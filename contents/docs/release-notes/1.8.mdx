@@ -31,58 +31,7 @@ Zero 1.8 improves observability, performance, and reliability.
 
 ## Performance
 
-Zero 1.8 speeds up local ZQL queries, ordered `limit()` queries, and replication after large Postgres writes.
-
-### Faster Local Queries
-
-When a query first runs, Zero builds its view from data already synced to the client. For example, for the query:
-
-```ts
-zql.issue
-  .where('closed', false)
-  .related('owner')
-  .orderBy('createdAt', 'desc')
-```
-
-Zero 1.8 reduces the per-row work for common local scans, filters, and relationship lookups. Views like this can appear sooner and use less client CPU, with local query fetches running **1.57x to 2.36x faster**, depending on the query.
-
-<BenchmarkComparisonChart
-  title="Local Query Fetch"
-  description="Normalized local query throughput. Higher is better."
-  previousLabel="Zero 1.7"
-  currentLabel="Zero 1.8"
-  precision={2}
-  height={360}
-  data={[
-    {
-      name: 'Issue scan, 1 sort key',
-      fullName: 'Scanning 1,000 issues sorted by 1 key',
-      current: 2.36
-    },
-    {
-      name: 'Issue scan, 2 sort keys',
-      fullName: 'Scanning 1,000 issues sorted by 2 keys',
-      current: 2.35
-    },
-    {
-      name: 'Issue scan, 4 sort keys',
-      fullName: 'Scanning 1,000 issues sorted by 4 keys',
-      current: 2.35
-    },
-    {
-      name: 'Open issues',
-      fullName:
-        'Filtering open issues from 1,000 local rows',
-      current: 1.74
-    },
-    {
-      name: 'Issues with owners',
-      fullName:
-        'Loading owners for 1,000 issues across 20 users',
-      current: 1.57
-    }
-  ]}
-/>
+Zero 1.8 speeds up ordered `limit()` queries, replication after large Postgres writes, and local ZQL queries.
 
 ### Ordered `limit()` Queries
 
@@ -97,7 +46,7 @@ zql.issue
   .limit(50)
 ```
 
-If open issues are sparse, the 50th match can be deep in the ordered data. If an issue enters, leaves, or moves within the top 50, Zero reads around the current 50th issue to determine which issue belongs in the result next.
+If open issues are sparse, Zero may need to look far down the ordered list to find 50 matches. When an issue enters or leaves the top 50, Zero checks the rows near the cutoff to keep the correct 50 issues in the result.
 
 Zero 1.8 lets SQLite seek directly to that boundary instead of scanning earlier rows again. Boundary fetches are **1.09x faster** after 50 rows and up to **300x faster** at the end of a 100,000-row index.
 
@@ -155,6 +104,60 @@ Zero 1.8 writes these changes in batches, making persistence **2.25x to 2.48x fa
       fullName:
         'Recording 50 transactions with 1,000 changes each',
       current: 2.25
+    }
+  ]}
+/>
+
+### Faster Local Queries
+
+When a query first runs, Zero builds its view from data already synced to the client.
+In Zero 1.8, there is less per-row work needed to run local scans, filters, and relationship lookups.
+
+For example, when running the query on page load:
+
+```ts
+zql.issue
+  .where('closed', false)
+  .related('owner')
+  .orderBy('createdAt', 'desc')
+```
+
+Views can appear sooner and use less client CPU, with local query fetches running **1.57x to 2.36x faster**, depending on the query.
+
+<BenchmarkComparisonChart
+  title="Local Query Fetch"
+  description="Normalized local query throughput. Higher is better."
+  previousLabel="Zero 1.7"
+  currentLabel="Zero 1.8"
+  precision={2}
+  height={360}
+  data={[
+    {
+      name: 'Issue scan, 1 sort key',
+      fullName: 'Scanning 1,000 issues sorted by 1 key',
+      current: 2.36
+    },
+    {
+      name: 'Issue scan, 2 sort keys',
+      fullName: 'Scanning 1,000 issues sorted by 2 keys',
+      current: 2.35
+    },
+    {
+      name: 'Issue scan, 4 sort keys',
+      fullName: 'Scanning 1,000 issues sorted by 4 keys',
+      current: 2.35
+    },
+    {
+      name: 'Open issues',
+      fullName:
+        'Filtering open issues from 1,000 local rows',
+      current: 1.74
+    },
+    {
+      name: 'Issues with owners',
+      fullName:
+        'Loading owners for 1,000 issues across 20 users',
+      current: 1.57
     }
   ]}
 />

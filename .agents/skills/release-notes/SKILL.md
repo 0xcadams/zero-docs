@@ -122,7 +122,7 @@ Capture release items over-inclusively so a human can trim the list, but write e
   - Use user-facing chart titles and row labels. If the measured path is narrower than the full workflow, scope the chart description and speedup claim to that operation instead of narrating the benchmark setup.
   - Omit a performance item if you cannot explain who benefits, under what conditions, and what improves.
   - Bad: "`Take` maintenance adds a sargable leading-column bound, improving the query-builder/SQLite proxy by 5416x."
-  - Good: "If open issues are sparse, the 50th match can be deep in the ordered data. If an issue enters, leaves, or moves within the top 50, Zero reads around the current 50th issue to determine which issue belongs in the result next. Zero can now seek directly to that boundary instead of scanning earlier rows again. Boundary fetches are 1.09x to 300x faster, depending on depth."
+  - Good: "If open issues are sparse, Zero may need to look far down the ordered list to find 50 matches. When an issue enters or leaves the top 50, Zero checks the rows near the cutoff to keep the correct 50 issues in the result. Zero can now seek directly to that cutoff instead of scanning earlier rows again. These reads are 1.09x to 300x faster, depending on how deep the cutoff is."
 - **Fix descriptions must be user-facing**, not implementation details:
   - Describe the problem, not "Fix [problem]" - the section heading already says "Fixes"
   - Phrase fixes as the old broken behavior or user-visible problem, not as a new capability
