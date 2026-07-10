@@ -90,10 +90,11 @@ Produce a release note draft that is intentionally over-inclusive so a human can
    - Confirm all non-skipped commits are represented or intentionally omitted.
    - Re-check any `MAYBE` or `BREAKING` rows and summarize the decision in the draft or in the saved release state.
    - Re-check any performance follow-ups recorded in `.releases/<major>.<minor>/commits.md`.
-   - For performance follow-ups, do not rely on a single PR benchmark table, commit message, or one local run for release-quality numbers. Either run the benchmark comparison process below, or explicitly record that the item lacks release-quality numbers and should be omitted, qualitative-only, or left as a TODO.
+   - For every performance item that will appear in the public release note, run the benchmark comparison process below first. Do not use a single PR benchmark table, commit message, one local run, qualitative wording, or TODO placeholder as a substitute.
+   - If release-quality benchmark comparison has not been run for a performance item, omit that item from the public release note and record the omission rationale in `.releases/<major>.<minor>/commits.md`.
 9. Build draft release notes in the latest format used in this repo:
    - Before drafting, read `contents/docs/release-notes/0.26.mdx` as the canonical long-form style reference to avoid format drift.
-   - If drafting a `## Performance` section, also read `contents/docs/release-notes/1.7.mdx` as the canonical performance-section style reference. Prefer the chart-based structure for release-quality benchmark comparisons: short explanatory text, scoped claims, and `<BenchmarkComparisonChart>` data when there are enough comparable benchmark rows.
+   - Draft a `## Performance` section only if at least one included performance item has release-quality benchmark comparison results. If drafting it, also read `contents/docs/release-notes/1.7.mdx` as the canonical performance-section style reference and prefer the chart-based structure: short explanatory text, scoped claims, and `<BenchmarkComparisonChart>` data when there are enough comparable benchmark rows.
    - Frontmatter with `title` and `description`
    - `## Installation`
    - optional `## Overview`
@@ -108,9 +109,9 @@ Produce a release note draft that is intentionally over-inclusive so a human can
 - Do not list chores unless they appear miscategorized and user-relevant.
 - Feature bullets must link to docs; if unknown, use `TODO` links as placeholders.
 - Fix bullets must be one line each and link to PRs.
-- Performance claims must be based on the repeatable benchmark comparison process below, not a single local run, one matrix row, or an unverified PR comment. PR benchmark tables/comments are useful evidence for deciding what to measure, but are not sufficient by themselves for release-quality numbers.
-- Performance sections should usually follow the `contents/docs/release-notes/1.7.mdx` chart style when there are release-quality benchmark comparisons: explain what was measured, state the baseline and target, and include `<BenchmarkComparisonChart>` data for important benchmark groups.
-- Performance bullets may still be used for isolated targeted results, but include quantified impact only when the comparison process produced reliable numbers. If a perf item lacks release-quality numbers, either omit it, phrase it qualitatively, or leave a clear TODO for the human.
+- Performance claims must be based on the repeatable benchmark comparison process below, not a single local run, one matrix row, an unverified PR comment, qualitative wording, or a TODO placeholder. PR benchmark tables/comments are useful evidence for deciding what to measure, but are not sufficient by themselves for release-quality numbers.
+- Performance sections must follow the `contents/docs/release-notes/1.7.mdx` chart style when there are enough comparable benchmark rows: explain what was measured, state the baseline and target, and include `<BenchmarkComparisonChart>` data for important benchmark groups.
+- Performance bullets may be used only for isolated targeted results that have release-quality benchmark comparison results. If a perf item lacks release-quality numbers, omit it from the public release note and record the omission rationale in `.releases/<major>.<minor>/commits.md`.
 - If a perf PR has mixed results, emphasize meaningful wins and avoid dismissive phrasing.
 - If several PRs comprise one logical fix, include one bullet with artful multi-link phrasing.
 - If no breaking changes, write `None.`

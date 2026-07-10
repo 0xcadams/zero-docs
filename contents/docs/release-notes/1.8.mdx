@@ -1,0 +1,130 @@
+---
+title: Zero 1.8
+description: Observability and Replication Reliability
+---
+
+## Installation
+
+```bash
+npm install @rocicorp/zero@1.8
+```
+
+## Overview
+
+Zero 1.8 improves operational observability, self-hosting options, and replication reliability.
+
+## Features
+
+- [**Request-header forwarding:**](/docs/zero-cache-config#mutate-allowed-request-headers) `zero-cache` can now forward selected incoming request headers, such as proxy or load-balancer headers, to custom mutate and query APIs via [`ZERO_MUTATE_ALLOWED_REQUEST_HEADERS`](/docs/zero-cache-config#mutate-allowed-request-headers) and [`ZERO_QUERY_ALLOWED_REQUEST_HEADERS`](/docs/zero-cache-config#query-allowed-request-headers). ([#6144](https://github.com/rocicorp/mono/pull/6144), thanks [@tjenkinson](https://github.com/tjenkinson)!)
+- [**GHCR Docker images:**](/docs/self-host#docker-images) The Zero Docker image is now published to `ghcr.io/rocicorp/zero` in addition to Docker Hub. ([#6161](https://github.com/rocicorp/mono/pull/6161))
+- [**Initial-sync metrics:**](/docs/otel#zeroreplication) `zero-cache` now exports initial-sync metrics for run outcomes, COPY time, SQLite flush time, index creation time, copied rows, copied bytes, and COPY chunks. ([#6191](https://github.com/rocicorp/mono/pull/6191))
+- [**Serving-lag metrics:**](/docs/otel#zerosync) `zero-cache` now exports metrics for replica changes that are ready locally but have not yet been fully served to active client groups. ([#6157](https://github.com/rocicorp/mono/pull/6157), thanks [@tantaman](https://github.com/tantaman)!)
+
+## Performance
+
+Zero 1.8 includes targeted improvements for common in-memory ZQL fetches, ordered `take` maintenance, and CDC `changeLog` persistence.
+
+The results below compare Zero 1.7 (`6863de5f00a3c1e7dc09c83ea3263dec4a94ebee`) to Zero 1.8 (`6c8b5e5a76f2b4b253b1b9c9c4a8598299d8c975`) using 10 separate process-level runs per ref. Values are median-of-medians from the benchmark output, normalized so higher is better.
+
+### In-Memory ZQL Fetch
+
+Common in-memory ZQL fetches are faster when there is no active overlay, start cursor, or connection filter. In the measured fetch hot paths, Zero 1.8 is about **2.1x faster** by geometric mean. ([#6127](https://github.com/rocicorp/mono/pull/6127))
+
+<BenchmarkComparisonChart
+  title="In-Memory ZQL Fetch"
+  description="Normalized fetch throughput. Higher is better."
+  previousLabel="Zero 1.7"
+  currentLabel="Zero 1.8"
+  precision={2}
+  height={360}
+  data={[
+    {
+      name: 'MemorySource, 1 key',
+      fullName:
+        'MemorySource fetch scanning 1,000 rows sorted by 1 key',
+      current: 2.41
+    },
+    {
+      name: 'MemorySource, 2 keys',
+      fullName:
+        'MemorySource fetch scanning 1,000 rows sorted by 2 keys',
+      current: 2.37
+    },
+    {
+      name: 'MemorySource, 4 keys',
+      fullName:
+        'MemorySource fetch scanning 1,000 rows sorted by 4 keys',
+      current: 2.36
+    },
+    {
+      name: 'Filter fetch',
+      fullName: 'Filter fetch over 1,000 in-memory issues',
+      current: 1.76
+    },
+    {
+      name: 'Join fetch',
+      fullName: 'Join fetch for 1,000 issues to 20 users',
+      current: 1.59
+    }
+  ]}
+/>
+
+### Ordered `take` Maintenance
+
+Ordered `take` maintenance fetches can now add a redundant leading-column bound for non-nullable leading sort columns, letting SQLite seek into the relevant index range instead of scanning a large partition. In a targeted benchmark with a 100k-row partition and a start cursor near the end, the median fetch time improved from **3.09 ms** to **826 ns**. ([#6184](https://github.com/rocicorp/mono/pull/6184), thanks [@tantaman](https://github.com/tantaman)!)
+
+<BenchmarkComparisonChart
+  title="Ordered Take Maintenance"
+  description="Normalized fetch throughput for a targeted 100k-row SQLite partition benchmark. Higher is better."
+  previousLabel="Zero 1.7"
+  currentLabel="Zero 1.8"
+  precision={0}
+  data={[
+    {
+      name: 'Start cursor near end',
+      fullName:
+        'Ordered take maintenance fetch after a start cursor near the end of an indexed partition',
+      current: 3742
+    }
+  ]}
+/>
+
+### CDC Storer Throughput
+
+`zero-cache` now batches CDC `changeLog` writes into multi-row inserts, reducing the time spent persisting metadata for large upstream transactions. In the targeted PostgreSQL storer benchmark, Zero 1.8 is about **1.2x faster** by geometric mean. ([#6142](https://github.com/rocicorp/mono/pull/6142))
+
+<BenchmarkComparisonChart
+  title="CDC Storer Throughput"
+  description="Normalized payload throughput while persisting replication changes to the change log. Higher is better."
+  previousLabel="Zero 1.7"
+  currentLabel="Zero 1.8"
+  precision={2}
+  data={[
+    {
+      name: 'Large transaction',
+      fullName:
+        'Persisting one transaction with 50k synthetic changes',
+      current: 1.17
+    },
+    {
+      name: 'Sustained stream',
+      fullName:
+        'Persisting 50 transactions of 1,000 synthetic changes each',
+      current: 1.3
+    }
+  ]}
+/>
+
+## Fixes
+
+- [Logical replication could stall indefinitely when the inbound Postgres replication stream went silent instead of reconnecting.](https://github.com/rocicorp/mono/pull/6047) (thanks [@tantaman](https://github.com/tantaman)!)
+- [Drizzle 1.0 RC `prepareQuery` results could come back in array mode instead of object mode, breaking Zero's Drizzle adapter.](https://github.com/rocicorp/mono/pull/6154) (thanks [@typedrat](https://github.com/typedrat)!)
+- [Queries could appear `complete` with stale or empty results after reconnect when persisted `got` state was no longer authoritative.](https://github.com/rocicorp/mono/pull/6172)
+- [Malformed SQLite replicas could be accepted until later failures instead of being detected during restore/open and recovered through autoreset.](https://github.com/rocicorp/mono/pull/6174) (thanks [@tantaman](https://github.com/tantaman)!)
+- [React Native reads using `op-sqlite` v17 could crash with `iterator method is not callable`.](https://github.com/rocicorp/mono/pull/6180)
+- [View-syncer pods could exit with `max attempts exceeded restoring replica` while the first backup was still uploading.](https://github.com/rocicorp/mono/pull/6134)
+- [Cold-start view-syncers could be told to restore before a restorable backup existed, causing repeated failed restore attempts.](https://github.com/rocicorp/mono/pull/6135)
+
+## Breaking Changes
+
+None.

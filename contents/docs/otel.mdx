@@ -141,16 +141,26 @@ This callback is called before sending WebSocket messages that trigger API serve
 
 ### zero.replication
 
-| Metric                 | Type      | Unit | Description                                                                                                                     |
-| ---------------------- | --------- | ---- | ------------------------------------------------------------------------------------------------------------------------------- |
-| `upstream_lag`         | Gauge     | ms   | Latency from sending a replication report to receiving it in the stream                                                         |
-| `replica_lag`          | Gauge     | ms   | Latency from receiving a replication report to it reaching the replica                                                          |
-| `total_lag`            | Gauge     | ms   | End-to-end replication latency. Grows as an estimate if the next report hasn't arrived                                          |
-| `last_total_lag`       | Gauge     | ms   | End-to-end latency of the most recently received report. Unlike `total_lag`, does not grow if reports stop arriving             |
-| `events`               | Counter   |      | Number of replication events processed                                                                                          |
-| `transactions`         | Counter   |      | Count of replicated transactions                                                                                                |
-| `shadow-sync-runs`     | Counter   |      | Number of [shadow initial-sync](/docs/zero-cache-config#shadow-sync-enabled) runs. Has a `result` attribute: `success`, `error` |
-| `shadow-sync-duration` | Histogram | s    | Wall-clock duration of a shadow initial-sync run. Has a `result` attribute: `success`, `error`                                  |
+| Metric                               | Type      | Unit  | Description                                                                                                                                     |
+| ------------------------------------ | --------- | ----- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| `upstream_lag`                       | Gauge     | ms    | Latency from sending a replication report to receiving it in the stream                                                                         |
+| `replica_lag`                        | Gauge     | ms    | Latency from receiving a replication report to it reaching the replica                                                                          |
+| `total_lag`                          | Gauge     | ms    | End-to-end replication latency. Grows as an estimate if the next report hasn't arrived                                                          |
+| `last_total_lag`                     | Gauge     | ms    | End-to-end latency of the most recently received report. Unlike `total_lag`, does not grow if reports stop arriving                             |
+| `events`                             | Counter   |       | Number of replication events processed                                                                                                          |
+| `transactions`                       | Counter   |       | Count of replicated transactions                                                                                                                |
+| `initial_sync_runs`                  | Counter   |       | Number of initial-sync runs. Has `sync_mode`, `copy_format`, and `result` attributes                                                            |
+| `initial_sync_duration`              | Histogram | s     | Wall-clock duration of an initial-sync run. Has `sync_mode`, `copy_format`, and `result` attributes                                             |
+| `initial_sync_copy_duration`         | Histogram | s     | Wall-clock duration of the COPY phase for a successful initial-sync run. Has `sync_mode`, `copy_format`, and `result` attributes                |
+| `initial_sync_copy_other_duration`   | Histogram | s     | Initial-sync duration excluding SQLite flush and index time for a successful run. Has `sync_mode`, `copy_format`, and `result` attributes       |
+| `initial_sync_flush_duration`        | Histogram | s     | Total SQLite flush time for a successful initial-sync run. Has `sync_mode`, `copy_format`, and `result` attributes                              |
+| `initial_sync_index_duration`        | Histogram | s     | SQLite index creation time for a successful initial-sync run. Has `sync_mode`, `copy_format`, and `result` attributes                           |
+| `initial_sync_rows`                  | Counter   |       | Rows copied during successful initial-sync runs. Has `sync_mode`, `copy_format`, and `result` attributes                                        |
+| `initial_sync_copy_stream`           | Counter   | bytes | PostgreSQL COPY stream bytes processed during initial sync, including in-progress and failed runs. Has `sync_mode` and `copy_format` attributes |
+| `initial_sync_completed_copy_stream` | Counter   | bytes | PostgreSQL COPY stream bytes processed during successful initial-sync runs. Has `sync_mode`, `copy_format`, and `result` attributes             |
+| `initial_sync_copy_chunks`           | Counter   |       | PostgreSQL COPY stream chunks processed during initial sync. Has `sync_mode` and `copy_format` attributes                                       |
+| `shadow-sync-runs`                   | Counter   |       | Number of [shadow initial-sync](/docs/zero-cache-config#shadow-sync-enabled) runs. Has a `result` attribute: `success`, `error`                 |
+| `shadow-sync-duration`               | Histogram | s     | Wall-clock duration of a shadow initial-sync run. Has a `result` attribute: `success`, `error`                                                  |
 
 ### zero.sync
 
@@ -161,6 +171,9 @@ This callback is called before sending WebSocket messages that trigger API serve
 | `active-client-groups`              | Gauge         |      | Number of active ViewSyncerService instances in a syncer worker                                                                                   |
 | `queries`                           | Gauge         |      | Active IVM pipelines across all client groups in a syncer worker                                                                                  |
 | `rows`                              | Gauge         |      | CVR-tracked rows across all client groups in a syncer worker                                                                                      |
+| `serving-lag`                       | Gauge         | ms   | Maximum time active ViewSyncer client groups have had replica changes ready locally but not yet served to clients                                 |
+| `serving-lag-stats`                 | Gauge         | ms   | Distribution of serving lag across active ViewSyncer client groups. Has a `stat` attribute: `min`, `p50`, `p75`, `p99`, `max`                     |
+| `serving-lagging-client-groups`     | Gauge         |      | Number of active ViewSyncer client groups with replica changes ready locally but not yet served to clients                                        |
 | `lock-wait-time`                    | Histogram     | s    | Time spent waiting to acquire the ViewSyncerService lock per operation                                                                            |
 | `pipeline-resets`                   | Counter       |      | Count of pipeline resets. Has a `reason` attribute: `advancement-timeout`, `scalar-subquery`, `schema-change`, `truncation`, `permissions-change` |
 | `hydration`                         | Counter       |      | Number of query hydrations                                                                                                                        |

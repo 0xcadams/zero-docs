@@ -1,0 +1,199 @@
+{
+  "generatedAt": "2026-07-03T18:27:10.993Z",
+  "baseline": {
+    "ref": "zero/v1.7.0",
+    "sha": "6863de5f00a3c1e7dc09c83ea3263dec4a94ebee"
+  },
+  "target": {
+    "ref": "maint/zero/v1.8",
+    "sha": "6c8b5e5a76f2b4b253b1b9c9c4a8598299d8c975"
+  },
+  "runCountPerRef": 10,
+  "aggregation": "median of each process-level benchmark median; ratios are baseline / target, so >1 is faster in target",
+  "results": [
+    {
+      "id": "memory-fetch",
+      "title": "In-Memory ZQL Fetch",
+      "unit": "ns/iter",
+      "valueKind": "duration",
+      "comparableCount": 5,
+      "medianRatio": 2.361147156513768,
+      "geometricMeanRatio": 2.0668015792170897,
+      "rows": [
+        {
+          "name": "src/memory-ivm-deopt.bench.ts > MemorySource fetch > scan 1000 rows, sort 1 key",
+          "shortName": "MemorySource fetch > scan 1000 rows, sort 1 key",
+          "unit": "ns/iter",
+          "baseline": 100854.5,
+          "target": 41832.99999988079,
+          "ratio": 2.4108837520686395,
+          "baselineDisplay": "100.85 us",
+          "targetDisplay": "41.83 us",
+          "baselineRuns": [
+            101125, 101583, 99708.00000023842, 100459, 101750, 103334, 99500,
+            103667, 99708, 100584
+          ],
+          "targetRuns": [
+            41166.99999988079, 42416, 41708, 41250, 41832.99999976158, 41375,
+            41833, 42041, 43208, 42708
+          ]
+        },
+        {
+          "name": "src/memory-ivm-deopt.bench.ts > MemorySource fetch > scan 1000 rows, sort 2 keys",
+          "shortName": "MemorySource fetch > scan 1000 rows, sort 2 keys",
+          "unit": "ns/iter",
+          "baseline": 99187.5,
+          "target": 41854.50000023842,
+          "ratio": 2.369816865556511,
+          "baselineDisplay": "99.19 us",
+          "targetDisplay": "41.85 us",
+          "baselineRuns": [
+            99875, 102250, 96500, 98500, 101583, 101334, 98125, 102125, 98250,
+            98334
+          ],
+          "targetRuns": [
+            42042, 42500, 41667.00000047684, 41542, 41625, 41333, 41667, 42166,
+            42542, 42583
+          ]
+        },
+        {
+          "name": "src/memory-ivm-deopt.bench.ts > MemorySource fetch > scan 1000 rows, sort 4 keys",
+          "shortName": "MemorySource fetch > scan 1000 rows, sort 4 keys",
+          "unit": "ns/iter",
+          "baseline": 99167,
+          "target": 41999.5,
+          "ratio": 2.361147156513768,
+          "baselineDisplay": "99.17 us",
+          "targetDisplay": "42.00 us",
+          "baselineRuns": [
+            99916, 99750, 96875, 99000, 97042, 101459, 98542, 101750, 97500,
+            99334
+          ],
+          "targetRuns": [
+            42041, 42666, 41667, 41167, 41833, 41250, 41958, 42125, 42958, 42583
+          ]
+        },
+        {
+          "name": "src/memory-ivm-deopt.bench.ts > Filter > fetch open issues (1000 total)",
+          "shortName": "Filter > fetch open issues (1000 total)",
+          "unit": "ns/iter",
+          "baseline": 148624.99999976158,
+          "target": 84667,
+          "ratio": 1.7554064747748424,
+          "baselineDisplay": "148.62 us",
+          "targetDisplay": "84.67 us",
+          "baselineRuns": [
+            147333, 152750, 148041, 145083, 148542, 149625, 150250, 149166,
+            148707.99999952316, 146708
+          ],
+          "targetRuns": [
+            87333, 82708, 85250, 83416, 84625, 84709, 84584, 84166, 85875, 87167
+          ]
+        },
+        {
+          "name": "src/memory-ivm-deopt.bench.ts > Join > fetch 1000 issues → 20 users",
+          "shortName": "Join > fetch 1000 issues → 20 users",
+          "unit": "ns/iter",
+          "baseline": 759031.5,
+          "target": 476604.0000009537,
+          "ratio": 1.5925831507886656,
+          "baselineDisplay": "759.03 us",
+          "targetDisplay": "476.60 us",
+          "baselineRuns": [
+            740125, 755084, 751916, 761604, 774874.9999990463, 769145.5, 812375,
+            760563, 757500, 750979.5
+          ],
+          "targetRuns": [
+            466459, 478208, 476041.00000190735, 477167, 474958,
+            471082.9999990463, 479312.49999952316, 474167, 483208, 477584
+          ]
+        }
+      ]
+    },
+    {
+      "id": "take-start-seek",
+      "title": "Seekable Ordered Take Maintenance",
+      "unit": "ns/iter",
+      "valueKind": "duration",
+      "comparableCount": 1,
+      "medianRatio": 3741.5418008868382,
+      "geometricMeanRatio": 3741.5418008868405,
+      "rows": [
+        {
+          "name": "src/take-start-seek.bench.ts > take start seek > fetch after boundary near end of partition",
+          "shortName": "take start seek > fetch after boundary near end of partition",
+          "unit": "ns/iter",
+          "baseline": 3089292,
+          "target": 825.6735229492188,
+          "ratio": 3741.5418008868382,
+          "baselineDisplay": "3.09 ms",
+          "targetDisplay": "826 ns",
+          "baselineRuns": [
+            3078417, 3047458, 3215333, 3190625, 3077125, 3036874.5, 3100167,
+            2994229, 3130666, 3177583.5
+          ],
+          "targetRuns": [
+            825.917724609375, 829.2541503905959, 841.0440673828125,
+            812.3271484375, 820.81103515625, 828.69970703125, 823.72021484375,
+            825.4293212890625, 815.165283203125, 827.178955078125
+          ]
+        }
+      ]
+    },
+    {
+      "id": "storer-pg",
+      "title": "CDC Storer Throughput",
+      "unit": "ns/MB",
+      "valueKind": "throughputAsNsPerOperation",
+      "comparableCount": 2,
+      "medianRatio": 1.2333270802820975,
+      "geometricMeanRatio": 1.2315133998833119,
+      "rows": [
+        {
+          "name": "change-streamer/storer single transaction payload MB",
+          "shortName": "change-streamer/storer single transaction payload MB",
+          "unit": "ns/MB",
+          "baseline": 11428067.734624857,
+          "target": 9797173.552664127,
+          "ratio": 1.1664657845646966,
+          "baselineDisplay": "87.50 MB/s",
+          "targetDisplay": "102.07 MB/s",
+          "baselineRuns": [
+            11186278.654118782, 11751725.798265751, 11291250.645543907,
+            12049172.723508071, 11444954.037111795, 10866750.704341114,
+            12811703.850279262, 11084069.21996827, 12668778.07981813,
+            11411181.43213792
+          ],
+          "targetRuns": [
+            9496021.000830939, 9672655.252271613, 16168192.902798435,
+            9897093.860473884, 12056332.908770109, 9699751.224827027,
+            9624731.87319393, 9694480.560606552, 9894595.88050123,
+            9926939.32650848
+          ]
+        },
+        {
+          "name": "change-streamer/storer sustained stream payload MB",
+          "shortName": "change-streamer/storer sustained stream payload MB",
+          "unit": "ns/MB",
+          "baseline": 13324451.486674096,
+          "target": 10248093.0706915,
+          "ratio": 1.3001883759994985,
+          "baselineDisplay": "75.05 MB/s",
+          "targetDisplay": "97.58 MB/s",
+          "baselineRuns": [
+            11017792.40328751, 15627979.228929829, 15093818.527961807,
+            12117361.00638133, 14531541.966966864, 16714235.085206527,
+            11816269.646783732, 14991001.475418981, 11503275.701133903,
+            11607023.169339964
+          ],
+          "targetRuns": [
+            33256896.458625823, 10270031.466936229, 10619320.909886668,
+            9633213.213253358, 35321594.72323123, 10083661.406757297,
+            9901502.476227237, 10226154.674446773, 10151623.939143859,
+            11332059.815817906
+          ]
+        }
+      ]
+    }
+  ]
+}

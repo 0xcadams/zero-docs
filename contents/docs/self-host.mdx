@@ -25,6 +25,15 @@ You will also need to deploy a Postgres database, your frontend, and your API se
 
 Before setting up Postgres, read [Connecting to Postgres](/docs/connecting-to-postgres) for provider-specific notes.
 
+## Docker Images
+
+Zero publishes the same container image to Docker Hub and GHCR.
+
+- Docker Hub: `rocicorp/zero:{version}`
+- GHCR: `ghcr.io/rocicorp/zero:{version}`
+
+The examples below use Docker Hub. If you prefer GHCR, replace the image name with `ghcr.io/rocicorp/zero:{version}`.
+
 ## Minimum Viable Strategy
 
 The simplest way to deploy Zero is to run everything on a single node. This is the least expensive way to run Zero, and it can take you surprisingly far.
