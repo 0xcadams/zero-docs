@@ -90,8 +90,10 @@ Produce a release note draft that is intentionally over-inclusive so a human can
    - Confirm all non-skipped commits are represented or intentionally omitted.
    - Re-check any `MAYBE` or `BREAKING` rows and summarize the decision in the draft or in the saved release state.
    - Re-check any performance follow-ups recorded in `.releases/<major>.<minor>/commits.md`.
+   - For performance follow-ups, do not rely on a single PR benchmark table, commit message, or one local run for release-quality numbers. Either run the benchmark comparison process below, or explicitly record that the item lacks release-quality numbers and should be omitted, qualitative-only, or left as a TODO.
 9. Build draft release notes in the latest format used in this repo:
    - Before drafting, read `contents/docs/release-notes/0.26.mdx` as the canonical long-form style reference to avoid format drift.
+   - If drafting a `## Performance` section, also read `contents/docs/release-notes/1.7.mdx` as the canonical performance-section style reference. Prefer the chart-based structure for release-quality benchmark comparisons: short explanatory text, scoped claims, and `<BenchmarkComparisonChart>` data when there are enough comparable benchmark rows.
    - Frontmatter with `title` and `description`
    - `## Installation`
    - optional `## Overview`
@@ -106,7 +108,9 @@ Produce a release note draft that is intentionally over-inclusive so a human can
 - Do not list chores unless they appear miscategorized and user-relevant.
 - Feature bullets must link to docs; if unknown, use `TODO` links as placeholders.
 - Fix bullets must be one line each and link to PRs.
-- Performance bullets should include quantified impact when available (e.g. `2x faster`, `20-30% faster`, `~6-8% faster`) based on PR benchmark tables/comments.
+- Performance claims must be based on the repeatable benchmark comparison process below, not a single local run, one matrix row, or an unverified PR comment. PR benchmark tables/comments are useful evidence for deciding what to measure, but are not sufficient by themselves for release-quality numbers.
+- Performance sections should usually follow the `contents/docs/release-notes/1.7.mdx` chart style when there are release-quality benchmark comparisons: explain what was measured, state the baseline and target, and include `<BenchmarkComparisonChart>` data for important benchmark groups.
+- Performance bullets may still be used for isolated targeted results, but include quantified impact only when the comparison process produced reliable numbers. If a perf item lacks release-quality numbers, either omit it, phrase it qualitatively, or leave a clear TODO for the human.
 - If a perf PR has mixed results, emphasize meaningful wins and avoid dismissive phrasing.
 - If several PRs comprise one logical fix, include one bullet with artful multi-link phrasing.
 - If no breaking changes, write `None.`
@@ -130,6 +134,56 @@ Produce a release note draft that is intentionally over-inclusive so a human can
   - Check commit author emails - rocicorp employees use `@roci.dev` emails
   - Also check for Co-authored-by lines in commit messages
 
+## Benchmark Comparison For Release Notes
+
+Use a repeatable benchmark comparison process for release-note performance numbers, not a single local run.
+
+### Process
+
+1. Create one clean worktree per ref/version.
+2. Apply the exact same benchmark file/change to both worktrees if the benchmark is new.
+3. Install using each ref's intended package manager/lockfile.
+4. Run the targeted benchmark in isolation, not as part of the whole suite.
+5. Run it multiple times as separate processes, usually 10 completed runs.
+6. Compare median-of-medians by benchmark name.
+7. Treat deltas inside roughly `±5%` as flat unless the absolute delta is release-relevant.
+8. For suspicious results, rerun focused subsets rather than trusting one matrix row.
+9. Document whether the result is original-suite coverage or targeted post-matrix coverage.
+
+### Commands Shape
+
+For in-memory ZQL benchmarks:
+
+```sh
+pnpm --filter zql-benchmarks exec vitest run --config vitest.config.bench-mem.ts debug-row-vended
+```
+
+For shared package benchmarks:
+
+```sh
+pnpm --filter shared exec vitest run --config vitest.config.bench.node.ts logger
+```
+
+For release-quality numbers, wrap the command and collect 10 process-level runs with JSON output:
+
+```sh
+BENCH_OUTPUT_FORMAT=json pnpm --filter zql-benchmarks exec vitest run --config vitest.config.bench-mem.ts debug-row-vended
+```
+
+Then aggregate each benchmark's median across the 10 runs.
+
+### Reliability Rules
+
+- Prefer targeted benchmarks when validating a specific perf commit.
+- Use separate process runs because mitata handles in-process sampling, but process startup/JIT/GC/environment noise still matters.
+- Avoid concurrent benchmark runs on the same machine.
+- Keep benchmark inputs deterministic and prebuilt where possible.
+- Make both refs run the same benchmark source.
+- Don't claim a perf win if the comparison is really "fixed implementation vs temporary bad implementation"; call that out separately.
+- For pg benchmarks, rely on benchmark-internal warmups plus multiple full benchmark reps, and keep DB setup identical.
+- If target-only benchmark coverage exists, temp-backport only the benchmark/harness changes needed to run the same benchmark definition on the baseline. Do not backport production code when measuring a performance commit.
+- Save or link raw outputs and aggregate scripts/results in `.releases/<major>.<minor>/` so future release review can audit the numbers.
+
 ## File Updates
 
 1. Add new note at `contents/docs/release-notes/<major>.<minor>.mdx`.
@@ -150,6 +204,8 @@ When updating those docs, do not mention version numbers. The main docs describe
 - Commit range used
 - Features included
 - Performance items included/excluded rationale
+- Performance benchmark comparison refs, commands, run count, aggregation method, and raw/aggregate result location
+- Whether each performance result is original-suite coverage or targeted post-matrix coverage
 - Potential breaking changes list (or explicit none found)
 - Protocol compatibility result
 - Any TODO docs links left for human follow-up
