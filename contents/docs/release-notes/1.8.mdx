@@ -31,9 +31,37 @@ Zero 1.8 improves observability, performance, and reliability.
 
 ## Performance
 
-Zero 1.8 speeds up ordered `limit()` queries, replication after large Postgres writes, and local ZQL queries.
+Zero 1.8 speeds up replication after large Postgres writes, ordered `limit()` queries, and local ZQL queries.
 
-### Ordered `limit()` Queries
+### Faster Replication After Bulk Writes
+
+A bulk import, backfill, or migration can change tens of thousands of rows in one transaction. Zero records each change during replication, and writing them one at a time could make replication fall behind.
+
+Zero 1.8 writes these changes in batches, making persistence **2.25x to 2.48x faster** and helping large transactions reach clients sooner.
+
+<BenchmarkComparisonChart
+  title="Replication Change Persistence"
+  description="Normalized throughput while recording Postgres changes for replication. Higher is better."
+  previousLabel="Zero 1.7"
+  currentLabel="Zero 1.8"
+  precision={2}
+  data={[
+    {
+      name: '50,000-change transaction',
+      fullName:
+        'Recording one transaction with 50,000 changes',
+      current: 2.48
+    },
+    {
+      name: '50 × 1,000-change transactions',
+      fullName:
+        'Recording 50 transactions with 1,000 changes each',
+      current: 2.25
+    }
+  ]}
+/>
+
+### Maintaining Ordered `limit()` Queries
 
 Consider a view showing the top 50 open issues:
 
@@ -76,34 +104,6 @@ Zero 1.8 lets SQLite seek directly to that boundary instead of scanning earlier 
     {
       name: 'Boundary at final row',
       current: 300.09
-    }
-  ]}
-/>
-
-### Faster Replication After Bulk Writes
-
-A bulk import, backfill, or migration can change tens of thousands of rows in one transaction. Zero records each change during replication, and writing them one at a time could make replication fall behind.
-
-Zero 1.8 writes these changes in batches, making persistence **2.25x to 2.48x faster** and helping large transactions reach clients sooner.
-
-<BenchmarkComparisonChart
-  title="Replication Change Persistence"
-  description="Normalized throughput while recording Postgres changes for replication. Higher is better."
-  previousLabel="Zero 1.7"
-  currentLabel="Zero 1.8"
-  precision={2}
-  data={[
-    {
-      name: '50,000-change transaction',
-      fullName:
-        'Recording one transaction with 50,000 changes',
-      current: 2.48
-    },
-    {
-      name: '50 × 1,000-change transactions',
-      fullName:
-        'Recording 50 transactions with 1,000 changes each',
-      current: 2.25
     }
   ]}
 />
