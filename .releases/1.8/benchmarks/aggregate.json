@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-07-09T00:53:34.741Z",
+  "generatedAt": "2026-07-10T22:50:06.432Z",
   "baseline": {
     "ref": "zero/v1.7.0",
     "sha": "6863de5f00a3c1e7dc09c83ea3263dec4a94ebee"
   },
   "target": {
     "ref": "maint/zero/v1.8",
-    "sha": "4ef9e4ef04fbc9fa838c930887d5d6b97241b789"
+    "sha": "cdc02598f137ab4e071878f5674fdc716dbbc69d"
   },
   "runCountPerRef": 10,
   "aggregation": "median of each process-level benchmark median; ratios are baseline / target, so >1 is faster in target",
@@ -17,125 +17,209 @@
       "unit": "ns/iter",
       "valueKind": "duration",
       "comparableCount": 5,
-      "medianRatio": 2.3346699825085375,
-      "geometricMeanRatio": 2.0497191640429926,
+      "medianRatio": 2.3508932446605963,
+      "geometricMeanRatio": 2.045530341413769,
       "rows": [
         {
           "name": "src/memory-ivm-deopt.bench.ts > MemorySource fetch > scan 1000 rows, sort 1 key",
           "shortName": "MemorySource fetch > scan 1000 rows, sort 1 key",
           "unit": "ns/iter",
-          "baseline": 98833.7499999702,
-          "target": 41645.5,
-          "ratio": 2.3732155935207935,
-          "baselineDisplay": "98.83 us",
-          "targetDisplay": "41.65 us",
+          "baseline": 99999.5,
+          "target": 42291.5,
+          "ratio": 2.364529515387253,
+          "baselineDisplay": "100.00 us",
+          "targetDisplay": "42.29 us",
           "baselineRuns": [
-            95625, 101083, 98167, 98709, 97667, 98958.4999999404, 99959, 100042,
-            96958, 99958
+            101958, 98833, 98792, 100083, 97666.50000011921, 100083, 99916,
+            98666, 109792, 116042
           ],
           "targetRuns": [
-            41208, 41625, 41917, 42084, 41458, 41291, 42125, 41792, 41458.5,
-            41666
+            41792, 41625, 42333, 41708, 42250, 42125, 43584, 43792,
+            48833.000000059605, 52249.99999976158
           ]
         },
         {
           "name": "src/memory-ivm-deopt.bench.ts > MemorySource fetch > scan 1000 rows, sort 2 keys",
           "shortName": "MemorySource fetch > scan 1000 rows, sort 2 keys",
           "unit": "ns/iter",
-          "baseline": 98500,
-          "target": 41688,
-          "ratio": 2.3627902513912877,
-          "baselineDisplay": "98.50 us",
-          "targetDisplay": "41.69 us",
+          "baseline": 100208,
+          "target": 42625.49999988079,
+          "ratio": 2.3508932446605963,
+          "baselineDisplay": "100.21 us",
+          "targetDisplay": "42.63 us",
           "baselineRuns": [
-            95875, 98417, 97583, 99959, 98542, 100417, 98542, 100083, 97500,
-            98458
+            101958, 99541, 98459, 100937.5, 97292, 100875, 98792, 98375, 112708,
+            119041
           ],
           "targetRuns": [
-            41250, 42875, 41917, 42459, 41500, 41250, 42042, 41667, 41709, 41375
+            42083, 41167, 41125, 42000, 42458.99999976158, 42792, 43584, 44458,
+            49875, 51541
           ]
         },
         {
           "name": "src/memory-ivm-deopt.bench.ts > MemorySource fetch > scan 1000 rows, sort 4 keys",
           "shortName": "MemorySource fetch > scan 1000 rows, sort 4 keys",
           "unit": "ns/iter",
-          "baseline": 98104,
-          "target": 42020.5,
-          "ratio": 2.3346699825085375,
-          "baselineDisplay": "98.10 us",
-          "targetDisplay": "42.02 us",
+          "baseline": 99917,
+          "target": 42437.5,
+          "ratio": 2.3544506627393225,
+          "baselineDisplay": "99.92 us",
+          "targetDisplay": "42.44 us",
           "baselineRuns": [
-            97208, 98291, 97459, 100042, 98250, 98750, 97750, 101375, 97250,
-            97958
+            100667, 98750, 98500, 97833, 97167, 100042, 99792, 101042, 109959,
+            120958.5
           ],
           "targetRuns": [
-            41875, 42541, 42083, 41958, 42083, 41125, 42167, 42542, 41375, 41750
+            41959, 41500, 41500, 42417, 42458, 42250, 43333, 45042, 51000, 53583
           ]
         },
         {
           "name": "src/memory-ivm-deopt.bench.ts > Filter > fetch open issues (1000 total)",
           "shortName": "Filter > fetch open issues (1000 total)",
           "unit": "ns/iter",
-          "baseline": 147604,
-          "target": 83979.00000047684,
-          "ratio": 1.7576298836514117,
-          "baselineDisplay": "147.60 us",
-          "targetDisplay": "83.98 us",
+          "baseline": 149625,
+          "target": 85749.99999952316,
+          "ratio": 1.7448979591933764,
+          "baselineDisplay": "149.63 us",
+          "targetDisplay": "85.75 us",
           "baselineRuns": [
-            143416, 147875, 145500, 147708, 146500, 148125, 148333, 147666,
-            144791, 147542
+            149417, 149625, 145042, 149625, 146458, 149584, 151125, 152500,
+            167333.99999904633, 193125
           ],
           "targetRuns": [
-            84459, 84000, 83541, 85375, 83375, 85000, 83958.00000095367, 87458,
-            83875, 83250
+            84458, 85500, 84042, 83708, 85167, 85999.99999904633, 87292, 90042,
+            107709, 108000
           ]
         },
         {
           "name": "src/memory-ivm-deopt.bench.ts > Join > fetch 1000 issues → 20 users",
           "shortName": "Join > fetch 1000 issues → 20 users",
           "unit": "ns/iter",
-          "baseline": 745093.7499990463,
-          "target": 473864.75,
-          "ratio": 1.572376400648173,
-          "baselineDisplay": "745.09 us",
-          "targetDisplay": "473.86 us",
+          "baseline": 760594,
+          "target": 485021,
+          "ratio": 1.5681671515253979,
+          "baselineDisplay": "760.59 us",
+          "targetDisplay": "485.02 us",
           "baselineRuns": [
-            736250, 746207.9999980927, 753979, 740166.5, 743979.5, 754125,
-            739833, 748521, 735292, 757958
+            760417, 755750, 753708, 760771, 761542, 749416, 759479,
+            787228.9999995232, 896125, 1027750
           ],
           "targetRuns": [
-            476167, 472416, 475500, 474000, 469125, 472666.5, 475875, 473729.5,
-            478459, 468583
+            473875, 477459, 471791, 476209, 492583, 469792, 515334, 537917,
+            630292, 641791.5
           ]
         }
       ]
     },
     {
       "id": "take-start-seek",
-      "title": "Seekable Ordered Take Maintenance",
+      "title": "Ordered Limit Boundary Fetch",
       "unit": "ns/iter",
       "valueKind": "duration",
-      "comparableCount": 1,
-      "medianRatio": 5259.683326769666,
-      "geometricMeanRatio": 5259.683326769664,
+      "comparableCount": 5,
+      "medianRatio": 135.25131851916967,
+      "geometricMeanRatio": 49.51310429827457,
       "rows": [
         {
-          "name": "src/take-start-seek.bench.ts > take start seek > fetch after boundary near end of partition",
-          "shortName": "take start seek > fetch after boundary near end of partition",
+          "name": "src/take-start-seek.bench.ts > ordered limit boundary fetch > after 50 rows",
+          "shortName": "ordered limit boundary fetch > after 50 rows",
           "unit": "ns/iter",
-          "baseline": 2635406,
-          "target": 501.05792236328125,
-          "ratio": 5259.683326769666,
-          "baselineDisplay": "2.64 ms",
-          "targetDisplay": "501 ns",
+          "baseline": 12934.491516113281,
+          "target": 11885.332763671875,
+          "ratio": 1.088273401620543,
+          "baselineDisplay": "12.93 us",
+          "targetDisplay": "11.89 us",
           "baselineRuns": [
-            2622500, 2608125, 2585500, 2629875, 2640937, 2688416.5, 2647563,
-            2659833, 2618562.5, 2653937.5
+            12835.31689453125, 12516.90673828125, 12600.163818359375,
+            12592.727661132812, 13045.369506835938, 13189.63623046875,
+            13032.958984375, 13136.332153320312, 12850.9013671875,
+            13018.081665039062
           ],
           "targetRuns": [
-            499.018310546875, 496.475341796875, 507.5072021484375, 650.828125,
-            490.961669921875, 489.481689453125, 503.0975341796875,
-            511.0067138671875, 518.8701171875, 494.852783203125
+            13648.300170898438, 11631.922485351562, 11760.828735351562,
+            11855.875610351562, 11833.984375, 11624.96435546875,
+            12094.284057617188, 12150.655029296882, 12081.680297851562,
+            11914.789916992188
+          ]
+        },
+        {
+          "name": "src/take-start-seek.bench.ts > ordered limit boundary fetch > after 10,000 rows",
+          "shortName": "ordered limit boundary fetch > after 10,000 rows",
+          "unit": "ns/iter",
+          "baseline": 327000.5,
+          "target": 12034.945190429688,
+          "ratio": 27.1709172601828,
+          "baselineDisplay": "327.00 us",
+          "targetDisplay": "12.03 us",
+          "baselineRuns": [
+            322375, 323000, 327916, 327500, 319625, 326834, 327875, 327167,
+            322625, 336375
+          ],
+          "targetRuns": [
+            13734.339477539062, 11961.344482421875, 11726.755859375058,
+            11774.69384765625, 11807.525634765625, 11642.903686523438,
+            12119.206787109375, 12274.795532226562, 12167.236328125,
+            12108.5458984375
+          ]
+        },
+        {
+          "name": "src/take-start-seek.bench.ts > ordered limit boundary fetch > after 50,000 rows",
+          "shortName": "ordered limit boundary fetch > after 50,000 rows",
+          "unit": "ns/iter",
+          "baseline": 1607708.5,
+          "target": 11886.823120117188,
+          "ratio": 135.25131851916967,
+          "baselineDisplay": "1.61 ms",
+          "targetDisplay": "11.89 us",
+          "baselineRuns": [
+            1657959, 1582541, 1623750, 1602291.5, 1585792, 1627958, 1619041,
+            1608542, 1590062.5, 1606875
+          ],
+          "targetRuns": [
+            11883.789184570312, 13079.299926757812, 11867.802978515625,
+            11889.857055664062, 11817.937255859375, 11766.799926757812,
+            11754.328369140625, 12360.392211914062, 12230.36181640625,
+            12097.5595703125
+          ]
+        },
+        {
+          "name": "src/take-start-seek.bench.ts > ordered limit boundary fetch > after 90,000 rows",
+          "shortName": "ordered limit boundary fetch > after 90,000 rows",
+          "unit": "ns/iter",
+          "baseline": 2957250,
+          "target": 11926.607849121094,
+          "ratio": 247.95398971870517,
+          "baselineDisplay": "2.96 ms",
+          "targetDisplay": "11.93 us",
+          "baselineRuns": [
+            3129250, 2898292, 2937166.5, 2899062.5, 2948292, 3050291.4999990463,
+            2966208, 2972500, 2899082.9999980927, 2978207.9999980927
+          ],
+          "targetRuns": [
+            11794.708129882812, 11702.092529296875, 12062.067626953125,
+            11797.068359375, 11756.230712890625, 12056.147338867188,
+            11748.758911132812, 12356.857299804688, 12075.068115234375,
+            12113.1083984375
+          ]
+        },
+        {
+          "name": "src/take-start-seek.bench.ts > ordered limit boundary fetch > after final row",
+          "shortName": "ordered limit boundary fetch > after final row",
+          "unit": "ns/iter",
+          "baseline": 3270531.25,
+          "target": 10898.643493652344,
+          "ratio": 300.08608428240115,
+          "baselineDisplay": "3.27 ms",
+          "targetDisplay": "10.90 us",
+          "baselineRuns": [
+            3509771, 3274250.5, 3241084, 3189667, 3220000, 3301583.5, 3272395.5,
+            3299625, 3200291.5, 3268667
+          ],
+          "targetRuns": [
+            10459.289672851562, 10602.732421875, 10652.832153320312,
+            10884.648681640625, 10941.370727539062, 10871.12939453125,
+            11584.859252929688, 11041.046142578125, 11053.44140625,
+            10912.638305664062
           ]
         }
       ]
@@ -146,51 +230,51 @@
       "unit": "ns/MB",
       "valueKind": "throughputAsNsPerOperation",
       "comparableCount": 2,
-      "medianRatio": 1.7122233239152251,
-      "geometricMeanRatio": 1.7116070544285902,
+      "medianRatio": 2.365585777427913,
+      "geometricMeanRatio": 2.36278145181765,
       "rows": [
         {
           "name": "change-streamer/storer single transaction payload MB",
           "shortName": "change-streamer/storer single transaction payload MB",
           "unit": "ns/MB",
-          "baseline": 17577363.973787017,
-          "target": 9997601.542856518,
-          "ratio": 1.7581580840603102,
-          "baselineDisplay": "56.89 MB/s",
-          "targetDisplay": "100.02 MB/s",
+          "baseline": 27733316.991436668,
+          "target": 11179465.312625535,
+          "ratio": 2.480737335453426,
+          "baselineDisplay": "36.06 MB/s",
+          "targetDisplay": "89.45 MB/s",
           "baselineRuns": [
-            18199827.03534844, 17737856.878080193, 17526182.884143334,
-            18067318.96323937, 17329547.860622223, 17280424.455473665,
-            17913961.144505143, 17628545.0634307, 17520743.008327574,
-            16845172.21059713
+            19282005.093705494, 18869770.608258825, 26337209.513343442,
+            22665817.1452654, 27262861.276224658, 30851885.482404646,
+            37331088.33527832, 32611208.24228678, 30171969.36250339,
+            28203772.70664868
           ],
           "targetRuns": [
-            34892162.54099854, 9859744.742754016, 9529125.66103311,
-            9247387.777642617, 9738335.418072034, 11077547.449224062,
-            9782950.639066692, 10524178.827034822, 10135458.342959022,
-            22824046.473571207
+            13942545.812502652, 10574471.492509665, 12291849.18004126,
+            11417764.805260127, 15573367.834715804, 10230196.17729446,
+            12932871.818808846, 10125975.273091048, 9762434.231891567,
+            10941165.819990944
           ]
         },
         {
           "name": "change-streamer/storer sustained stream payload MB",
           "shortName": "change-streamer/storer sustained stream payload MB",
           "unit": "ns/MB",
-          "baseline": 17106305.921399213,
-          "target": 10266112.540972214,
-          "ratio": 1.66628856377014,
-          "baselineDisplay": "58.46 MB/s",
-          "targetDisplay": "97.41 MB/s",
+          "baseline": 25865868.523451246,
+          "target": 11493723.433658015,
+          "ratio": 2.2504342194024,
+          "baselineDisplay": "38.66 MB/s",
+          "targetDisplay": "87.00 MB/s",
           "baselineRuns": [
-            16992915.048021905, 17504354.618732218, 17131772.306997813,
-            17763416.092578683, 17080839.535800613, 17425821.622602787,
-            17133311.59679805, 16576289.253819091, 16858023.764927514,
-            16724306.785392059
+            17390516.887598734, 24103356.607548237, 25277969.879708167,
+            20777386.869860727, 27129323.20992483, 28226725.066085577,
+            26453767.167194325, 24770780.265462004, 27062932.88000142,
+            30999188.626906782
           ],
           "targetRuns": [
-            10339032.44953617, 10048425.028822381, 9905251.137390742,
-            9704905.013649745, 11266481.750161333, 10449485.65508169,
-            10285229.521974057, 10952663.732193902, 10246995.559970373,
-            9996103.596424397
+            14961226.908323793, 11038284.758901276, 13357907.203465912,
+            23537480.75824456, 11955259.812155988, 11162316.969643425,
+            11825129.897672605, 9798545.762596928, 10929461.560581964,
+            10203254.630953448
           ]
         }
       ]

@@ -13,7 +13,7 @@ const groups = [
   },
   {
     id: 'take-start-seek',
-    title: 'Seekable Ordered Take Maintenance',
+    title: 'Ordered Limit Boundary Fetch',
     unit: 'ns/iter',
     valueKind: 'duration',
   },
@@ -164,7 +164,7 @@ const aggregate = {
   },
   target: {
     ref: 'maint/zero/v1.8',
-    sha: '4ef9e4ef04fbc9fa838c930887d5d6b97241b789',
+    sha: 'cdc02598f137ab4e071878f5674fdc716dbbc69d',
   },
   runCountPerRef: 10,
   aggregation:
@@ -184,7 +184,7 @@ md.push(
   '- Baseline: `zero/v1.7.0` (`6863de5f00a3c1e7dc09c83ea3263dec4a94ebee`)',
 );
 md.push(
-  '- Target: `maint/zero/v1.8` (`4ef9e4ef04fbc9fa838c930887d5d6b97241b789`)',
+  '- Target: `maint/zero/v1.8` (`cdc02598f137ab4e071878f5674fdc716dbbc69d`)',
 );
 md.push('- Run count: 10 separate processes per ref per benchmark command');
 md.push('- Aggregation: median of process-level medians');

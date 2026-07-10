@@ -9,128 +9,166 @@ description: Observability and Reliability
 npm install @rocicorp/zero@1.8
 ```
 
+You can now use `zero-cache` from GHCR:
+
+```bash
+docker pull rocicorp/zero:1.8.0
+docker pull ghcr.io/rocicorp/zero:1.8.0
+```
+
 ## Overview
 
-Zero 1.8 improves operational observability, self-hosting options, API visibility, and replication reliability.
+Zero 1.8 improves observability, performance, and reliability.
 
 ## Features
 
-- [**Request-header forwarding:**](/docs/zero-cache-config#mutate-allowed-request-headers) `zero-cache` can now forward selected incoming request headers, such as proxy or load-balancer headers, to custom mutate and query APIs via [`ZERO_MUTATE_ALLOWED_REQUEST_HEADERS`](/docs/zero-cache-config#mutate-allowed-request-headers) and [`ZERO_QUERY_ALLOWED_REQUEST_HEADERS`](/docs/zero-cache-config#query-allowed-request-headers). ([#6144](https://github.com/rocicorp/mono/pull/6144), thanks [@tjenkinson](https://github.com/tjenkinson)!)
-- [**GHCR Docker images:**](/docs/self-host#docker-images) The Zero Docker image is now published to `ghcr.io/rocicorp/zero` in addition to Docker Hub. ([#6161](https://github.com/rocicorp/mono/pull/6161))
-- [**API-server and startup metrics:**](/docs/otel#zeroserver) `zero-cache` now exports request, attempt, duration, and in-flight metrics for calls to user API servers, plus startup-duration metrics for zero-cache and worker readiness. ([#6203](https://github.com/rocicorp/mono/pull/6203), [#6208](https://github.com/rocicorp/mono/pull/6208))
-- [**Initial-sync metrics:**](/docs/otel#zeroreplication) `zero-cache` now exports initial-sync metrics for run outcomes, COPY time, SQLite flush time, index creation time, copied rows, copied bytes, and COPY chunks. ([#6191](https://github.com/rocicorp/mono/pull/6191))
-- [**Litestream backup and restore metrics:**](/docs/otel#zeroreplica) `zero-cache` now exports metrics for Litestream restore runs, restore attempts, restore validation, restored DB size, backup subprocesses, backup listing, backup verification, and snapshot reservations. ([#6199](https://github.com/rocicorp/mono/pull/6199))
-- [**Replication slot metrics:**](/docs/otel#zeroreplication) `zero-cache` now exports health and WAL-retention metrics for the active Postgres logical replication slot. ([#6210](https://github.com/rocicorp/mono/pull/6210))
-- [**Serving-lag metrics:**](/docs/otel#zerosync) `zero-cache` now exports metrics for replica changes that are ready locally but have not yet been fully served to active client groups, including aggregable native histograms for view-syncer lag and hydration. ([#6157](https://github.com/rocicorp/mono/pull/6157), [#6214](https://github.com/rocicorp/mono/pull/6214), thanks [@tantaman](https://github.com/tantaman)!)
-- [**Stability metrics:**](/docs/otel#zerosync) `zero-cache` now exports CVR load/flush, client WebSocket connection, and replication flow-control/backlog metrics for debugging reconnects, transport churn, and downstream backpressure. ([#6207](https://github.com/rocicorp/mono/pull/6207), thanks [@tantaman](https://github.com/tantaman)!)
+- [**Request-header forwarding:**](/docs/zero-cache-config#mutate-allowed-request-headers) `zero-cache` can forward selected WebSocket upgrade headers to custom APIs using [`ZERO_MUTATE_ALLOWED_REQUEST_HEADERS`](/docs/zero-cache-config#mutate-allowed-request-headers) and [`ZERO_QUERY_ALLOWED_REQUEST_HEADERS`](/docs/zero-cache-config#query-allowed-request-headers). ([#6144](https://github.com/rocicorp/mono/pull/6144), thanks [@tjenkinson](https://github.com/tjenkinson)!)
+- [**GHCR Docker images:**](/docs/self-host#docker-images) Zero images are now published to `ghcr.io/rocicorp/zero` as well as Docker Hub. ([#6161](https://github.com/rocicorp/mono/pull/6161))
+- [**Mutator result type:**](/docs/mutators#waiting-for-results) `MutatorResult` is now exported from `@rocicorp/zero` for typing helpers that await `.client` or `.server`. ([#6223](https://github.com/rocicorp/mono/pull/6223))
+- **Operational metrics:** `zero-cache` adds metrics for [API calls and startup](/docs/otel#zeroserver), [initial sync and replication slots](/docs/otel#zeroreplication), and [Litestream backup and restore](/docs/otel#zeroreplica). ([#6203](https://github.com/rocicorp/mono/pull/6203), [#6208](https://github.com/rocicorp/mono/pull/6208), [#6191](https://github.com/rocicorp/mono/pull/6191), [#6199](https://github.com/rocicorp/mono/pull/6199), [#6210](https://github.com/rocicorp/mono/pull/6210))
+- **Stability metrics:** New [serving-lag, CVR, and WebSocket metrics](/docs/otel#zerosync) and [replication flow-control metrics](/docs/otel#zeroreplication) help diagnose delayed updates, reconnects, and backpressure. ([#6157](https://github.com/rocicorp/mono/pull/6157), [#6214](https://github.com/rocicorp/mono/pull/6214), [#6207](https://github.com/rocicorp/mono/pull/6207), thanks [@tantaman](https://github.com/tantaman)!)
 
 ## Performance
 
-Zero 1.8 includes targeted improvements for common in-memory ZQL fetches, ordered `take` maintenance, and CDC `changeLog` persistence.
+Zero 1.8 speeds up local ZQL queries, ordered `limit()` queries, and replication after large Postgres writes.
 
-The results below compare Zero 1.7 (`6863de5f00a3c1e7dc09c83ea3263dec4a94ebee`) to Zero 1.8 (`4ef9e4ef04fbc9fa838c930887d5d6b97241b789`) using 10 separate process-level runs per ref. Values are median-of-medians from the benchmark output, normalized so higher is better.
+### Faster Local Queries
 
-### In-Memory ZQL Fetch
+When a query first runs, Zero builds its view from data already synced to the client. For example, for the query:
 
-Common in-memory ZQL fetches are faster when there is no active overlay, start cursor, or connection filter. In the measured fetch hot paths, Zero 1.8 is about **2.05x faster** by geometric mean. ([#6127](https://github.com/rocicorp/mono/pull/6127))
+```ts
+zql.issue
+  .where('closed', false)
+  .related('owner')
+  .orderBy('createdAt', 'desc')
+```
+
+Zero 1.8 reduces the per-row work for common local scans, filters, and relationship lookups. Views like this can appear sooner and use less client CPU, with local query fetches running **1.57x to 2.36x faster**, depending on the query.
 
 <BenchmarkComparisonChart
-  title="In-Memory ZQL Fetch"
-  description="Normalized fetch throughput. Higher is better."
+  title="Local Query Fetch"
+  description="Normalized local query throughput. Higher is better."
   previousLabel="Zero 1.7"
   currentLabel="Zero 1.8"
   precision={2}
   height={360}
   data={[
     {
-      name: 'MemorySource, 1 key',
-      fullName:
-        'MemorySource fetch scanning 1,000 rows sorted by 1 key',
-      current: 2.37
-    },
-    {
-      name: 'MemorySource, 2 keys',
-      fullName:
-        'MemorySource fetch scanning 1,000 rows sorted by 2 keys',
+      name: 'Issue scan, 1 sort key',
+      fullName: 'Scanning 1,000 issues sorted by 1 key',
       current: 2.36
     },
     {
-      name: 'MemorySource, 4 keys',
+      name: 'Issue scan, 2 sort keys',
+      fullName: 'Scanning 1,000 issues sorted by 2 keys',
+      current: 2.35
+    },
+    {
+      name: 'Issue scan, 4 sort keys',
+      fullName: 'Scanning 1,000 issues sorted by 4 keys',
+      current: 2.35
+    },
+    {
+      name: 'Open issues',
       fullName:
-        'MemorySource fetch scanning 1,000 rows sorted by 4 keys',
-      current: 2.33
+        'Filtering open issues from 1,000 local rows',
+      current: 1.74
     },
     {
-      name: 'Filter fetch',
-      fullName: 'Filter fetch over 1,000 in-memory issues',
-      current: 1.76
-    },
-    {
-      name: 'Join fetch',
-      fullName: 'Join fetch for 1,000 issues to 20 users',
+      name: 'Issues with owners',
+      fullName:
+        'Loading owners for 1,000 issues across 20 users',
       current: 1.57
     }
   ]}
 />
 
-### Ordered `take` Maintenance
+### Ordered `limit()` Queries
 
-Ordered `take` maintenance fetches can now add a redundant leading-column bound for non-nullable leading sort columns, letting SQLite seek into the relevant index range instead of scanning a large partition. In a targeted benchmark with a 100k-row partition and a start cursor near the end, the median fetch time improved from **2.64 ms** to **501 ns**. ([#6184](https://github.com/rocicorp/mono/pull/6184), thanks [@tantaman](https://github.com/tantaman)!)
+Consider a view showing the top 50 open issues:
 
-<BenchmarkComparisonChart
-  title="Ordered Take Maintenance"
-  description="Normalized fetch throughput for a targeted 100k-row SQLite partition benchmark. Higher is better."
-  previousLabel="Zero 1.7"
-  currentLabel="Zero 1.8"
-  precision={0}
-  data={[
-    {
-      name: 'Start cursor near end',
-      fullName:
-        'Ordered take maintenance fetch after a start cursor near the end of an indexed partition',
-      current: 5260
-    }
-  ]}
-/>
+```ts
+zql.issue
+  .where('workspaceID', workspaceID)
+  .where('status', 'open')
+  .orderBy('priority', 'desc')
+  .orderBy('created', 'asc')
+  .limit(50)
+```
 
-### CDC Storer Throughput
+If open issues are sparse, the 50th match can be deep in the ordered data. If an issue enters, leaves, or moves within the top 50, Zero reads around the current 50th issue to determine which issue belongs in the result next.
 
-`zero-cache` now batches CDC `changeLog` writes into multi-row inserts, reducing the time spent persisting metadata for large upstream transactions. In the targeted PostgreSQL storer benchmark, Zero 1.8 is about **1.7x faster** by geometric mean. ([#6142](https://github.com/rocicorp/mono/pull/6142))
+Zero 1.8 lets SQLite seek directly to that boundary instead of scanning earlier rows again. Boundary fetches are **1.09x faster** after 50 rows and up to **300x faster** at the end of a 100,000-row index.
 
 <BenchmarkComparisonChart
-  title="CDC Storer Throughput"
-  description="Normalized payload throughput while persisting replication changes to the change log. Higher is better."
+  title="Ordered Limit Boundary Fetch"
+  description="Normalized query-path throughput when refilling an ordered limited view. Higher is better."
   previousLabel="Zero 1.7"
   currentLabel="Zero 1.8"
   precision={2}
   data={[
     {
-      name: 'Large transaction',
-      fullName:
-        'Persisting one transaction with 50k synthetic changes',
-      current: 1.76
+      name: 'Boundary 50 rows deep',
+      current: 1.09
     },
     {
-      name: 'Sustained stream',
+      name: 'Boundary 10,000 rows deep',
+      current: 27.17
+    },
+    {
+      name: 'Boundary 50,000 rows deep',
+      current: 135.25
+    },
+    {
+      name: 'Boundary 90,000 rows deep',
+      current: 247.95
+    },
+    {
+      name: 'Boundary at final row',
+      current: 300.09
+    }
+  ]}
+/>
+
+### Faster Replication After Bulk Writes
+
+A bulk import, backfill, or migration can change tens of thousands of rows in one transaction. Zero records each change during replication, and writing them one at a time could make replication fall behind.
+
+Zero 1.8 writes these changes in batches, making persistence **2.25x to 2.48x faster** and helping large transactions reach clients sooner.
+
+<BenchmarkComparisonChart
+  title="Replication Change Persistence"
+  description="Normalized throughput while recording Postgres changes for replication. Higher is better."
+  previousLabel="Zero 1.7"
+  currentLabel="Zero 1.8"
+  precision={2}
+  data={[
+    {
+      name: '50,000-change transaction',
       fullName:
-        'Persisting 50 transactions of 1,000 synthetic changes each',
-      current: 1.67
+        'Recording one transaction with 50,000 changes',
+      current: 2.48
+    },
+    {
+      name: '50 × 1,000-change transactions',
+      fullName:
+        'Recording 50 transactions with 1,000 changes each',
+      current: 2.25
     }
   ]}
 />
 
 ## Fixes
 
-- [Logical replication could stall indefinitely when the inbound Postgres replication stream went silent instead of reconnecting.](https://github.com/rocicorp/mono/pull/6047) (thanks [@tantaman](https://github.com/tantaman)!)
-- [Postgres connections could crash after a socket disconnected while a pending write still tried to use the closed socket.](https://github.com/rocicorp/mono/pull/6193)
-- [Drizzle 1.0 RC `prepareQuery` results could come back in array mode instead of object mode, breaking Zero's Drizzle adapter.](https://github.com/rocicorp/mono/pull/6154) (thanks [@typedrat](https://github.com/typedrat)!)
-- [z2s failed to compile queries using `start`, and SQLite fetches could handle `null` start cursor fields incorrectly.](https://github.com/rocicorp/mono/pull/6189) (thanks [@tantaman](https://github.com/tantaman)!)
-- [Queries could appear `complete` with stale or empty results after reconnect when persisted `got` state was no longer authoritative.](https://github.com/rocicorp/mono/pull/6172)
-- [React Native reads using `op-sqlite` v17 could crash with `iterator method is not callable`.](https://github.com/rocicorp/mono/pull/6180)
-- [View-syncer pods could exit with `max attempts exceeded restoring replica` while the first backup was still uploading.](https://github.com/rocicorp/mono/pull/6134)
-- [Cold-start view-syncers could be told to restore before a restorable backup existed, causing repeated failed restore attempts.](https://github.com/rocicorp/mono/pull/6135)
-- [Zero Docker images used a Node build affected by the `availableParallelism` bug.](https://github.com/rocicorp/mono/pull/6198) (thanks [@tantaman](https://github.com/tantaman)!)
-- [Catching-up change-stream subscribers could bypass flow control and build an unbounded in-memory backlog.](https://github.com/rocicorp/mono/pull/6186) (thanks [@tantaman](https://github.com/tantaman)!)
+- [Logical replication now reconnects when the inbound Postgres stream goes silent.](https://github.com/rocicorp/mono/pull/6047)
+- [Postgres writes no longer use sockets after disconnection.](https://github.com/rocicorp/mono/pull/6193)
+- [The Drizzle adapter now handles array-mode results from Drizzle 1.0 RC `prepareQuery`.](https://github.com/rocicorp/mono/pull/6154) (thanks [@typedrat](https://github.com/typedrat)!)
+- [z2s now compiles queries using `start`, and SQLite fetches handle `null` start-cursor fields.](https://github.com/rocicorp/mono/pull/6189)
+- [Queries no longer appear `complete` with stale or empty results after reconnect.](https://github.com/rocicorp/mono/pull/6172)
+- [React Native reads now work with `op-sqlite` v17.](https://github.com/rocicorp/mono/pull/6180)
+- [View-syncers no longer fail while the first backup is uploading](https://github.com/rocicorp/mono/pull/6134) or [retry before a restorable backup exists on cold start](https://github.com/rocicorp/mono/pull/6135).
+- [Zero Docker images now choose the correct default sync-worker count.](https://github.com/rocicorp/mono/pull/6198)
+- [Change-stream catch-up now respects flow control, preventing unbounded in-memory backlogs.](https://github.com/rocicorp/mono/pull/6186)
 
 ## Breaking Changes
 

@@ -13,12 +13,14 @@ const SNIPPET_LENGTH = 120;
 const escapeRegExp = (value: string) =>
   value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
-const normalizeTokens = (value: string) =>
+const tokenize = (value: string) =>
   lunr
     .tokenizer(value)
     .map(token => token.toString().toLowerCase())
-    .flatMap(token => token.split(/[^a-z0-9]+/i))
     .filter(Boolean);
+
+const splitPunctuation = (tokens: string[]) =>
+  tokens.flatMap(token => token.split(/[^a-z0-9]+/i)).filter(Boolean);
 
 const findFirstMatchIndex = (content: string, terms: string[]) => {
   const lowerContent = content.toLowerCase();
@@ -192,31 +194,41 @@ export const searchDocuments = ({
   const sanitizedInput = query.trim();
   if (!sanitizedInput) return [];
 
-  const tokens = normalizeTokens(sanitizedInput);
-  if (!tokens.length) return [];
+  const primaryTokens = tokenize(sanitizedInput);
+  if (!primaryTokens.length) return [];
 
-  const requiredPresence =
-    tokens.length > 1
-      ? lunr.Query.presence.REQUIRED
-      : lunr.Query.presence.OPTIONAL;
-
-  const runQuery = (config: {
-    presence: lunr.Query.presence;
-    includeFuzzy: boolean;
-  }) => index.query(builder => buildQuery(builder, tokens, config));
-
-  let results = runQuery({presence: requiredPresence, includeFuzzy: false});
-  if (!results.length) {
-    results = runQuery({presence: requiredPresence, includeFuzzy: true});
-  }
-  if (!results.length && tokens.length > 1) {
-    results = runQuery({
-      presence: lunr.Query.presence.OPTIONAL,
-      includeFuzzy: true,
-    });
+  const fallbackTokens = splitPunctuation(primaryTokens);
+  const tokenSets = [primaryTokens];
+  if (
+    fallbackTokens.length &&
+    (fallbackTokens.length !== primaryTokens.length ||
+      fallbackTokens.some((token, index) => token !== primaryTokens[index]))
+  ) {
+    tokenSets.push(fallbackTokens);
   }
 
-  if (!results.length) return [];
+  const runQueries = (includeFuzzy: boolean, optionalOnly = false) => {
+    for (const tokens of tokenSets) {
+      if (optionalOnly && tokens.length < 2) continue;
+
+      const presence = optionalOnly
+        ? lunr.Query.presence.OPTIONAL
+        : tokens.length > 1
+          ? lunr.Query.presence.REQUIRED
+          : lunr.Query.presence.OPTIONAL;
+      const results = index.query(builder =>
+        buildQuery(builder, tokens, {presence, includeFuzzy}),
+      );
+      if (results.length) return {results, tokens};
+    }
+
+    return null;
+  };
+
+  const match = runQueries(false) ?? runQueries(true) ?? runQueries(true, true);
+  if (!match) return [];
+
+  const {results, tokens} = match;
 
   const documentsById = new Map(documents.map(doc => [doc.id, doc]));
   const phrase = tokens.length > 1 ? tokens.join(' ') : '';

@@ -9,7 +9,7 @@ Use this skill to draft new Zero release notes in `zero-docs` from `rocicorp/mon
 
 ## Goal
 
-Produce a release note draft that is intentionally over-inclusive so a human can trim it.
+Capture release items over-inclusively so a human can trim the list, but write each public item concisely for developers.
 
 ## Inputs
 
@@ -90,11 +90,10 @@ Produce a release note draft that is intentionally over-inclusive so a human can
    - Confirm all non-skipped commits are represented or intentionally omitted.
    - Re-check any `MAYBE` or `BREAKING` rows and summarize the decision in the draft or in the saved release state.
    - Re-check any performance follow-ups recorded in `.releases/<major>.<minor>/commits.md`.
-   - For every performance item that will appear in the public release note, run the benchmark comparison process below first. Do not use a single PR benchmark table, commit message, one local run, qualitative wording, or TODO placeholder as a substitute.
-   - If release-quality benchmark comparison has not been run for a performance item, omit that item from the public release note and record the omission rationale in `.releases/<major>.<minor>/commits.md`.
+   - Before including a performance item in public release notes, run the benchmark comparison process below. If no release-quality comparison is available, omit the item and record why in `.releases/<major>.<minor>/commits.md`.
 9. Build draft release notes in the latest format used in this repo:
    - Before drafting, read `contents/docs/release-notes/0.26.mdx` as the canonical long-form style reference to avoid format drift.
-   - Draft a `## Performance` section only if at least one included performance item has release-quality benchmark comparison results. If drafting it, also read `contents/docs/release-notes/1.7.mdx` as the canonical performance-section style reference and prefer the chart-based structure: short explanatory text, scoped claims, and `<BenchmarkComparisonChart>` data when there are enough comparable benchmark rows.
+   - Include `## Performance` only when at least one item has release-quality comparison results. Follow `contents/docs/release-notes/1.7.mdx`: ground each improvement in a concrete developer workload, explain the practical benefit, then present scoped benchmark results and `<BenchmarkComparisonChart>` data when enough rows are comparable.
    - Frontmatter with `title` and `description`
    - `## Installation`
    - optional `## Overview`
@@ -105,16 +104,25 @@ Produce a release note draft that is intentionally over-inclusive so a human can
 
 ## Formatting Rules
 
-- Prefer including too much over too little.
+- Prefer covering too many relevant items in the draft over missing one; do not make individual items verbose.
 - Do not list chores unless they appear miscategorized and user-relevant.
 - Feature bullets must link to docs; if unknown, use `TODO` links as placeholders.
 - Fix bullets must be one line each and link to PRs.
-- Performance claims must be based on the repeatable benchmark comparison process below, not a single local run, one matrix row, an unverified PR comment, qualitative wording, or a TODO placeholder. PR benchmark tables/comments are useful evidence for deciding what to measure, but are not sufficient by themselves for release-quality numbers.
-- Performance sections must follow the `contents/docs/release-notes/1.7.mdx` chart style when there are enough comparable benchmark rows: explain what was measured, state the baseline and target, and include `<BenchmarkComparisonChart>` data for important benchmark groups.
-- Performance bullets may be used only for isolated targeted results that have release-quality benchmark comparison results. If a perf item lacks release-quality numbers, omit it from the public release note and record the omission rationale in `.releases/<major>.<minor>/commits.md`.
+- Use the benchmark requirements below for all performance claims. Follow the `contents/docs/release-notes/1.7.mdx` chart format when enough rows are comparable; reserve bullets for isolated targeted results.
 - If a perf PR has mixed results, emphasize meaningful wins and avoid dismissive phrasing.
 - If several PRs comprise one logical fix, include one bullet with artful multi-link phrasing.
 - If no breaking changes, write `None.`
+- **Performance descriptions must explain the developer impact**, not just repeat a commit title, internal optimization, or benchmark result:
+  - Start with a recognizable workload: a ZQL query, mutation flow, sync pattern, or operator task. Use a short public API example when it makes an abstract optimization concrete.
+  - Make sure the example can produce the measured slow path. For example, a plain `limit(50)` has a boundary only 50 rows deep; add a realistic sparse filter if the improvement depends on finding 50 matches deep in the ordered source data.
+  - Explain when the slow path occurs and what Zero does in plain language, then state what is faster. Clarify local database reads when words such as "fetch" could sound like network activity.
+  - Use public concepts such as `limit()`, initial sync, or replication. Avoid internal names such as `Take`, planner helper names, data structures, and generated predicates unless they are necessary to understand the benefit.
+  - Inspect the commit, tests, PR context, and nearby product docs when the user-facing workload is unclear. Do not infer a workload from a benchmark name alone.
+  - State measured results directly as "X is N times faster." Do not discuss "a benchmark," "a focused benchmark," hardware, process counts, aggregation, or other methodology in public prose. Keep those details in `.releases/<major>.<minor>/`.
+  - Use user-facing chart titles and row labels. If the measured path is narrower than the full workflow, scope the chart description and speedup claim to that operation instead of narrating the benchmark setup.
+  - Omit a performance item if you cannot explain who benefits, under what conditions, and what improves.
+  - Bad: "`Take` maintenance adds a sargable leading-column bound, improving the query-builder/SQLite proxy by 5416x."
+  - Good: "If open issues are sparse, the 50th match can be deep in the ordered data. If an issue enters, leaves, or moves within the top 50, Zero reads around the current 50th issue to determine which issue belongs in the result next. Zero can now seek directly to that boundary instead of scanning earlier rows again. Boundary fetches are 1.09x to 300x faster, depending on depth."
 - **Fix descriptions must be user-facing**, not implementation details:
   - Describe the problem, not "Fix [problem]" - the section heading already says "Fixes"
   - Phrase fixes as the old broken behavior or user-visible problem, not as a new capability
@@ -132,7 +140,7 @@ Produce a release note draft that is intentionally over-inclusive so a human can
   - Omit purely internal fixes that users would never notice
 - Thank external contributors (non-Rocicorp) at the end of their bullet:
   - Format: `(thanks [@username](https://github.com/username)!)`
-  - Check commit author emails - rocicorp employees use `@roci.dev` emails
+  - Check commit author emails - rocicorp employees use `@roci.dev` emails. `tantaman` is a rocicorp contributor.
   - Also check for Co-authored-by lines in commit messages
 
 ## Benchmark Comparison For Release Notes
@@ -165,23 +173,23 @@ For shared package benchmarks:
 pnpm --filter shared exec vitest run --config vitest.config.bench.node.ts logger
 ```
 
-For release-quality numbers, wrap the command and collect 10 process-level runs with JSON output:
+For release-quality numbers, run the command in 10 separate processes with JSON output:
 
 ```sh
 BENCH_OUTPUT_FORMAT=json pnpm --filter zql-benchmarks exec vitest run --config vitest.config.bench-mem.ts debug-row-vended
 ```
 
-Then aggregate each benchmark's median across the 10 runs.
+Aggregate each benchmark's 10 process-level medians.
 
 ### Reliability Rules
 
 - Prefer targeted benchmarks when validating a specific perf commit.
-- Use separate process runs because mitata handles in-process sampling, but process startup/JIT/GC/environment noise still matters.
+- Use separate processes: mitata handles in-process sampling, but not process startup, JIT, GC, or environment noise.
 - Avoid concurrent benchmark runs on the same machine.
 - Keep benchmark inputs deterministic and prebuilt where possible.
 - Make both refs run the same benchmark source.
 - Don't claim a perf win if the comparison is really "fixed implementation vs temporary bad implementation"; call that out separately.
-- For pg benchmarks, rely on benchmark-internal warmups plus multiple full benchmark reps, and keep DB setup identical.
+- For PostgreSQL benchmarks, keep database setup identical and use benchmark-internal warmups plus multiple complete runs.
 - If target-only benchmark coverage exists, temp-backport only the benchmark/harness changes needed to run the same benchmark definition on the baseline. Do not backport production code when measuring a performance commit.
 - Save or link raw outputs and aggregate scripts/results in `.releases/<major>.<minor>/` so future release review can audit the numbers.
 

@@ -2,7 +2,7 @@
 
 - Release version: `1.8.0`
 - Previous tag/ref: `zero/v1.7.0` (`6863de5f0`), equivalent to `origin/maint/zero/v1.7`
-- Target ref: `maint/zero/v1.8` (`4ef9e4ef0`)
+- Target ref: `maint/zero/v1.8` (`cdc02598f`)
 - Merge base: `20d8df7d7679aaebb6a53e8c40f24731d67b7889`
 - Mono repo: `../mono`, origin `git@github.com:rocicorp/mono.git`
 - Human review: hidden Litestream v5 work should not be included in public release notes.
@@ -20,6 +20,8 @@ git -C ../mono log --reverse --no-merges --format='COMMIT %h %H%nAUTHOR %an <%ae
 git -C ../mono log --reverse --format='%H%x09%an%x09%ae%x09%s%n%b%n---END---' c2b5a75652e5926cd894a98bd7f9bddeebfc9a07..maint/zero/v1.8
 git -C ../mono log --reverse --oneline --no-merges e91debd95c7155a834e8a428f1f9495d6cb2f636..maint/zero/v1.8
 git -C ../mono log --reverse --format='%H%x09%an%x09%ae%x09%s%n%b%n---END---' e91debd95c7155a834e8a428f1f9495d6cb2f636..maint/zero/v1.8
+git -C ../mono log --reverse --oneline --no-merges 4ef9e4ef04fbc9fa838c930887d5d6b97241b789..maint/zero/v1.8
+git -C ../mono log --reverse --format='%H%x09%an%x09%ae%x09%s%n%b%n---END---' 4ef9e4ef04fbc9fa838c930887d5d6b97241b789..maint/zero/v1.8
 ```
 
 ## Protocol Compatibility
@@ -85,6 +87,8 @@ d4258993d chore: fix various lag metrics to be aggregable across time and space 
 f71c897c4 feat(zero-cache): added replication slot metrics (#6210)
 832580d65 feat(zero-cache): add worker startup duration metric (#6208)
 4ef9e4ef0 chore(zero-cache): cap the subscriber queue during catchup (#6186)
+312a0f78f docs: fixup readme for release (#6218)
+cdc02598f chore: add MutatorResult to exported types (#6223)
 ```
 
 ## Cherry-Pick / Patch-Equivalence Skips
@@ -147,6 +151,8 @@ f71c897c4 feat(zero-cache): added replication slot metrics (#6210)
 | `f71c897c4` | feature  | -         | Adds Postgres replication slot health and WAL retention metrics for the active Zero logical replication slot. Public operator observability feature; docs need OTel metric entries.                                                                                              |
 | `832580d65` | feature  | -         | Adds top-level zero-cache and per-worker startup duration metrics so operators can diagnose readiness delays by worker phase. Public observability feature; docs need OTel metric entries.                                                                                       |
 | `4ef9e4ef0` | fix      | -         | Catching-up change-stream subscribers could bypass flow control and build an unbounded in-memory backlog before dumping it downstream. User-facing reliability fix for replication-manager memory/backpressure behavior during catchup.                                          |
+| `312a0f78f` | skip     | -         | Updates the published package README with package-manager install examples and removes internal release instructions. Documentation-only; no Zero runtime or public API change.                                                                                                  |
+| `cdc02598f` | feature  | -         | Exports the existing `MutatorResult` type from the public `@rocicorp/zero` entrypoint. Additive, type-only developer API that makes mutation-result helpers easier to type; the existing alias remains exported.                                                                 |
 
 ## Potential Breaking Changes
 
@@ -154,7 +160,8 @@ f71c897c4 feat(zero-cache): added replication slot metrics (#6210)
 - `a85e0eee4`, `3deac3a0f`, `deb8f682e`, `9774d0d4a`, and `962587a71` can affect internal contributor or release workflows, but they do not change public Zero runtime behavior.
 - `31e48aa71` changes `null` cursor comparison behavior. This is treated as a fix, not a breaking change, because the previous behavior was incorrect query pagination/fetch semantics.
 - `d711edbb2` changes final metric names before release. This is not treated as breaking because 1.8 had not shipped with the previous names.
-- `d4258993d` adds native histogram metrics. Operators using Prometheus need Prometheus `3.8+` for those native histograms, but existing legacy serving-lag gauges remain available.
+- `d4258993d` adds native histogram metrics. Prometheus supports them experimentally in versions 2.40 through 3.7 and as a stable feature in 3.8, with ingestion configuration still required. Existing legacy serving-lag gauges remain available.
+- `cdc02598f` is additive and type-only. `PromiseWithServerResult` remains exported as an alias, so no existing import is removed.
 
 ## Performance Follow-Ups
 
@@ -168,12 +175,13 @@ Benchmark results:
 - Raw outputs: `.releases/1.8/benchmarks/raw/**`.
 - Methodology: `.releases/1.8/benchmarks/README.md`.
 - Aggregation script: `.releases/1.8/benchmarks/aggregate-benchmarks.mjs`.
+- Targeted ordered-limit boundary-fetch source for `#6184`: `.releases/1.8/benchmarks/take-start-seek.bench.ts`.
 - Aggregate JSON: `.releases/1.8/benchmarks/aggregate.json`.
 - Aggregate Markdown: `.releases/1.8/benchmarks/aggregate.md`.
 - Run count: 10 separate processes per ref per benchmark command.
 - Aggregation method: median of process-level medians.
 - Baseline: `zero/v1.7.0` (`6863de5f00a3c1e7dc09c83ea3263dec4a94ebee`).
-- Target: `maint/zero/v1.8` (`4ef9e4ef04fbc9fa838c930887d5d6b97241b789`).
+- Target: `maint/zero/v1.8` (`cdc02598f137ab4e071878f5674fdc716dbbc69d`).
 
 ## Draft Inclusion Checklist
 
@@ -189,6 +197,7 @@ Features to include:
 - Stability metrics for CVR load/flush, WebSocket connections, and replication flow-control/backlog (`#6207`), with OTel metrics reference entries.
 - Replication slot health and WAL retention metrics (`#6210`), with OTel metrics reference entries.
 - Startup duration metrics for zero-cache and worker readiness (`#6208`), with OTel metrics reference entries.
+- Public `MutatorResult` type export (`#6223`), with a mutator-results docs example.
 
 Fixes to include:
 
@@ -213,6 +222,7 @@ Items explicitly excluded:
 
 - Hidden Litestream v5 implementation/flag/safety commits: `69c83bb59`, `d1e92234a`, `c8ab96e34`, `2adca291b`, `8429abd34`.
 - Release/CI/devcontainer/benchmark-only/internal logging commits unless a human later asks to include them.
+- Package README-only release cleanup: `312a0f78f`.
 
 ## Open Questions
 
@@ -225,6 +235,7 @@ Items explicitly excluded:
 - Updated public docs anchors:
   - `contents/docs/zero-cache-config.mdx`: `#mutate-allowed-request-headers`, `#query-allowed-request-headers`.
   - `contents/docs/self-host.mdx`: `#docker-images`.
+  - `contents/docs/mutators.mdx`: `#waiting-for-results`.
   - `contents/docs/otel.mdx`: API-server and startup metrics under `#zeroserver`, Litestream backup/restore metrics under `#zeroreplica`, initial-sync, flow-control, and replication slot metrics under `#zeroreplication`, and serving-lag, native view-syncer histogram, CVR, and WebSocket metrics under `#zerosync`.
 - Updated generated search index: `assets/search-index.json`.
 - External contributor thanks checked from PR metadata and included for `@tjenkinson`, `@typedrat`, and `@tantaman`.
@@ -234,5 +245,5 @@ Items explicitly excluded:
   - `node .releases/1.8/benchmarks/aggregate-benchmarks.mjs`
   - `pnpm run build:search`
   - `pnpm run check-types`
-  - `pnpm exec prettier --check .releases/1.8/commits.md .releases/1.8/benchmarks/README.md .releases/1.8/benchmarks/aggregate.md .releases/1.8/benchmarks/aggregate.json .releases/1.8/benchmarks/aggregate-benchmarks.mjs assets/search-index.json contents/docs/release-notes/1.8.mdx contents/docs/otel.mdx`
+  - `pnpm exec prettier --check .releases/1.8/commits.md .releases/1.8/benchmarks/README.md .releases/1.8/benchmarks/aggregate.md .releases/1.8/benchmarks/aggregate.json .releases/1.8/benchmarks/aggregate-benchmarks.mjs .releases/1.8/benchmarks/take-start-seek.bench.ts assets/search-index.json contents/docs/release-notes/1.8.mdx contents/docs/release-notes/index.mdx contents/docs/mutators.mdx contents/docs/otel.mdx contents/docs/zero-cache-config.mdx`
   - `git diff --check`
