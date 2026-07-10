@@ -3,12 +3,12 @@
 ## Refs
 
 - Baseline: `zero/v1.7.0` (`6863de5f00a3c1e7dc09c83ea3263dec4a94ebee`)
-- Target: `maint/zero/v1.8` (`6c8b5e5a76f2b4b253b1b9c9c4a8598299d8c975`)
+- Target: `maint/zero/v1.8` (`4ef9e4ef04fbc9fa838c930887d5d6b97241b789`)
 
 ## Worktrees
 
 - Baseline worktree: `/var/folders/97/c3gvpw6d46g3nm0y2684_cfm0000gn/T/opencode/zero-1.8-bench/zero-v1.7.0`
-- Target worktree: `/var/folders/97/c3gvpw6d46g3nm0y2684_cfm0000gn/T/opencode/zero-1.8-bench/zero-v1.8`
+- Target worktree: `/var/folders/97/c3gvpw6d46g3nm0y2684_cfm0000gn/T/opencode/zero-1.8-bench/zero-v1.8-e91`, advanced to `4ef9e4ef0`
 
 Both worktrees were installed with:
 
@@ -99,8 +99,8 @@ Aggregation method: median of each benchmark's process-level medians. Ratios are
 
 | Group                             | Comparable Rows | Median Ratio | Geomean Ratio |
 | --------------------------------- | --------------: | -----------: | ------------: |
-| In-memory ZQL fetch               |               5 |        2.36x |         2.07x |
-| Seekable ordered take maintenance |               1 |     3741.54x |      3741.54x |
-| CDC storer throughput             |               2 |        1.23x |         1.23x |
+| In-memory ZQL fetch               |               5 |        2.33x |         2.05x |
+| Seekable ordered take maintenance |               1 |     5259.68x |      5259.68x |
+| CDC storer throughput             |               2 |        1.71x |         1.71x |
 
 See `.releases/1.8/benchmarks/aggregate.md` for row-level results.

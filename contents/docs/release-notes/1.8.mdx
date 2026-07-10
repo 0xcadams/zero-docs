@@ -1,6 +1,6 @@
 ---
 title: Zero 1.8
-description: Observability and Replication Reliability
+description: Observability and Reliability
 ---
 
 ## Installation
@@ -11,24 +11,28 @@ npm install @rocicorp/zero@1.8
 
 ## Overview
 
-Zero 1.8 improves operational observability, self-hosting options, and replication reliability.
+Zero 1.8 improves operational observability, self-hosting options, API visibility, and replication reliability.
 
 ## Features
 
 - [**Request-header forwarding:**](/docs/zero-cache-config#mutate-allowed-request-headers) `zero-cache` can now forward selected incoming request headers, such as proxy or load-balancer headers, to custom mutate and query APIs via [`ZERO_MUTATE_ALLOWED_REQUEST_HEADERS`](/docs/zero-cache-config#mutate-allowed-request-headers) and [`ZERO_QUERY_ALLOWED_REQUEST_HEADERS`](/docs/zero-cache-config#query-allowed-request-headers). ([#6144](https://github.com/rocicorp/mono/pull/6144), thanks [@tjenkinson](https://github.com/tjenkinson)!)
 - [**GHCR Docker images:**](/docs/self-host#docker-images) The Zero Docker image is now published to `ghcr.io/rocicorp/zero` in addition to Docker Hub. ([#6161](https://github.com/rocicorp/mono/pull/6161))
+- [**API-server and startup metrics:**](/docs/otel#zeroserver) `zero-cache` now exports request, attempt, duration, and in-flight metrics for calls to user API servers, plus startup-duration metrics for zero-cache and worker readiness. ([#6203](https://github.com/rocicorp/mono/pull/6203), [#6208](https://github.com/rocicorp/mono/pull/6208))
 - [**Initial-sync metrics:**](/docs/otel#zeroreplication) `zero-cache` now exports initial-sync metrics for run outcomes, COPY time, SQLite flush time, index creation time, copied rows, copied bytes, and COPY chunks. ([#6191](https://github.com/rocicorp/mono/pull/6191))
-- [**Serving-lag metrics:**](/docs/otel#zerosync) `zero-cache` now exports metrics for replica changes that are ready locally but have not yet been fully served to active client groups. ([#6157](https://github.com/rocicorp/mono/pull/6157), thanks [@tantaman](https://github.com/tantaman)!)
+- [**Litestream backup and restore metrics:**](/docs/otel#zeroreplica) `zero-cache` now exports metrics for Litestream restore runs, restore attempts, restore validation, restored DB size, backup subprocesses, backup listing, backup verification, and snapshot reservations. ([#6199](https://github.com/rocicorp/mono/pull/6199))
+- [**Replication slot metrics:**](/docs/otel#zeroreplication) `zero-cache` now exports health and WAL-retention metrics for the active Postgres logical replication slot. ([#6210](https://github.com/rocicorp/mono/pull/6210))
+- [**Serving-lag metrics:**](/docs/otel#zerosync) `zero-cache` now exports metrics for replica changes that are ready locally but have not yet been fully served to active client groups, including aggregable native histograms for view-syncer lag and hydration. ([#6157](https://github.com/rocicorp/mono/pull/6157), [#6214](https://github.com/rocicorp/mono/pull/6214), thanks [@tantaman](https://github.com/tantaman)!)
+- [**Stability metrics:**](/docs/otel#zerosync) `zero-cache` now exports CVR load/flush, client WebSocket connection, and replication flow-control/backlog metrics for debugging reconnects, transport churn, and downstream backpressure. ([#6207](https://github.com/rocicorp/mono/pull/6207), thanks [@tantaman](https://github.com/tantaman)!)
 
 ## Performance
 
 Zero 1.8 includes targeted improvements for common in-memory ZQL fetches, ordered `take` maintenance, and CDC `changeLog` persistence.
 
-The results below compare Zero 1.7 (`6863de5f00a3c1e7dc09c83ea3263dec4a94ebee`) to Zero 1.8 (`6c8b5e5a76f2b4b253b1b9c9c4a8598299d8c975`) using 10 separate process-level runs per ref. Values are median-of-medians from the benchmark output, normalized so higher is better.
+The results below compare Zero 1.7 (`6863de5f00a3c1e7dc09c83ea3263dec4a94ebee`) to Zero 1.8 (`4ef9e4ef04fbc9fa838c930887d5d6b97241b789`) using 10 separate process-level runs per ref. Values are median-of-medians from the benchmark output, normalized so higher is better.
 
 ### In-Memory ZQL Fetch
 
-Common in-memory ZQL fetches are faster when there is no active overlay, start cursor, or connection filter. In the measured fetch hot paths, Zero 1.8 is about **2.1x faster** by geometric mean. ([#6127](https://github.com/rocicorp/mono/pull/6127))
+Common in-memory ZQL fetches are faster when there is no active overlay, start cursor, or connection filter. In the measured fetch hot paths, Zero 1.8 is about **2.05x faster** by geometric mean. ([#6127](https://github.com/rocicorp/mono/pull/6127))
 
 <BenchmarkComparisonChart
   title="In-Memory ZQL Fetch"
@@ -42,19 +46,19 @@ Common in-memory ZQL fetches are faster when there is no active overlay, start c
       name: 'MemorySource, 1 key',
       fullName:
         'MemorySource fetch scanning 1,000 rows sorted by 1 key',
-      current: 2.41
+      current: 2.37
     },
     {
       name: 'MemorySource, 2 keys',
       fullName:
         'MemorySource fetch scanning 1,000 rows sorted by 2 keys',
-      current: 2.37
+      current: 2.36
     },
     {
       name: 'MemorySource, 4 keys',
       fullName:
         'MemorySource fetch scanning 1,000 rows sorted by 4 keys',
-      current: 2.36
+      current: 2.33
     },
     {
       name: 'Filter fetch',
@@ -64,14 +68,14 @@ Common in-memory ZQL fetches are faster when there is no active overlay, start c
     {
       name: 'Join fetch',
       fullName: 'Join fetch for 1,000 issues to 20 users',
-      current: 1.59
+      current: 1.57
     }
   ]}
 />
 
 ### Ordered `take` Maintenance
 
-Ordered `take` maintenance fetches can now add a redundant leading-column bound for non-nullable leading sort columns, letting SQLite seek into the relevant index range instead of scanning a large partition. In a targeted benchmark with a 100k-row partition and a start cursor near the end, the median fetch time improved from **3.09 ms** to **826 ns**. ([#6184](https://github.com/rocicorp/mono/pull/6184), thanks [@tantaman](https://github.com/tantaman)!)
+Ordered `take` maintenance fetches can now add a redundant leading-column bound for non-nullable leading sort columns, letting SQLite seek into the relevant index range instead of scanning a large partition. In a targeted benchmark with a 100k-row partition and a start cursor near the end, the median fetch time improved from **2.64 ms** to **501 ns**. ([#6184](https://github.com/rocicorp/mono/pull/6184), thanks [@tantaman](https://github.com/tantaman)!)
 
 <BenchmarkComparisonChart
   title="Ordered Take Maintenance"
@@ -84,14 +88,14 @@ Ordered `take` maintenance fetches can now add a redundant leading-column bound 
       name: 'Start cursor near end',
       fullName:
         'Ordered take maintenance fetch after a start cursor near the end of an indexed partition',
-      current: 3742
+      current: 5260
     }
   ]}
 />
 
 ### CDC Storer Throughput
 
-`zero-cache` now batches CDC `changeLog` writes into multi-row inserts, reducing the time spent persisting metadata for large upstream transactions. In the targeted PostgreSQL storer benchmark, Zero 1.8 is about **1.2x faster** by geometric mean. ([#6142](https://github.com/rocicorp/mono/pull/6142))
+`zero-cache` now batches CDC `changeLog` writes into multi-row inserts, reducing the time spent persisting metadata for large upstream transactions. In the targeted PostgreSQL storer benchmark, Zero 1.8 is about **1.7x faster** by geometric mean. ([#6142](https://github.com/rocicorp/mono/pull/6142))
 
 <BenchmarkComparisonChart
   title="CDC Storer Throughput"
@@ -104,13 +108,13 @@ Ordered `take` maintenance fetches can now add a redundant leading-column bound 
       name: 'Large transaction',
       fullName:
         'Persisting one transaction with 50k synthetic changes',
-      current: 1.17
+      current: 1.76
     },
     {
       name: 'Sustained stream',
       fullName:
         'Persisting 50 transactions of 1,000 synthetic changes each',
-      current: 1.3
+      current: 1.67
     }
   ]}
 />
@@ -118,12 +122,15 @@ Ordered `take` maintenance fetches can now add a redundant leading-column bound 
 ## Fixes
 
 - [Logical replication could stall indefinitely when the inbound Postgres replication stream went silent instead of reconnecting.](https://github.com/rocicorp/mono/pull/6047) (thanks [@tantaman](https://github.com/tantaman)!)
+- [Postgres connections could crash after a socket disconnected while a pending write still tried to use the closed socket.](https://github.com/rocicorp/mono/pull/6193)
 - [Drizzle 1.0 RC `prepareQuery` results could come back in array mode instead of object mode, breaking Zero's Drizzle adapter.](https://github.com/rocicorp/mono/pull/6154) (thanks [@typedrat](https://github.com/typedrat)!)
+- [z2s failed to compile queries using `start`, and SQLite fetches could handle `null` start cursor fields incorrectly.](https://github.com/rocicorp/mono/pull/6189) (thanks [@tantaman](https://github.com/tantaman)!)
 - [Queries could appear `complete` with stale or empty results after reconnect when persisted `got` state was no longer authoritative.](https://github.com/rocicorp/mono/pull/6172)
-- [Malformed SQLite replicas could be accepted until later failures instead of being detected during restore/open and recovered through autoreset.](https://github.com/rocicorp/mono/pull/6174) (thanks [@tantaman](https://github.com/tantaman)!)
 - [React Native reads using `op-sqlite` v17 could crash with `iterator method is not callable`.](https://github.com/rocicorp/mono/pull/6180)
 - [View-syncer pods could exit with `max attempts exceeded restoring replica` while the first backup was still uploading.](https://github.com/rocicorp/mono/pull/6134)
 - [Cold-start view-syncers could be told to restore before a restorable backup existed, causing repeated failed restore attempts.](https://github.com/rocicorp/mono/pull/6135)
+- [Zero Docker images used a Node build affected by the `availableParallelism` bug.](https://github.com/rocicorp/mono/pull/6198) (thanks [@tantaman](https://github.com/tantaman)!)
+- [Catching-up change-stream subscribers could bypass flow control and build an unbounded in-memory backlog.](https://github.com/rocicorp/mono/pull/6186) (thanks [@tantaman](https://github.com/tantaman)!)
 
 ## Breaking Changes
 

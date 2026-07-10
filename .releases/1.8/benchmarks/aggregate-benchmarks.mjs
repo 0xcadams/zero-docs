@@ -164,7 +164,7 @@ const aggregate = {
   },
   target: {
     ref: 'maint/zero/v1.8',
-    sha: '6c8b5e5a76f2b4b253b1b9c9c4a8598299d8c975',
+    sha: '4ef9e4ef04fbc9fa838c930887d5d6b97241b789',
   },
   runCountPerRef: 10,
   aggregation:
@@ -184,7 +184,7 @@ md.push(
   '- Baseline: `zero/v1.7.0` (`6863de5f00a3c1e7dc09c83ea3263dec4a94ebee`)',
 );
 md.push(
-  '- Target: `maint/zero/v1.8` (`6c8b5e5a76f2b4b253b1b9c9c4a8598299d8c975`)',
+  '- Target: `maint/zero/v1.8` (`4ef9e4ef04fbc9fa838c930887d5d6b97241b789`)',
 );
 md.push('- Run count: 10 separate processes per ref per benchmark command');
 md.push('- Aggregation: median of process-level medians');
