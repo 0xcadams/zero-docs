@@ -175,7 +175,8 @@ Benchmark results:
 - Raw outputs: `.releases/1.8/benchmarks/raw/**`.
 - Methodology: `.releases/1.8/benchmarks/README.md`.
 - Aggregation script: `.releases/1.8/benchmarks/aggregate-benchmarks.mjs`.
-- Targeted ordered-limit boundary-fetch source for `#6184`: `.releases/1.8/benchmarks/take-start-seek.bench.ts`.
+- Targeted `orderBy()` + `limit()` maintenance source for `#6184`: `.releases/1.8/benchmarks/take-start-seek.bench.ts`.
+- End-to-end large-transaction replication source for `#6142`: `.releases/1.8/benchmarks/replication-large-transactions.bench.pg.ts`.
 - Aggregate JSON: `.releases/1.8/benchmarks/aggregate.json`.
 - Aggregate Markdown: `.releases/1.8/benchmarks/aggregate.md`.
 - Run count: 10 separate processes per ref per benchmark command.

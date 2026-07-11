@@ -1,108 +1,170 @@
-import {afterAll} from 'vitest';
-import {testLogConfig} from '../../otel/src/test-log-config.ts';
-import {bench, describe, use} from '../../shared/src/bench.ts';
+import {bench, describe} from '../../shared/src/bench.ts';
 import {createSilentLogContext} from '../../shared/src/logging-test-utils.ts';
-import type {SchemaValue} from '../../zero-schema/src/table-schema.ts';
+import type {Row} from '../../zero-protocol/src/data.ts';
+import {createSchema} from '../../zero-schema/src/builder/schema-builder.ts';
+import {
+  number,
+  string,
+  table,
+} from '../../zero-schema/src/builder/table-builder.ts';
+import {makeSourceChangeEdit} from '../../zql/src/ivm/source.ts';
+import {consume} from '../../zql/src/ivm/stream.ts';
+import {createBuilder} from '../../zql/src/query/create-builder.ts';
 import {Database} from '../../zqlite/src/db.ts';
-import {TableSource} from '../../zqlite/src/table-source.ts';
+import {QueryDelegateImpl} from '../../zqlite/src/query-delegate.ts';
 
 const ROW_COUNT = 100_000;
+const LIMIT = 50;
 const WORKSPACE_ID = 'workspace-1';
-const BOUNDARIES = [
-  ['after 50 rows', 49],
-  ['after 10,000 rows', 9_999],
-  ['after 50,000 rows', 49_999],
-  ['after 90,000 rows', 89_999],
-  ['after final row', ROW_COUNT - 1],
-] as const;
+const BOUNDARY_DEPTHS = [50, 10_000, 50_000, 90_000, ROW_COUNT] as const;
+const requestedDepth = Number(process.env['BENCH_DEPTH']);
+const selectedDepths = Number.isFinite(requestedDepth)
+  ? BOUNDARY_DEPTHS.filter(depth => depth === requestedDepth)
+  : BOUNDARY_DEPTHS;
 
-const columns = {
-  workspaceID: {type: 'string'},
-  id: {type: 'string'},
-  priority: {type: 'number'},
-  created: {type: 'number'},
-} as const satisfies Record<string, SchemaValue>;
-
-function key(index: number) {
-  return index.toString().padStart(6, '0');
+if (selectedDepths.length === 0) {
+  throw new Error(`Unsupported BENCH_DEPTH: ${process.env['BENCH_DEPTH']}`);
 }
 
-const db = new Database(
-  createSilentLogContext(),
-  ':memory:',
-  undefined,
-  Number.POSITIVE_INFINITY,
-);
-db.exec(/* sql */ `
-  CREATE TABLE issues(
-    workspaceID TEXT NOT NULL,
-    id TEXT NOT NULL,
-    priority INTEGER NOT NULL,
-    created INTEGER NOT NULL
-  );
-  CREATE UNIQUE INDEX issues_id ON issues(id);
-  CREATE INDEX issues_workspace_priority_created
-    ON issues(workspaceID, priority DESC, created ASC, id ASC);
-`);
+const activity = table('activity')
+  .columns({
+    id: string(),
+    workspaceID: string(),
+    status: string(),
+    priority: number(),
+    created: number(),
+  })
+  .primaryKey('id');
+const schema = createSchema({tables: [activity]});
+const zql = createBuilder(schema);
 
-const insert = db.prepare(
-  'INSERT INTO issues(workspaceID, id, priority, created) VALUES (?, ?, ?, ?)',
-);
-db.transaction(() => {
-  for (let i = 0; i < ROW_COUNT; i++) {
-    insert.run(WORKSPACE_ID, `issue-${key(i)}`, ROW_COUNT - i, i);
+function key(position: number) {
+  return position.toString().padStart(6, '0');
+}
+
+function rowAt(position: number, status: 'open' | 'closed'): Row {
+  return {
+    id: `activity-${key(position)}`,
+    workspaceID: WORKSPACE_ID,
+    status,
+    priority: ROW_COUNT - position,
+    created: position,
+  };
+}
+
+function assertIDs(actual: readonly string[], expected: readonly string[]) {
+  if (
+    actual.length !== expected.length ||
+    actual.some((id, index) => id !== expected[index])
+  ) {
+    throw new Error(
+      `Unexpected query result:\nactual: ${actual.join(',')}\nexpected: ${expected.join(',')}`,
+    );
   }
-});
+}
 
-const source = new TableSource(
-  createSilentLogContext(),
-  testLogConfig,
-  db,
-  'issues',
-  columns,
-  ['id'],
-);
-const input = source.connect([
-  ['priority', 'desc'],
-  ['created', 'asc'],
-  ['id', 'asc'],
-]);
+describe('maintaining orderBy() + limit() query', () => {
+  for (const depth of selectedDepths) {
+    bench(
+      `cutoff ${depth.toLocaleString()} rows deep`,
+      function* () {
+        const lc = createSilentLogContext();
+        const db = new Database(
+          lc,
+          ':memory:',
+          undefined,
+          Number.POSITIVE_INFINITY,
+        );
+        db.exec(/* sql */ `
+          CREATE TABLE activity(
+            id TEXT NOT NULL,
+            workspaceID TEXT NOT NULL,
+            status TEXT NOT NULL,
+            priority INTEGER NOT NULL,
+            created INTEGER NOT NULL
+          );
+          CREATE UNIQUE INDEX activity_id ON activity(id);
+          CREATE INDEX activity_workspace_priority_created
+            ON activity(
+              workspaceID,
+              priority DESC,
+              created ASC,
+              id ASC,
+              status
+            );
+        `);
 
-function fetchAfter(index: number) {
-  let count = 0;
-  for (const node of input.fetch({
-    constraint: {workspaceID: WORKSPACE_ID},
-    start: {
-      row: {
-        workspaceID: WORKSPACE_ID,
-        id: `issue-${key(index)}`,
-        priority: ROW_COUNT - index,
-        created: index,
+        const firstOpenPosition = depth - LIMIT + 1;
+        const insert = db.prepare(
+          'INSERT INTO activity(id, workspaceID, status, priority, created) VALUES (?, ?, ?, ?, ?)',
+        );
+        db.transaction(() => {
+          for (let position = 1; position <= ROW_COUNT; position++) {
+            const row = rowAt(
+              position,
+              position >= firstOpenPosition && position <= depth
+                ? 'open'
+                : 'closed',
+            );
+            insert.run(
+              row['id'],
+              row['workspaceID'],
+              row['status'],
+              row['priority'],
+              row['created'],
+            );
+          }
+        });
+
+        const delegate = new QueryDelegateImpl(lc, db, schema);
+        const query = zql.activity
+          .where('workspaceID', WORKSPACE_ID)
+          .where('status', 'open')
+          .orderBy('priority', 'desc')
+          .orderBy('created', 'asc')
+          .limit(LIMIT);
+        const view = delegate.materialize(query);
+        const source = delegate.getSource('activity');
+
+        const boundaryRow = rowAt(depth, 'open');
+        const promotedRow = {...boundaryRow, priority: ROW_COUNT + 1};
+        const originalIDs = Array.from(
+          {length: LIMIT},
+          (_, index) =>
+            rowAt(firstOpenPosition + index, 'open')['id'] as string,
+        );
+        const promotedIDs = [
+          boundaryRow['id'] as string,
+          ...originalIDs.slice(0, -1),
+        ];
+        const viewIDs = () => view.data.map(row => row.id);
+
+        assertIDs(viewIDs(), originalIDs);
+        consume(source.push(makeSourceChangeEdit(promotedRow, boundaryRow)));
+        assertIDs(viewIDs(), promotedIDs);
+        consume(source.push(makeSourceChangeEdit(boundaryRow, promotedRow)));
+        assertIDs(viewIDs(), originalIDs);
+
+        let promoted = false;
+        yield () => {
+          consume(
+            source.push(
+              promoted
+                ? makeSourceChangeEdit(boundaryRow, promotedRow)
+                : makeSourceChangeEdit(promotedRow, boundaryRow),
+            ),
+          );
+          promoted = !promoted;
+        };
+
+        if (promoted) {
+          consume(source.push(makeSourceChangeEdit(boundaryRow, promotedRow)));
+        }
+        assertIDs(viewIDs(), originalIDs);
+        view.destroy();
+        db.close();
       },
-      basis: 'after',
-    },
-  })) {
-    if (node === 'yield') {
-      continue;
-    }
-    use(node);
-    if (++count === 2) {
-      break;
-    }
-  }
-  use(count);
-}
-
-for (const [, index] of BOUNDARIES) {
-  fetchAfter(index);
-}
-
-afterAll(() => {
-  db.close();
-});
-
-describe('ordered limit boundary fetch', () => {
-  for (const [name, index] of BOUNDARIES) {
-    bench(name, () => fetchAfter(index));
+      {min_cpu_time: 1, min_samples: 25, max_samples: 25},
+    );
   }
 });

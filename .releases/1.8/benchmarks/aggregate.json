@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-10T22:50:06.432Z",
+  "generatedAt": "2026-07-11T01:03:24.521Z",
   "baseline": {
     "ref": "zero/v1.7.0",
     "sha": "6863de5f00a3c1e7dc09c83ea3263dec4a94ebee"
@@ -112,114 +112,255 @@
       ]
     },
     {
-      "id": "take-start-seek",
-      "title": "Ordered Limit Boundary Fetch",
+      "id": "local-hydration",
+      "title": "Running Local ZQL Queries",
       "unit": "ns/iter",
       "valueKind": "duration",
       "comparableCount": 5,
-      "medianRatio": 135.25131851916967,
-      "geometricMeanRatio": 49.51310429827457,
+      "medianRatio": 1.2894842330474472,
+      "geometricMeanRatio": 1.0435732831837705,
       "rows": [
         {
-          "name": "src/take-start-seek.bench.ts > ordered limit boundary fetch > after 50 rows",
-          "shortName": "ordered limit boundary fetch > after 50 rows",
+          "name": "src/ivm-memory.bench.ts > hydration > hydrate: issues only",
+          "shortName": "hydration > hydrate: issues only",
           "unit": "ns/iter",
-          "baseline": 12934.491516113281,
-          "target": 11885.332763671875,
-          "ratio": 1.088273401620543,
-          "baselineDisplay": "12.93 us",
-          "targetDisplay": "11.89 us",
+          "baseline": 208250,
+          "target": 373499.75,
+          "ratio": 0.5575639608861853,
+          "baselineDisplay": "208.25 us",
+          "targetDisplay": "373.50 us",
           "baselineRuns": [
-            12835.31689453125, 12516.90673828125, 12600.163818359375,
-            12592.727661132812, 13045.369506835938, 13189.63623046875,
-            13032.958984375, 13136.332153320312, 12850.9013671875,
-            13018.081665039062
+            196833.5, 199438, 210833.5, 200125, 205666.5, 198062.5,
+            399020.4999999404, 328354, 339750.0000000596, 449667
           ],
           "targetRuns": [
-            13648.300170898438, 11631.922485351562, 11760.828735351562,
-            11855.875610351562, 11833.984375, 11624.96435546875,
-            12094.284057617188, 12150.655029296882, 12081.680297851562,
-            11914.789916992188
+            166604, 269291.5, 298666.5, 190979, 303374.5, 519166.4999999702,
+            534146, 443625, 466021.0000000596, 549229
           ]
         },
         {
-          "name": "src/take-start-seek.bench.ts > ordered limit boundary fetch > after 10,000 rows",
-          "shortName": "ordered limit boundary fetch > after 10,000 rows",
+          "name": "src/ivm-memory.bench.ts > hydration > hydrate: issues with creator",
+          "shortName": "hydration > hydrate: issues with creator",
           "unit": "ns/iter",
-          "baseline": 327000.5,
-          "target": 12034.945190429688,
-          "ratio": 27.1709172601828,
-          "baselineDisplay": "327.00 us",
-          "targetDisplay": "12.03 us",
+          "baseline": 1114927.25,
+          "target": 839302.5,
+          "ratio": 1.3283973894990184,
+          "baselineDisplay": "1.11 ms",
+          "targetDisplay": "839.30 us",
           "baselineRuns": [
-            322375, 323000, 327916, 327500, 319625, 326834, 327875, 327167,
-            322625, 336375
+            746458, 901958.5, 806875, 774521, 823208.5, 1544166.5, 1474083.5,
+            1329000, 1327896, 3042687.5
           ],
           "targetRuns": [
-            13734.339477539062, 11961.344482421875, 11726.755859375058,
-            11774.69384765625, 11807.525634765625, 11642.903686523438,
-            12119.206787109375, 12274.795532226562, 12167.236328125,
-            12108.5458984375
+            506229.5, 571687, 589395.5, 733938, 647562.5, 1178750, 944667,
+            996500.0000001192, 999896, 1109083.5
           ]
         },
         {
-          "name": "src/take-start-seek.bench.ts > ordered limit boundary fetch > after 50,000 rows",
-          "shortName": "ordered limit boundary fetch > after 50,000 rows",
+          "name": "src/ivm-memory.bench.ts > hydration > hydrate: issues with creator + comments",
+          "shortName": "hydration > hydrate: issues with creator + comments",
           "unit": "ns/iter",
-          "baseline": 1607708.5,
-          "target": 11886.823120117188,
-          "ratio": 135.25131851916967,
-          "baselineDisplay": "1.61 ms",
-          "targetDisplay": "11.89 us",
+          "baseline": 2536469,
+          "target": 1967041.5,
+          "ratio": 1.2894842330474472,
+          "baselineDisplay": "2.54 ms",
+          "targetDisplay": "1.97 ms",
           "baselineRuns": [
-            1657959, 1582541, 1623750, 1602291.5, 1585792, 1627958, 1619041,
-            1608542, 1590062.5, 1606875
+            1841104.5, 1995917, 1841312.5, 1831854, 1992395.5, 3284062.5,
+            3272937.5, 3077021, 3137791.5, 4345500
           ],
           "targetRuns": [
-            11883.789184570312, 13079.299926757812, 11867.802978515625,
-            11889.857055664062, 11817.937255859375, 11766.799926757812,
-            11754.328369140625, 12360.392211914062, 12230.36181640625,
-            12097.5595703125
+            1251916.5000000596, 1374646, 1444875, 1397437.5, 1564208.5,
+            2584395.5, 2369874.5, 2428145.5, 2756666.5, 3070104
           ]
         },
         {
-          "name": "src/take-start-seek.bench.ts > ordered limit boundary fetch > after 90,000 rows",
-          "shortName": "ordered limit boundary fetch > after 90,000 rows",
+          "name": "src/ivm-memory.bench.ts > hydration > hydrate: issues filtered open",
+          "shortName": "hydration > hydrate: issues filtered open",
           "unit": "ns/iter",
-          "baseline": 2957250,
-          "target": 11926.607849121094,
-          "ratio": 247.95398971870517,
-          "baselineDisplay": "2.96 ms",
-          "targetDisplay": "11.93 us",
+          "baseline": 225364.5,
+          "target": 252615,
+          "ratio": 0.8921263582922629,
+          "baselineDisplay": "225.36 us",
+          "targetDisplay": "252.62 us",
           "baselineRuns": [
-            3129250, 2898292, 2937166.5, 2899062.5, 2948292, 3050291.4999990463,
-            2966208, 2972500, 2899082.9999980927, 2978207.9999980927
+            170104, 203937.5, 209166, 193520.5, 214333, 236396, 352624.5,
+            415875, 296604, 444229
           ],
           "targetRuns": [
-            11794.708129882812, 11702.092529296875, 12062.067626953125,
-            11797.068359375, 11756.230712890625, 12056.147338867188,
-            11748.758911132812, 12356.857299804688, 12075.068115234375,
-            12113.1083984375
+            180104, 200083, 199938, 245438, 259792, 341791.4999999404, 201146,
+            315916.5, 355250, 459583.5
           ]
         },
         {
-          "name": "src/take-start-seek.bench.ts > ordered limit boundary fetch > after final row",
-          "shortName": "ordered limit boundary fetch > after final row",
+          "name": "src/ivm-memory.bench.ts > hydration > hydrate: issues limit 50",
+          "shortName": "hydration > hydrate: issues limit 50",
           "unit": "ns/iter",
-          "baseline": 3270531.25,
-          "target": 10898.643493652344,
-          "ratio": 300.08608428240115,
-          "baselineDisplay": "3.27 ms",
-          "targetDisplay": "10.90 us",
+          "baseline": 77989.5,
+          "target": 53689.14538574219,
+          "ratio": 1.4526120585393238,
+          "baselineDisplay": "77.99 us",
+          "targetDisplay": "53.69 us",
           "baselineRuns": [
-            3509771, 3274250.5, 3241084, 3189667, 3220000, 3301583.5, 3272395.5,
-            3299625, 3200291.5, 3268667
+            37293.401123046875, 65187.5, 37606.160522461054, 38794.72863769531,
+            41340.17944335943, 109396, 110271, 90791.5, 100583, 131312.5
           ],
           "targetRuns": [
-            10459.289672851562, 10602.732421875, 10652.832153320312,
-            10884.648681640625, 10941.370727539062, 10871.12939453125,
-            11584.859252929688, 11041.046142578125, 11053.44140625,
-            10912.638305664062
+            30441.401000976562, 31314.320922851562, 32158.599853515625, 62875,
+            40897.05908203125, 91708.5, 44503.290771484375, 87583.5, 111250.5,
+            112500
+          ]
+        }
+      ]
+    },
+    {
+      "id": "take-start-seek",
+      "title": "Maintaining orderBy() + limit() Queries",
+      "unit": "ns/iter",
+      "valueKind": "duration",
+      "comparableCount": 5,
+      "medianRatio": 2.1033256056264653,
+      "geometricMeanRatio": 4.356046836636608,
+      "rows": [
+        {
+          "name": "src/take-start-seek.bench.ts > maintaining orderBy() + limit() query > cutoff 50 rows deep",
+          "shortName": "maintaining orderBy() + limit() query > cutoff 50 rows deep",
+          "unit": "ns/iter",
+          "baseline": 4392020.49999994,
+          "target": 3919957.99999997,
+          "ratio": 1.1204253974149656,
+          "baselineDisplay": "4.39 ms",
+          "targetDisplay": "3.92 ms",
+          "baselineRuns": [
+            3371708, 3934124.9999999404, 4280000, 4504040.999999881, 4788167,
+            4268500, 4086333, 4532542, 4734209, 4853583
+          ],
+          "targetRuns": [
+            3106666, 3875332.9999999404, 4028000, 3557958, 3964583, 4005416,
+            4028083, 3482500, 3839584, 3996833
+          ]
+        },
+        {
+          "name": "src/take-start-seek.bench.ts > maintaining orderBy() + limit() query > cutoff 10,000 rows deep",
+          "shortName": "maintaining orderBy() + limit() query > cutoff 10,000 rows deep",
+          "unit": "ns/iter",
+          "baseline": 4043583,
+          "target": 3396750,
+          "ratio": 1.1904270258335172,
+          "baselineDisplay": "4.04 ms",
+          "targetDisplay": "3.40 ms",
+          "baselineRuns": [
+            3411041, 4126292.0000000596, 4037750, 3859208, 4011916, 4049416,
+            4099458.0000000596, 3886582.9999999404, 4469709, 4420792
+          ],
+          "targetRuns": [
+            3074709, 3046000, 3556250, 3311584, 3572666.999999881, 3516500,
+            3481916, 3100333, 3075458, 3966042
+          ]
+        },
+        {
+          "name": "src/take-start-seek.bench.ts > maintaining orderBy() + limit() query > cutoff 50,000 rows deep",
+          "shortName": "maintaining orderBy() + limit() query > cutoff 50,000 rows deep",
+          "unit": "ns/iter",
+          "baseline": 4037333.5,
+          "target": 1919500,
+          "ratio": 2.1033256056264653,
+          "baselineDisplay": "4.04 ms",
+          "targetDisplay": "1.92 ms",
+          "baselineRuns": [
+            3346875, 4030834, 4139042, 4043833, 4065708, 4192166, 4047292,
+            3563750, 3952500, 3835375
+          ],
+          "targetRuns": [
+            1797125, 2030333, 2042209.0000001192, 1862833, 1978457.9999999404,
+            2025416, 1976167, 1823834, 1731750, 1592666
+          ]
+        },
+        {
+          "name": "src/take-start-seek.bench.ts > maintaining orderBy() + limit() query > cutoff 90,000 rows deep",
+          "shortName": "maintaining orderBy() + limit() query > cutoff 90,000 rows deep",
+          "unit": "ns/iter",
+          "baseline": 4030479,
+          "target": 431770.5000000298,
+          "ratio": 9.33477159741048,
+          "baselineDisplay": "4.03 ms",
+          "targetDisplay": "431.77 us",
+          "baselineRuns": [
+            3698041.9999999404, 3979250, 4081708, 4182334, 4092542, 4099667,
+            4122083.000000119, 3607917, 3596583, 3594834
+          ],
+          "targetRuns": [
+            406416, 451875, 436458.0000000596, 455708, 466207.9999999404,
+            427083, 456500, 411542, 386916, 385708
+          ]
+        },
+        {
+          "name": "src/take-start-seek.bench.ts > maintaining orderBy() + limit() query > cutoff 100,000 rows deep",
+          "shortName": "maintaining orderBy() + limit() query > cutoff 100,000 rows deep",
+          "unit": "ns/iter",
+          "baseline": 3999000,
+          "target": 66770.5,
+          "ratio": 59.89171864820542,
+          "baselineDisplay": "4.00 ms",
+          "targetDisplay": "66.77 us",
+          "baselineRuns": [
+            3553374.9999999404, 4055625, 4203292, 4064875, 4038084, 4003708,
+            3980791, 3994292, 3538166, 3594625
+          ],
+          "targetRuns": [
+            60459, 65291, 125124.99999988079, 68250, 71082.9999999404, 63709,
+            62709, 70666, 54750, 81750
+          ]
+        }
+      ]
+    },
+    {
+      "id": "replication-e2e",
+      "title": "Replicating Large Transactions",
+      "unit": "ns/change",
+      "valueKind": "throughputAsChangesPerSecond",
+      "comparableCount": 2,
+      "medianRatio": 1.5693277800137424,
+      "geometricMeanRatio": 1.5692882840900175,
+      "rows": [
+        {
+          "name": "replication one 50,000-change transaction",
+          "shortName": "replication one 50,000-change transaction",
+          "unit": "ns/change",
+          "baseline": 90538.80875999999,
+          "target": 57286.30625000001,
+          "ratio": 1.5804616266387392,
+          "baselineDisplay": "11045 changes/s",
+          "targetDisplay": "17456 changes/s",
+          "baselineRuns": [
+            102763.97834, 99433.95084, 102866.2175, 119261.32, 93635.34834,
+            87442.26917999997, 84807.06168000001, 86028.74334, 83899.69416,
+            87180.14334000002
+          ],
+          "targetRuns": [
+            59439.77000000001, 67299.58084, 79055.67334, 65128.6975,
+            61471.90333999999, 55132.8425, 54952.95418, 54014.73, 54444.06084,
+            54583.995
+          ]
+        },
+        {
+          "name": "replication 50 x 1,000-change transactions",
+          "shortName": "replication 50 x 1,000-change transactions",
+          "unit": "ns/change",
+          "baseline": 92935.06666000001,
+          "target": 59642.81125,
+          "ratio": 1.5581939333887453,
+          "baselineDisplay": "10760 changes/s",
+          "targetDisplay": "16766 changes/s",
+          "baselineRuns": [
+            130218.47499999998, 98950.03416, 95087.10916000002, 104906.14416,
+            96887.5, 89928.24084, 89235.71332000002, 88378.94666, 90783.02416,
+            89371.47832
+          ],
+          "targetRuns": [
+            60458.64750000001, 70777.26583999998, 71312.79583999998, 64763.05,
+            63401.31082, 58826.975, 58232.73917999999, 56754.50000000001,
+            57420.96249999999, 56975.342500000006
           ]
         }
       ]

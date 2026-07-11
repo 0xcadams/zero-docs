@@ -12,10 +12,22 @@ const groups = [
     valueKind: 'duration',
   },
   {
-    id: 'take-start-seek',
-    title: 'Ordered Limit Boundary Fetch',
+    id: 'local-hydration',
+    title: 'Running Local ZQL Queries',
     unit: 'ns/iter',
     valueKind: 'duration',
+  },
+  {
+    id: 'take-start-seek',
+    title: 'Maintaining orderBy() + limit() Queries',
+    unit: 'ns/iter',
+    valueKind: 'duration',
+  },
+  {
+    id: 'replication-e2e',
+    title: 'Replicating Large Transactions',
+    unit: 'ns/change',
+    valueKind: 'throughputAsChangesPerSecond',
   },
   {
     id: 'storer-pg',
@@ -104,6 +116,9 @@ function formatDuration(ns) {
 function formatValue(value, group) {
   if (group.valueKind === 'throughputAsNsPerOperation') {
     return `${(1_000_000_000 / value).toFixed(2)} MB/s`;
+  }
+  if (group.valueKind === 'throughputAsChangesPerSecond') {
+    return `${(1_000_000_000 / value).toFixed(0)} changes/s`;
   }
   return formatDuration(value);
 }

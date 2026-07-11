@@ -20,19 +20,44 @@
 | Filter > fetch open issues (1000 total)          | 149.63 us |  85.75 us | 1.74x |
 | Join > fetch 1000 issues → 20 users              | 760.59 us | 485.02 us | 1.57x |
 
-## Ordered Limit Boundary Fetch
+## Running Local ZQL Queries
 
 - Comparable rows: 5
-- Median ratio: 135.25x
-- Geometric mean ratio: 49.51x
+- Median ratio: 1.29x
+- Geometric mean ratio: 1.04x
 
-| Benchmark                                        |  Zero 1.7 | Zero 1.8 |   Ratio |
-| ------------------------------------------------ | --------: | -------: | ------: |
-| ordered limit boundary fetch > after 50 rows     |  12.93 us | 11.89 us |   1.09x |
-| ordered limit boundary fetch > after 10,000 rows | 327.00 us | 12.03 us |  27.17x |
-| ordered limit boundary fetch > after 50,000 rows |   1.61 ms | 11.89 us | 135.25x |
-| ordered limit boundary fetch > after 90,000 rows |   2.96 ms | 11.93 us | 247.95x |
-| ordered limit boundary fetch > after final row   |   3.27 ms | 10.90 us | 300.09x |
+| Benchmark                                           |  Zero 1.7 |  Zero 1.8 | Ratio |
+| --------------------------------------------------- | --------: | --------: | ----: |
+| hydration > hydrate: issues only                    | 208.25 us | 373.50 us | 0.56x |
+| hydration > hydrate: issues with creator            |   1.11 ms | 839.30 us | 1.33x |
+| hydration > hydrate: issues with creator + comments |   2.54 ms |   1.97 ms | 1.29x |
+| hydration > hydrate: issues filtered open           | 225.36 us | 252.62 us | 0.89x |
+| hydration > hydrate: issues limit 50                |  77.99 us |  53.69 us | 1.45x |
+
+## Maintaining orderBy() + limit() Queries
+
+- Comparable rows: 5
+- Median ratio: 2.10x
+- Geometric mean ratio: 4.36x
+
+| Benchmark                                                        | Zero 1.7 |  Zero 1.8 |  Ratio |
+| ---------------------------------------------------------------- | -------: | --------: | -----: |
+| maintaining orderBy() + limit() query > cutoff 50 rows deep      |  4.39 ms |   3.92 ms |  1.12x |
+| maintaining orderBy() + limit() query > cutoff 10,000 rows deep  |  4.04 ms |   3.40 ms |  1.19x |
+| maintaining orderBy() + limit() query > cutoff 50,000 rows deep  |  4.04 ms |   1.92 ms |  2.10x |
+| maintaining orderBy() + limit() query > cutoff 90,000 rows deep  |  4.03 ms | 431.77 us |  9.33x |
+| maintaining orderBy() + limit() query > cutoff 100,000 rows deep |  4.00 ms |  66.77 us | 59.89x |
+
+## Replicating Large Transactions
+
+- Comparable rows: 2
+- Median ratio: 1.57x
+- Geometric mean ratio: 1.57x
+
+| Benchmark                                  |        Zero 1.7 |        Zero 1.8 | Ratio |
+| ------------------------------------------ | --------------: | --------------: | ----: |
+| replication one 50,000-change transaction  | 11045 changes/s | 17456 changes/s | 1.58x |
+| replication 50 x 1,000-change transactions | 10760 changes/s | 16766 changes/s | 1.56x |
 
 ## CDC Storer Throughput
 

@@ -113,16 +113,39 @@ Capture release items over-inclusively so a human can trim the list, but write e
 - If several PRs comprise one logical fix, include one bullet with artful multi-link phrasing.
 - If no breaking changes, write `None.`
 - **Performance descriptions must explain the developer impact**, not just repeat a commit title, internal optimization, or benchmark result:
-  - Start with a recognizable workload: a ZQL query, mutation flow, sync pattern, or operator task. Use a short public API example when it makes an abstract optimization concrete.
-  - Make sure the example can produce the measured slow path. For example, a plain `limit(50)` has a boundary only 50 rows deep; add a realistic sparse filter if the improvement depends on finding 50 matches deep in the ordered source data.
-  - Explain when the slow path occurs and what Zero does in plain language, then state what is faster. Clarify local database reads when words such as "fetch" could sound like network activity.
-  - Use public concepts such as `limit()`, initial sync, or replication. Avoid internal names such as `Take`, planner helper names, data structures, and generated predicates unless they are necessary to understand the benefit.
-  - Inspect the commit, tests, PR context, and nearby product docs when the user-facing workload is unclear. Do not infer a workload from a benchmark name alone.
-  - State measured results directly as "X is N times faster." Do not discuss "a benchmark," "a focused benchmark," hardware, process counts, aggregation, or other methodology in public prose. Keep those details in `.releases/<major>.<minor>/`.
-  - Use user-facing chart titles and row labels. If the measured path is narrower than the full workflow, scope the chart description and speedup claim to that operation instead of narrating the benchmark setup.
+  - Identify the exact lifecycle phase that improved before drafting: initial execution or hydration, incremental maintenance or updates, replication, or another specific operation. Name that phase in the heading and claim; do not imply the whole feature is faster when only one phase changed.
+  - Order performance sections by expected user impact, with broad production improvements before narrower optimizations. Do not order them by commit chronology or the largest multiplier.
+  - Start with a recognizable workload: a ZQL query, mutation flow, sync pattern, or operator task. Use a short public API example when it makes an abstract optimization concrete, but do not repeat API syntax throughout the explanation.
+  - Format API names consistently, for example `related()`, `orderBy()`, and `limit()`. Do not add a leading dot to one API name when the others do not have one.
+  - Make sure the example can produce the measured slow path. For example, add a realistic sparse filter if the improvement depends on finding 50 matches far into an index.
+  - Explain the old behavior and what Zero does differently before giving the results. A developer should be able to understand why the optimization helps.
+  - Explain counterintuitive benchmark dimensions. If a chart suggests that a row farther into an index is faster, state what operation is measured and why that trend occurs.
+  - Use established docs terms. For initial local query execution, say `hydrate` or `hydration`, not the internal term `fetch`. For ongoing query work, use `incremental updates` when that is what was measured.
+  - Do not expose internal terms such as `fetch`, `Take`, `MemorySource`, `storer`, `query path`, or `changeLog` in public headings, prose, chart titles, or chart labels. Replace them with the public API or product operation.
+  - Avoid invented or vague phrases such as `result window`, `refill`, `related data`, or `the version with creators`. State the rows or relationships involved directly.
+  - Inspect the commit, tests, PR context, and nearby product docs when the user-facing workload or wording is unclear. Reuse the docs' terminology and rewrite from scratch rather than forcing an awkward explanation.
+  - Match the measurement to the claim. Claims about replication, query execution, or query maintenance require end-to-end coverage of that operation. An internal stage may explain a result, but its throughput must not be presented as the user-facing operation's throughput.
+  - Prefer absolute, user-meaningful values on chart axes, such as changes/sec, updates/sec, or milliseconds. Show both release values and keep the faster/slower multiple in the tooltip. A multiple alone is too abstract for readers to judge practical impact.
+  - Put the machine name only in chart subtext, not in body prose, chart titles, or row labels. Keep it short, for example `Measured on M5 Pro. Higher is better.` Keep detailed hardware, process counts, aggregation, and other methodology in `.releases/<major>.<minor>/`.
+  - Do not narrate "a benchmark," "a focused benchmark," or setup details in public prose. State the measured before/after values directly.
+  - Use user-facing chart titles and plain row labels. Labels should name the variable being changed, for example `Last result at row 50,000`, rather than an internal concept such as `Boundary 50,000 rows deep`.
+  - Keep chart subtext plain and factual: machine plus whether higher or lower is better. Put units on the axis instead of repeating the workload in the subtext.
+  - Keep tooltips compact: previous value, current value, and faster/slower ratio. Do not repeat the chart row title in the tooltip.
+  - Do not invent product concepts from workload descriptions. For example, say "replicating large transactions," not "bulk writes," unless the product has a public bulk-write API.
+  - Remove unmeasured or promotional conclusions such as "helping changes reach clients sooner." Explain only the behavior and impact demonstrated by the measurement.
+  - If the complete user-facing operation does not improve meaningfully, omit the public performance item rather than substituting a faster internal stage.
   - Omit a performance item if you cannot explain who benefits, under what conditions, and what improves.
   - Bad: "`Take` maintenance adds a sargable leading-column bound, improving the query-builder/SQLite proxy by 5416x."
-  - Good: "If open issues are sparse, Zero may need to look far down the ordered list to find 50 matches. When an issue enters or leaves the top 50, Zero checks the rows near the cutoff to keep the correct 50 issues in the result. Zero can now seek directly to that cutoff instead of scanning earlier rows again. These reads are 1.09x to 300x faster, depending on how deep the cutoff is."
+  - Good: "Previously, that read could start at the beginning of the index. In 1.8, Zero starts SQLite at the last returned row's sort key, so SQLite can seek into the index and scan from there."
+  - Bad: "Change-log persistence is 2.48x faster, helping large transactions reach clients sooner."
+  - Good: "Zero 1.8 replicated one 50,000-change transaction at 17,456 changes/sec, up from 11,045 changes/sec in Zero 1.7."
+  - Bad: "The version with creators only fell from 1.11 ms to 0.84 ms."
+  - Good: "Hydrating 500 issues with creators fell from 1.11 ms to 0.84 ms."
+  - Bad chart title: "Ordered Limit Boundary Fetch"
+  - Good chart title: "Maintaining `orderBy()` + `limit()` Queries"
+  - Bad chart description: "Normalized query-path throughput when refilling an ordered limited view. Higher is better."
+  - Good chart description: "Measured on M5 Pro. Higher is better."
+  - Before publishing, review performance headings, prose, chart titles, row labels, subtext, and tooltips independently. Confirm that a developer can tell what was measured, what Zero does differently, what each chart row varies, and why the results behave as shown.
 - **Fix descriptions must be user-facing**, not implementation details:
   - Describe the problem, not "Fix [problem]" - the section heading already says "Fixes"
   - Phrase fixes as the old broken behavior or user-visible problem, not as a new capability
@@ -207,6 +230,12 @@ Aggregate each benchmark's 10 process-level medians.
 When a new feature lands, the release-notes feature bullet should link to a real docs anchor — not a PR. That often means updating `contents/docs/**` to document the feature alongside the release.
 
 When updating those docs, do not mention version numbers. The main docs describe Zero's current state only; version numbers belong in release notes. Exception: a `<Note>` callout describing historical behavior or a legacy workaround may say "originally" or "previously" but should still avoid precise version numbers like `>=v1.5`.
+
+## Smoke-Test Handoff
+
+After the human has reviewed the release contents and a canary is available, load the `release-smoke-test` skill. Pass it the reviewed release notes, previous stable version, target canary, mono ref, selected companion packages, and unresolved feature or compatibility risks from `.releases/<major>.<minor>/commits.md`.
+
+Use smoke testing to validate the release notes as an upgrade contract. Any required migration or operational step that cannot be inferred from the target release notes should be recorded as a release-note or documentation gap.
 
 ## Output Checklist
 

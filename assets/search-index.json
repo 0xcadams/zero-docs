@@ -6059,7 +6059,7 @@
     "title": "Zero 1.8",
     "searchTitle": "Zero 1.8",
     "url": "/docs/release-notes/1.8",
-    "content": "Installation npm install @rocicorp/zero@1.8 You can now use zero-cache from GHCR: docker pull rocicorp/zero:1.8.0 # or docker pull ghcr.io/rocicorp/zero:1.8.0 Overview Zero 1.8 improves observability, performance, and reliability. Features Request-header forwarding: zero-cache can forward selected WebSocket upgrade headers to custom APIs using ZERO_MUTATE_ALLOWED_REQUEST_HEADERS and ZERO_QUERY_ALLOWED_REQUEST_HEADERS. (#6144, thanks @tjenkinson!) GHCR Docker images: Zero images are now published to ghcr.io/rocicorp/zero as well as Docker Hub. (#6161) Mutator result type: MutatorResult is now exported from @rocicorp/zero for typing helpers that await .client or .server. (#6223) Operational metrics: zero-cache adds metrics for API calls and startup, initial sync and replication slots, and Litestream backup and restore. (#6203, #6208, #6191, #6199, #6210) Stability metrics: New serving-lag, CVR, and WebSocket metrics and replication flow-control metrics help diagnose delayed updates, reconnects, and backpressure. (#6157, #6214, #6207, thanks @tantaman!) Performance Zero 1.8 speeds up ordered limit() queries, replication after large Postgres writes, and local ZQL queries. Ordered limit() Queries Consider a view showing the top 50 open issues: zql.issue .where('workspaceID', workspaceID) .where('status', 'open') .orderBy('priority', 'desc') .orderBy('created', 'asc') .limit(50) If open issues are sparse, Zero may need to look far down the ordered list to find 50 matches. When an issue enters or leaves the top 50, Zero checks the rows near the cutoff to keep the correct 50 issues in the result. Zero 1.8 lets SQLite seek directly to that boundary instead of scanning earlier rows again. Boundary fetches are 1.09x faster after 50 rows and up to 300x faster at the end of a 100,000-row index. Faster Replication After Bulk Writes A bulk import, backfill, or migration can change tens of thousands of rows in one transaction. Zero records each change during replication, and writing them one at a time could make replication fall behind. Zero 1.8 writes these changes in batches, making persistence 2.25x to 2.48x faster and helping large transactions reach clients sooner. Faster Local Queries When a query first runs, Zero builds its view from data already synced to the client. In Zero 1.8, there is less per-row work needed to run local scans, filters, and relationship lookups. For example, when running the query on page load: zql.issue .where('closed', false) .related('owner') .orderBy('createdAt', 'desc') Views can appear sooner and use less client CPU, with local query fetches running 1.57x to 2.36x faster, depending on the query. Fixes Logical replication now reconnects when the inbound Postgres stream goes silent. Postgres writes no longer use sockets after disconnection. The Drizzle adapter now handles array-mode results from Drizzle 1.0 RC prepareQuery. (thanks @typedrat!) z2s now compiles queries using start, and SQLite fetches handle null start-cursor fields. Queries no longer appear complete with stale or empty results after reconnect. React Native reads now work with op-sqlite v17. View-syncers no longer fail while the first backup is uploading or retry before a restorable backup exists on cold start. Zero Docker images now choose the correct default sync-worker count. Change-stream catch-up now respects flow control, preventing unbounded in-memory backlogs. Breaking Changes None.",
+    "content": "Installation npm install @rocicorp/zero@1.8 You can now use zero-cache from GHCR: docker pull rocicorp/zero:1.8.0 # or docker pull ghcr.io/rocicorp/zero:1.8.0 Overview Zero 1.8 improves observability, performance, and reliability. Features Request-header forwarding: zero-cache can forward selected WebSocket upgrade headers to custom APIs using ZERO_MUTATE_ALLOWED_REQUEST_HEADERS and ZERO_QUERY_ALLOWED_REQUEST_HEADERS. (#6144, thanks @tjenkinson!) GHCR Docker images: Zero images are now published to ghcr.io/rocicorp/zero as well as Docker Hub. (#6161) Mutator result type: MutatorResult is now exported from @rocicorp/zero for typing helpers that await .client or .server. (#6223) Operational metrics: zero-cache adds metrics for API calls and startup, initial sync and replication slots, and Litestream backup and restore. (#6203, #6208, #6191, #6199, #6210) Stability metrics: New serving-lag, CVR, and WebSocket metrics and replication flow-control metrics help diagnose delayed updates, reconnects, and backpressure. (#6157, #6214, #6207) Performance Zero 1.8 speeds up replication of large transactions, maintenance of queries with orderBy() and limit(), and local ZQL queries with related(). Replicating Large Transactions Bulk imports, backfills, or migrations often change thousands of rows in a single transaction. Zero 1.8 replicated one 50,000-change transaction at 17,456 changes/sec, up from 11,045 changes/sec in Zero 1.7. For fifty 1,000-change transactions, throughput rose from 10,760 to 16,766 changes/sec. Maintaining orderBy() + limit() Queries Consider a view showing the top 50 open issues: zql.issue .where('workspaceID', workspaceID) .where('status', 'open') .orderBy('priority', 'desc') .orderBy('created', 'asc') .limit(50) If only a few issues are open, the 50th matching issue can be far down the orderBy() index. When changes move rows in or out of the first 50 results, Zero may need to read more rows after the last row currently returned. Previously, that read could start at the beginning of the index, even though rows before the last returned row could not be next. In 1.8, Zero starts SQLite at the last returned row's sort key, so SQLite can seek into the index and scan from there. When the last returned row was 50,000 rows into the index, incremental updates rose from 248 to 521 updates/sec. At the end of a 100,000-row index, they rose from 250 to 14,977 updates/sec. Running Local ZQL Queries When a local query first runs, Zero hydrates it from data already on the client. Zero 1.8 makes that faster, especially for queries with relationships. For example: zql.issue.related('creator').related('comments') Hydrating 500 issues with creators and comments fell from 2.54 ms to 1.97 ms. Hydrating 500 issues with creators fell from 1.11 ms to 0.84 ms. Fixes Logical replication now reconnects when the inbound Postgres stream goes silent. Postgres writes no longer use sockets after disconnection. The Drizzle adapter now handles array-mode results from Drizzle 1.0 RC prepareQuery. (thanks @typedrat!) z2s now compiles queries using start, and SQLite fetches handle null start-cursor fields. Queries no longer appear complete with stale or empty results after reconnect. React Native reads now work with op-sqlite v17. View-syncers no longer fail while the first backup is uploading or retry before a restorable backup exists on cold start. Zero Docker images now choose the correct default sync-worker count. Change-stream catch-up now respects flow control, preventing unbounded in-memory backlogs. Breaking Changes None.",
     "headings": [
       {
         "text": "Installation",
@@ -6078,16 +6078,16 @@
         "id": "performance"
       },
       {
-        "text": "Ordered limit() Queries",
-        "id": "ordered-limit-queries"
+        "text": "Replicating Large Transactions",
+        "id": "replicating-large-transactions"
       },
       {
-        "text": "Faster Replication After Bulk Writes",
-        "id": "faster-replication-after-bulk-writes"
+        "text": "Maintaining orderBy() + limit() Queries",
+        "id": "maintaining-orderby--limit-queries"
       },
       {
-        "text": "Faster Local Queries",
-        "id": "faster-local-queries"
+        "text": "Running Local ZQL Queries",
+        "id": "running-local-zql-queries"
       },
       {
         "text": "Fixes",
@@ -6127,7 +6127,7 @@
     "sectionTitle": "Features",
     "sectionId": "features",
     "url": "/docs/release-notes/1.8",
-    "content": "Request-header forwarding: zero-cache can forward selected WebSocket upgrade headers to custom APIs using ZERO_MUTATE_ALLOWED_REQUEST_HEADERS and ZERO_QUERY_ALLOWED_REQUEST_HEADERS. (#6144, thanks @tjenkinson!) GHCR Docker images: Zero images are now published to ghcr.io/rocicorp/zero as well as Docker Hub. (#6161) Mutator result type: MutatorResult is now exported from @rocicorp/zero for typing helpers that await .client or .server. (#6223) Operational metrics: zero-cache adds metrics for API calls and startup, initial sync and replication slots, and Litestream backup and restore. (#6203, #6208, #6191, #6199, #6210) Stability metrics: New serving-lag, CVR, and WebSocket metrics and replication flow-control metrics help diagnose delayed updates, reconnects, and backpressure. (#6157, #6214, #6207, thanks @tantaman!)",
+    "content": "Request-header forwarding: zero-cache can forward selected WebSocket upgrade headers to custom APIs using ZERO_MUTATE_ALLOWED_REQUEST_HEADERS and ZERO_QUERY_ALLOWED_REQUEST_HEADERS. (#6144, thanks @tjenkinson!) GHCR Docker images: Zero images are now published to ghcr.io/rocicorp/zero as well as Docker Hub. (#6161) Mutator result type: MutatorResult is now exported from @rocicorp/zero for typing helpers that await .client or .server. (#6223) Operational metrics: zero-cache adds metrics for API calls and startup, initial sync and replication slots, and Litestream backup and restore. (#6203, #6208, #6191, #6199, #6210) Stability metrics: New serving-lag, CVR, and WebSocket metrics and replication flow-control metrics help diagnose delayed updates, reconnects, and backpressure. (#6157, #6214, #6207)",
     "kind": "section"
   },
   {
@@ -6137,37 +6137,37 @@
     "sectionTitle": "Performance",
     "sectionId": "performance",
     "url": "/docs/release-notes/1.8",
-    "content": "Zero 1.8 speeds up ordered limit() queries, replication after large Postgres writes, and local ZQL queries. Ordered limit() Queries Consider a view showing the top 50 open issues: zql.issue .where('workspaceID', workspaceID) .where('status', 'open') .orderBy('priority', 'desc') .orderBy('created', 'asc') .limit(50) If open issues are sparse, Zero may need to look far down the ordered list to find 50 matches. When an issue enters or leaves the top 50, Zero checks the rows near the cutoff to keep the correct 50 issues in the result. Zero 1.8 lets SQLite seek directly to that boundary instead of scanning earlier rows again. Boundary fetches are 1.09x faster after 50 rows and up to 300x faster at the end of a 100,000-row index. Faster Replication After Bulk Writes A bulk import, backfill, or migration can change tens of thousands of rows in one transaction. Zero records each change during replication, and writing them one at a time could make replication fall behind. Zero 1.8 writes these changes in batches, making persistence 2.25x to 2.48x faster and helping large transactions reach clients sooner. Faster Local Queries When a query first runs, Zero builds its view from data already synced to the client. In Zero 1.8, there is less per-row work needed to run local scans, filters, and relationship lookups. For example, when running the query on page load: zql.issue .where('closed', false) .related('owner') .orderBy('createdAt', 'desc') Views can appear sooner and use less client CPU, with local query fetches running 1.57x to 2.36x faster, depending on the query.",
+    "content": "Zero 1.8 speeds up replication of large transactions, maintenance of queries with orderBy() and limit(), and local ZQL queries with related(). Replicating Large Transactions Bulk imports, backfills, or migrations often change thousands of rows in a single transaction. Zero 1.8 replicated one 50,000-change transaction at 17,456 changes/sec, up from 11,045 changes/sec in Zero 1.7. For fifty 1,000-change transactions, throughput rose from 10,760 to 16,766 changes/sec. Maintaining orderBy() + limit() Queries Consider a view showing the top 50 open issues: zql.issue .where('workspaceID', workspaceID) .where('status', 'open') .orderBy('priority', 'desc') .orderBy('created', 'asc') .limit(50) If only a few issues are open, the 50th matching issue can be far down the orderBy() index. When changes move rows in or out of the first 50 results, Zero may need to read more rows after the last row currently returned. Previously, that read could start at the beginning of the index, even though rows before the last returned row could not be next. In 1.8, Zero starts SQLite at the last returned row's sort key, so SQLite can seek into the index and scan from there. When the last returned row was 50,000 rows into the index, incremental updates rose from 248 to 521 updates/sec. At the end of a 100,000-row index, they rose from 250 to 14,977 updates/sec. Running Local ZQL Queries When a local query first runs, Zero hydrates it from data already on the client. Zero 1.8 makes that faster, especially for queries with relationships. For example: zql.issue.related('creator').related('comments') Hydrating 500 issues with creators and comments fell from 2.54 ms to 1.97 ms. Hydrating 500 issues with creators fell from 1.11 ms to 0.84 ms.",
     "kind": "section"
   },
   {
-    "id": "470-release-notes/1.8#ordered-limit-queries",
+    "id": "470-release-notes/1.8#replicating-large-transactions",
     "title": "Zero 1.8",
-    "searchTitle": "Ordered limit() Queries",
-    "sectionTitle": "Ordered limit() Queries",
-    "sectionId": "ordered-limit-queries",
+    "searchTitle": "Replicating Large Transactions",
+    "sectionTitle": "Replicating Large Transactions",
+    "sectionId": "replicating-large-transactions",
     "url": "/docs/release-notes/1.8",
-    "content": "Consider a view showing the top 50 open issues: zql.issue .where('workspaceID', workspaceID) .where('status', 'open') .orderBy('priority', 'desc') .orderBy('created', 'asc') .limit(50) If open issues are sparse, Zero may need to look far down the ordered list to find 50 matches. When an issue enters or leaves the top 50, Zero checks the rows near the cutoff to keep the correct 50 issues in the result. Zero 1.8 lets SQLite seek directly to that boundary instead of scanning earlier rows again. Boundary fetches are 1.09x faster after 50 rows and up to 300x faster at the end of a 100,000-row index.",
+    "content": "Bulk imports, backfills, or migrations often change thousands of rows in a single transaction. Zero 1.8 replicated one 50,000-change transaction at 17,456 changes/sec, up from 11,045 changes/sec in Zero 1.7. For fifty 1,000-change transactions, throughput rose from 10,760 to 16,766 changes/sec.",
     "kind": "section"
   },
   {
-    "id": "471-release-notes/1.8#faster-replication-after-bulk-writes",
+    "id": "471-release-notes/1.8#maintaining-orderby--limit-queries",
     "title": "Zero 1.8",
-    "searchTitle": "Faster Replication After Bulk Writes",
-    "sectionTitle": "Faster Replication After Bulk Writes",
-    "sectionId": "faster-replication-after-bulk-writes",
+    "searchTitle": "Maintaining orderBy() + limit() Queries",
+    "sectionTitle": "Maintaining orderBy() + limit() Queries",
+    "sectionId": "maintaining-orderby--limit-queries",
     "url": "/docs/release-notes/1.8",
-    "content": "A bulk import, backfill, or migration can change tens of thousands of rows in one transaction. Zero records each change during replication, and writing them one at a time could make replication fall behind. Zero 1.8 writes these changes in batches, making persistence 2.25x to 2.48x faster and helping large transactions reach clients sooner.",
+    "content": "Consider a view showing the top 50 open issues: zql.issue .where('workspaceID', workspaceID) .where('status', 'open') .orderBy('priority', 'desc') .orderBy('created', 'asc') .limit(50) If only a few issues are open, the 50th matching issue can be far down the orderBy() index. When changes move rows in or out of the first 50 results, Zero may need to read more rows after the last row currently returned. Previously, that read could start at the beginning of the index, even though rows before the last returned row could not be next. In 1.8, Zero starts SQLite at the last returned row's sort key, so SQLite can seek into the index and scan from there. When the last returned row was 50,000 rows into the index, incremental updates rose from 248 to 521 updates/sec. At the end of a 100,000-row index, they rose from 250 to 14,977 updates/sec.",
     "kind": "section"
   },
   {
-    "id": "472-release-notes/1.8#faster-local-queries",
+    "id": "472-release-notes/1.8#running-local-zql-queries",
     "title": "Zero 1.8",
-    "searchTitle": "Faster Local Queries",
-    "sectionTitle": "Faster Local Queries",
-    "sectionId": "faster-local-queries",
+    "searchTitle": "Running Local ZQL Queries",
+    "sectionTitle": "Running Local ZQL Queries",
+    "sectionId": "running-local-zql-queries",
     "url": "/docs/release-notes/1.8",
-    "content": "When a query first runs, Zero builds its view from data already synced to the client. In Zero 1.8, there is less per-row work needed to run local scans, filters, and relationship lookups. For example, when running the query on page load: zql.issue .where('closed', false) .related('owner') .orderBy('createdAt', 'desc') Views can appear sooner and use less client CPU, with local query fetches running 1.57x to 2.36x faster, depending on the query.",
+    "content": "When a local query first runs, Zero hydrates it from data already on the client. Zero 1.8 makes that faster, especially for queries with relationships. For example: zql.issue.related('creator').related('comments') Hydrating 500 issues with creators and comments fell from 2.54 ms to 1.97 ms. Hydrating 500 issues with creators fell from 1.11 ms to 0.84 ms.",
     "kind": "section"
   },
   {

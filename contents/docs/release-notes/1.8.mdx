@@ -31,37 +31,35 @@ Zero 1.8 improves observability, performance, and reliability.
 
 ## Performance
 
-Zero 1.8 speeds up replication after large Postgres writes, ordered `limit()` queries, and local ZQL queries.
+Zero 1.8 speeds up replication of large transactions, maintenance of queries with `orderBy()` and `limit()`, and local ZQL queries with `related()`.
 
-### Faster Replication After Bulk Writes
+### Replicating Large Transactions
 
-A bulk import, backfill, or migration can change tens of thousands of rows in one transaction. Zero records each change during replication, and writing them one at a time could make replication fall behind.
-
-Zero 1.8 writes these changes in batches, making persistence **2.25x to 2.48x faster** and helping large transactions reach clients sooner.
+Bulk imports, backfills, or migrations often change thousands of rows in a single transaction. Zero 1.8 replicated one 50,000-change transaction at **17,456 changes/sec**, up from **11,045 changes/sec** in Zero 1.7. For fifty 1,000-change transactions, throughput rose from **10,760 to 16,766 changes/sec**.
 
 <BenchmarkComparisonChart
-  title="Replication Change Persistence"
-  description="Normalized throughput while recording Postgres changes for replication. Higher is better."
+  title="Replicating Large Transactions"
+  description="Measured on M5 Pro. Higher is better."
   previousLabel="Zero 1.7"
   currentLabel="Zero 1.8"
   precision={2}
+  valuePrecision={0}
+  unit="changes/s"
   data={[
     {
       name: '50,000-change transaction',
-      fullName:
-        'Recording one transaction with 50,000 changes',
-      current: 2.48
+      previous: 11045,
+      current: 17456
     },
     {
       name: '50 × 1,000-change transactions',
-      fullName:
-        'Recording 50 transactions with 1,000 changes each',
-      current: 2.25
+      previous: 10760,
+      current: 16766
     }
   ]}
 />
 
-### Maintaining Ordered `limit()` Queries
+### Maintaining `orderBy()` + `limit()` Queries
 
 Consider a view showing the top 50 open issues:
 
@@ -74,90 +72,88 @@ zql.issue
   .limit(50)
 ```
 
-If open issues are sparse, Zero may need to look far down the ordered list to find 50 matches. When an issue enters or leaves the top 50, Zero checks the rows near the cutoff to keep the correct 50 issues in the result.
+If only a few issues are open, the 50th matching issue can be far down the `orderBy()` index. When changes move rows in or out of the first 50 results, Zero may need to read more rows after the last row currently returned.
 
-Zero 1.8 lets SQLite seek directly to that boundary instead of scanning earlier rows again. Boundary fetches are **1.09x faster** after 50 rows and up to **300x faster** at the end of a 100,000-row index.
+Previously, that read could start at the beginning of the index, even though rows before the last returned row could not be next. In 1.8, Zero starts SQLite at the last returned row's sort key, so SQLite can seek into the index and scan from there. When the last returned row was 50,000 rows into the index, incremental updates rose from **248 to 521 updates/sec**. At the end of a 100,000-row index, they rose from **250 to 14,977 updates/sec**.
 
 <BenchmarkComparisonChart
-  title="Ordered Limit Boundary Fetch"
-  description="Normalized query-path throughput when refilling an ordered limited view. Higher is better."
+  title="Maintaining orderBy() + limit() Queries"
+  description="Measured on M5 Pro. Higher is better."
   previousLabel="Zero 1.7"
   currentLabel="Zero 1.8"
   precision={2}
+  valuePrecision={0}
+  unit="updates/s"
   data={[
     {
-      name: 'Boundary 50 rows deep',
-      current: 1.09
+      name: 'Last result at row 50',
+      previous: 228,
+      current: 255
     },
     {
-      name: 'Boundary 10,000 rows deep',
-      current: 27.17
+      name: 'Last result at row 10,000',
+      previous: 247,
+      current: 294
     },
     {
-      name: 'Boundary 50,000 rows deep',
-      current: 135.25
+      name: 'Last result at row 50,000',
+      previous: 248,
+      current: 521
     },
     {
-      name: 'Boundary 90,000 rows deep',
-      current: 247.95
+      name: 'Last result at row 90,000',
+      previous: 248,
+      current: 2316
     },
     {
-      name: 'Boundary at final row',
-      current: 300.09
+      name: 'Last result at row 100,000',
+      previous: 250,
+      current: 14977
     }
   ]}
 />
 
-### Faster Local Queries
+### Running Local ZQL Queries
 
-When a query first runs, Zero builds its view from data already synced to the client.
-In Zero 1.8, there is less per-row work needed to run local scans, filters, and relationship lookups.
+When a local query first runs, Zero hydrates it from data already on the client. Zero 1.8 makes that faster, especially for queries with relationships.
 
-For example, when running the query on page load:
+For example:
 
 ```ts
-zql.issue
-  .where('closed', false)
-  .related('owner')
-  .orderBy('createdAt', 'desc')
+zql.issue.related('creator').related('comments')
 ```
 
-Views can appear sooner and use less client CPU, with local query fetches running **1.57x to 2.36x faster**, depending on the query.
+Hydrating 500 issues with creators and comments fell from **2.54 ms to 1.97 ms**. Hydrating 500 issues with creators fell from **1.11 ms to 0.84 ms**.
 
 <BenchmarkComparisonChart
-  title="Local Query Fetch"
-  description="Normalized local query throughput. Higher is better."
+  title="Running Local ZQL Queries"
+  description="Measured on M5 Pro. Lower is better."
   previousLabel="Zero 1.7"
   currentLabel="Zero 1.8"
   precision={2}
-  height={360}
+  valuePrecision={2}
+  unit="ms"
+  higherIsBetter={false}
   data={[
     {
-      name: 'Issue scan, 1 sort key',
-      fullName: 'Scanning 1,000 issues sorted by 1 key',
-      current: 2.36
+      name: 'Issues with creators',
+      fullName: 'Loading 500 issues and their creators',
+      previous: 1.11492725,
+      current: 0.8393025
     },
     {
-      name: 'Issue scan, 2 sort keys',
-      fullName: 'Scanning 1,000 issues sorted by 2 keys',
-      current: 2.35
-    },
-    {
-      name: 'Issue scan, 4 sort keys',
-      fullName: 'Scanning 1,000 issues sorted by 4 keys',
-      current: 2.35
-    },
-    {
-      name: 'Open issues',
+      name: 'Issues, creators, comments',
       fullName:
-        'Filtering open issues from 1,000 local rows',
-      current: 1.74
+        'Loading 500 issues with their creators and 1,000 comments',
+      previous: 2.536469,
+      current: 1.9670415
     },
     {
-      name: 'Issues with owners',
+      name: 'First 50 issues',
       fullName:
-        'Loading owners for 1,000 issues across 20 users',
-      current: 1.57
+        'Loading a local issue query with limit(50)',
+      previous: 0.0779895,
+      current: 0.053689145
     }
   ]}
 />
