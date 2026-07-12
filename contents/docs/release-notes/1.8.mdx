@@ -31,11 +31,11 @@ Zero 1.8 improves observability, performance, and reliability.
 
 ## Performance
 
-Zero 1.8 speeds up replication of large transactions, maintenance of queries with `orderBy()` and `limit()`, and local ZQL queries with `related()`.
+Zero 1.8 speeds up replication of large transactions, maintenance of queries that use `limit()`, and client-side query hydration.
 
 ### Replicating Large Transactions
 
-Bulk imports, backfills, or migrations often change thousands of rows in a single transaction. Zero 1.8 replicates these transactions about **50% faster**.
+Bulk imports, backfills, or migrations often change thousands of rows in a single Postgres transaction. These large transactions replicate about **1.5x&nbsp;faster in Zero&nbsp;1.8**.
 
 <BenchmarkComparisonChart
   title="Replicating Large Transactions"
@@ -59,25 +59,25 @@ Bulk imports, backfills, or migrations often change thousands of rows in a singl
   ]}
 />
 
-### Maintaining `orderBy()` + `limit()` Queries
+### Maintaining `limit()` Queries
 
-For example, an app might show the first 50 open issues, ordered by priority:
+Consider a query like this:
 
 ```ts
 zql.issue
-  .where('workspaceID', workspaceID)
   .where('status', 'open')
-  .orderBy('priority', 'desc')
   .orderBy('created', 'asc')
   .limit(50)
 ```
 
-If only a few issues are open, the 50th matching issue can be far down the `orderBy()` index. When changes move rows in or out of the first 50 results, Zero may need to read more rows after the last row currently returned.
+Zero can fulfill this query using an index on either `status` or `created`. If it decides to use the `created` index, Zero might have to consider many rows before it finds 50 matches. That is unavoidable.
 
-Previously, that read could start at the beginning of the index, even though rows before the last returned row could not be next. In 1.8, Zero starts SQLite at the last returned row's sort key, so SQLite can seek into the index and scan from there. When the last returned row was 50,000 rows into the index, incremental updates rose from **248 to 521 updates/sec**. At the end of a 100,000-row index, they rose from **250 to 14,977 updates/sec**.
+But when changes to the data move rows in or out of the first 50 results, Zero 1.7 repeated the work to find the first 50 results, making incremental updates slower than necessary. Zero 1.8 fixes this.
+
+In benchmarks, when the last returned row was 50,000 rows into the index, incremental updates were **2x&nbsp;faster in Zero 1.8**. When it was 100,000 rows in, updates were **over 50x&nbsp;faster in Zero 1.8**.
 
 <BenchmarkComparisonChart
-  title="Maintaining orderBy() + limit() Queries"
+  title="Maintaining limit() Queries"
   description="Measured on M5 Pro. Higher is better."
   previousLabel="Zero 1.7"
   currentLabel="Zero 1.8"
@@ -113,20 +113,16 @@ Previously, that read could start at the beginning of the index, even though row
   ]}
 />
 
-### Running Local ZQL Queries
+### Client-Side Hydration
 
-When a local query first runs, Zero hydrates it from data already on the client. Zero 1.8 makes that faster, especially for queries with relationships.
-
-For example:
+Zero run queries first on the client, then on the server. The initial client-side hydration got faster in Zero 1.8. For example, this query returns initial data from client about **1.3x faster in Zero 1.8**:
 
 ```ts
 zql.issue.related('creator').related('comments')
 ```
 
-Hydrating 500 issues with creators and comments fell from **2.54 ms to 1.97 ms**. Hydrating 500 issues with creators fell from **1.11 ms to 0.84 ms**.
-
 <BenchmarkComparisonChart
-  title="Running Local ZQL Queries"
+  title="Client-Side Hydration"
   description="Measured on M5 Pro. Lower is better."
   previousLabel="Zero 1.7"
   currentLabel="Zero 1.8"
@@ -136,13 +132,13 @@ Hydrating 500 issues with creators and comments fell from **2.54 ms to 1.97 ms**
   higherIsBetter={false}
   data={[
     {
-      name: 'Issues with creators',
+      name: '500 issues with creators',
       fullName: 'Loading 500 issues and their creators',
       previous: 1.11492725,
       current: 0.8393025
     },
     {
-      name: 'Issues, creators, comments',
+      name: '500 issues with creators and comments',
       fullName:
         'Loading 500 issues with their creators and 1,000 comments',
       previous: 2.536469,
