@@ -3,6 +3,8 @@ import path from 'node:path';
 
 const root = new URL('.', import.meta.url).pathname;
 const rawRoot = path.join(root, 'raw');
+const aggregatePath = path.join(root, 'aggregate.json');
+const BYTES_PER_MIB = 1024 * 1024;
 
 const groups = [
   {
@@ -27,7 +29,7 @@ const groups = [
     id: 'replication-e2e',
     title: 'Replicating Large Transactions',
     unit: 'ns/change',
-    valueKind: 'throughputAsChangesPerSecond',
+    valueKind: 'throughputAsMiBPerSecond',
   },
   {
     id: 'storer-pg',
@@ -88,6 +90,9 @@ function collectGroup(group) {
   for (const ref of ['baseline', 'target']) {
     for (let i = 1; i <= 10; i++) {
       const file = path.join(rawRoot, group.id, `${ref}-${i}.log`);
+      if (!fs.existsSync(file)) {
+        return collectGroupFromExistingAggregate(group);
+      }
       const rows = parseLog(file);
       if (rows.length === 0) {
         throw new Error(`No benchmark JSON found in ${file}`);
@@ -98,6 +103,27 @@ function collectGroup(group) {
         out[ref].set(row.name, values);
       }
     }
+  }
+  return out;
+}
+
+function collectGroupFromExistingAggregate(group) {
+  if (!fs.existsSync(aggregatePath)) {
+    throw new Error(`Missing raw logs and ${aggregatePath}`);
+  }
+
+  const existing = JSON.parse(fs.readFileSync(aggregatePath, 'utf8'));
+  const existingGroup = existing.results?.find(
+    result => result.id === group.id,
+  );
+  if (!existingGroup) {
+    throw new Error(`No existing aggregate group for ${group.id}`);
+  }
+
+  const out = {baseline: new Map(), target: new Map()};
+  for (const row of existingGroup.rows) {
+    out.baseline.set(row.name, row.baselineRuns);
+    out.target.set(row.name, row.targetRuns);
   }
   return out;
 }
@@ -113,12 +139,59 @@ function formatDuration(ns) {
   return `${(ns / 1_000_000_000).toFixed(2)} s`;
 }
 
-function formatValue(value, group) {
+function payloadLength(id, minBytes, maxBytes) {
+  const range = maxBytes - minBytes + 1;
+  return minBytes + ((id * 9973) % range);
+}
+
+function benchmarkFixtureRowPayloadBytes(id) {
+  const kind = id % 10;
+
+  if (kind < 5) {
+    return payloadLength(id, 256, 2048);
+  }
+  if (kind < 7) {
+    return (
+      `wide row ${id}`.length +
+      payloadLength(id, 2048, 8192) +
+      payloadLength(id + 17, 512, 2048)
+    );
+  }
+  if (kind < 9) {
+    return payloadLength(id, 128, 1024);
+  }
+  return `lookup-${id % 10_000}`.length;
+}
+
+function benchmarkFixturePayloadMiB(startID, count) {
+  let bytes = 0;
+  for (let i = 0; i < count; i++) {
+    bytes += benchmarkFixtureRowPayloadBytes(startID + i);
+  }
+  return bytes / BYTES_PER_MIB;
+}
+
+function replicationPayloadInfo(name) {
+  if (name === 'replication one 50,000-change transaction') {
+    const changes = 50_000;
+    const payloadMiB = benchmarkFixturePayloadMiB(10_001, changes);
+    return {changes, payloadMiB, mibPerChange: payloadMiB / changes};
+  }
+  if (name === 'replication 50 x 1,000-change transactions') {
+    const changes = 50_000;
+    const payloadMiB = benchmarkFixturePayloadMiB(60_001, changes);
+    return {changes, payloadMiB, mibPerChange: payloadMiB / changes};
+  }
+  throw new Error(`Unknown replication payload size for ${name}`);
+}
+
+function formatValue(value, group, name) {
   if (group.valueKind === 'throughputAsNsPerOperation') {
     return `${(1_000_000_000 / value).toFixed(2)} MB/s`;
   }
-  if (group.valueKind === 'throughputAsChangesPerSecond') {
-    return `${(1_000_000_000 / value).toFixed(0)} changes/s`;
+  if (group.valueKind === 'throughputAsMiBPerSecond') {
+    const {mibPerChange} = replicationPayloadInfo(name);
+    return `${((1_000_000_000 / value) * mibPerChange).toFixed(1)} MiB/s`;
   }
   return formatDuration(value);
 }
@@ -145,15 +218,21 @@ for (const group of groups) {
     const baseline = median(baselineRuns);
     const target = median(targetRuns);
     const ratio = baseline / target;
+    const rowShortName = shortName(name);
+    const payloadInfo =
+      group.valueKind === 'throughputAsMiBPerSecond'
+        ? replicationPayloadInfo(rowShortName)
+        : undefined;
     return {
       name,
-      shortName: shortName(name),
+      shortName: rowShortName,
       unit: group.unit,
       baseline,
       target,
       ratio,
-      baselineDisplay: formatValue(baseline, group),
-      targetDisplay: formatValue(target, group),
+      payloadMiB: payloadInfo?.payloadMiB,
+      baselineDisplay: formatValue(baseline, group, rowShortName),
+      targetDisplay: formatValue(target, group, rowShortName),
       baselineRuns,
       targetRuns,
     };

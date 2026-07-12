@@ -89,6 +89,8 @@ Raw outputs:
 
 Coverage type: targeted post-matrix coverage using the target's end-to-end replication benchmark on both refs. It measures from writes committed to upstream Postgres until all changes reach the SQLite replica. Each process measures one 50,000-change transaction and fifty 1,000-change transactions.
 
+The aggregate reports generated fixture payload throughput in MiB/s. This is deterministic text payload size from the benchmark fixture, not WAL bytes, logical-replication bytes, or wire bytes.
+
 ```sh
 BENCH_OUTPUT_FORMAT=json NO_COLOR=1 corepack pnpm --filter zero-cache exec vitest run --config vitest.config.bench.pg.ts src/services/replicator/replication-throughput.bench.pg.ts
 ```

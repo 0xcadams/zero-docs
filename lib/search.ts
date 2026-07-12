@@ -16,11 +16,51 @@ const escapeRegExp = (value: string) =>
 const tokenize = (value: string) =>
   lunr
     .tokenizer(value)
-    .map(token => token.toString().toLowerCase())
+    .map(token =>
+      token.toString().toLowerCase().replace(/^\W+/, '').replace(/\W+$/, ''),
+    )
     .filter(Boolean);
 
 const splitPunctuation = (tokens: string[]) =>
   tokens.flatMap(token => token.split(/[^a-z0-9]+/i)).filter(Boolean);
+
+const normalizeText = (value: string) =>
+  value
+    .toLowerCase()
+    .replace(/[^a-z0-9.]+/g, ' ')
+    .trim();
+
+const urlToText = (url: string) =>
+  normalizeText(url.replace(/^\/docs\/?/, '').replace(/\//g, ' '));
+
+const versionPattern = /\b\d+\.\d+(?:\.\d+)?\b/g;
+const hasVersionPattern = /\b\d+\.\d+(?:\.\d+)?\b/;
+
+const isReleaseQuery = (query: string) =>
+  /\b(release|notes?|changelog|versions?|upgrade|upgrading|breaking)\b/i.test(
+    query,
+  ) || hasVersionPattern.test(query);
+
+const isDeprecatedQuery = (query: string) =>
+  /\b(deprecated|legacy|old|rls|crud|synced\s*query|ad\s*-?\s*hoc)\b/i.test(
+    query,
+  );
+
+const tokenMatchesText = (token: string, text: string) => {
+  const normalizedToken = normalizeText(token);
+  if (!normalizedToken) return false;
+  return text
+    .split(' ')
+    .some(part => part === normalizedToken || part.startsWith(normalizedToken));
+};
+
+const allTokensMatchText = (tokens: string[], text: string) =>
+  tokens.length > 0 && tokens.every(token => tokenMatchesText(token, text));
+
+const isClientApiQuery = (tokens: string[]) =>
+  tokens.some(
+    token => /^use[a-z0-9]{2,}/i.test(token) || /provider$/i.test(token),
+  );
 
 const findFirstMatchIndex = (content: string, terms: string[]) => {
   const lowerContent = content.toLowerCase();
@@ -109,6 +149,8 @@ export const createLunrIndex = (docs: SearchDocument[]) => {
     b.ref('id');
     b.field('searchTitle', {boost: 14});
     b.field('sectionTitle', {boost: 16});
+    b.field('title', {boost: 10});
+    b.field('urlTokens', {boost: 8});
     b.field('content');
     b.field('headings', {boost: 6});
 
@@ -117,6 +159,8 @@ export const createLunrIndex = (docs: SearchDocument[]) => {
         id: doc.id,
         searchTitle: doc.searchTitle?.toLowerCase() ?? '',
         sectionTitle: doc.sectionTitle?.toLowerCase() ?? '',
+        title: doc.title?.toLowerCase() ?? '',
+        urlTokens: urlToText(doc.url),
         content: doc.content?.toLowerCase() ?? '',
         headings: (doc.headings ?? [])
           .map(heading => heading.text.toLowerCase())
@@ -126,22 +170,86 @@ export const createLunrIndex = (docs: SearchDocument[]) => {
   });
 };
 
-const getPhraseBoost = (doc: SearchDocument, phrase: string) => {
-  if (!phrase) return 0;
-  const normalizedPhrase = phrase.toLowerCase();
+const getRankingBoost = (
+  doc: SearchDocument,
+  query: string,
+  tokens: string[],
+) => {
+  const normalizedPhrase = normalizeText(query);
+  if (!normalizedPhrase) return 0;
 
-  const sectionTitle = doc.sectionTitle?.toLowerCase() ?? '';
-  const pageTitle = doc.title.toLowerCase();
+  const searchTitle = normalizeText(doc.searchTitle ?? '');
+  const sectionTitle = normalizeText(doc.sectionTitle ?? '');
+  const pageTitle = normalizeText(doc.title);
+  const urlText = urlToText(doc.url);
+  const titleText = normalizeText(
+    `${doc.title} ${doc.searchTitle ?? ''} ${doc.sectionTitle ?? ''} ${urlText}`,
+  );
   const headingsText = (doc.headings ?? [])
-    .map(heading => heading.text.toLowerCase())
+    .map(heading => normalizeText(heading.text))
     .join(' ');
-  const content = doc.content.toLowerCase();
+  const content = normalizeText(doc.content);
 
-  if (sectionTitle && sectionTitle.includes(normalizedPhrase)) return 6;
-  if (pageTitle.includes(normalizedPhrase)) return 4;
-  if (headingsText.includes(normalizedPhrase)) return 3;
-  if (content.includes(normalizedPhrase)) return 1;
-  return 0;
+  let boost = 0;
+
+  if (sectionTitle === normalizedPhrase) boost += 28;
+  else if (sectionTitle.includes(normalizedPhrase)) boost += 18;
+
+  if (searchTitle === normalizedPhrase) boost += 24;
+  else if (searchTitle.includes(normalizedPhrase)) boost += 14;
+
+  if (pageTitle === normalizedPhrase) boost += 22;
+  else if (pageTitle.includes(normalizedPhrase)) boost += 12;
+
+  if (titleText.includes(normalizedPhrase)) boost += 8;
+  if (headingsText.includes(normalizedPhrase)) boost += 4;
+  if (content.includes(normalizedPhrase)) boost += 1;
+
+  const comparableTokens = tokens.filter(token => token.length > 1);
+  if (allTokensMatchText(comparableTokens, titleText)) boost += 12;
+  if (allTokensMatchText(comparableTokens, sectionTitle)) boost += 10;
+  if (allTokensMatchText(comparableTokens, searchTitle)) boost += 8;
+  if (allTokensMatchText(comparableTokens, pageTitle)) boost += 6;
+
+  if (isClientApiQuery(tokens)) {
+    if (doc.url === '/docs/react') boost += 8;
+    else if (doc.url === '/docs/solidjs' || doc.url === '/docs/react-native') {
+      boost += 5;
+    } else if (doc.url === '/docs/queries') {
+      boost += 3;
+    }
+  }
+
+  for (const version of query.match(versionPattern) ?? []) {
+    if (doc.url.includes(version) || doc.title.includes(version)) {
+      boost += 20;
+    }
+  }
+
+  return boost;
+};
+
+const getRankingMultiplier = (doc: SearchDocument, query: string) => {
+  let multiplier = 1;
+
+  if (doc.url.startsWith('/docs/release-notes') && !isReleaseQuery(query)) {
+    multiplier *= 0.2;
+  }
+
+  if (doc.url.startsWith('/docs/deprecated') && !isDeprecatedQuery(query)) {
+    multiplier *= 0.15;
+  }
+
+  if (
+    !isDeprecatedQuery(query) &&
+    normalizeText(`${doc.searchTitle} ${doc.sectionTitle ?? ''}`).includes(
+      'deprecated',
+    )
+  ) {
+    multiplier *= 0.2;
+  }
+
+  return multiplier;
 };
 
 const getFuzzyDistance = (token: string) => {
@@ -150,26 +258,29 @@ const getFuzzyDistance = (token: string) => {
   return 2;
 };
 
+type QueryStrategy = 'exact' | 'prefix' | 'fuzzy';
+
 const buildQuery = (
   builder: lunr.Query,
   tokens: string[],
   {
     presence,
-    includeFuzzy,
+    strategy,
   }: {
     presence: lunr.Query.presence;
-    includeFuzzy: boolean;
+    strategy: QueryStrategy;
   },
 ) => {
   for (const token of tokens) {
-    builder.term(token, {boost: 8, presence});
-    builder.term(token, {
-      boost: 3,
-      presence,
-      wildcard: lunr.Query.wildcard.TRAILING,
-    });
-
-    if (includeFuzzy) {
+    if (strategy === 'exact') {
+      builder.term(token, {boost: 8, presence});
+    } else if (strategy === 'prefix') {
+      builder.term(token, {
+        boost: 4,
+        presence,
+        wildcard: lunr.Query.wildcard.TRAILING,
+      });
+    } else {
       const editDistance = getFuzzyDistance(token);
       if (editDistance !== null) {
         builder.term(token, {
@@ -177,6 +288,8 @@ const buildQuery = (
           presence,
           editDistance,
         });
+      } else {
+        builder.term(token, {boost: 8, presence});
       }
     }
   }
@@ -199,7 +312,11 @@ export const searchDocuments = ({
 
   const fallbackTokens = splitPunctuation(primaryTokens);
   const tokenSets = [primaryTokens];
+  const preservesVersionToken = primaryTokens.some(token =>
+    hasVersionPattern.test(token),
+  );
   if (
+    !preservesVersionToken &&
     fallbackTokens.length &&
     (fallbackTokens.length !== primaryTokens.length ||
       fallbackTokens.some((token, index) => token !== primaryTokens[index]))
@@ -207,7 +324,10 @@ export const searchDocuments = ({
     tokenSets.push(fallbackTokens);
   }
 
-  const runQueries = (includeFuzzy: boolean, optionalOnly = false) => {
+  const runQueries = (strategies: QueryStrategy[], optionalOnly = false) => {
+    const resultsByRef = new Map<string, lunr.Index.Result>();
+    let matchedTokens: string[] | null = null;
+
     for (const tokens of tokenSets) {
       if (optionalOnly && tokens.length < 2) continue;
 
@@ -216,22 +336,35 @@ export const searchDocuments = ({
         : tokens.length > 1
           ? lunr.Query.presence.REQUIRED
           : lunr.Query.presence.OPTIONAL;
-      const results = index.query(builder =>
-        buildQuery(builder, tokens, {presence, includeFuzzy}),
-      );
-      if (results.length) return {results, tokens};
+      for (const strategy of strategies) {
+        const results = index.query(builder =>
+          buildQuery(builder, tokens, {presence, strategy}),
+        );
+        if (results.length && !matchedTokens) matchedTokens = tokens;
+
+        for (const result of results) {
+          const existing = resultsByRef.get(result.ref);
+          if (!existing || result.score > existing.score) {
+            resultsByRef.set(result.ref, result);
+          }
+        }
+      }
     }
 
-    return null;
+    return resultsByRef.size && matchedTokens
+      ? {results: Array.from(resultsByRef.values()), tokens: matchedTokens}
+      : null;
   };
 
-  const match = runQueries(false) ?? runQueries(true) ?? runQueries(true, true);
+  const match =
+    runQueries(['exact', 'prefix']) ??
+    runQueries(['fuzzy']) ??
+    runQueries(['fuzzy'], true);
   if (!match) return [];
 
   const {results, tokens} = match;
 
   const documentsById = new Map(documents.map(doc => [doc.id, doc]));
-  const phrase = tokens.length > 1 ? tokens.join(' ') : '';
   const highlightTerms = Array.from(
     new Set([sanitizedInput, ...tokens].filter(Boolean)),
   );
@@ -241,8 +374,9 @@ export const searchDocuments = ({
       const doc = documentsById.get(result.ref);
       if (!doc) return null;
 
-      const phraseBoost = tokens.length > 1 ? getPhraseBoost(doc, phrase) : 0;
-      const score = result.score + phraseBoost;
+      const score =
+        (result.score + getRankingBoost(doc, sanitizedInput, tokens)) *
+        getRankingMultiplier(doc, sanitizedInput);
 
       const snippet = extractSnippet(doc.content, highlightTerms);
       const snippetId =

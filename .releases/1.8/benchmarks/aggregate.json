@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-11T01:03:24.521Z",
+  "generatedAt": "2026-07-12T06:09:26.955Z",
   "baseline": {
     "ref": "zero/v1.7.0",
     "sha": "6863de5f00a3c1e7dc09c83ea3263dec4a94ebee"
@@ -318,7 +318,7 @@
       "id": "replication-e2e",
       "title": "Replicating Large Transactions",
       "unit": "ns/change",
-      "valueKind": "throughputAsChangesPerSecond",
+      "valueKind": "throughputAsMiBPerSecond",
       "comparableCount": 2,
       "medianRatio": 1.5693277800137424,
       "geometricMeanRatio": 1.5692882840900175,
@@ -330,8 +330,9 @@
           "baseline": 90538.80875999999,
           "target": 57286.30625000001,
           "ratio": 1.5804616266387392,
-          "baselineDisplay": "11045 changes/s",
-          "targetDisplay": "17456 changes/s",
+          "payloadMiB": 94.17852783203125,
+          "baselineDisplay": "20.8 MiB/s",
+          "targetDisplay": "32.9 MiB/s",
           "baselineRuns": [
             102763.97834, 99433.95084, 102866.2175, 119261.32, 93635.34834,
             87442.26917999997, 84807.06168000001, 86028.74334, 83899.69416,
@@ -350,8 +351,9 @@
           "baseline": 92935.06666000001,
           "target": 59642.81125,
           "ratio": 1.5581939333887453,
-          "baselineDisplay": "10760 changes/s",
-          "targetDisplay": "16766 changes/s",
+          "payloadMiB": 94.17303466796875,
+          "baselineDisplay": "20.3 MiB/s",
+          "targetDisplay": "31.6 MiB/s",
           "baselineRuns": [
             130218.47499999998, 98950.03416, 95087.10916000002, 104906.14416,
             96887.5, 89928.24084, 89235.71332000002, 88378.94666, 90783.02416,

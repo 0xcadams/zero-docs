@@ -28,6 +28,7 @@ yarn-error.log*
 
 # release benchmark raw logs
 .releases/*/benchmarks/raw/**/*.log
+.releases/*/benchmarks/**/raw/**/*.log
 
 # local env files
 .env*.local

@@ -54,10 +54,10 @@
 - Median ratio: 1.57x
 - Geometric mean ratio: 1.57x
 
-| Benchmark                                  |        Zero 1.7 |        Zero 1.8 | Ratio |
-| ------------------------------------------ | --------------: | --------------: | ----: |
-| replication one 50,000-change transaction  | 11045 changes/s | 17456 changes/s | 1.58x |
-| replication 50 x 1,000-change transactions | 10760 changes/s | 16766 changes/s | 1.56x |
+| Benchmark                                  |   Zero 1.7 |   Zero 1.8 | Ratio |
+| ------------------------------------------ | ---------: | ---------: | ----: |
+| replication one 50,000-change transaction  | 20.8 MiB/s | 32.9 MiB/s | 1.58x |
+| replication 50 x 1,000-change transactions | 20.3 MiB/s | 31.6 MiB/s | 1.56x |
 
 ## CDC Storer Throughput
 

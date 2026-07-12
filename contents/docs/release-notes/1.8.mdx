@@ -35,7 +35,7 @@ Zero 1.8 speeds up replication of large transactions, maintenance of queries wit
 
 ### Replicating Large Transactions
 
-Bulk imports, backfills, or migrations often change thousands of rows in a single transaction. Zero 1.8 replicated one 50,000-change transaction at **17,456 changes/sec**, up from **11,045 changes/sec** in Zero 1.7. For fifty 1,000-change transactions, throughput rose from **10,760 to 16,766 changes/sec**.
+Bulk imports, backfills, or migrations often change thousands of rows in a single transaction. Zero 1.8 replicates these transactions about **50% faster**.
 
 <BenchmarkComparisonChart
   title="Replicating Large Transactions"
@@ -43,18 +43,18 @@ Bulk imports, backfills, or migrations often change thousands of rows in a singl
   previousLabel="Zero 1.7"
   currentLabel="Zero 1.8"
   precision={2}
-  valuePrecision={0}
-  unit="changes/s"
+  valuePrecision={1}
+  unit="MiB/s"
   data={[
     {
       name: '50,000-change transaction',
-      previous: 11045,
-      current: 17456
+      previous: 20.8,
+      current: 32.9
     },
     {
       name: '50 × 1,000-change transactions',
-      previous: 10760,
-      current: 16766
+      previous: 20.3,
+      current: 31.6
     }
   ]}
 />
