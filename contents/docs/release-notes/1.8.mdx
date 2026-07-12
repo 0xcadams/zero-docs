@@ -115,7 +115,7 @@ In benchmarks, when the last returned row was 50,000 rows into the index, increm
 
 ### Client-Side Hydration
 
-Zero run queries first on the client, then on the server. The initial client-side hydration got faster in Zero 1.8. For example, this query returns initial data from client about **1.3x faster in Zero 1.8**:
+Zero runs queries first on the client, then on the server. The initial client-side hydration got faster in Zero 1.8. For example, this query returns initial data from client about **1.3x faster in Zero 1.8**:
 
 ```ts
 zql.issue.related('creator').related('comments')
