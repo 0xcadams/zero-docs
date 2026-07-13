@@ -2,6 +2,7 @@
 const nextConfig = {
   pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx', 'txt'],
   serverExternalPackages: ['@typescript/vfs'],
+  allowedDevOrigins: ['roci.cormo-turtle.ts.net'],
   redirects() {
     return [
       {

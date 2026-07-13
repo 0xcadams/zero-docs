@@ -1,8 +1,0 @@
-raw/*
-profiles/*
-results/*
-manifests/*
-!raw/.gitkeep
-!profiles/.gitkeep
-!results/.gitkeep
-!manifests/.gitkeep
