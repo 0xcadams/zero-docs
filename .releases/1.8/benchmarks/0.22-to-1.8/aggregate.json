@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-12T07:28:18.875Z",
+  "generatedAt": "2026-07-12T18:52:26.399Z",
   "baseline": {
     "ref": "zero/v0.22.2025071101",
     "sha": "bef41d6de044cd3de5173c56df1329a19933e175",
@@ -13,6 +13,10 @@
   "runCountPerRef": 10,
   "aggregation": "median of each process-level benchmark median; raw duration and ns/MB values use baseline / target ratios, so >1 is faster in target",
   "throughputDisplay": "ns/MB throughput metrics are displayed as decimal MB/s by converting with 1,000,000,000 / nsPerMB",
+  "caveats": [
+    "The 0.22 live-replication harness bypasses JSON serialization and parsing that its production WebSocket path performed, while 1.8 still pays parsing and worker-thread costs. Those rows are not apples-to-apples production throughput.",
+    "The reconnect/catch-up row measures ChangeStreamer backlog replay into a JavaScript counter, not stopping and restarting a stale SQLite replica."
+  ],
   "summary": {
     "comparableCount": 15,
     "medianRatio": 1.190770681682916,

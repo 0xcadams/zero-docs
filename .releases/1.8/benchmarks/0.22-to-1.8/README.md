@@ -94,18 +94,30 @@ Outputs:
 - `.releases/1.8/benchmarks/0.22-to-1.8/aggregate.md`
 - `.releases/1.8/benchmarks/0.22-to-1.8/three-way.json`
 - `.releases/1.8/benchmarks/0.22-to-1.8/three-way.md`
+- `.releases/1.8/benchmarks/0.22-to-1.8/investigation.md`
+- `.releases/1.8/benchmarks/0.22-to-1.8/worker-isolation.json`
+
+Follow-up replication investigations:
+
+- [`replication-large-transaction-experiments.md`](./replication-large-transaction-experiments.md): backfill apply, semantic insert batching, worker pipelining, coarse reset, and replay-versus-restore experiments.
+- [`replication-native-update-experiment.md`](./replication-native-update-experiment.md): native pre-stringify update batching for 100,000-row through three-million-row transactions, logical MiB/s, RTT sensitivity, stage attribution, mixed upserts, and backward-compatible rollout options.
+- [`replication-next-opportunities.md`](./replication-next-opportunities.md): frame batching, cumulative ACKs, and ChangeLog storage experiments that preceded native semantic batching.
 
 Aggregation method: median of each benchmark's process-level medians. Ratios are raw older/newer ratios, so values above `1.0` mean the newer version is faster. Postgres throughput rows are recorded as `ns/MB` and displayed as decimal `MB/s` using `1,000,000,000 / nsPerMB`.
 
 ## Summary Results
 
-| Group | Comparable Rows | Median Ratio | Geomean Ratio |
-| --- | ---: | ---: | ---: |
-| Postgres sync, replication, and catch-up | 5 | 1.05x | 2.02x |
-| Local and server query workloads | 10 | 1.47x | 2.62x |
-| Overall | 15 | 1.19x | 2.41x |
-| Overall excluding largest improvement | 14 | 1.16x | 1.83x |
+| Group                                    | Comparable Rows | Median Ratio | Geomean Ratio |
+| ---------------------------------------- | --------------: | -----------: | ------------: |
+| Postgres sync, replication, and catch-up |               5 |        1.05x |         2.02x |
+| Local and server query workloads         |              10 |        1.47x |         2.62x |
+| Overall                                  |              15 |        1.19x |         2.41x |
+| Overall excluding largest improvement    |              14 |        1.16x |         1.83x |
 
-The largest improvement is reconnect/catch-up from stored ChangeStreamer backlog, where target is `111.93x` faster than 0.22 in this harness. The row is retained in the row-level report and also excluded from the adjusted overall aggregate above.
+These aggregates retain all raw rows for reproducibility, but they should not be used as a production-level performance claim:
 
-See `.releases/1.8/benchmarks/0.22-to-1.8/three-way.md` for the 0.22, 1.0, and 1.8 table.
+- The original 0.22 live-replication harness bypassed JSON transport work that its production WebSocket path performed, while 1.8 still paid parsing and worker-thread costs.
+- The reconnect/catch-up row measures ChangeStreamer backlog replay into a JavaScript counter, not stopping and restarting a stale SQLite replica.
+- A paired follow-up found transport-normalized 0.22 and in-thread 1.8 within 3-8%. The remaining shipped-path slowdown is primarily the serial per-message write-worker boundary introduced before 1.0.
+
+See `.releases/1.8/benchmarks/0.22-to-1.8/investigation.md` for the root-cause analysis and `.releases/1.8/benchmarks/0.22-to-1.8/three-way.md` for the raw 0.22, 1.0, and 1.8 table.

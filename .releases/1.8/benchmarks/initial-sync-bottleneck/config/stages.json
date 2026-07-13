@@ -1,0 +1,92 @@
+{
+  "calibration": {
+    "repetitions": 1,
+    "mode": "validate",
+    "profiles": ["toast-200m", "toast-300m", "toast-400m", "toast-500m", "toast-600m", "toast-800m", "toast-1200m"],
+    "treatments": [
+      {"worktree": "1.8-binary", "workers": 4, "indexProfile": "standard", "instrument": true}
+    ]
+  },
+  "stage0": {
+    "repetitions": 5,
+    "mode": "sync",
+    "profiles": ["toast-400m", "toast-1200m"],
+    "treatments": [
+      {"worktree": "1.8-binary", "workers": 4, "indexProfile": "standard", "instrument": false},
+      {"worktree": "1.8-binary", "workers": 4, "indexProfile": "standard", "instrument": true}
+    ]
+  },
+  "stage1": {
+    "repetitions": 6,
+    "mode": "sync",
+    "profiles": ["toast-200m", "toast-300m", "toast-400m", "toast-500m", "toast-600m", "toast-800m", "toast-1200m"],
+    "treatments": [
+      {"worktree": "1.8-binary", "workers": 4, "indexProfile": "standard", "instrument": true}
+    ],
+    "controls": [
+      {"worktree": "1.8-binary", "profiles": ["toast-400m", "toast-1200m"], "workers": 4, "indexProfile": "standard", "instrument": true, "mode": "copy-only"},
+      {"worktree": "1.8-text", "profiles": ["toast-400m", "toast-1200m"], "workers": 4, "indexProfile": "standard", "instrument": true},
+      {"worktree": "1.8-text", "profiles": ["toast-400m", "toast-1200m"], "workers": 4, "indexProfile": "standard", "instrument": true, "mode": "copy-only"}
+    ]
+  },
+  "stage2": {
+    "repetitions": 6,
+    "mode": "sync",
+    "profiles": ["toast-400m", "toast-1200m"],
+    "treatments": [
+      {"worktree": "1.8-binary", "workers": 4, "indexProfile": "standard", "instrument": true},
+      {"worktree": "1.8-binary", "workers": 4, "indexProfile": "required", "instrument": true},
+      {"worktree": "1.8-binary", "workers": 4, "indexProfile": "none", "instrument": true},
+      {"worktree": "1.8-binary", "workers": 4, "indexProfile": "stress", "instrument": true}
+    ]
+  },
+  "stage3": {
+    "repetitions": 6,
+    "mode": "sync",
+    "profiles": ["toast-400m", "toast-1200m"],
+    "treatments": [
+      {"worktree": "1.8-binary", "workers": 1, "indexProfile": "standard", "instrument": true},
+      {"worktree": "1.8-binary", "workers": 2, "indexProfile": "standard", "instrument": true},
+      {"worktree": "1.8-binary", "workers": 4, "indexProfile": "standard", "instrument": true}
+    ]
+  },
+  "stage4-index": {
+    "repetitions": 4,
+    "mode": "sync",
+    "profiles": ["toast-1200m"],
+    "treatments": [
+      {"worktree": "1.8-binary", "workers": 4, "indexProfile": "standard", "instrument": true, "tuningLabel": "default"},
+      {"worktree": "1.8-binary", "workers": 4, "indexProfile": "standard", "instrument": true, "tuningLabel": "cache-256", "sqliteCacheMB": 256},
+      {"worktree": "1.8-binary", "workers": 4, "indexProfile": "standard", "instrument": true, "tuningLabel": "cache-1024", "sqliteCacheMB": 1024},
+      {"worktree": "1.8-binary", "workers": 4, "indexProfile": "standard", "instrument": true, "tuningLabel": "mmap-1024", "sqliteMmapMB": 1024},
+      {"worktree": "1.8-binary", "workers": 4, "indexProfile": "standard", "instrument": true, "tuningLabel": "temp-memory", "sqliteTempStore": "memory"},
+      {"worktree": "1.8-binary", "workers": 4, "indexProfile": "standard", "instrument": true, "tuningLabel": "cache-256-mmap-1024", "sqliteCacheMB": 256, "sqliteMmapMB": 1024}
+    ]
+  },
+  "confirm": {
+    "repetitions": 10,
+    "mode": "sync",
+    "profiles": ["toast-400m", "toast-1200m"],
+    "treatments": [
+      {"worktree": "0.22-text", "workers": 4, "indexProfile": "standard", "instrument": true},
+      {"worktree": "1.0-text", "workers": 4, "indexProfile": "standard", "instrument": true},
+      {"worktree": "1.8-binary", "workers": 4, "indexProfile": "standard", "instrument": true},
+      {"worktree": "1.8-text", "workers": 4, "indexProfile": "standard", "instrument": true}
+    ]
+  },
+  "confirm-cause": {
+    "repetitions": 5,
+    "mode": "sync",
+    "profiles": ["toast-400m", "toast-1200m"],
+    "treatments": [
+      {"worktree": "0.22-text", "workers": 4, "indexProfile": "standard", "instrument": false, "tuningLabel": "default"},
+      {"worktree": "0.22-text", "workers": 4, "indexProfile": "standard", "instrument": false, "tuningLabel": "mmap-1024", "sqliteMmapMB": 1024},
+      {"worktree": "1.0-text", "workers": 4, "indexProfile": "standard", "instrument": false, "tuningLabel": "default"},
+      {"worktree": "1.0-text", "workers": 4, "indexProfile": "standard", "instrument": false, "tuningLabel": "mmap-1024", "sqliteMmapMB": 1024},
+      {"worktree": "1.8-binary", "workers": 4, "indexProfile": "standard", "instrument": false, "tuningLabel": "default"},
+      {"worktree": "1.8-binary", "workers": 4, "indexProfile": "standard", "instrument": false, "tuningLabel": "mmap-1024", "sqliteMmapMB": 1024},
+      {"worktree": "1.8-text", "workers": 4, "indexProfile": "standard", "instrument": false, "tuningLabel": "default"},
+      {"worktree": "1.8-text", "workers": 4, "indexProfile": "standard", "instrument": false, "tuningLabel": "mmap-1024", "sqliteMmapMB": 1024}
+    ]
+  }
+}

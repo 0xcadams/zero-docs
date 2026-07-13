@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-12T07:28:18.875Z",
+  "generatedAt": "2026-07-12T18:52:26.399Z",
   "versions": {
     "zero022": {
       "ref": "zero/v0.22.2025071101",
@@ -17,6 +17,10 @@
   },
   "runCountPerRef": 10,
   "aggregation": "median of process-level medians",
+  "caveats": [
+    "The 0.22 live-replication harness bypasses JSON serialization and parsing that its production WebSocket path performed, while 1.8 still pays parsing and worker-thread costs. Those rows are not apples-to-apples production throughput.",
+    "The reconnect/catch-up row measures ChangeStreamer backlog replay into a JavaScript counter, not stopping and restarting a stale SQLite replica."
+  ],
   "rows": [
     {
       "group": "Postgres Sync, Replication, And Catch-up",

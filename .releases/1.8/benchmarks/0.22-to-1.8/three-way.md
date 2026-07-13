@@ -6,6 +6,8 @@
 - Values are median of 10 process-level medians per ref. Throughput rows are decimal `MB/s`; duration rows are lower-is-better.
 - Ratios above `1.0` mean the newer version is faster.
 
+> **Important:** The raw 0.22 live-replication rows omit production JSON transport work that 1.8 still performs, so those rows are not an apples-to-apples production comparison. A paired isolation found transport-normalized 0.22 and in-thread 1.8 within 3-8%; the remaining shipped-path difference is primarily per-message worker-thread IPC. See `investigation.md`.
+
 | Workload | Zero 0.22 | Zero 1.0 | Zero 1.8 | 1.8 vs 0.22 | 1.8 vs 1.0 | 1.0 vs 0.22 |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
 | Postgres initial sync/backfill payload | 86.20 MB/s | 82.68 MB/s | 90.76 MB/s | 1.05x | 1.10x | 0.96x |

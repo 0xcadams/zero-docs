@@ -8,6 +8,10 @@
 - Ratio: raw `baseline / target`; values above `1.0` are faster in target
 - Throughput display: `ns/MB` metrics are converted to decimal `MB/s`
 
+> **Important:** The 0.22 live-replication rows bypass production transport serialization, while 1.8 retains parsing and worker-thread costs. Do not interpret those raw rows as an apples-to-apples production throughput regression. See `investigation.md`.
+>
+> The reconnect/catch-up row measures ChangeStreamer backlog replay into a JavaScript counter, not a restarted stale SQLite replica.
+
 ## Overall
 
 - Comparable rows: 15

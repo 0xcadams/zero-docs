@@ -249,6 +249,10 @@ const aggregate = {
     'median of each process-level benchmark median; raw duration and ns/MB values use baseline / target ratios, so >1 is faster in target',
   throughputDisplay:
     'ns/MB throughput metrics are displayed as decimal MB/s by converting with 1,000,000,000 / nsPerMB',
+  caveats: [
+    'The 0.22 live-replication harness bypasses JSON serialization and parsing that its production WebSocket path performed, while 1.8 still pays parsing and worker-thread costs. Those rows are not apples-to-apples production throughput.',
+    'The reconnect/catch-up row measures ChangeStreamer backlog replay into a JavaScript counter, not stopping and restarting a stale SQLite replica.',
+  ],
   summary,
   results,
 };
@@ -272,6 +276,10 @@ function pushAggregateMarkdown(md) {
   md.push('- Aggregation: median of process-level medians');
   md.push('- Ratio: raw `baseline / target`; values above `1.0` are faster in target');
   md.push('- Throughput display: `ns/MB` metrics are converted to decimal `MB/s`');
+  md.push('');
+  md.push('> **Important:** The 0.22 live-replication rows bypass production transport serialization, while 1.8 retains parsing and worker-thread costs. Do not interpret those raw rows as an apples-to-apples production throughput regression. See `investigation.md`.');
+  md.push('>');
+  md.push('> The reconnect/catch-up row measures ChangeStreamer backlog replay into a JavaScript counter, not a restarted stale SQLite replica.');
   md.push('');
   md.push('## Overall');
   md.push('');
@@ -348,6 +356,7 @@ const threeWay = {
   },
   runCountPerRef: runCount,
   aggregation: 'median of process-level medians',
+  caveats: aggregate.caveats,
   rows: threeWayRows(),
 };
 
@@ -364,6 +373,8 @@ threeWayMd.push('- `Zero 1.0`: `zero/v1.0.0` (`5a5ea6b786d126fb12f34b1b81a846b8b
 threeWayMd.push('- `Zero 1.8`: `maint/zero/v1.8` (`cdc02598f137ab4e071878f5674fdc716dbbc69d`)');
 threeWayMd.push('- Values are median of 10 process-level medians per ref. Throughput rows are decimal `MB/s`; duration rows are lower-is-better.');
 threeWayMd.push('- Ratios above `1.0` mean the newer version is faster.');
+threeWayMd.push('');
+threeWayMd.push('> **Important:** The raw 0.22 live-replication rows omit production JSON transport work that 1.8 still performs, so those rows are not an apples-to-apples production comparison. A paired isolation found transport-normalized 0.22 and in-thread 1.8 within 3-8%; the remaining shipped-path difference is primarily per-message worker-thread IPC. See `investigation.md`.');
 threeWayMd.push('');
 threeWayMd.push('| Workload | Zero 0.22 | Zero 1.0 | Zero 1.8 | 1.8 vs 0.22 | 1.8 vs 1.0 | 1.0 vs 0.22 |');
 threeWayMd.push('| --- | ---: | ---: | ---: | ---: | ---: | ---: |');
