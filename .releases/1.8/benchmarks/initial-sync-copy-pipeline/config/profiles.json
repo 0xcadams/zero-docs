@@ -1,0 +1,38 @@
+{
+  "contained-4k-31k": {
+    "description": "Contained-field control with no fragmented payloads",
+    "fieldBytes": 4096,
+    "chunkBytes": 31744,
+    "columns": 7,
+    "rows": 4096,
+    "warmups": 2,
+    "iterations": 8
+  },
+  "imports-270k-5.5k": {
+    "description": "Margins-like payload and observed small COPY chunks",
+    "fieldBytes": 276480,
+    "chunkBytes": 5632,
+    "columns": 7,
+    "rows": 64,
+    "warmups": 1,
+    "iterations": 6
+  },
+  "email-683k-31k": {
+    "description": "PL high sample with its larger observed chunk endpoint",
+    "fieldBytes": 699392,
+    "chunkBytes": 31744,
+    "columns": 25,
+    "rows": 32,
+    "warmups": 1,
+    "iterations": 6
+  },
+  "email-683k-5.5k": {
+    "description": "Worst observed fragmentation envelope",
+    "fieldBytes": 699392,
+    "chunkBytes": 5632,
+    "columns": 25,
+    "rows": 16,
+    "warmups": 1,
+    "iterations": 5
+  }
+}

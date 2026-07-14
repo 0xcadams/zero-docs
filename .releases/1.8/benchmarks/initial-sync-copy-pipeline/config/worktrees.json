@@ -1,0 +1,14 @@
+{
+  "benchmarkRoot": "/Users/chase/.worktree/mono",
+  "commit": "d87c1c813",
+  "worktrees": {
+    "baseline": {
+      "path": "initial-sync-copy-pipeline-baseline",
+      "label": "baseline"
+    },
+    "linear-parser": {
+      "path": "initial-sync-copy-pipeline",
+      "label": "linear-parser"
+    }
+  }
+}

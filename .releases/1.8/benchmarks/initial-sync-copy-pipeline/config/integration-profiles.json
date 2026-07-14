@@ -1,0 +1,64 @@
+{
+  "email-smoke-100m": {
+    "fixture": "email",
+    "rows": 400,
+    "payloadBytes": 250000,
+    "copyChunkBytes": 31744,
+    "expectedCopyBytes": 100000000,
+    "docker": {"cpus": 1, "memory": "3g", "nodeHeapMB": 2304}
+  },
+  "email-683m": {
+    "fixture": "email",
+    "rows": 1000,
+    "payloadBytes": 683000,
+    "copyChunkBytes": 31744,
+    "expectedCopyBytes": 683000000,
+    "docker": {"cpus": 1, "memory": "3g", "nodeHeapMB": 2304}
+  },
+  "email-high-6.83g": {
+    "fixture": "email",
+    "rows": 10000,
+    "payloadBytes": 683000,
+    "copyChunkBytes": 31744,
+    "expectedCopyBytes": 6830000000,
+    "docker": {"cpus": 1, "memory": "3g", "nodeHeapMB": 2304}
+  },
+  "imports-smoke-110m": {
+    "fixture": "imports",
+    "rows": 400,
+    "payloadBytes": 275000,
+    "copyChunkBytes": 5632,
+    "expectedCopyBytes": 110000000,
+    "docker": {"cpus": 2, "memory": "6g", "nodeHeapMB": 4608}
+  },
+  "imports-550m": {
+    "fixture": "imports",
+    "rows": 2000,
+    "payloadBytes": 275000,
+    "copyChunkBytes": 5632,
+    "expectedCopyBytes": 550000000,
+    "docker": {"cpus": 2, "memory": "6g", "nodeHeapMB": 4608}
+  },
+  "imports-production-2.75g": {
+    "fixture": "imports",
+    "rows": 10000,
+    "payloadBytes": 275000,
+    "copyChunkBytes": 5632,
+    "expectedCopyBytes": 2750000000,
+    "docker": {"cpus": 2, "memory": "6g", "nodeHeapMB": 4608}
+  },
+  "email-narrow-250k": {
+    "fixture": "email",
+    "rows": 250000,
+    "payloadBytes": 128,
+    "copyChunkBytes": 31744,
+    "docker": {"cpus": 1, "memory": "3g", "nodeHeapMB": 2304}
+  },
+  "imports-narrow-250k": {
+    "fixture": "imports",
+    "rows": 250000,
+    "payloadBytes": 128,
+    "copyChunkBytes": 5632,
+    "docker": {"cpus": 2, "memory": "6g", "nodeHeapMB": 4608}
+  }
+}

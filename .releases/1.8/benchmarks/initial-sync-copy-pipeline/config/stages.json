@@ -1,0 +1,17 @@
+{
+  "parser-smoke": {
+    "profiles": ["imports-270k-5.5k", "email-683k-31k"],
+    "worktrees": ["baseline", "linear-parser"],
+    "repetitions": 1
+  },
+  "parser-core": {
+    "profiles": [
+      "contained-4k-31k",
+      "imports-270k-5.5k",
+      "email-683k-31k",
+      "email-683k-5.5k"
+    ],
+    "worktrees": ["baseline", "linear-parser"],
+    "repetitions": 5
+  }
+}
