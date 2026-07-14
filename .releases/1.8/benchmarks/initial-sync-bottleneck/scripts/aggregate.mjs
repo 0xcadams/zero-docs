@@ -24,6 +24,9 @@ for (const file of files) {
   const exitLine = text
     .split(/\r?\n/)
     .find(line => line.startsWith('ZERO_INITIAL_SYNC_EXIT '));
+  const cgroupLine = text
+    .split(/\r?\n/)
+    .find(line => line.startsWith('ZERO_INITIAL_SYNC_CGROUP '));
   if (!resultLine) {
     failures.push({file, reason: 'missing ZERO_INITIAL_SYNC_RESULT', exitLine});
     continue;
@@ -32,7 +35,10 @@ for (const file of files) {
     resultLine.indexOf('ZERO_INITIAL_SYNC_RESULT ') + 25,
   );
   try {
-    runs.push({file, ...JSON.parse(json)});
+    const cgroup = cgroupLine
+      ? JSON.parse(cgroupLine.slice('ZERO_INITIAL_SYNC_CGROUP '.length))
+      : undefined;
+    runs.push({file, ...JSON.parse(json), ...(cgroup ? {cgroup} : {})});
   } catch (error) {
     failures.push({
       file,

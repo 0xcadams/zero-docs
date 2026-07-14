@@ -63,6 +63,29 @@
       {"worktree": "1.8-binary", "workers": 4, "indexProfile": "standard", "instrument": true, "tuningLabel": "cache-256-mmap-1024", "sqliteCacheMB": 256, "sqliteMmapMB": 1024}
     ]
   },
+  "linux-mmap-sweep": {
+    "repetitions": 4,
+    "mode": "sync",
+    "profiles": ["toast-1200m"],
+    "treatments": [
+      {"worktree": "1.8-binary", "workers": 4, "indexProfile": "standard", "instrument": true, "tuningLabel": "default"},
+      {"worktree": "1.8-binary", "workers": 4, "indexProfile": "standard", "instrument": true, "tuningLabel": "mmap-256", "sqliteMmapMB": 256},
+      {"worktree": "1.8-binary", "workers": 4, "indexProfile": "standard", "instrument": true, "tuningLabel": "mmap-512", "sqliteMmapMB": 512},
+      {"worktree": "1.8-binary", "workers": 4, "indexProfile": "standard", "instrument": true, "tuningLabel": "mmap-768", "sqliteMmapMB": 768},
+      {"worktree": "1.8-binary", "workers": 4, "indexProfile": "standard", "instrument": true, "tuningLabel": "mmap-1024", "sqliteMmapMB": 1024}
+    ]
+  },
+  "linux-mmap-knee": {
+    "repetitions": 4,
+    "mode": "sync",
+    "profiles": ["toast-400m", "toast-1200m"],
+    "treatments": [
+      {"worktree": "1.8-binary", "workers": 4, "indexProfile": "standard", "instrument": true, "tuningLabel": "default"},
+      {"worktree": "1.8-binary", "workers": 4, "indexProfile": "standard", "instrument": true, "tuningLabel": "mmap-512", "sqliteMmapMB": 512},
+      {"worktree": "1.8-binary", "workers": 4, "indexProfile": "standard", "instrument": true, "tuningLabel": "mmap-768", "sqliteMmapMB": 768},
+      {"worktree": "1.8-binary", "workers": 4, "indexProfile": "standard", "instrument": true, "tuningLabel": "mmap-1024", "sqliteMmapMB": 1024}
+    ]
+  },
   "confirm": {
     "repetitions": 10,
     "mode": "sync",

@@ -174,6 +174,7 @@ test(
       const resourcesBefore = process.resourceUsage();
       let peakRssBytes = process.memoryUsage().rss;
       let callbackMs = 0;
+      let effectiveMmapBytes = 0;
       const rssTimer = instrument
         ? setInterval(() => {
             peakRssBytes = Math.max(peakRssBytes, process.memoryUsage().rss);
@@ -193,6 +194,8 @@ test(
             if (sqliteMmapMB !== undefined) {
               tx.pragma(`mmap_size = ${sqliteMmapMB * 1024 * 1024}`);
             }
+            const [mmap] = tx.pragma<{mmap_size: number}>('mmap_size');
+            effectiveMmapBytes = mmap?.mmap_size ?? 0;
             if (sqliteTempStore === 'memory') {
               tx.pragma('temp_store = MEMORY');
             }
@@ -233,6 +236,7 @@ test(
         sqliteTuning: {
           cacheMB: sqliteCacheMB,
           mmapMB: sqliteMmapMB,
+          effectiveMmapBytes,
           tempStore: sqliteTempStore,
         },
         fixture,
