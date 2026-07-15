@@ -1,0 +1,520 @@
+{
+  "stage": "pr7-current-strategy-narrow-docker",
+  "generatedAt": "2026-07-15T16:46:36.219Z",
+  "summary": {
+    "email-narrow-250k/pr7-deferred-parent": {
+      "callbackMs": 1840.6276475000002,
+      "outerMs": 1903.4448965,
+      "wrapperMs": 60.44093750000002,
+      "copyMs": 1468.752938,
+      "flushMs": 640.2147284999996,
+      "indexMs": 258.0023544999999,
+      "copyOtherMs": 923.083937000001,
+      "totalMs": 1830.2477095,
+      "rawCopyMs": 338.02575049999996,
+      "rawCopyMBps": 446.41259955714605,
+      "rawChunkBytes": 603.5757896968412,
+      "callbackMinusRawMs": 1478.3869385000003,
+      "callbackToRawRatio": 5.312076409142464,
+      "dominantElapsedMs": 1463.4143334999999,
+      "dominantFlushMs": 640.1927489999998,
+      "dominantCopyBytes": 150894551,
+      "peakRssBytes": 331237376,
+      "gcCount": 95,
+      "gcMs": 182.99701748788357,
+      "eventLoopUtilization": 0.9713062387659701,
+      "userCPUTime": 1628678,
+      "systemCPUTime": 222753,
+      "minorPageFaults": 32706,
+      "scopedMemoryPressureFullUs": 0,
+      "scopedIOPressureFullUs": 0,
+      "scopedIOReadBytes": 0,
+      "scopedIOWriteBytes": 0,
+      "scopedMemoryMaxEvents": 0,
+      "cgroupMemoryMaxEvents": 0,
+      "sqliteFileBytes": 176455680
+    },
+    "email-narrow-250k/pr7-adaptive-2k": {
+      "callbackMs": 1818.3923340000001,
+      "outerMs": 1884.221542,
+      "wrapperMs": 61.235333500000024,
+      "copyMs": 1467.4013964999997,
+      "flushMs": 601.0986285000001,
+      "indexMs": 253.1648129999994,
+      "copyOtherMs": 932.0631664999999,
+      "totalMs": 1808.216814,
+      "rawCopyMs": 349.28333350000025,
+      "rawCopyMBps": 432.0323315184968,
+      "rawChunkBytes": 603.5757896968412,
+      "callbackMinusRawMs": 1457.9060005,
+      "callbackToRawRatio": 5.300477635361721,
+      "dominantElapsedMs": 1461.4472509999998,
+      "dominantFlushMs": 601.0745660000005,
+      "dominantCopyBytes": 150894551,
+      "peakRssBytes": 326273024,
+      "gcCount": 95,
+      "gcMs": 190.90985698252916,
+      "eventLoopUtilization": 0.970646110052356,
+      "userCPUTime": 1625516,
+      "systemCPUTime": 205900.5,
+      "minorPageFaults": 30929.5,
+      "scopedMemoryPressureFullUs": 0,
+      "scopedIOPressureFullUs": 0,
+      "scopedIOReadBytes": 0,
+      "scopedIOWriteBytes": 0,
+      "scopedMemoryMaxEvents": 0,
+      "cgroupMemoryMaxEvents": 0,
+      "sqliteFileBytes": 176455680
+    },
+    "email-narrow-250k/pr7-forced-eager-secondary": {
+      "callbackMs": 2017.5745840000002,
+      "outerMs": 2088.6086265,
+      "wrapperMs": 67.50341599999979,
+      "copyMs": 1863.562126,
+      "flushMs": 1004.0022909999998,
+      "indexMs": 49.48181199999976,
+      "copyOtherMs": 969.3674185000007,
+      "totalMs": 2006.7304175,
+      "rawCopyMs": 355.6433750000001,
+      "rawCopyMBps": 424.33361617087826,
+      "rawChunkBytes": 603.5757896968412,
+      "callbackMinusRawMs": 1663.8450845,
+      "callbackToRawRatio": 5.727053675710014,
+      "dominantElapsedMs": 1857.4153135000001,
+      "dominantFlushMs": 1003.9697289999997,
+      "dominantCopyBytes": 150894551,
+      "peakRssBytes": 319750144,
+      "gcCount": 97,
+      "gcMs": 211.75803949683905,
+      "eventLoopUtilization": 0.973455287873646,
+      "userCPUTime": 1827713,
+      "systemCPUTime": 233299.5,
+      "minorPageFaults": 32308,
+      "scopedMemoryPressureFullUs": 0,
+      "scopedIOPressureFullUs": 0,
+      "scopedIOReadBytes": 0,
+      "scopedIOWriteBytes": 0,
+      "scopedMemoryMaxEvents": 0,
+      "cgroupMemoryMaxEvents": 0,
+      "sqliteFileBytes": 179245056
+    },
+    "imports-narrow-250k/pr7-deferred-parent": {
+      "callbackMs": 773.0212299999998,
+      "outerMs": 847.2647715000002,
+      "wrapperMs": 73.99783350000018,
+      "copyMs": 399.97797949999995,
+      "flushMs": 157.78991799999903,
+      "indexMs": 267.51614599999994,
+      "copyOtherMs": 344.0391890000003,
+      "totalMs": 761.7883550000003,
+      "rawCopyMs": 112.21064599999988,
+      "rawCopyMBps": 484.495628805959,
+      "rawChunkBytes": 217.45479818080727,
+      "callbackMinusRawMs": 661.0362299999997,
+      "callbackToRawRatio": 6.799968954539905,
+      "dominantElapsedMs": 392.9266675,
+      "dominantFlushMs": 157.74066799999912,
+      "dominantCopyBytes": 54363917,
+      "peakRssBytes": 197623808,
+      "gcCount": 33,
+      "gcMs": 25.78116848692298,
+      "eventLoopUtilization": 0.9462844459105413,
+      "userCPUTime": 723350.5,
+      "systemCPUTime": 94618,
+      "minorPageFaults": 7885.5,
+      "scopedMemoryPressureFullUs": 0,
+      "scopedIOPressureFullUs": 0,
+      "scopedIOReadBytes": 0,
+      "scopedIOWriteBytes": 0,
+      "scopedMemoryMaxEvents": 0,
+      "cgroupMemoryMaxEvents": 0,
+      "sqliteFileBytes": 86937600
+    },
+    "imports-narrow-250k/pr7-adaptive-2k": {
+      "callbackMs": 759.6142715,
+      "outerMs": 833.4952294999999,
+      "wrapperMs": 72.60577050000006,
+      "copyMs": 394.22093749999976,
+      "flushMs": 158.13662750000015,
+      "indexMs": 271.1521254999998,
+      "copyOtherMs": 318.45968900000025,
+      "totalMs": 749.9340209999999,
+      "rawCopyMs": 111.11387500000001,
+      "rawCopyMBps": 489.26549132028373,
+      "rawChunkBytes": 217.45479818080727,
+      "callbackMinusRawMs": 652.1622294999999,
+      "callbackToRawRatio": 6.745004596336559,
+      "dominantElapsedMs": 388.81995800000004,
+      "dominantFlushMs": 158.118106,
+      "dominantCopyBytes": 54363917,
+      "peakRssBytes": 199020544,
+      "gcCount": 33,
+      "gcMs": 24.015167508274317,
+      "eventLoopUtilization": 0.9503504846145853,
+      "userCPUTime": 713553.5,
+      "systemCPUTime": 100075.5,
+      "minorPageFaults": 7455.5,
+      "scopedMemoryPressureFullUs": 0,
+      "scopedIOPressureFullUs": 0,
+      "scopedIOReadBytes": 0,
+      "scopedIOWriteBytes": 0,
+      "scopedMemoryMaxEvents": 0,
+      "cgroupMemoryMaxEvents": 0,
+      "sqliteFileBytes": 86937600
+    },
+    "imports-narrow-250k/pr7-forced-eager-secondary": {
+      "callbackMs": 1068.4271885,
+      "outerMs": 1147.352813,
+      "wrapperMs": 78.00893699999983,
+      "copyMs": 932.8867510000001,
+      "flushMs": 693.6034179999999,
+      "indexMs": 37.01622900000007,
+      "copyOtherMs": 325.59431200000085,
+      "totalMs": 1058.5481875,
+      "rawCopyMs": 112.74541650000003,
+      "rawCopyMBps": 482.18308899099634,
+      "rawChunkBytes": 217.45479818080727,
+      "callbackMinusRawMs": 956.179355,
+      "callbackToRawRatio": 9.518459756013485,
+      "dominantElapsedMs": 926.9047505000002,
+      "dominantFlushMs": 693.5703129999999,
+      "dominantCopyBytes": 54363917,
+      "peakRssBytes": 187039744,
+      "gcCount": 33,
+      "gcMs": 25.155666019767523,
+      "eventLoopUtilization": 0.9588505915478571,
+      "userCPUTime": 1028999.5,
+      "systemCPUTime": 97264.5,
+      "minorPageFaults": 7440.5,
+      "scopedMemoryPressureFullUs": 0,
+      "scopedIOPressureFullUs": 0,
+      "scopedIOReadBytes": 0,
+      "scopedIOWriteBytes": 0,
+      "scopedMemoryMaxEvents": 0,
+      "cgroupMemoryMaxEvents": 0,
+      "sqliteFileBytes": 93667328
+    }
+  },
+  "comparisons": {
+    "email-narrow-250k/pr7-adaptive-2k vs pr7-deferred-parent": {
+      "callbackMs": {
+        "ratio": 0.9879197112299162,
+        "changePercent": -1.2080288770083825,
+        "pairedRatio": 0.9883235732926199,
+        "pairedChangePercent": -1.1676426707380116
+      },
+      "copyMs": {
+        "ratio": 0.9990798033726211,
+        "changePercent": -0.09201966273788553,
+        "pairedRatio": 1.0126903806316614,
+        "pairedChangePercent": 1.269038063166139
+      },
+      "flushMs": {
+        "ratio": 0.9389015930769866,
+        "changePercent": -6.109840692301338,
+        "pairedRatio": 0.9413294084083104,
+        "pairedChangePercent": -5.867059159168964
+      },
+      "indexMs": {
+        "ratio": 0.9812500102591099,
+        "changePercent": -1.874998974089015,
+        "pairedRatio": 0.9812865508614179,
+        "pairedChangePercent": -1.8713449138582083
+      },
+      "copyOtherMs": {
+        "ratio": 1.0097274247119727,
+        "changePercent": 0.9727424711972743,
+        "pairedRatio": 1.007931050929193,
+        "pairedChangePercent": 0.7931050929192995
+      },
+      "rawCopyMs": {
+        "ratio": 1.0333039213235924,
+        "changePercent": 3.330392132359239,
+        "pairedRatio": 1.0199423246599548,
+        "pairedChangePercent": 1.9942324659954824
+      },
+      "callbackMinusRawMs": {
+        "ratio": 0.9861464292827284,
+        "changePercent": -1.3853570717271557,
+        "pairedRatio": 1.0014543200367676,
+        "pairedChangePercent": 0.1454320036767598
+      },
+      "callbackToRawRatio": {
+        "ratio": 0.9978165273073293,
+        "changePercent": -0.21834726926707182,
+        "pairedRatio": 1.0138026913577973,
+        "pairedChangePercent": 1.3802691357797325
+      },
+      "dominantElapsedMs": {
+        "ratio": 0.9986558266821841,
+        "changePercent": -0.13441733178158888,
+        "pairedRatio": 1.0121364082661417,
+        "pairedChangePercent": 1.2136408266141707
+      },
+      "dominantFlushMs": {
+        "ratio": 0.9388962417004829,
+        "changePercent": -6.110375829951709,
+        "pairedRatio": 0.9413249227697797,
+        "pairedChangePercent": -5.867507723022025
+      },
+      "peakRssBytes": {
+        "ratio": 0.9850127058125228,
+        "changePercent": -1.498729418747724,
+        "pairedRatio": 1.0227557719641118,
+        "pairedChangePercent": 2.2755771964111826
+      },
+      "gcCount": {
+        "ratio": 1,
+        "changePercent": 0,
+        "pairedRatio": 0.989417693169093,
+        "pairedChangePercent": -1.0582306830906996
+      },
+      "gcMs": {
+        "ratio": 1.0432402648046957,
+        "changePercent": 4.324026480469567,
+        "pairedRatio": 1.0382697718212162,
+        "pairedChangePercent": 3.826977182121616
+      }
+    },
+    "email-narrow-250k/pr7-forced-eager-secondary vs pr7-deferred-parent": {
+      "callbackMs": {
+        "ratio": 1.096134020772933,
+        "changePercent": 9.613402077293308,
+        "pairedRatio": 1.1555864964787252,
+        "pairedChangePercent": 15.558649647872524
+      },
+      "copyMs": {
+        "ratio": 1.26880571795663,
+        "changePercent": 26.88057179566301,
+        "pairedRatio": 1.3315529387784133,
+        "pairedChangePercent": 33.15529387784133
+      },
+      "flushMs": {
+        "ratio": 1.5682274185605531,
+        "changePercent": 56.822741856055316,
+        "pairedRatio": 1.7017507000970906,
+        "pairedChangePercent": 70.17507000970906
+      },
+      "indexMs": {
+        "ratio": 0.19178821873890992,
+        "changePercent": -80.821178126109,
+        "pairedRatio": 0.19440337576520206,
+        "pairedChangePercent": -80.55966242347979
+      },
+      "copyOtherMs": {
+        "ratio": 1.050140057306619,
+        "changePercent": 5.014005730661908,
+        "pairedRatio": 1.0647672121913963,
+        "pairedChangePercent": 6.476721219139625
+      },
+      "rawCopyMs": {
+        "ratio": 1.0521191787132802,
+        "changePercent": 5.21191787132802,
+        "pairedRatio": 1.086852781483016,
+        "pairedChangePercent": 8.6852781483016
+      },
+      "callbackMinusRawMs": {
+        "ratio": 1.1254462828169796,
+        "changePercent": 12.544628281697957,
+        "pairedRatio": 1.169859695979008,
+        "pairedChangePercent": 16.985969597900798
+      },
+      "callbackToRawRatio": {
+        "ratio": 1.0781195966709636,
+        "changePercent": 7.811959667096358,
+        "pairedRatio": 1.0674454715889206,
+        "pairedChangePercent": 6.744547158892056
+      },
+      "dominantElapsedMs": {
+        "ratio": 1.269234058311894,
+        "changePercent": 26.923405831189395,
+        "pairedRatio": 1.3324407994316383,
+        "pairedChangePercent": 33.244079943163825
+      },
+      "dominantFlushMs": {
+        "ratio": 1.5682303971237261,
+        "changePercent": 56.82303971237261,
+        "pairedRatio": 1.7017589769171355,
+        "pairedChangePercent": 70.17589769171354
+      },
+      "peakRssBytes": {
+        "ratio": 0.9653202421214688,
+        "changePercent": -3.467975787853117,
+        "pairedRatio": 0.9463631779681568,
+        "pairedChangePercent": -5.363682203184316
+      },
+      "gcCount": {
+        "ratio": 1.0210526315789474,
+        "changePercent": 2.1052631578947434,
+        "pairedRatio": 1.0052083333333335,
+        "pairedChangePercent": 0.5208333333333481
+      },
+      "gcMs": {
+        "ratio": 1.1571666161764618,
+        "changePercent": 15.716661617646178,
+        "pairedRatio": 1.1652233757842971,
+        "pairedChangePercent": 16.522337578429713
+      }
+    },
+    "imports-narrow-250k/pr7-adaptive-2k vs pr7-deferred-parent": {
+      "callbackMs": {
+        "ratio": 0.9826564161763063,
+        "changePercent": -1.734358382369372,
+        "pairedRatio": 0.989622022583274,
+        "pairedChangePercent": -1.037797741672597
+      },
+      "copyMs": {
+        "ratio": 0.9856066026254823,
+        "changePercent": -1.4393397374517725,
+        "pairedRatio": 1.0119182091516115,
+        "pairedChangePercent": 1.1918209151611459
+      },
+      "flushMs": {
+        "ratio": 1.0021972855071837,
+        "changePercent": 0.21972855071836772,
+        "pairedRatio": 1.0426605491269831,
+        "pairedChangePercent": 4.266054912698314
+      },
+      "indexMs": {
+        "ratio": 1.0135916263536477,
+        "changePercent": 1.3591626353647746,
+        "pairedRatio": 0.9907166808572867,
+        "pairedChangePercent": -0.9283319142713298
+      },
+      "copyOtherMs": {
+        "ratio": 0.9256494584981712,
+        "changePercent": -7.435054150182885,
+        "pairedRatio": 0.9448021735584997,
+        "pairedChangePercent": -5.519782644150029
+      },
+      "rawCopyMs": {
+        "ratio": 0.9902257848154633,
+        "changePercent": -0.9774215184536694,
+        "pairedRatio": 0.9890884321427524,
+        "pairedChangePercent": -1.0911567857247562
+      },
+      "callbackMinusRawMs": {
+        "ratio": 0.9865756215812863,
+        "changePercent": -1.342437841871369,
+        "pairedRatio": 0.9861977576724514,
+        "pairedChangePercent": -1.3802242327548564
+      },
+      "callbackToRawRatio": {
+        "ratio": 0.9919169692434184,
+        "changePercent": -0.8083030756581566,
+        "pairedRatio": 0.9956012755919001,
+        "pairedChangePercent": -0.4398724408099852
+      },
+      "dominantElapsedMs": {
+        "ratio": 0.9895484072737314,
+        "changePercent": -1.045159272626861,
+        "pairedRatio": 1.0135450569945785,
+        "pairedChangePercent": 1.354505699457853
+      },
+      "dominantFlushMs": {
+        "ratio": 1.0023927754635913,
+        "changePercent": 0.239277546359129,
+        "pairedRatio": 1.0427087435111666,
+        "pairedChangePercent": 4.27087435111666
+      },
+      "peakRssBytes": {
+        "ratio": 1.0070676504725584,
+        "changePercent": 0.7067650472558418,
+        "pairedRatio": 1.0068846593158556,
+        "pairedChangePercent": 0.6884659315855579
+      },
+      "gcCount": {
+        "ratio": 1,
+        "changePercent": 0,
+        "pairedRatio": 1,
+        "pairedChangePercent": 0
+      },
+      "gcMs": {
+        "ratio": 0.9315003515242363,
+        "changePercent": -6.8499648475763735,
+        "pairedRatio": 0.9824598668103477,
+        "pairedChangePercent": -1.7540133189652307
+      }
+    },
+    "imports-narrow-250k/pr7-forced-eager-secondary vs pr7-deferred-parent": {
+      "callbackMs": {
+        "ratio": 1.3821446902564374,
+        "changePercent": 38.21446902564374,
+        "pairedRatio": 1.3691743454625815,
+        "pairedChangePercent": 36.91743454625816
+      },
+      "copyMs": {
+        "ratio": 2.332345276022877,
+        "changePercent": 133.2345276022877,
+        "pairedRatio": 2.355001123258795,
+        "pairedChangePercent": 135.50011232587948
+      },
+      "flushMs": {
+        "ratio": 4.395739770902246,
+        "changePercent": 339.5739770902246,
+        "pairedRatio": 4.4954093854520085,
+        "pairedChangePercent": 349.54093854520085
+      },
+      "indexMs": {
+        "ratio": 0.13837007430572087,
+        "changePercent": -86.16299256942791,
+        "pairedRatio": 0.13354844797746587,
+        "pairedChangePercent": -86.6451552022534
+      },
+      "copyOtherMs": {
+        "ratio": 0.9463872791538308,
+        "changePercent": -5.361272084616919,
+        "pairedRatio": 0.952374089993533,
+        "pairedChangePercent": -4.762591000646699
+      },
+      "rawCopyMs": {
+        "ratio": 1.0047657732939186,
+        "changePercent": 0.4765773293918585,
+        "pairedRatio": 1.0043838418995583,
+        "pairedChangePercent": 0.4383841899558316
+      },
+      "callbackMinusRawMs": {
+        "ratio": 1.4464855504213443,
+        "changePercent": 44.64855504213443,
+        "pairedRatio": 1.428156239228835,
+        "pairedChangePercent": 42.815623922883496
+      },
+      "callbackToRawRatio": {
+        "ratio": 1.399779884238827,
+        "changePercent": 39.97798842388269,
+        "pairedRatio": 1.400283363869643,
+        "pairedChangePercent": 40.028336386964305
+      },
+      "dominantElapsedMs": {
+        "ratio": 2.3589764380143534,
+        "changePercent": 135.89764380143535,
+        "pairedRatio": 2.3920199002133042,
+        "pairedChangePercent": 139.20199002133043
+      },
+      "dominantFlushMs": {
+        "ratio": 4.3969023448030775,
+        "changePercent": 339.69023448030777,
+        "pairedRatio": 4.496184008548498,
+        "pairedChangePercent": 349.6184008548498
+      },
+      "peakRssBytes": {
+        "ratio": 0.9464433758912286,
+        "changePercent": -5.355662410877137,
+        "pairedRatio": 0.9284238833116818,
+        "pairedChangePercent": -7.15761166883182
+      },
+      "gcCount": {
+        "ratio": 1,
+        "changePercent": 0,
+        "pairedRatio": 1,
+        "pairedChangePercent": 0
+      },
+      "gcMs": {
+        "ratio": 0.9757380094128499,
+        "changePercent": -2.426199058715006,
+        "pairedRatio": 0.9753080032407389,
+        "pairedChangePercent": -2.469199675926115
+      }
+    }
+  }
+}

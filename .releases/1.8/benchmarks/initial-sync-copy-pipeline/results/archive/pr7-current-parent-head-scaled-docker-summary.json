@@ -1,0 +1,296 @@
+{
+  "stage": "pr7-current-parent-head-scaled-docker",
+  "generatedAt": "2026-07-15T16:11:02.286Z",
+  "summary": {
+    "email-683m/pr7-deferred-parent": {
+      "callbackMs": 1073.9636879999998,
+      "outerMs": 3162.2335435000005,
+      "wrapperMs": 2032.9303545000002,
+      "copyMs": 732.3025839999999,
+      "flushMs": 390.98018749999983,
+      "indexMs": 249.592583,
+      "copyOtherMs": 439.7121074999997,
+      "totalMs": 1064.770563,
+      "rawCopyMs": 244.35729200000003,
+      "rawCopyMBps": 2796.9077259920487,
+      "rawChunkBytes": 682755.5674325675,
+      "callbackMinusRawMs": 828.2727295,
+      "callbackToRawRatio": 4.360501757678588,
+      "dominantElapsedMs": 726.4767295,
+      "dominantFlushMs": 390.96179099999995,
+      "dominantCopyBytes": 683438323,
+      "peakRssBytes": 342251520,
+      "gcCount": 45.5,
+      "gcMs": 37.519499000161886,
+      "eventLoopUtilization": 0.9797531200759704,
+      "userCPUTime": 541634.5,
+      "systemCPUTime": 595990,
+      "minorPageFaults": 239267.5,
+      "scopedMemoryPressureFullUs": 0,
+      "scopedIOPressureFullUs": 0,
+      "scopedIOReadBytes": 0,
+      "scopedIOWriteBytes": 0,
+      "scopedMemoryMaxEvents": 0,
+      "cgroupMemoryMaxEvents": 0,
+      "sqliteFileBytes": 684822528
+    },
+    "email-683m/pr7-adaptive-2k": {
+      "callbackMs": 901.5955630000001,
+      "outerMs": 2420.921918,
+      "wrapperMs": 1065.4492920000002,
+      "copyMs": 807.6107714999999,
+      "flushMs": 410.5612714999994,
+      "indexMs": 0.6379585000001953,
+      "copyOtherMs": 478.53768950000085,
+      "totalMs": 892.484355,
+      "rawCopyMs": 247.62483299999997,
+      "rawCopyMBps": 2759.9873467211596,
+      "rawChunkBytes": 682755.5674325675,
+      "callbackMinusRawMs": 642.855584,
+      "callbackToRawRatio": 3.5582634061883978,
+      "dominantElapsedMs": 801.9552505,
+      "dominantFlushMs": 410.54045999999937,
+      "dominantCopyBytes": 683438323,
+      "peakRssBytes": 340322304,
+      "gcCount": 45,
+      "gcMs": 34.499353505671024,
+      "eventLoopUtilization": 0.9721263734064909,
+      "userCPUTime": 488347,
+      "systemCPUTime": 397056.5,
+      "minorPageFaults": 236895,
+      "scopedMemoryPressureFullUs": 0,
+      "scopedIOPressureFullUs": 0,
+      "scopedIOReadBytes": 0,
+      "scopedIOWriteBytes": 0,
+      "scopedMemoryMaxEvents": 0,
+      "cgroupMemoryMaxEvents": 0,
+      "sqliteFileBytes": 684826624
+    },
+    "imports-550m/pr7-deferred-parent": {
+      "callbackMs": 1274.2742504999999,
+      "outerMs": 1313.247188,
+      "wrapperMs": 37.87414600000011,
+      "copyMs": 832.6374170000001,
+      "flushMs": 282.5383775000005,
+      "indexMs": 345.26064599999995,
+      "copyOtherMs": 626.0076055000015,
+      "totalMs": 1265.497522,
+      "rawCopyMs": 821.0857709999998,
+      "rawCopyMBps": 670.0693088196333,
+      "rawChunkBytes": 274949.88255872065,
+      "callbackMinusRawMs": 434.14679249999995,
+      "callbackToRawRatio": 1.5299747323983381,
+      "dominantElapsedMs": 823.5953339999999,
+      "dominantFlushMs": 282.5069400000002,
+      "dominantCopyBytes": 550174715,
+      "peakRssBytes": 310851584,
+      "gcCount": 39,
+      "gcMs": 35.34400003403425,
+      "eventLoopUtilization": 0.7785339557402158,
+      "userCPUTime": 534440,
+      "systemCPUTime": 562050,
+      "minorPageFaults": 171022,
+      "scopedMemoryPressureFullUs": 0,
+      "scopedIOPressureFullUs": 0,
+      "scopedIOReadBytes": 0,
+      "scopedIOWriteBytes": 0,
+      "scopedMemoryMaxEvents": 0,
+      "cgroupMemoryMaxEvents": 0,
+      "sqliteFileBytes": 551362560
+    },
+    "imports-550m/pr7-adaptive-2k": {
+      "callbackMs": 924.6412505000001,
+      "outerMs": 963.7691465,
+      "wrapperMs": 40.15300000000025,
+      "copyMs": 834.6595629999999,
+      "flushMs": 290.8297920000016,
+      "indexMs": 1.2593750000005457,
+      "copyOtherMs": 625.8364800000004,
+      "totalMs": 915.5401674999998,
+      "rawCopyMs": 820.9147710000001,
+      "rawCopyMBps": 670.2026624978976,
+      "rawChunkBytes": 274949.88255872065,
+      "callbackMinusRawMs": 122.63374949999991,
+      "callbackToRawRatio": 1.148512942493628,
+      "dominantElapsedMs": 828.8196255,
+      "dominantFlushMs": 290.8123330000019,
+      "dominantCopyBytes": 550174715,
+      "peakRssBytes": 293636096,
+      "gcCount": 40.5,
+      "gcMs": 35.32474998757243,
+      "eventLoopUtilization": 0.7071687217347213,
+      "userCPUTime": 460348.5,
+      "systemCPUTime": 288425,
+      "minorPageFaults": 168775,
+      "scopedMemoryPressureFullUs": 0,
+      "scopedIOPressureFullUs": 0,
+      "scopedIOReadBytes": 0,
+      "scopedIOWriteBytes": 0,
+      "scopedMemoryMaxEvents": 0,
+      "cgroupMemoryMaxEvents": 0,
+      "sqliteFileBytes": 551374848
+    }
+  },
+  "comparisons": {
+    "email-683m/pr7-adaptive-2k vs pr7-deferred-parent": {
+      "callbackMs": {
+        "ratio": 0.8395028370828868,
+        "changePercent": -16.049716291711324,
+        "pairedRatio": 0.741232950554513,
+        "pairedChangePercent": -25.8767049445487
+      },
+      "copyMs": {
+        "ratio": 1.1028375280183362,
+        "changePercent": 10.283752801833623,
+        "pairedRatio": 0.9567487131747616,
+        "pairedChangePercent": -4.325128682523838
+      },
+      "flushMs": {
+        "ratio": 1.0500820364458994,
+        "changePercent": 5.008203644589937,
+        "pairedRatio": 0.9257642616250631,
+        "pairedChangePercent": -7.4235738374936915
+      },
+      "indexMs": {
+        "ratio": 0.002555999430480654,
+        "changePercent": -99.74440005695193,
+        "pairedRatio": 0.002556100061284804,
+        "pairedChangePercent": -99.74438999387152
+      },
+      "copyOtherMs": {
+        "ratio": 1.0882977323975578,
+        "changePercent": 8.829773239755777,
+        "pairedRatio": 1.047195006915131,
+        "pairedChangePercent": 4.719500691513101
+      },
+      "rawCopyMs": {
+        "ratio": 1.0133719807305768,
+        "changePercent": 1.3371980730576771,
+        "pairedRatio": 1.010814591391339,
+        "pairedChangePercent": 1.081459139133889
+      },
+      "callbackMinusRawMs": {
+        "ratio": 0.7761399851810526,
+        "changePercent": -22.386001481894734,
+        "pairedRatio": 0.6650890073738848,
+        "pairedChangePercent": -33.49109926261152
+      },
+      "callbackToRawRatio": {
+        "ratio": 0.8160215507131731,
+        "changePercent": -18.397844928682694,
+        "pairedRatio": 0.7626929451405142,
+        "pairedChangePercent": -23.730705485948576
+      },
+      "dominantElapsedMs": {
+        "ratio": 1.1038966809741426,
+        "changePercent": 10.389668097414262,
+        "pairedRatio": 0.9568512477072686,
+        "pairedChangePercent": -4.314875229273141
+      },
+      "dominantFlushMs": {
+        "ratio": 1.050078215955378,
+        "changePercent": 5.007821595537809,
+        "pairedRatio": 0.9257630937344037,
+        "pairedChangePercent": -7.423690626559631
+      },
+      "peakRssBytes": {
+        "ratio": 0.9943631630912845,
+        "changePercent": -0.5636836908715526,
+        "pairedRatio": 1.029166639141126,
+        "pairedChangePercent": 2.916663914112605
+      },
+      "gcCount": {
+        "ratio": 0.989010989010989,
+        "changePercent": -1.098901098901095,
+        "pairedRatio": 1,
+        "pairedChangePercent": 0
+      },
+      "gcMs": {
+        "ratio": 0.9195046422534099,
+        "changePercent": -8.049535774659011,
+        "pairedRatio": 0.8688447475981931,
+        "pairedChangePercent": -13.115525240180691
+      }
+    },
+    "imports-550m/pr7-adaptive-2k vs pr7-deferred-parent": {
+      "callbackMs": {
+        "ratio": 0.725621858981447,
+        "changePercent": -27.437814101855295,
+        "pairedRatio": 0.745422034222043,
+        "pairedChangePercent": -25.457796577795698
+      },
+      "copyMs": {
+        "ratio": 1.0024286033256655,
+        "changePercent": 0.24286033256655237,
+        "pairedRatio": 1.0146420939097014,
+        "pairedChangePercent": 1.4642093909701392
+      },
+      "flushMs": {
+        "ratio": 1.0293461531610908,
+        "changePercent": 2.9346153161090793,
+        "pairedRatio": 1.0417209852386056,
+        "pairedChangePercent": 4.172098523860557
+      },
+      "indexMs": {
+        "ratio": 0.003647606567939243,
+        "changePercent": -99.63523934320607,
+        "pairedRatio": 0.0037835302492639587,
+        "pairedChangePercent": -99.6216469750736
+      },
+      "copyOtherMs": {
+        "ratio": 0.9997266399026183,
+        "changePercent": -0.027336009738165856,
+        "pairedRatio": 1.0002076168357736,
+        "pairedChangePercent": 0.020761683577363854
+      },
+      "rawCopyMs": {
+        "ratio": 0.9997917391750786,
+        "changePercent": -0.02082608249214246,
+        "pairedRatio": 0.9834834819427909,
+        "pairedChangePercent": -1.6516518057209106
+      },
+      "callbackMinusRawMs": {
+        "ratio": 0.2824707025792432,
+        "changePercent": -71.75292974207568,
+        "pairedRatio": 0.27617891775806613,
+        "pairedChangePercent": -72.38210822419339
+      },
+      "callbackToRawRatio": {
+        "ratio": 0.7506744511350569,
+        "changePercent": -24.93255488649431,
+        "pairedRatio": 0.7585302824878413,
+        "pairedChangePercent": -24.146971751215872
+      },
+      "dominantElapsedMs": {
+        "ratio": 1.0063432747665375,
+        "changePercent": 0.634327476653751,
+        "pairedRatio": 1.013820230560905,
+        "pairedChangePercent": 1.3820230560904978
+      },
+      "dominantFlushMs": {
+        "ratio": 1.0293988990146639,
+        "changePercent": 2.939889901466386,
+        "pairedRatio": 1.0417254828697464,
+        "pairedChangePercent": 4.172548286974642
+      },
+      "peakRssBytes": {
+        "ratio": 0.9446183037626085,
+        "changePercent": -5.538169623739153,
+        "pairedRatio": 0.92523871629058,
+        "pairedChangePercent": -7.476128370942003
+      },
+      "gcCount": {
+        "ratio": 1.0384615384615385,
+        "changePercent": 3.8461538461538547,
+        "pairedRatio": 1.0519568151147098,
+        "pairedChangePercent": 5.195681511470984
+      },
+      "gcMs": {
+        "ratio": 0.9994553517869148,
+        "changePercent": -0.054464821308519706,
+        "pairedRatio": 1.0631574647772446,
+        "pairedChangePercent": 6.31574647772446
+      }
+    }
+  }
+}

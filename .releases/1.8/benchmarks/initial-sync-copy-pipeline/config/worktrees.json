@@ -31,13 +31,13 @@
     "current-pr7-head": {
       "path": "adaptive-secondary-index-scheduling",
       "label": "current-pr7-head",
-      "commit": "ea459443f18e7a6f94a32e28333f8af01df1b02b",
+      "commit": "ac5228117cfa130d519b15fbde9227b377193e70",
       "defaultInstall": false
     },
     "current-pr7-eager": {
       "path": "adaptive-secondary-index-scheduling",
       "label": "current-pr7-eager",
-      "commit": "ea459443f18e7a6f94a32e28333f8af01df1b02b",
+      "commit": "ac5228117cfa130d519b15fbde9227b377193e70",
       "defaultInstall": false
     }
   }

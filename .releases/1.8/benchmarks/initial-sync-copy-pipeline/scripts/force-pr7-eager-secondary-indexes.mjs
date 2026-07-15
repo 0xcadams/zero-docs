@@ -4,7 +4,7 @@ const path =
   process.env.PR7_INITIAL_SYNC_PATH ??
   '/workspace/packages/zero-cache/src/services/change-source/pg/initial-sync.ts';
 const source = await readFile(path, 'utf8');
-const original = `export function shouldCreateSecondaryIndexesBeforeCopy(
+const original = `function shouldCreateSecondaryIndexesBeforeCopy(
   totalRows: number,
   totalBytes: number | undefined,
   minAverageRowBytes: number,
@@ -21,7 +21,7 @@ const original = `export function shouldCreateSecondaryIndexesBeforeCopy(
     (totalBytes ?? 0) / totalRows >= minAverageRowBytes
   );
 }`;
-const replacement = `export function shouldCreateSecondaryIndexesBeforeCopy(
+const replacement = `function shouldCreateSecondaryIndexesBeforeCopy(
   _totalRows: number,
   _totalBytes: number | undefined,
   _minAverageRowBytes: number,
