@@ -1,0 +1,263 @@
+{
+  "stage": "docker-direct-text-core",
+  "generatedAt": "2026-07-14T11:20:43.530Z",
+  "execute": true,
+  "platform": "linux/arm64",
+  "images": {
+    "linear-parser": "zero-copy-pipeline-linear-parser:local"
+  },
+  "runs": [
+    {
+      "profile": "email-683m",
+      "worktree": "linear-parser",
+      "label": "linear-parser",
+      "partialInsertBatches": false,
+      "directTextBuffers": false,
+      "bufferMB": 8,
+      "repetition": 1,
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304
+      }
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "linear-parser",
+      "label": "parser-direct-text",
+      "partialInsertBatches": false,
+      "directTextBuffers": true,
+      "bufferMB": 8,
+      "repetition": 1,
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304
+      }
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "linear-parser",
+      "label": "parser-direct-text-partial-8m",
+      "partialInsertBatches": true,
+      "directTextBuffers": true,
+      "bufferMB": 8,
+      "repetition": 1,
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304
+      }
+    },
+    {
+      "profile": "imports-550m",
+      "worktree": "linear-parser",
+      "label": "linear-parser",
+      "partialInsertBatches": false,
+      "directTextBuffers": false,
+      "bufferMB": 8,
+      "repetition": 1,
+      "constraints": {
+        "cpus": 2,
+        "memory": "6g",
+        "nodeHeapMB": 4608
+      }
+    },
+    {
+      "profile": "imports-550m",
+      "worktree": "linear-parser",
+      "label": "parser-direct-text",
+      "partialInsertBatches": false,
+      "directTextBuffers": true,
+      "bufferMB": 8,
+      "repetition": 1,
+      "constraints": {
+        "cpus": 2,
+        "memory": "6g",
+        "nodeHeapMB": 4608
+      }
+    },
+    {
+      "profile": "imports-550m",
+      "worktree": "linear-parser",
+      "label": "parser-direct-text-partial-8m",
+      "partialInsertBatches": true,
+      "directTextBuffers": true,
+      "bufferMB": 8,
+      "repetition": 1,
+      "constraints": {
+        "cpus": 2,
+        "memory": "6g",
+        "nodeHeapMB": 4608
+      }
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "linear-parser",
+      "label": "linear-parser",
+      "partialInsertBatches": false,
+      "directTextBuffers": false,
+      "bufferMB": 8,
+      "repetition": 2,
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304
+      }
+    },
+    {
+      "profile": "imports-550m",
+      "worktree": "linear-parser",
+      "label": "parser-direct-text-partial-8m",
+      "partialInsertBatches": true,
+      "directTextBuffers": true,
+      "bufferMB": 8,
+      "repetition": 2,
+      "constraints": {
+        "cpus": 2,
+        "memory": "6g",
+        "nodeHeapMB": 4608
+      }
+    },
+    {
+      "profile": "imports-550m",
+      "worktree": "linear-parser",
+      "label": "parser-direct-text",
+      "partialInsertBatches": false,
+      "directTextBuffers": true,
+      "bufferMB": 8,
+      "repetition": 2,
+      "constraints": {
+        "cpus": 2,
+        "memory": "6g",
+        "nodeHeapMB": 4608
+      }
+    },
+    {
+      "profile": "imports-550m",
+      "worktree": "linear-parser",
+      "label": "linear-parser",
+      "partialInsertBatches": false,
+      "directTextBuffers": false,
+      "bufferMB": 8,
+      "repetition": 2,
+      "constraints": {
+        "cpus": 2,
+        "memory": "6g",
+        "nodeHeapMB": 4608
+      }
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "linear-parser",
+      "label": "parser-direct-text-partial-8m",
+      "partialInsertBatches": true,
+      "directTextBuffers": true,
+      "bufferMB": 8,
+      "repetition": 2,
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304
+      }
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "linear-parser",
+      "label": "parser-direct-text",
+      "partialInsertBatches": false,
+      "directTextBuffers": true,
+      "bufferMB": 8,
+      "repetition": 2,
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304
+      }
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "linear-parser",
+      "label": "parser-direct-text-partial-8m",
+      "partialInsertBatches": true,
+      "directTextBuffers": true,
+      "bufferMB": 8,
+      "repetition": 3,
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304
+      }
+    },
+    {
+      "profile": "imports-550m",
+      "worktree": "linear-parser",
+      "label": "linear-parser",
+      "partialInsertBatches": false,
+      "directTextBuffers": false,
+      "bufferMB": 8,
+      "repetition": 3,
+      "constraints": {
+        "cpus": 2,
+        "memory": "6g",
+        "nodeHeapMB": 4608
+      }
+    },
+    {
+      "profile": "imports-550m",
+      "worktree": "linear-parser",
+      "label": "parser-direct-text",
+      "partialInsertBatches": false,
+      "directTextBuffers": true,
+      "bufferMB": 8,
+      "repetition": 3,
+      "constraints": {
+        "cpus": 2,
+        "memory": "6g",
+        "nodeHeapMB": 4608
+      }
+    },
+    {
+      "profile": "imports-550m",
+      "worktree": "linear-parser",
+      "label": "parser-direct-text-partial-8m",
+      "partialInsertBatches": true,
+      "directTextBuffers": true,
+      "bufferMB": 8,
+      "repetition": 3,
+      "constraints": {
+        "cpus": 2,
+        "memory": "6g",
+        "nodeHeapMB": 4608
+      }
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "linear-parser",
+      "label": "linear-parser",
+      "partialInsertBatches": false,
+      "directTextBuffers": false,
+      "bufferMB": 8,
+      "repetition": 3,
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304
+      }
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "linear-parser",
+      "label": "parser-direct-text",
+      "partialInsertBatches": false,
+      "directTextBuffers": true,
+      "bufferMB": 8,
+      "repetition": 3,
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304
+      }
+    }
+  ]
+}

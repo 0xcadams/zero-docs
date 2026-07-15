@@ -1,0 +1,181 @@
+{
+  "stage": "batched-metrics-scaled",
+  "generatedAt": "2026-07-14T11:58:20.306Z",
+  "execute": true,
+  "platform": "linux/arm64",
+  "images": {
+    "linear-parser": "zero-copy-pipeline-linear-parser:local"
+  },
+  "runs": [
+    {
+      "profile": "email-683m",
+      "worktree": "linear-parser",
+      "label": "direct-text-eager-secondary-batched-metrics",
+      "partialInsertBatches": false,
+      "directTextBuffers": true,
+      "eagerIndexes": false,
+      "eagerSecondaryIndexes": true,
+      "bufferMB": 8,
+      "mmapGiB": 2,
+      "repetition": 1,
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304
+      }
+    },
+    {
+      "profile": "imports-550m",
+      "worktree": "linear-parser",
+      "label": "direct-text-eager-secondary-batched-metrics",
+      "partialInsertBatches": false,
+      "directTextBuffers": true,
+      "eagerIndexes": false,
+      "eagerSecondaryIndexes": true,
+      "bufferMB": 8,
+      "mmapGiB": 2,
+      "repetition": 1,
+      "constraints": {
+        "cpus": 2,
+        "memory": "6g",
+        "nodeHeapMB": 4608
+      }
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "linear-parser",
+      "label": "direct-text-eager-secondary-batched-metrics",
+      "partialInsertBatches": false,
+      "directTextBuffers": true,
+      "eagerIndexes": false,
+      "eagerSecondaryIndexes": true,
+      "bufferMB": 8,
+      "mmapGiB": 2,
+      "repetition": 2,
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304
+      }
+    },
+    {
+      "profile": "imports-550m",
+      "worktree": "linear-parser",
+      "label": "direct-text-eager-secondary-batched-metrics",
+      "partialInsertBatches": false,
+      "directTextBuffers": true,
+      "eagerIndexes": false,
+      "eagerSecondaryIndexes": true,
+      "bufferMB": 8,
+      "mmapGiB": 2,
+      "repetition": 2,
+      "constraints": {
+        "cpus": 2,
+        "memory": "6g",
+        "nodeHeapMB": 4608
+      }
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "linear-parser",
+      "label": "direct-text-eager-secondary-batched-metrics",
+      "partialInsertBatches": false,
+      "directTextBuffers": true,
+      "eagerIndexes": false,
+      "eagerSecondaryIndexes": true,
+      "bufferMB": 8,
+      "mmapGiB": 2,
+      "repetition": 3,
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304
+      }
+    },
+    {
+      "profile": "imports-550m",
+      "worktree": "linear-parser",
+      "label": "direct-text-eager-secondary-batched-metrics",
+      "partialInsertBatches": false,
+      "directTextBuffers": true,
+      "eagerIndexes": false,
+      "eagerSecondaryIndexes": true,
+      "bufferMB": 8,
+      "mmapGiB": 2,
+      "repetition": 3,
+      "constraints": {
+        "cpus": 2,
+        "memory": "6g",
+        "nodeHeapMB": 4608
+      }
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "linear-parser",
+      "label": "direct-text-eager-secondary-batched-metrics",
+      "partialInsertBatches": false,
+      "directTextBuffers": true,
+      "eagerIndexes": false,
+      "eagerSecondaryIndexes": true,
+      "bufferMB": 8,
+      "mmapGiB": 2,
+      "repetition": 4,
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304
+      }
+    },
+    {
+      "profile": "imports-550m",
+      "worktree": "linear-parser",
+      "label": "direct-text-eager-secondary-batched-metrics",
+      "partialInsertBatches": false,
+      "directTextBuffers": true,
+      "eagerIndexes": false,
+      "eagerSecondaryIndexes": true,
+      "bufferMB": 8,
+      "mmapGiB": 2,
+      "repetition": 4,
+      "constraints": {
+        "cpus": 2,
+        "memory": "6g",
+        "nodeHeapMB": 4608
+      }
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "linear-parser",
+      "label": "direct-text-eager-secondary-batched-metrics",
+      "partialInsertBatches": false,
+      "directTextBuffers": true,
+      "eagerIndexes": false,
+      "eagerSecondaryIndexes": true,
+      "bufferMB": 8,
+      "mmapGiB": 2,
+      "repetition": 5,
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304
+      }
+    },
+    {
+      "profile": "imports-550m",
+      "worktree": "linear-parser",
+      "label": "direct-text-eager-secondary-batched-metrics",
+      "partialInsertBatches": false,
+      "directTextBuffers": true,
+      "eagerIndexes": false,
+      "eagerSecondaryIndexes": true,
+      "bufferMB": 8,
+      "mmapGiB": 2,
+      "repetition": 5,
+      "constraints": {
+        "cpus": 2,
+        "memory": "6g",
+        "nodeHeapMB": 4608
+      }
+    }
+  ]
+}

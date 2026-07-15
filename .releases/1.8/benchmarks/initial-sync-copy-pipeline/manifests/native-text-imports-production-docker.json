@@ -1,0 +1,234 @@
+{
+  "stage": "native-text-imports-production",
+  "generatedAt": "2026-07-14T15:51:56.661Z",
+  "execute": true,
+  "platform": "linux/arm64",
+  "images": {
+    "linear-parser": "zero-copy-pipeline-linear-parser:local"
+  },
+  "imageIDs": {
+    "linear-parser": "sha256:a7e99d105f478d0c526e8eff5b274b50be52bab2dfe03c7de24e98224550708c"
+  },
+  "runs": [
+    {
+      "profile": "imports-production-2.75g",
+      "worktree": "linear-parser",
+      "label": "cast-text",
+      "partialInsertBatches": false,
+      "directTextBuffers": true,
+      "nativeTextBuffers": false,
+      "nativeTextBufferStatic": false,
+      "eagerIndexes": false,
+      "eagerSecondaryIndexes": false,
+      "adaptiveSecondaryIndexes": true,
+      "instrumentCopyPhases": false,
+      "reuseFragmentedFieldBuffers": false,
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 1,
+      "constraints": {
+        "cpus": 2,
+        "memory": "6g",
+        "nodeHeapMB": 4608
+      }
+    },
+    {
+      "profile": "imports-production-2.75g",
+      "worktree": "linear-parser",
+      "label": "native-transient",
+      "partialInsertBatches": false,
+      "directTextBuffers": true,
+      "nativeTextBuffers": true,
+      "nativeTextBufferStatic": false,
+      "eagerIndexes": false,
+      "eagerSecondaryIndexes": false,
+      "adaptiveSecondaryIndexes": true,
+      "instrumentCopyPhases": false,
+      "reuseFragmentedFieldBuffers": false,
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 1,
+      "constraints": {
+        "cpus": 2,
+        "memory": "6g",
+        "nodeHeapMB": 4608
+      }
+    },
+    {
+      "profile": "imports-production-2.75g",
+      "worktree": "linear-parser",
+      "label": "cast-text",
+      "partialInsertBatches": false,
+      "directTextBuffers": true,
+      "nativeTextBuffers": false,
+      "nativeTextBufferStatic": false,
+      "eagerIndexes": false,
+      "eagerSecondaryIndexes": false,
+      "adaptiveSecondaryIndexes": true,
+      "instrumentCopyPhases": false,
+      "reuseFragmentedFieldBuffers": false,
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 2,
+      "constraints": {
+        "cpus": 2,
+        "memory": "6g",
+        "nodeHeapMB": 4608
+      }
+    },
+    {
+      "profile": "imports-production-2.75g",
+      "worktree": "linear-parser",
+      "label": "native-transient",
+      "partialInsertBatches": false,
+      "directTextBuffers": true,
+      "nativeTextBuffers": true,
+      "nativeTextBufferStatic": false,
+      "eagerIndexes": false,
+      "eagerSecondaryIndexes": false,
+      "adaptiveSecondaryIndexes": true,
+      "instrumentCopyPhases": false,
+      "reuseFragmentedFieldBuffers": false,
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 2,
+      "constraints": {
+        "cpus": 2,
+        "memory": "6g",
+        "nodeHeapMB": 4608
+      }
+    },
+    {
+      "profile": "imports-production-2.75g",
+      "worktree": "linear-parser",
+      "label": "cast-text",
+      "partialInsertBatches": false,
+      "directTextBuffers": true,
+      "nativeTextBuffers": false,
+      "nativeTextBufferStatic": false,
+      "eagerIndexes": false,
+      "eagerSecondaryIndexes": false,
+      "adaptiveSecondaryIndexes": true,
+      "instrumentCopyPhases": false,
+      "reuseFragmentedFieldBuffers": false,
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 3,
+      "constraints": {
+        "cpus": 2,
+        "memory": "6g",
+        "nodeHeapMB": 4608
+      }
+    },
+    {
+      "profile": "imports-production-2.75g",
+      "worktree": "linear-parser",
+      "label": "native-transient",
+      "partialInsertBatches": false,
+      "directTextBuffers": true,
+      "nativeTextBuffers": true,
+      "nativeTextBufferStatic": false,
+      "eagerIndexes": false,
+      "eagerSecondaryIndexes": false,
+      "adaptiveSecondaryIndexes": true,
+      "instrumentCopyPhases": false,
+      "reuseFragmentedFieldBuffers": false,
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 3,
+      "constraints": {
+        "cpus": 2,
+        "memory": "6g",
+        "nodeHeapMB": 4608
+      }
+    },
+    {
+      "profile": "imports-production-2.75g",
+      "worktree": "linear-parser",
+      "label": "cast-text",
+      "partialInsertBatches": false,
+      "directTextBuffers": true,
+      "nativeTextBuffers": false,
+      "nativeTextBufferStatic": false,
+      "eagerIndexes": false,
+      "eagerSecondaryIndexes": false,
+      "adaptiveSecondaryIndexes": true,
+      "instrumentCopyPhases": false,
+      "reuseFragmentedFieldBuffers": false,
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 4,
+      "constraints": {
+        "cpus": 2,
+        "memory": "6g",
+        "nodeHeapMB": 4608
+      }
+    },
+    {
+      "profile": "imports-production-2.75g",
+      "worktree": "linear-parser",
+      "label": "native-transient",
+      "partialInsertBatches": false,
+      "directTextBuffers": true,
+      "nativeTextBuffers": true,
+      "nativeTextBufferStatic": false,
+      "eagerIndexes": false,
+      "eagerSecondaryIndexes": false,
+      "adaptiveSecondaryIndexes": true,
+      "instrumentCopyPhases": false,
+      "reuseFragmentedFieldBuffers": false,
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 4,
+      "constraints": {
+        "cpus": 2,
+        "memory": "6g",
+        "nodeHeapMB": 4608
+      }
+    },
+    {
+      "profile": "imports-production-2.75g",
+      "worktree": "linear-parser",
+      "label": "cast-text",
+      "partialInsertBatches": false,
+      "directTextBuffers": true,
+      "nativeTextBuffers": false,
+      "nativeTextBufferStatic": false,
+      "eagerIndexes": false,
+      "eagerSecondaryIndexes": false,
+      "adaptiveSecondaryIndexes": true,
+      "instrumentCopyPhases": false,
+      "reuseFragmentedFieldBuffers": false,
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 5,
+      "constraints": {
+        "cpus": 2,
+        "memory": "6g",
+        "nodeHeapMB": 4608
+      }
+    },
+    {
+      "profile": "imports-production-2.75g",
+      "worktree": "linear-parser",
+      "label": "native-transient",
+      "partialInsertBatches": false,
+      "directTextBuffers": true,
+      "nativeTextBuffers": true,
+      "nativeTextBufferStatic": false,
+      "eagerIndexes": false,
+      "eagerSecondaryIndexes": false,
+      "adaptiveSecondaryIndexes": true,
+      "instrumentCopyPhases": false,
+      "reuseFragmentedFieldBuffers": false,
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 5,
+      "constraints": {
+        "cpus": 2,
+        "memory": "6g",
+        "nodeHeapMB": 4608
+      }
+    }
+  ]
+}

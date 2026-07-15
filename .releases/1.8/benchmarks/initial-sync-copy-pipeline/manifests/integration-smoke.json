@@ -1,0 +1,55 @@
+{
+  "stage": "integration-smoke",
+  "generatedAt": "2026-07-14T07:06:18.691Z",
+  "execute": true,
+  "runs": [
+    {
+      "profile": "email-smoke-100m",
+      "worktree": "baseline",
+      "label": "baseline",
+      "partialInsertBatches": false,
+      "bufferMB": 8,
+      "repetition": 1
+    },
+    {
+      "profile": "email-smoke-100m",
+      "worktree": "linear-parser",
+      "label": "linear-parser",
+      "partialInsertBatches": false,
+      "bufferMB": 8,
+      "repetition": 1
+    },
+    {
+      "profile": "email-smoke-100m",
+      "worktree": "linear-parser",
+      "label": "parser-partial-8m",
+      "partialInsertBatches": true,
+      "bufferMB": 8,
+      "repetition": 1
+    },
+    {
+      "profile": "imports-smoke-110m",
+      "worktree": "baseline",
+      "label": "baseline",
+      "partialInsertBatches": false,
+      "bufferMB": 8,
+      "repetition": 1
+    },
+    {
+      "profile": "imports-smoke-110m",
+      "worktree": "linear-parser",
+      "label": "linear-parser",
+      "partialInsertBatches": false,
+      "bufferMB": 8,
+      "repetition": 1
+    },
+    {
+      "profile": "imports-smoke-110m",
+      "worktree": "linear-parser",
+      "label": "parser-partial-8m",
+      "partialInsertBatches": true,
+      "bufferMB": 8,
+      "repetition": 1
+    }
+  ]
+}

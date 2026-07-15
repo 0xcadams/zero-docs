@@ -1,0 +1,61 @@
+{
+  "stage": "direct-text-production-smoke",
+  "generatedAt": "2026-07-14T11:22:56.079Z",
+  "execute": true,
+  "runs": [
+    {
+      "profile": "email-high-6.83g",
+      "worktree": "linear-parser",
+      "label": "parser-partial-8m",
+      "partialInsertBatches": true,
+      "directTextBuffers": false,
+      "bufferMB": 8,
+      "repetition": 1
+    },
+    {
+      "profile": "email-high-6.83g",
+      "worktree": "linear-parser",
+      "label": "parser-direct-text",
+      "partialInsertBatches": false,
+      "directTextBuffers": true,
+      "bufferMB": 8,
+      "repetition": 1
+    },
+    {
+      "profile": "email-high-6.83g",
+      "worktree": "linear-parser",
+      "label": "parser-direct-text-partial-8m",
+      "partialInsertBatches": true,
+      "directTextBuffers": true,
+      "bufferMB": 8,
+      "repetition": 1
+    },
+    {
+      "profile": "imports-production-2.75g",
+      "worktree": "linear-parser",
+      "label": "parser-partial-8m",
+      "partialInsertBatches": true,
+      "directTextBuffers": false,
+      "bufferMB": 8,
+      "repetition": 1
+    },
+    {
+      "profile": "imports-production-2.75g",
+      "worktree": "linear-parser",
+      "label": "parser-direct-text",
+      "partialInsertBatches": false,
+      "directTextBuffers": true,
+      "bufferMB": 8,
+      "repetition": 1
+    },
+    {
+      "profile": "imports-production-2.75g",
+      "worktree": "linear-parser",
+      "label": "parser-direct-text-partial-8m",
+      "partialInsertBatches": true,
+      "directTextBuffers": true,
+      "bufferMB": 8,
+      "repetition": 1
+    }
+  ]
+}

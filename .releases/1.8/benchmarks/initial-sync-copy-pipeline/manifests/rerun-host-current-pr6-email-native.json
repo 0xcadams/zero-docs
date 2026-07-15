@@ -1,0 +1,187 @@
+{
+  "stage": "rerun-host-current-pr6-email-native",
+  "generatedAt": "2026-07-15T05:57:02.613Z",
+  "execute": false,
+  "runs": [
+    {
+      "profile": "email-683m",
+      "worktree": "current-pr6-parent",
+      "label": "current-pr6-parent",
+      "copyChunkBytes": "native",
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 1
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "current-pr6-head",
+      "label": "current-pr6-head",
+      "copyChunkBytes": "native",
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 1
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "current-pr6-head",
+      "label": "current-pr6-head",
+      "copyChunkBytes": "native",
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 2
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "current-pr6-parent",
+      "label": "current-pr6-parent",
+      "copyChunkBytes": "native",
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 2
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "current-pr6-parent",
+      "label": "current-pr6-parent",
+      "copyChunkBytes": "native",
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 3
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "current-pr6-head",
+      "label": "current-pr6-head",
+      "copyChunkBytes": "native",
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 3
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "current-pr6-head",
+      "label": "current-pr6-head",
+      "copyChunkBytes": "native",
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 4
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "current-pr6-parent",
+      "label": "current-pr6-parent",
+      "copyChunkBytes": "native",
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 4
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "current-pr6-parent",
+      "label": "current-pr6-parent",
+      "copyChunkBytes": "native",
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 5
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "current-pr6-head",
+      "label": "current-pr6-head",
+      "copyChunkBytes": "native",
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 5
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "current-pr6-head",
+      "label": "current-pr6-head",
+      "copyChunkBytes": "native",
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 6
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "current-pr6-parent",
+      "label": "current-pr6-parent",
+      "copyChunkBytes": "native",
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 6
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "current-pr6-parent",
+      "label": "current-pr6-parent",
+      "copyChunkBytes": "native",
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 7
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "current-pr6-head",
+      "label": "current-pr6-head",
+      "copyChunkBytes": "native",
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 7
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "current-pr6-head",
+      "label": "current-pr6-head",
+      "copyChunkBytes": "native",
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 8
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "current-pr6-parent",
+      "label": "current-pr6-parent",
+      "copyChunkBytes": "native",
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 8
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "current-pr6-parent",
+      "label": "current-pr6-parent",
+      "copyChunkBytes": "native",
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 9
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "current-pr6-head",
+      "label": "current-pr6-head",
+      "copyChunkBytes": "native",
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 9
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "current-pr6-head",
+      "label": "current-pr6-head",
+      "copyChunkBytes": "native",
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 10
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "current-pr6-parent",
+      "label": "current-pr6-parent",
+      "copyChunkBytes": "native",
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 10
+    }
+  ]
+}

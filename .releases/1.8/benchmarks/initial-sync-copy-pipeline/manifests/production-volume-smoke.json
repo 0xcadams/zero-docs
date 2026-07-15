@@ -1,0 +1,39 @@
+{
+  "stage": "production-volume-smoke",
+  "generatedAt": "2026-07-14T07:14:17.084Z",
+  "execute": true,
+  "runs": [
+    {
+      "profile": "email-high-6.83g",
+      "worktree": "baseline",
+      "label": "baseline",
+      "partialInsertBatches": false,
+      "bufferMB": 8,
+      "repetition": 1
+    },
+    {
+      "profile": "email-high-6.83g",
+      "worktree": "linear-parser",
+      "label": "parser-partial-8m",
+      "partialInsertBatches": true,
+      "bufferMB": 8,
+      "repetition": 1
+    },
+    {
+      "profile": "imports-production-2.75g",
+      "worktree": "baseline",
+      "label": "baseline",
+      "partialInsertBatches": false,
+      "bufferMB": 8,
+      "repetition": 1
+    },
+    {
+      "profile": "imports-production-2.75g",
+      "worktree": "linear-parser",
+      "label": "parser-partial-8m",
+      "partialInsertBatches": true,
+      "bufferMB": 8,
+      "repetition": 1
+    }
+  ]
+}

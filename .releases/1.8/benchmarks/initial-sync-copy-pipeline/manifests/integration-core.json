@@ -1,0 +1,407 @@
+{
+  "stage": "integration-core",
+  "generatedAt": "2026-07-14T07:06:48.872Z",
+  "execute": true,
+  "runs": [
+    {
+      "profile": "email-683m",
+      "worktree": "baseline",
+      "label": "baseline",
+      "partialInsertBatches": false,
+      "bufferMB": 8,
+      "repetition": 1
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "linear-parser",
+      "label": "linear-parser",
+      "partialInsertBatches": false,
+      "bufferMB": 8,
+      "repetition": 1
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "linear-parser",
+      "label": "parser-partial-8m",
+      "partialInsertBatches": true,
+      "bufferMB": 8,
+      "repetition": 1
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "linear-parser",
+      "label": "parser-partial-16m",
+      "partialInsertBatches": true,
+      "bufferMB": 16,
+      "repetition": 1
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "linear-parser",
+      "label": "parser-partial-32m",
+      "partialInsertBatches": true,
+      "bufferMB": 32,
+      "repetition": 1
+    },
+    {
+      "profile": "imports-550m",
+      "worktree": "baseline",
+      "label": "baseline",
+      "partialInsertBatches": false,
+      "bufferMB": 8,
+      "repetition": 1
+    },
+    {
+      "profile": "imports-550m",
+      "worktree": "linear-parser",
+      "label": "linear-parser",
+      "partialInsertBatches": false,
+      "bufferMB": 8,
+      "repetition": 1
+    },
+    {
+      "profile": "imports-550m",
+      "worktree": "linear-parser",
+      "label": "parser-partial-8m",
+      "partialInsertBatches": true,
+      "bufferMB": 8,
+      "repetition": 1
+    },
+    {
+      "profile": "imports-550m",
+      "worktree": "linear-parser",
+      "label": "parser-partial-16m",
+      "partialInsertBatches": true,
+      "bufferMB": 16,
+      "repetition": 1
+    },
+    {
+      "profile": "imports-550m",
+      "worktree": "linear-parser",
+      "label": "parser-partial-32m",
+      "partialInsertBatches": true,
+      "bufferMB": 32,
+      "repetition": 1
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "baseline",
+      "label": "baseline",
+      "partialInsertBatches": false,
+      "bufferMB": 8,
+      "repetition": 2
+    },
+    {
+      "profile": "imports-550m",
+      "worktree": "linear-parser",
+      "label": "parser-partial-32m",
+      "partialInsertBatches": true,
+      "bufferMB": 32,
+      "repetition": 2
+    },
+    {
+      "profile": "imports-550m",
+      "worktree": "linear-parser",
+      "label": "parser-partial-16m",
+      "partialInsertBatches": true,
+      "bufferMB": 16,
+      "repetition": 2
+    },
+    {
+      "profile": "imports-550m",
+      "worktree": "linear-parser",
+      "label": "parser-partial-8m",
+      "partialInsertBatches": true,
+      "bufferMB": 8,
+      "repetition": 2
+    },
+    {
+      "profile": "imports-550m",
+      "worktree": "linear-parser",
+      "label": "linear-parser",
+      "partialInsertBatches": false,
+      "bufferMB": 8,
+      "repetition": 2
+    },
+    {
+      "profile": "imports-550m",
+      "worktree": "baseline",
+      "label": "baseline",
+      "partialInsertBatches": false,
+      "bufferMB": 8,
+      "repetition": 2
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "linear-parser",
+      "label": "parser-partial-32m",
+      "partialInsertBatches": true,
+      "bufferMB": 32,
+      "repetition": 2
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "linear-parser",
+      "label": "parser-partial-16m",
+      "partialInsertBatches": true,
+      "bufferMB": 16,
+      "repetition": 2
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "linear-parser",
+      "label": "parser-partial-8m",
+      "partialInsertBatches": true,
+      "bufferMB": 8,
+      "repetition": 2
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "linear-parser",
+      "label": "linear-parser",
+      "partialInsertBatches": false,
+      "bufferMB": 8,
+      "repetition": 2
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "linear-parser",
+      "label": "parser-partial-8m",
+      "partialInsertBatches": true,
+      "bufferMB": 8,
+      "repetition": 3
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "linear-parser",
+      "label": "parser-partial-16m",
+      "partialInsertBatches": true,
+      "bufferMB": 16,
+      "repetition": 3
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "linear-parser",
+      "label": "parser-partial-32m",
+      "partialInsertBatches": true,
+      "bufferMB": 32,
+      "repetition": 3
+    },
+    {
+      "profile": "imports-550m",
+      "worktree": "baseline",
+      "label": "baseline",
+      "partialInsertBatches": false,
+      "bufferMB": 8,
+      "repetition": 3
+    },
+    {
+      "profile": "imports-550m",
+      "worktree": "linear-parser",
+      "label": "linear-parser",
+      "partialInsertBatches": false,
+      "bufferMB": 8,
+      "repetition": 3
+    },
+    {
+      "profile": "imports-550m",
+      "worktree": "linear-parser",
+      "label": "parser-partial-8m",
+      "partialInsertBatches": true,
+      "bufferMB": 8,
+      "repetition": 3
+    },
+    {
+      "profile": "imports-550m",
+      "worktree": "linear-parser",
+      "label": "parser-partial-16m",
+      "partialInsertBatches": true,
+      "bufferMB": 16,
+      "repetition": 3
+    },
+    {
+      "profile": "imports-550m",
+      "worktree": "linear-parser",
+      "label": "parser-partial-32m",
+      "partialInsertBatches": true,
+      "bufferMB": 32,
+      "repetition": 3
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "baseline",
+      "label": "baseline",
+      "partialInsertBatches": false,
+      "bufferMB": 8,
+      "repetition": 3
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "linear-parser",
+      "label": "linear-parser",
+      "partialInsertBatches": false,
+      "bufferMB": 8,
+      "repetition": 3
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "linear-parser",
+      "label": "parser-partial-8m",
+      "partialInsertBatches": true,
+      "bufferMB": 8,
+      "repetition": 4
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "linear-parser",
+      "label": "linear-parser",
+      "partialInsertBatches": false,
+      "bufferMB": 8,
+      "repetition": 4
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "baseline",
+      "label": "baseline",
+      "partialInsertBatches": false,
+      "bufferMB": 8,
+      "repetition": 4
+    },
+    {
+      "profile": "imports-550m",
+      "worktree": "linear-parser",
+      "label": "parser-partial-32m",
+      "partialInsertBatches": true,
+      "bufferMB": 32,
+      "repetition": 4
+    },
+    {
+      "profile": "imports-550m",
+      "worktree": "linear-parser",
+      "label": "parser-partial-16m",
+      "partialInsertBatches": true,
+      "bufferMB": 16,
+      "repetition": 4
+    },
+    {
+      "profile": "imports-550m",
+      "worktree": "linear-parser",
+      "label": "parser-partial-8m",
+      "partialInsertBatches": true,
+      "bufferMB": 8,
+      "repetition": 4
+    },
+    {
+      "profile": "imports-550m",
+      "worktree": "linear-parser",
+      "label": "linear-parser",
+      "partialInsertBatches": false,
+      "bufferMB": 8,
+      "repetition": 4
+    },
+    {
+      "profile": "imports-550m",
+      "worktree": "baseline",
+      "label": "baseline",
+      "partialInsertBatches": false,
+      "bufferMB": 8,
+      "repetition": 4
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "linear-parser",
+      "label": "parser-partial-32m",
+      "partialInsertBatches": true,
+      "bufferMB": 32,
+      "repetition": 4
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "linear-parser",
+      "label": "parser-partial-16m",
+      "partialInsertBatches": true,
+      "bufferMB": 16,
+      "repetition": 4
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "linear-parser",
+      "label": "parser-partial-32m",
+      "partialInsertBatches": true,
+      "bufferMB": 32,
+      "repetition": 5
+    },
+    {
+      "profile": "imports-550m",
+      "worktree": "baseline",
+      "label": "baseline",
+      "partialInsertBatches": false,
+      "bufferMB": 8,
+      "repetition": 5
+    },
+    {
+      "profile": "imports-550m",
+      "worktree": "linear-parser",
+      "label": "linear-parser",
+      "partialInsertBatches": false,
+      "bufferMB": 8,
+      "repetition": 5
+    },
+    {
+      "profile": "imports-550m",
+      "worktree": "linear-parser",
+      "label": "parser-partial-8m",
+      "partialInsertBatches": true,
+      "bufferMB": 8,
+      "repetition": 5
+    },
+    {
+      "profile": "imports-550m",
+      "worktree": "linear-parser",
+      "label": "parser-partial-16m",
+      "partialInsertBatches": true,
+      "bufferMB": 16,
+      "repetition": 5
+    },
+    {
+      "profile": "imports-550m",
+      "worktree": "linear-parser",
+      "label": "parser-partial-32m",
+      "partialInsertBatches": true,
+      "bufferMB": 32,
+      "repetition": 5
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "baseline",
+      "label": "baseline",
+      "partialInsertBatches": false,
+      "bufferMB": 8,
+      "repetition": 5
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "linear-parser",
+      "label": "linear-parser",
+      "partialInsertBatches": false,
+      "bufferMB": 8,
+      "repetition": 5
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "linear-parser",
+      "label": "parser-partial-8m",
+      "partialInsertBatches": true,
+      "bufferMB": 8,
+      "repetition": 5
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "linear-parser",
+      "label": "parser-partial-16m",
+      "partialInsertBatches": true,
+      "bufferMB": 16,
+      "repetition": 5
+    }
+  ]
+}

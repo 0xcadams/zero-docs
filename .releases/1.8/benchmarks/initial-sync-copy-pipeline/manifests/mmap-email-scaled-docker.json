@@ -1,0 +1,161 @@
+{
+  "stage": "mmap-email-scaled",
+  "generatedAt": "2026-07-14T11:39:58.852Z",
+  "execute": true,
+  "platform": "linux/arm64",
+  "images": {
+    "linear-parser": "zero-copy-pipeline-linear-parser:local"
+  },
+  "runs": [
+    {
+      "profile": "email-683m",
+      "worktree": "linear-parser",
+      "label": "direct-text-mmap-1g",
+      "partialInsertBatches": false,
+      "directTextBuffers": true,
+      "bufferMB": 8,
+      "mmapGiB": 1,
+      "repetition": 1,
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304
+      }
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "linear-parser",
+      "label": "direct-text-mmap-2g",
+      "partialInsertBatches": false,
+      "directTextBuffers": true,
+      "bufferMB": 8,
+      "mmapGiB": 2,
+      "repetition": 1,
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304
+      }
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "linear-parser",
+      "label": "direct-text-mmap-1g",
+      "partialInsertBatches": false,
+      "directTextBuffers": true,
+      "bufferMB": 8,
+      "mmapGiB": 1,
+      "repetition": 2,
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304
+      }
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "linear-parser",
+      "label": "direct-text-mmap-2g",
+      "partialInsertBatches": false,
+      "directTextBuffers": true,
+      "bufferMB": 8,
+      "mmapGiB": 2,
+      "repetition": 2,
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304
+      }
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "linear-parser",
+      "label": "direct-text-mmap-1g",
+      "partialInsertBatches": false,
+      "directTextBuffers": true,
+      "bufferMB": 8,
+      "mmapGiB": 1,
+      "repetition": 3,
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304
+      }
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "linear-parser",
+      "label": "direct-text-mmap-2g",
+      "partialInsertBatches": false,
+      "directTextBuffers": true,
+      "bufferMB": 8,
+      "mmapGiB": 2,
+      "repetition": 3,
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304
+      }
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "linear-parser",
+      "label": "direct-text-mmap-1g",
+      "partialInsertBatches": false,
+      "directTextBuffers": true,
+      "bufferMB": 8,
+      "mmapGiB": 1,
+      "repetition": 4,
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304
+      }
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "linear-parser",
+      "label": "direct-text-mmap-2g",
+      "partialInsertBatches": false,
+      "directTextBuffers": true,
+      "bufferMB": 8,
+      "mmapGiB": 2,
+      "repetition": 4,
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304
+      }
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "linear-parser",
+      "label": "direct-text-mmap-1g",
+      "partialInsertBatches": false,
+      "directTextBuffers": true,
+      "bufferMB": 8,
+      "mmapGiB": 1,
+      "repetition": 5,
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304
+      }
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "linear-parser",
+      "label": "direct-text-mmap-2g",
+      "partialInsertBatches": false,
+      "directTextBuffers": true,
+      "bufferMB": 8,
+      "mmapGiB": 2,
+      "repetition": 5,
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304
+      }
+    }
+  ]
+}

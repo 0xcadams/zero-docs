@@ -1,0 +1,207 @@
+{
+  "stage": "parser-core",
+  "generatedAt": "2026-07-14T06:49:15.839Z",
+  "execute": true,
+  "runs": [
+    {
+      "profile": "contained-4k-31k",
+      "worktree": "baseline",
+      "repetition": 1
+    },
+    {
+      "profile": "contained-4k-31k",
+      "worktree": "linear-parser",
+      "repetition": 1
+    },
+    {
+      "profile": "imports-270k-5.5k",
+      "worktree": "baseline",
+      "repetition": 1
+    },
+    {
+      "profile": "imports-270k-5.5k",
+      "worktree": "linear-parser",
+      "repetition": 1
+    },
+    {
+      "profile": "email-683k-31k",
+      "worktree": "baseline",
+      "repetition": 1
+    },
+    {
+      "profile": "email-683k-31k",
+      "worktree": "linear-parser",
+      "repetition": 1
+    },
+    {
+      "profile": "email-683k-5.5k",
+      "worktree": "baseline",
+      "repetition": 1
+    },
+    {
+      "profile": "email-683k-5.5k",
+      "worktree": "linear-parser",
+      "repetition": 1
+    },
+    {
+      "profile": "contained-4k-31k",
+      "worktree": "baseline",
+      "repetition": 2
+    },
+    {
+      "profile": "email-683k-5.5k",
+      "worktree": "linear-parser",
+      "repetition": 2
+    },
+    {
+      "profile": "email-683k-5.5k",
+      "worktree": "baseline",
+      "repetition": 2
+    },
+    {
+      "profile": "email-683k-31k",
+      "worktree": "linear-parser",
+      "repetition": 2
+    },
+    {
+      "profile": "email-683k-31k",
+      "worktree": "baseline",
+      "repetition": 2
+    },
+    {
+      "profile": "imports-270k-5.5k",
+      "worktree": "linear-parser",
+      "repetition": 2
+    },
+    {
+      "profile": "imports-270k-5.5k",
+      "worktree": "baseline",
+      "repetition": 2
+    },
+    {
+      "profile": "contained-4k-31k",
+      "worktree": "linear-parser",
+      "repetition": 2
+    },
+    {
+      "profile": "imports-270k-5.5k",
+      "worktree": "baseline",
+      "repetition": 3
+    },
+    {
+      "profile": "imports-270k-5.5k",
+      "worktree": "linear-parser",
+      "repetition": 3
+    },
+    {
+      "profile": "email-683k-31k",
+      "worktree": "baseline",
+      "repetition": 3
+    },
+    {
+      "profile": "email-683k-31k",
+      "worktree": "linear-parser",
+      "repetition": 3
+    },
+    {
+      "profile": "email-683k-5.5k",
+      "worktree": "baseline",
+      "repetition": 3
+    },
+    {
+      "profile": "email-683k-5.5k",
+      "worktree": "linear-parser",
+      "repetition": 3
+    },
+    {
+      "profile": "contained-4k-31k",
+      "worktree": "baseline",
+      "repetition": 3
+    },
+    {
+      "profile": "contained-4k-31k",
+      "worktree": "linear-parser",
+      "repetition": 3
+    },
+    {
+      "profile": "imports-270k-5.5k",
+      "worktree": "baseline",
+      "repetition": 4
+    },
+    {
+      "profile": "contained-4k-31k",
+      "worktree": "linear-parser",
+      "repetition": 4
+    },
+    {
+      "profile": "contained-4k-31k",
+      "worktree": "baseline",
+      "repetition": 4
+    },
+    {
+      "profile": "email-683k-5.5k",
+      "worktree": "linear-parser",
+      "repetition": 4
+    },
+    {
+      "profile": "email-683k-5.5k",
+      "worktree": "baseline",
+      "repetition": 4
+    },
+    {
+      "profile": "email-683k-31k",
+      "worktree": "linear-parser",
+      "repetition": 4
+    },
+    {
+      "profile": "email-683k-31k",
+      "worktree": "baseline",
+      "repetition": 4
+    },
+    {
+      "profile": "imports-270k-5.5k",
+      "worktree": "linear-parser",
+      "repetition": 4
+    },
+    {
+      "profile": "email-683k-31k",
+      "worktree": "baseline",
+      "repetition": 5
+    },
+    {
+      "profile": "email-683k-31k",
+      "worktree": "linear-parser",
+      "repetition": 5
+    },
+    {
+      "profile": "email-683k-5.5k",
+      "worktree": "baseline",
+      "repetition": 5
+    },
+    {
+      "profile": "email-683k-5.5k",
+      "worktree": "linear-parser",
+      "repetition": 5
+    },
+    {
+      "profile": "contained-4k-31k",
+      "worktree": "baseline",
+      "repetition": 5
+    },
+    {
+      "profile": "contained-4k-31k",
+      "worktree": "linear-parser",
+      "repetition": 5
+    },
+    {
+      "profile": "imports-270k-5.5k",
+      "worktree": "baseline",
+      "repetition": 5
+    },
+    {
+      "profile": "imports-270k-5.5k",
+      "worktree": "linear-parser",
+      "repetition": 5
+    }
+  ]
+}

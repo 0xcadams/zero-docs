@@ -1,0 +1,60 @@
+{
+  "stage": "network-shaped-production-smoke",
+  "generatedAt": "2026-07-14T15:00:06.485Z",
+  "execute": true,
+  "platform": "linux/arm64",
+  "images": {
+    "linear-parser": "zero-copy-pipeline-linear-parser:local"
+  },
+  "imageIDs": {
+    "linear-parser": "sha256:547891da906dbdaac8bbe6aa2f553f4800e8c6d03298e0613ca3b3d91218264a"
+  },
+  "runs": [
+    {
+      "profile": "email-high-6.83g",
+      "worktree": "linear-parser",
+      "label": "cast-52.2mbps",
+      "copyRateMBps": 52.2,
+      "partialInsertBatches": false,
+      "directTextBuffers": true,
+      "nativeTextBuffers": false,
+      "nativeTextBufferStatic": false,
+      "eagerIndexes": false,
+      "eagerSecondaryIndexes": false,
+      "adaptiveSecondaryIndexes": true,
+      "instrumentCopyPhases": false,
+      "reuseFragmentedFieldBuffers": false,
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 1,
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304
+      }
+    },
+    {
+      "profile": "email-high-6.83g",
+      "worktree": "linear-parser",
+      "label": "native-transient-52.2mbps",
+      "copyRateMBps": 52.2,
+      "partialInsertBatches": false,
+      "directTextBuffers": true,
+      "nativeTextBuffers": true,
+      "nativeTextBufferStatic": false,
+      "eagerIndexes": false,
+      "eagerSecondaryIndexes": false,
+      "adaptiveSecondaryIndexes": true,
+      "instrumentCopyPhases": false,
+      "reuseFragmentedFieldBuffers": false,
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 1,
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304
+      }
+    }
+  ]
+}

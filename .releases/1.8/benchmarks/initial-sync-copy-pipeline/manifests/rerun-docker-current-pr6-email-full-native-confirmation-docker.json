@@ -1,0 +1,154 @@
+{
+  "stage": "rerun-docker-current-pr6-email-full-native-confirmation",
+  "generatedAt": "2026-07-15T06:30:29.459Z",
+  "execute": false,
+  "reuseImages": false,
+  "platform": "linux/arm64",
+  "images": {
+    "current-pr6-head": "zero-copy-pipeline-current-pr6-head:local",
+    "current-pr6-parent": "zero-copy-pipeline-current-pr6-parent:local"
+  },
+  "imageIDs": {},
+  "runs": [
+    {
+      "profile": "email-high-6.83g",
+      "worktree": "current-pr6-head",
+      "label": "current-pr6-head-full-native",
+      "copyChunkBytes": "native",
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 1,
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304
+      }
+    },
+    {
+      "profile": "email-high-6.83g",
+      "worktree": "current-pr6-parent",
+      "label": "current-pr6-parent-full-native",
+      "copyChunkBytes": "native",
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 1,
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304
+      }
+    },
+    {
+      "profile": "email-high-6.83g",
+      "worktree": "current-pr6-parent",
+      "label": "current-pr6-parent-full-native",
+      "copyChunkBytes": "native",
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 2,
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304
+      }
+    },
+    {
+      "profile": "email-high-6.83g",
+      "worktree": "current-pr6-head",
+      "label": "current-pr6-head-full-native",
+      "copyChunkBytes": "native",
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 2,
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304
+      }
+    },
+    {
+      "profile": "email-high-6.83g",
+      "worktree": "current-pr6-head",
+      "label": "current-pr6-head-full-native",
+      "copyChunkBytes": "native",
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 3,
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304
+      }
+    },
+    {
+      "profile": "email-high-6.83g",
+      "worktree": "current-pr6-parent",
+      "label": "current-pr6-parent-full-native",
+      "copyChunkBytes": "native",
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 3,
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304
+      }
+    },
+    {
+      "profile": "email-high-6.83g",
+      "worktree": "current-pr6-parent",
+      "label": "current-pr6-parent-full-native",
+      "copyChunkBytes": "native",
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 4,
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304
+      }
+    },
+    {
+      "profile": "email-high-6.83g",
+      "worktree": "current-pr6-head",
+      "label": "current-pr6-head-full-native",
+      "copyChunkBytes": "native",
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 4,
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304
+      }
+    },
+    {
+      "profile": "email-high-6.83g",
+      "worktree": "current-pr6-head",
+      "label": "current-pr6-head-full-native",
+      "copyChunkBytes": "native",
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 5,
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304
+      }
+    },
+    {
+      "profile": "email-high-6.83g",
+      "worktree": "current-pr6-parent",
+      "label": "current-pr6-parent-full-native",
+      "copyChunkBytes": "native",
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 5,
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304
+      }
+    }
+  ]
+}

@@ -1,0 +1,322 @@
+{
+  "stage": "final-field-pool-core",
+  "generatedAt": "2026-07-14T16:01:40.971Z",
+  "execute": true,
+  "platform": "linux/arm64",
+  "images": {
+    "linear-parser": "zero-copy-pipeline-linear-parser:local"
+  },
+  "imageIDs": {
+    "linear-parser": "sha256:20e1d6d75489519782df9d68f9c3b5e60f97eafb20c39c25d3cff7cb70ab990c"
+  },
+  "runs": [
+    {
+      "profile": "email-high-6.83g",
+      "worktree": "linear-parser",
+      "label": "field-pool-off",
+      "partialInsertBatches": false,
+      "directTextBuffers": true,
+      "nativeTextBuffers": true,
+      "nativeTextBufferStatic": false,
+      "eagerIndexes": false,
+      "eagerSecondaryIndexes": false,
+      "adaptiveSecondaryIndexes": true,
+      "instrumentCopyPhases": false,
+      "reuseFragmentedFieldBuffers": false,
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 1,
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304
+      }
+    },
+    {
+      "profile": "email-high-6.83g",
+      "worktree": "linear-parser",
+      "label": "field-pool-on",
+      "partialInsertBatches": false,
+      "directTextBuffers": true,
+      "nativeTextBuffers": true,
+      "nativeTextBufferStatic": false,
+      "eagerIndexes": false,
+      "eagerSecondaryIndexes": false,
+      "adaptiveSecondaryIndexes": true,
+      "instrumentCopyPhases": false,
+      "reuseFragmentedFieldBuffers": true,
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 1,
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304
+      }
+    },
+    {
+      "profile": "email-high-6.83g",
+      "worktree": "linear-parser",
+      "label": "field-pool-off",
+      "partialInsertBatches": false,
+      "directTextBuffers": true,
+      "nativeTextBuffers": true,
+      "nativeTextBufferStatic": false,
+      "eagerIndexes": false,
+      "eagerSecondaryIndexes": false,
+      "adaptiveSecondaryIndexes": true,
+      "instrumentCopyPhases": false,
+      "reuseFragmentedFieldBuffers": false,
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 2,
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304
+      }
+    },
+    {
+      "profile": "email-high-6.83g",
+      "worktree": "linear-parser",
+      "label": "field-pool-on",
+      "partialInsertBatches": false,
+      "directTextBuffers": true,
+      "nativeTextBuffers": true,
+      "nativeTextBufferStatic": false,
+      "eagerIndexes": false,
+      "eagerSecondaryIndexes": false,
+      "adaptiveSecondaryIndexes": true,
+      "instrumentCopyPhases": false,
+      "reuseFragmentedFieldBuffers": true,
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 2,
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304
+      }
+    },
+    {
+      "profile": "email-high-6.83g",
+      "worktree": "linear-parser",
+      "label": "field-pool-off",
+      "partialInsertBatches": false,
+      "directTextBuffers": true,
+      "nativeTextBuffers": true,
+      "nativeTextBufferStatic": false,
+      "eagerIndexes": false,
+      "eagerSecondaryIndexes": false,
+      "adaptiveSecondaryIndexes": true,
+      "instrumentCopyPhases": false,
+      "reuseFragmentedFieldBuffers": false,
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 3,
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304
+      }
+    },
+    {
+      "profile": "email-high-6.83g",
+      "worktree": "linear-parser",
+      "label": "field-pool-on",
+      "partialInsertBatches": false,
+      "directTextBuffers": true,
+      "nativeTextBuffers": true,
+      "nativeTextBufferStatic": false,
+      "eagerIndexes": false,
+      "eagerSecondaryIndexes": false,
+      "adaptiveSecondaryIndexes": true,
+      "instrumentCopyPhases": false,
+      "reuseFragmentedFieldBuffers": true,
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 3,
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304
+      }
+    },
+    {
+      "profile": "email-high-6.83g",
+      "worktree": "linear-parser",
+      "label": "field-pool-off",
+      "partialInsertBatches": false,
+      "directTextBuffers": true,
+      "nativeTextBuffers": true,
+      "nativeTextBufferStatic": false,
+      "eagerIndexes": false,
+      "eagerSecondaryIndexes": false,
+      "adaptiveSecondaryIndexes": true,
+      "instrumentCopyPhases": false,
+      "reuseFragmentedFieldBuffers": false,
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 4,
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304
+      }
+    },
+    {
+      "profile": "email-high-6.83g",
+      "worktree": "linear-parser",
+      "label": "field-pool-on",
+      "partialInsertBatches": false,
+      "directTextBuffers": true,
+      "nativeTextBuffers": true,
+      "nativeTextBufferStatic": false,
+      "eagerIndexes": false,
+      "eagerSecondaryIndexes": false,
+      "adaptiveSecondaryIndexes": true,
+      "instrumentCopyPhases": false,
+      "reuseFragmentedFieldBuffers": true,
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 4,
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304
+      }
+    },
+    {
+      "profile": "email-high-6.83g",
+      "worktree": "linear-parser",
+      "label": "field-pool-off",
+      "partialInsertBatches": false,
+      "directTextBuffers": true,
+      "nativeTextBuffers": true,
+      "nativeTextBufferStatic": false,
+      "eagerIndexes": false,
+      "eagerSecondaryIndexes": false,
+      "adaptiveSecondaryIndexes": true,
+      "instrumentCopyPhases": false,
+      "reuseFragmentedFieldBuffers": false,
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 5,
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304
+      }
+    },
+    {
+      "profile": "email-high-6.83g",
+      "worktree": "linear-parser",
+      "label": "field-pool-on",
+      "partialInsertBatches": false,
+      "directTextBuffers": true,
+      "nativeTextBuffers": true,
+      "nativeTextBufferStatic": false,
+      "eagerIndexes": false,
+      "eagerSecondaryIndexes": false,
+      "adaptiveSecondaryIndexes": true,
+      "instrumentCopyPhases": false,
+      "reuseFragmentedFieldBuffers": true,
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 5,
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304
+      }
+    },
+    {
+      "profile": "email-high-6.83g",
+      "worktree": "linear-parser",
+      "label": "field-pool-off",
+      "partialInsertBatches": false,
+      "directTextBuffers": true,
+      "nativeTextBuffers": true,
+      "nativeTextBufferStatic": false,
+      "eagerIndexes": false,
+      "eagerSecondaryIndexes": false,
+      "adaptiveSecondaryIndexes": true,
+      "instrumentCopyPhases": false,
+      "reuseFragmentedFieldBuffers": false,
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 6,
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304
+      }
+    },
+    {
+      "profile": "email-high-6.83g",
+      "worktree": "linear-parser",
+      "label": "field-pool-on",
+      "partialInsertBatches": false,
+      "directTextBuffers": true,
+      "nativeTextBuffers": true,
+      "nativeTextBufferStatic": false,
+      "eagerIndexes": false,
+      "eagerSecondaryIndexes": false,
+      "adaptiveSecondaryIndexes": true,
+      "instrumentCopyPhases": false,
+      "reuseFragmentedFieldBuffers": true,
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 6,
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304
+      }
+    },
+    {
+      "profile": "email-high-6.83g",
+      "worktree": "linear-parser",
+      "label": "field-pool-off",
+      "partialInsertBatches": false,
+      "directTextBuffers": true,
+      "nativeTextBuffers": true,
+      "nativeTextBufferStatic": false,
+      "eagerIndexes": false,
+      "eagerSecondaryIndexes": false,
+      "adaptiveSecondaryIndexes": true,
+      "instrumentCopyPhases": false,
+      "reuseFragmentedFieldBuffers": false,
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 7,
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304
+      }
+    },
+    {
+      "profile": "email-high-6.83g",
+      "worktree": "linear-parser",
+      "label": "field-pool-on",
+      "partialInsertBatches": false,
+      "directTextBuffers": true,
+      "nativeTextBuffers": true,
+      "nativeTextBufferStatic": false,
+      "eagerIndexes": false,
+      "eagerSecondaryIndexes": false,
+      "adaptiveSecondaryIndexes": true,
+      "instrumentCopyPhases": false,
+      "reuseFragmentedFieldBuffers": true,
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 7,
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304
+      }
+    }
+  ]
+}

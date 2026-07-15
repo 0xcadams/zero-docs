@@ -1,0 +1,34 @@
+{
+  "generatedAt": "2026-07-15T15:58:54.993Z",
+  "execute": true,
+  "platform": "linux/arm64",
+  "images": {
+    "current-pr7-parent": {
+      "image": "zero-copy-pipeline-current-pr7-parent:local",
+      "policy": "adaptive",
+      "context": "/Users/chase/.worktree/mono/initial-sync-statement-batching-baseline",
+      "commit": "ea459443f18e7a6f94a32e28333f8af01df1b02b",
+      "status": "",
+      "diffSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "imageID": "sha256:414458486a7760b2efcd042c85ba6107cf8b5b8c197fb7734057a17e7d357bad"
+    },
+    "current-pr7-head": {
+      "image": "zero-copy-pipeline-current-pr7-head:local",
+      "policy": "adaptive",
+      "context": "/Users/chase/.worktree/mono/adaptive-secondary-index-scheduling",
+      "commit": "ea459443f18e7a6f94a32e28333f8af01df1b02b",
+      "status": "M packages/zero-cache/src/config/zero-config.test.ts\n M packages/zero-cache/src/config/zero-config.ts\n M packages/zero-cache/src/services/change-source/pg/initial-sync.pg.test.ts\n M packages/zero-cache/src/services/change-source/pg/initial-sync.test.ts\n M packages/zero-cache/src/services/change-source/pg/initial-sync.ts",
+      "diffSHA256": "30b6d70599dd1bbb85bb30f7b35dd26a622084935176fb9e7309bfa9e72fbfba",
+      "imageID": "sha256:b9801cb76580eb8519ffa412e4ed31003d77f2c40e8e3f9a5f314661e5ead41c"
+    },
+    "current-pr7-eager": {
+      "image": "zero-copy-pipeline-current-pr7-eager:local",
+      "policy": "eager-secondary",
+      "context": "/Users/chase/.worktree/mono/adaptive-secondary-index-scheduling",
+      "commit": "ea459443f18e7a6f94a32e28333f8af01df1b02b",
+      "status": "M packages/zero-cache/src/config/zero-config.test.ts\n M packages/zero-cache/src/config/zero-config.ts\n M packages/zero-cache/src/services/change-source/pg/initial-sync.pg.test.ts\n M packages/zero-cache/src/services/change-source/pg/initial-sync.test.ts\n M packages/zero-cache/src/services/change-source/pg/initial-sync.ts",
+      "diffSHA256": "30b6d70599dd1bbb85bb30f7b35dd26a622084935176fb9e7309bfa9e72fbfba",
+      "imageID": "sha256:2be8ccf462be3e0da086212f981eab95d9dd4e17accebca6bea95e2d79968ca4"
+    }
+  }
+}

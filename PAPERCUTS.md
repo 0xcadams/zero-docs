@@ -10,3 +10,7 @@
 
 - Fetching `mono` over SSH failed when the 1Password SSH agent stopped responding. Verify the remote ref with the public HTTPS URL rather than changing signing or SSH configuration.
 - The COPY-pipeline Docker runner accepts an unsuffixed stage name but writes raw output under `<stage>-docker`; passing the original name to `aggregate.mjs` fails with `ENOENT`. Surface the generated aggregate stage name in runner output or normalize it in the aggregator.
+
+## 2026-07-15
+
+- Running zero-docs `pnpm lint` with the locked `oxlint@1.65.0` and `oxlint-tsgolint@0.8.6` panics before linting because tsgolint does not recognize `no-useless-default-assignment`. The lint tool versions or default type-aware rules need to be aligned.

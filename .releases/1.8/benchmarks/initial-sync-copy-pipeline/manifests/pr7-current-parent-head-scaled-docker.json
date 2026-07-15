@@ -1,0 +1,44 @@
+{
+  "stage": "pr7-current-parent-head-scaled",
+  "generatedAt": "2026-07-15T15:03:02.963Z",
+  "execute": false,
+  "reuseImages": false,
+  "platform": "linux/arm64",
+  "images": {
+    "current-pr7-parent": "zero-copy-pipeline-current-pr7-parent:local",
+    "current-pr7-head": "zero-copy-pipeline-current-pr7-head:local"
+  },
+  "imageIDs": {},
+  "runs": [
+    {
+      "profile": "email-683m",
+      "worktree": "current-pr7-parent",
+      "label": "pr7-deferred-parent",
+      "copyChunkBytes": "native",
+      "secondaryIndexMinAverageRowBytes": 0,
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 1,
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304
+      }
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "current-pr7-head",
+      "label": "pr7-adaptive-2k",
+      "copyChunkBytes": "native",
+      "secondaryIndexMinAverageRowBytes": 2048,
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 1,
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304
+      }
+    }
+  ]
+}

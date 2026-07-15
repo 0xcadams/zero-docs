@@ -1,0 +1,90 @@
+{
+  "stage": "docker-core",
+  "generatedAt": "2026-07-14T11:05:28.433Z",
+  "execute": true,
+  "platform": "linux/arm64",
+  "images": {
+    "baseline": "zero-copy-pipeline-baseline:local",
+    "linear-parser": "zero-copy-pipeline-linear-parser:local"
+  },
+  "runs": [
+    {
+      "profile": "email-683m",
+      "worktree": "baseline",
+      "label": "baseline",
+      "partialInsertBatches": false,
+      "bufferMB": 8,
+      "repetition": 1,
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304
+      }
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "linear-parser",
+      "label": "linear-parser",
+      "partialInsertBatches": false,
+      "bufferMB": 8,
+      "repetition": 1,
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304
+      }
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "linear-parser",
+      "label": "parser-partial-8m",
+      "partialInsertBatches": true,
+      "bufferMB": 8,
+      "repetition": 1,
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304
+      }
+    },
+    {
+      "profile": "imports-550m",
+      "worktree": "baseline",
+      "label": "baseline",
+      "partialInsertBatches": false,
+      "bufferMB": 8,
+      "repetition": 1,
+      "constraints": {
+        "cpus": 2,
+        "memory": "6g",
+        "nodeHeapMB": 4608
+      }
+    },
+    {
+      "profile": "imports-550m",
+      "worktree": "linear-parser",
+      "label": "linear-parser",
+      "partialInsertBatches": false,
+      "bufferMB": 8,
+      "repetition": 1,
+      "constraints": {
+        "cpus": 2,
+        "memory": "6g",
+        "nodeHeapMB": 4608
+      }
+    },
+    {
+      "profile": "imports-550m",
+      "worktree": "linear-parser",
+      "label": "parser-partial-8m",
+      "partialInsertBatches": true,
+      "bufferMB": 8,
+      "repetition": 1,
+      "constraints": {
+        "cpus": 2,
+        "memory": "6g",
+        "nodeHeapMB": 4608
+      }
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "stage": "parser-smoke",
+  "generatedAt": "2026-07-14T06:49:00.289Z",
+  "execute": true,
+  "runs": [
+    {
+      "profile": "imports-270k-5.5k",
+      "worktree": "baseline",
+      "repetition": 1
+    },
+    {
+      "profile": "imports-270k-5.5k",
+      "worktree": "linear-parser",
+      "repetition": 1
+    },
+    {
+      "profile": "email-683k-31k",
+      "worktree": "baseline",
+      "repetition": 1
+    },
+    {
+      "profile": "email-683k-31k",
+      "worktree": "linear-parser",
+      "repetition": 1
+    }
+  ]
+}

@@ -1,0 +1,314 @@
+{
+  "stage": "rerun-docker-current-pr6-email-host-port",
+  "generatedAt": "2026-07-15T05:57:02.639Z",
+  "execute": false,
+  "reuseImages": false,
+  "platform": "linux/arm64",
+  "images": {
+    "current-pr6-parent": "zero-copy-pipeline-current-pr6-parent:local",
+    "current-pr6-head": "zero-copy-pipeline-current-pr6-head:local"
+  },
+  "imageIDs": {},
+  "runs": [
+    {
+      "profile": "email-683m",
+      "worktree": "current-pr6-parent",
+      "label": "current-pr6-parent-host-port",
+      "copyChunkBytes": "native",
+      "postgresTopology": "host-port",
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 1,
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304
+      }
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "current-pr6-head",
+      "label": "current-pr6-head-host-port",
+      "copyChunkBytes": "native",
+      "postgresTopology": "host-port",
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 1,
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304
+      }
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "current-pr6-head",
+      "label": "current-pr6-head-host-port",
+      "copyChunkBytes": "native",
+      "postgresTopology": "host-port",
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 2,
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304
+      }
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "current-pr6-parent",
+      "label": "current-pr6-parent-host-port",
+      "copyChunkBytes": "native",
+      "postgresTopology": "host-port",
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 2,
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304
+      }
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "current-pr6-parent",
+      "label": "current-pr6-parent-host-port",
+      "copyChunkBytes": "native",
+      "postgresTopology": "host-port",
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 3,
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304
+      }
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "current-pr6-head",
+      "label": "current-pr6-head-host-port",
+      "copyChunkBytes": "native",
+      "postgresTopology": "host-port",
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 3,
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304
+      }
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "current-pr6-head",
+      "label": "current-pr6-head-host-port",
+      "copyChunkBytes": "native",
+      "postgresTopology": "host-port",
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 4,
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304
+      }
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "current-pr6-parent",
+      "label": "current-pr6-parent-host-port",
+      "copyChunkBytes": "native",
+      "postgresTopology": "host-port",
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 4,
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304
+      }
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "current-pr6-parent",
+      "label": "current-pr6-parent-host-port",
+      "copyChunkBytes": "native",
+      "postgresTopology": "host-port",
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 5,
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304
+      }
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "current-pr6-head",
+      "label": "current-pr6-head-host-port",
+      "copyChunkBytes": "native",
+      "postgresTopology": "host-port",
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 5,
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304
+      }
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "current-pr6-head",
+      "label": "current-pr6-head-host-port",
+      "copyChunkBytes": "native",
+      "postgresTopology": "host-port",
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 6,
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304
+      }
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "current-pr6-parent",
+      "label": "current-pr6-parent-host-port",
+      "copyChunkBytes": "native",
+      "postgresTopology": "host-port",
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 6,
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304
+      }
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "current-pr6-parent",
+      "label": "current-pr6-parent-host-port",
+      "copyChunkBytes": "native",
+      "postgresTopology": "host-port",
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 7,
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304
+      }
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "current-pr6-head",
+      "label": "current-pr6-head-host-port",
+      "copyChunkBytes": "native",
+      "postgresTopology": "host-port",
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 7,
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304
+      }
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "current-pr6-head",
+      "label": "current-pr6-head-host-port",
+      "copyChunkBytes": "native",
+      "postgresTopology": "host-port",
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 8,
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304
+      }
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "current-pr6-parent",
+      "label": "current-pr6-parent-host-port",
+      "copyChunkBytes": "native",
+      "postgresTopology": "host-port",
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 8,
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304
+      }
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "current-pr6-parent",
+      "label": "current-pr6-parent-host-port",
+      "copyChunkBytes": "native",
+      "postgresTopology": "host-port",
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 9,
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304
+      }
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "current-pr6-head",
+      "label": "current-pr6-head-host-port",
+      "copyChunkBytes": "native",
+      "postgresTopology": "host-port",
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 9,
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304
+      }
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "current-pr6-head",
+      "label": "current-pr6-head-host-port",
+      "copyChunkBytes": "native",
+      "postgresTopology": "host-port",
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 10,
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304
+      }
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "current-pr6-parent",
+      "label": "current-pr6-parent-host-port",
+      "copyChunkBytes": "native",
+      "postgresTopology": "host-port",
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 10,
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304
+      }
+    }
+  ]
+}

@@ -1,4 +1,0 @@
-raw/**
-manifests/**
-!raw/.gitkeep
-!manifests/.gitkeep

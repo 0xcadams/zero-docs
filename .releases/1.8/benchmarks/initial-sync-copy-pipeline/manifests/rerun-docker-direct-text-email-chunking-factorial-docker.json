@@ -1,0 +1,271 @@
+{
+  "stage": "rerun-docker-direct-text-email-chunking-factorial",
+  "generatedAt": "2026-07-15T05:11:59.752Z",
+  "execute": true,
+  "reuseImages": true,
+  "platform": "linux/arm64",
+  "images": {
+    "linear-parser": "zero-copy-pipeline-linear-parser:local"
+  },
+  "imageIDs": {
+    "linear-parser": "sha256:08c4a7b296357f142bad92fc3cfb32cca2897fea8f77a928f2474618278ba5c2"
+  },
+  "runs": [
+    {
+      "profile": "email-683m",
+      "worktree": "linear-parser",
+      "label": "string-native-chunks",
+      "partialInsertBatches": false,
+      "directTextBuffers": false,
+      "copyChunkBytes": "native",
+      "bufferMB": 8,
+      "mmapGiB": 1,
+      "repetition": 1,
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304
+      }
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "linear-parser",
+      "label": "buffer-cast-native-chunks",
+      "partialInsertBatches": false,
+      "directTextBuffers": true,
+      "copyChunkBytes": "native",
+      "bufferMB": 8,
+      "mmapGiB": 1,
+      "repetition": 1,
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304
+      }
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "linear-parser",
+      "label": "string-31k-chunks",
+      "partialInsertBatches": false,
+      "directTextBuffers": false,
+      "copyChunkBytes": 31744,
+      "bufferMB": 8,
+      "mmapGiB": 1,
+      "repetition": 1,
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304
+      }
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "linear-parser",
+      "label": "buffer-cast-31k-chunks",
+      "partialInsertBatches": false,
+      "directTextBuffers": true,
+      "copyChunkBytes": 31744,
+      "bufferMB": 8,
+      "mmapGiB": 1,
+      "repetition": 1,
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304
+      }
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "linear-parser",
+      "label": "buffer-cast-31k-chunks",
+      "partialInsertBatches": false,
+      "directTextBuffers": true,
+      "copyChunkBytes": 31744,
+      "bufferMB": 8,
+      "mmapGiB": 1,
+      "repetition": 2,
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304
+      }
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "linear-parser",
+      "label": "string-31k-chunks",
+      "partialInsertBatches": false,
+      "directTextBuffers": false,
+      "copyChunkBytes": 31744,
+      "bufferMB": 8,
+      "mmapGiB": 1,
+      "repetition": 2,
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304
+      }
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "linear-parser",
+      "label": "buffer-cast-native-chunks",
+      "partialInsertBatches": false,
+      "directTextBuffers": true,
+      "copyChunkBytes": "native",
+      "bufferMB": 8,
+      "mmapGiB": 1,
+      "repetition": 2,
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304
+      }
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "linear-parser",
+      "label": "string-native-chunks",
+      "partialInsertBatches": false,
+      "directTextBuffers": false,
+      "copyChunkBytes": "native",
+      "bufferMB": 8,
+      "mmapGiB": 1,
+      "repetition": 2,
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304
+      }
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "linear-parser",
+      "label": "string-native-chunks",
+      "partialInsertBatches": false,
+      "directTextBuffers": false,
+      "copyChunkBytes": "native",
+      "bufferMB": 8,
+      "mmapGiB": 1,
+      "repetition": 3,
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304
+      }
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "linear-parser",
+      "label": "buffer-cast-native-chunks",
+      "partialInsertBatches": false,
+      "directTextBuffers": true,
+      "copyChunkBytes": "native",
+      "bufferMB": 8,
+      "mmapGiB": 1,
+      "repetition": 3,
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304
+      }
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "linear-parser",
+      "label": "string-31k-chunks",
+      "partialInsertBatches": false,
+      "directTextBuffers": false,
+      "copyChunkBytes": 31744,
+      "bufferMB": 8,
+      "mmapGiB": 1,
+      "repetition": 3,
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304
+      }
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "linear-parser",
+      "label": "buffer-cast-31k-chunks",
+      "partialInsertBatches": false,
+      "directTextBuffers": true,
+      "copyChunkBytes": 31744,
+      "bufferMB": 8,
+      "mmapGiB": 1,
+      "repetition": 3,
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304
+      }
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "linear-parser",
+      "label": "buffer-cast-31k-chunks",
+      "partialInsertBatches": false,
+      "directTextBuffers": true,
+      "copyChunkBytes": 31744,
+      "bufferMB": 8,
+      "mmapGiB": 1,
+      "repetition": 4,
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304
+      }
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "linear-parser",
+      "label": "string-31k-chunks",
+      "partialInsertBatches": false,
+      "directTextBuffers": false,
+      "copyChunkBytes": 31744,
+      "bufferMB": 8,
+      "mmapGiB": 1,
+      "repetition": 4,
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304
+      }
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "linear-parser",
+      "label": "buffer-cast-native-chunks",
+      "partialInsertBatches": false,
+      "directTextBuffers": true,
+      "copyChunkBytes": "native",
+      "bufferMB": 8,
+      "mmapGiB": 1,
+      "repetition": 4,
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304
+      }
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "linear-parser",
+      "label": "string-native-chunks",
+      "partialInsertBatches": false,
+      "directTextBuffers": false,
+      "copyChunkBytes": "native",
+      "bufferMB": 8,
+      "mmapGiB": 1,
+      "repetition": 4,
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304
+      }
+    }
+  ]
+}
