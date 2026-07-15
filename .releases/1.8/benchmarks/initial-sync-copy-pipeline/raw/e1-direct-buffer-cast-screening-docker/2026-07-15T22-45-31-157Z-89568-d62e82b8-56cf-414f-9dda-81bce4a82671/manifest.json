@@ -1,0 +1,2002 @@
+{
+  "schemaVersion": 2,
+  "stage": "e1-direct-buffer-cast-screening",
+  "runToken": "2026-07-15T22-45-31-157Z-89568-d62e82b8-56cf-414f-9dda-81bce4a82671",
+  "generatedAt": "2026-07-15T22:45:31.157Z",
+  "mode": "noncanonical",
+  "execute": true,
+  "reuseImages": false,
+  "status": "complete",
+  "evidence": {
+    "eligible": false,
+    "classification": "noncanonical",
+    "reasons": [
+      "runner was explicitly noncanonical",
+      "stage selection is incomplete",
+      "stage has no predeclared analysis plan",
+      "one or more fixture profiles are not canonical"
+    ]
+  },
+  "platform": "linux/arm64",
+  "environment": {
+    "dockerServer": {
+      "Platform": {
+        "Name": "Docker Desktop 4.82.0 (233772)"
+      },
+      "Version": "29.6.1",
+      "ApiVersion": "1.55",
+      "MinAPIVersion": "1.40",
+      "Os": "linux",
+      "Arch": "arm64",
+      "Components": [
+        {
+          "Name": "Engine",
+          "Version": "29.6.1",
+          "Details": {
+            "ApiVersion": "1.55",
+            "Arch": "arm64",
+            "BuildTime": "Fri Jun 26 11:39:58 2026",
+            "Experimental": "false",
+            "GitCommit": "8ec5ab3",
+            "GoVersion": "go1.26.4",
+            "KernelVersion": "6.12.76-linuxkit",
+            "MinAPIVersion": "1.40",
+            "Module": "github.com/moby/moby/v2",
+            "ModuleVersion": "v2.0.0+unknown",
+            "Os": "linux"
+          }
+        },
+        {
+          "Name": "containerd",
+          "Version": "v2.2.5",
+          "Details": {
+            "GitCommit": "e53c7c1516c3b2bff98eb76f1f4117477e6f4e66"
+          }
+        },
+        {
+          "Name": "runc",
+          "Version": "1.3.6",
+          "Details": {
+            "GitCommit": "v1.3.6-0-g491b69ba"
+          }
+        },
+        {
+          "Name": "docker-init",
+          "Version": "0.19.0",
+          "Details": {
+            "GitCommit": "de40ad0"
+          }
+        }
+      ],
+      "GitCommit": "8ec5ab3",
+      "GoVersion": "go1.26.4",
+      "KernelVersion": "6.12.76-linuxkit",
+      "BuildTime": "2026-06-26T11:39:58.000000000+00:00"
+    },
+    "dockerInfo": {
+      "id": "6e6f630a-e4c8-45f6-9e6c-7f6a95d8dba5",
+      "driver": "overlayfs",
+      "cgroupDriver": "cgroupfs",
+      "cgroupVersion": "2",
+      "kernelVersion": "6.12.76-linuxkit",
+      "operatingSystem": "Docker Desktop",
+      "architecture": "aarch64",
+      "nCPU": 14,
+      "memoryBytes": 25161015296
+    }
+  },
+  "ordering": "paired-ab-ba",
+  "selection": {
+    "requestedLimit": 4,
+    "completeStage": false,
+    "selectedBlocks": [
+      1
+    ],
+    "plannedBlocks": 6,
+    "selectedRunCount": 4,
+    "plannedRunCount": 24
+  },
+  "processIsolation": {
+    "measuredOperationsPerContainer": 1,
+    "measuredOperationsPerVitestInvocation": 1,
+    "fileParallelism": false,
+    "maxWorkers": 1
+  },
+  "analysisPlan": null,
+  "baseImageReferences": {
+    "node": "node:22-bookworm-slim@sha256:6c74791e557ce11fc957704f6d4fe134a7bc8d6f5ca4403205b2966bd488f6b3",
+    "postgres": "postgres:17-alpine@sha256:742f40ea20b9ff2ff31db5458d127452988a2164df9e17441e191f3b72252193"
+  },
+  "baseImages": {
+    "node": {
+      "reference": "node:22-bookworm-slim@sha256:6c74791e557ce11fc957704f6d4fe134a7bc8d6f5ca4403205b2966bd488f6b3",
+      "id": "sha256:6c74791e557ce11fc957704f6d4fe134a7bc8d6f5ca4403205b2966bd488f6b3",
+      "repoDigests": [
+        "node@sha256:6c74791e557ce11fc957704f6d4fe134a7bc8d6f5ca4403205b2966bd488f6b3"
+      ],
+      "created": "2026-07-14T01:51:48.417032893Z",
+      "os": "linux",
+      "architecture": "arm64",
+      "variant": "v8",
+      "labels": {},
+      "rootFSLayers": [
+        "sha256:12cdff3b039e28c684ffd2097ff5a66df274a8500966a1431038b05f50bcf096",
+        "sha256:43e4f3df99f20979a78cc4e6fb9e52bdc4ab31172750194f853005d88964db7e",
+        "sha256:2316784a23db74c15d46af9a7f2f891d2b44f77abbb4bed1e861b3268bdd946e",
+        "sha256:888e40d812f105ea5ea1263d750cf66a552432bb12d9b7436cbe345989d0f3c1",
+        "sha256:a491c257493e76fe1e68b7d0251d2497e59c543eed2289846fa87df1e227489f"
+      ]
+    },
+    "postgres": {
+      "reference": "postgres:17-alpine@sha256:742f40ea20b9ff2ff31db5458d127452988a2164df9e17441e191f3b72252193",
+      "id": "sha256:742f40ea20b9ff2ff31db5458d127452988a2164df9e17441e191f3b72252193",
+      "repoDigests": [
+        "postgres@sha256:742f40ea20b9ff2ff31db5458d127452988a2164df9e17441e191f3b72252193"
+      ],
+      "created": "2026-07-07T17:46:49.401690597Z",
+      "os": "linux",
+      "architecture": "arm64",
+      "variant": "v8",
+      "labels": {},
+      "rootFSLayers": [
+        "sha256:b2848c02ac6ff53d265469b5b30f649f335e546a83330cd8916d54e65e640409",
+        "sha256:3276ea79c0c0c02b7d702de4aa0bf6b60d4b3f1b295b30366973c4ec4bf91249",
+        "sha256:d7d195016259883bbb161fb50292c1be3f96f0c9b50c573cbb0ed57e64dfa2c9",
+        "sha256:1ebee87cc825164b634bd6837685531c240dcfe5a1cf507cb6e8df057f661cbf",
+        "sha256:df8da200347edec60626a356f574551d1ecb9e7727402137d7d1bc6cb3cf11db",
+        "sha256:40252c7d7df3e6b969af3fa01b51346fbff89b508a6f2c5a9f457d23e797cf64",
+        "sha256:11b7e3ae2bd33cf903077779b2178d1242006f750906c41d9941cd45be4c6175",
+        "sha256:60d0936c2e0dac1f79128a468e3259644a610850f2ce98c238027943b5e87108",
+        "sha256:60d2d3ed3afa870cf11fe567074bfc1c37e1f0488fe4f9259b4b4ccd6084c209",
+        "sha256:66c221f9d5b6c9542d87a9f5143ffa653ce6628a4db739870abede8c87da99af"
+      ]
+    }
+  },
+  "inputHashes": {
+    "initialSyncHarness": {
+      "path": "src/initial-sync-copy-pipeline.product.bench.pg.ts",
+      "sha256": "3c2a28b988ccd56a8f585d903983fc8aaa2dec33fb424e3e30e194e6b89beec5"
+    },
+    "parserHarness": {
+      "path": "src/pg-copy-parser.product.bench.ts",
+      "sha256": "94ed9b0953a0319473a139cb8c267af3fdbf0111dee30c156d2e23961bd1c012"
+    },
+    "dockerfile": {
+      "path": "Dockerfile.linux",
+      "sha256": "2379eb7f04895d51088433f473bae67a525c938194995a4c4775408975ea3ca9"
+    },
+    "adaptiveIndexDockerfile": {
+      "path": "Dockerfile.adaptive-index.linux",
+      "sha256": "9a7689f3cbb1b0d51ec58cd039c8dd67fae03e96fc86cd5fd28f4e8a498b99d1"
+    },
+    "adaptiveIndexPolicyTransform": {
+      "path": "scripts/force-eager-secondary-indexes.mjs",
+      "sha256": "329af5575f916a58cb3a550cfc2c9753512fa3c719320fbb49559efb1d384285"
+    },
+    "addonDockerfile": {
+      "path": "Dockerfile.addon-experiment.linux",
+      "sha256": "aeea538f45fcb2b307003ae1d528d5726d8b3434f03c200f990064f566e17755"
+    },
+    "addonLinker": {
+      "path": "scripts/link-local-addon.mjs",
+      "sha256": "8687773f148ff4e98e5ffd6528834480b1d69253ac72c4e02f9bfcc837ee4dd1"
+    },
+    "runner": {
+      "path": "scripts/run-docker.mjs",
+      "sha256": "2bad1f951c62794e420eefe582e5c9d8305bf77546fc7d1235ca69af1e027ec0"
+    },
+    "provenance": {
+      "path": "scripts/provenance.mjs",
+      "sha256": "51f0140e1f045fe46e4ea4985de8d8a76e019d20a297be2127b9736092b38d02"
+    },
+    "worktrees": {
+      "path": "config/worktrees.json",
+      "sha256": "c4f6fcba1b7111cdc4645a7b6fe0b6f566243c14c566bc4dcd00e9b9abad5468"
+    },
+    "profiles": {
+      "path": "config/integration-profiles.json",
+      "sha256": "b7b3e8a3a40e10e49d4e56d2415d53332b58210a30effc679ccb9ae69b22b0ca"
+    },
+    "stages": {
+      "path": "config/integration-stages.json",
+      "sha256": "81b9177b27fd87e32806e9dd4037a671c81d00b7203f5bd29a0042b1d59242d4"
+    },
+    "runnerConfig": {
+      "path": "config/runner.json",
+      "sha256": "d49052232ec5c66e19db659b1a3b8204770f5162383d54b5a52cc448320b1877"
+    }
+  },
+  "sources": {
+    "origin-main": {
+      "path": "/Users/chase/.worktree/mono/initial-sync-experiment-baseline",
+      "commit": "bc1db665f30ee341011697128a5414d2bbc7ea7c",
+      "tree": "6c3164a01a41cbe27dfedd9bb8f0bd956544dca1",
+      "clean": true,
+      "status": "",
+      "diffSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "trackedDiffSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "trackedContentSHA256": "c639c29b18352d686ca0a5babe7baa82451ab1f23a7823eb8c8ccdf6457e3222",
+      "contentSHA256": "f3153b5307666e672acb658b8063949bd9328cb6b2a427fc70b2ffd7cb0118ef",
+      "untracked": []
+    },
+    "direct-buffer-cast": {
+      "path": "/Users/chase/.worktree/mono/direct-copy-text-buffers",
+      "commit": "27683b82b1e3c31b99e7fe39959a320712646a24",
+      "tree": "f033e60d315f902555d2ff7a868050eba402a635",
+      "clean": true,
+      "status": "",
+      "diffSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "trackedDiffSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "trackedContentSHA256": "f5651be9c517f4e117f5f5a6fc26a37ce32934f8ba15664f7152475579c2b004",
+      "contentSHA256": "ac8ce4b39a6b4680706cc9989120d97b0c793a682534c317ca182ab473c108ed",
+      "untracked": []
+    }
+  },
+  "addonSources": {},
+  "addonBuildPolicy": {
+    "source": "local-worktree-only",
+    "packagePublishing": false,
+    "npmCanaryFetch": false,
+    "platform": "linux/arm64"
+  },
+  "images": {
+    "origin-main": {
+      "tag": "zero-copy-pipeline-origin-main:local",
+      "reference": "zero-copy-pipeline-origin-main:local",
+      "id": "sha256:bf3d08284172f2dd6412242f021acc79d5632b75e28463493f21bd706e915d6a",
+      "repoDigests": [
+        "zero-copy-pipeline-origin-main@sha256:bf3d08284172f2dd6412242f021acc79d5632b75e28463493f21bd706e915d6a"
+      ],
+      "created": "2026-07-15T22:47:09.983194753Z",
+      "os": "linux",
+      "architecture": "arm64",
+      "variant": null,
+      "labels": {
+        "dev.rocicorp.zero-benchmark.build-inputs-sha256": "b5a29c1e4e1a11002108edc802e88cdecfb2c06aff0958eccc0ed73d328bb903",
+        "dev.rocicorp.zero-benchmark.config-sha256": "b7b3e8a3a40e10e49d4e56d2415d53332b58210a30effc679ccb9ae69b22b0ca",
+        "dev.rocicorp.zero-benchmark.harness-sha256": "3c2a28b988ccd56a8f585d903983fc8aaa2dec33fb424e3e30e194e6b89beec5",
+        "dev.rocicorp.zero-benchmark.node-image": "node:22-bookworm-slim@sha256:6c74791e557ce11fc957704f6d4fe134a7bc8d6f5ca4403205b2966bd488f6b3",
+        "dev.rocicorp.zero-benchmark.runner-sha256": "2bad1f951c62794e420eefe582e5c9d8305bf77546fc7d1235ca69af1e027ec0",
+        "dev.rocicorp.zero-benchmark.source-commit": "bc1db665f30ee341011697128a5414d2bbc7ea7c",
+        "dev.rocicorp.zero-benchmark.source-content-sha256": "f3153b5307666e672acb658b8063949bd9328cb6b2a427fc70b2ffd7cb0118ef",
+        "dev.rocicorp.zero-benchmark.source-diff-sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "dev.rocicorp.zero-benchmark.source-tree": "6c3164a01a41cbe27dfedd9bb8f0bd956544dca1",
+        "dev.rocicorp.zero-benchmark.worktree": "origin-main"
+      },
+      "rootFSLayers": [
+        "sha256:12cdff3b039e28c684ffd2097ff5a66df274a8500966a1431038b05f50bcf096",
+        "sha256:43e4f3df99f20979a78cc4e6fb9e52bdc4ab31172750194f853005d88964db7e",
+        "sha256:2316784a23db74c15d46af9a7f2f891d2b44f77abbb4bed1e861b3268bdd946e",
+        "sha256:888e40d812f105ea5ea1263d750cf66a552432bb12d9b7436cbe345989d0f3c1",
+        "sha256:a491c257493e76fe1e68b7d0251d2497e59c543eed2289846fa87df1e227489f",
+        "sha256:dc422b62237a258cb7e290f4174773b3e90ebbc060493f82077fe962c92e65c5",
+        "sha256:40d44b29c6e9652a7154b3ad551bff65a1762c29bd44d45013bcb509a74b2014",
+        "sha256:ad63fc7a5b4cf07bb895d54f6adc81da2fb1cdbb47d038c757d1c306bdf9d298",
+        "sha256:7c8204b1f862ed65c9046246a0cfb9417b912a3bde9872278295cc3eee5bd9bc",
+        "sha256:140ce742b778187278318291daf71254bac2483f6be2b848f11421b245ddb287",
+        "sha256:958f976608ad5a0234ae37a4f0c3a148a18d8166c52bbf547a25b173cb2522d8",
+        "sha256:54ed084c7ad45f44892456f5b60a5b98a36b27a10ffcf363ffb0ed6d64ff920c",
+        "sha256:e957a7f7492608ba2ae3d2b7b86b98fc6bda3297f2c528e252cde04d7652e688",
+        "sha256:5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef"
+      ],
+      "worktree": "origin-main",
+      "addonWorktree": null,
+      "dockerfile": "Dockerfile.linux",
+      "buildInputs": {
+        "platform": "linux/arm64",
+        "dockerfile": {
+          "path": "Dockerfile.linux",
+          "sha256": "2379eb7f04895d51088433f473bae67a525c938194995a4c4775408975ea3ca9"
+        },
+        "mono": {
+          "commit": "bc1db665f30ee341011697128a5414d2bbc7ea7c",
+          "tree": "6c3164a01a41cbe27dfedd9bb8f0bd956544dca1",
+          "diffSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "trackedContentSHA256": "c639c29b18352d686ca0a5babe7baa82451ab1f23a7823eb8c8ccdf6457e3222",
+          "contentSHA256": "f3153b5307666e672acb658b8063949bd9328cb6b2a427fc70b2ffd7cb0118ef"
+        },
+        "sha256": "b5a29c1e4e1a11002108edc802e88cdecfb2c06aff0958eccc0ed73d328bb903"
+      },
+      "expectedLabels": {
+        "dev.rocicorp.zero-benchmark.worktree": "origin-main",
+        "dev.rocicorp.zero-benchmark.source-commit": "bc1db665f30ee341011697128a5414d2bbc7ea7c",
+        "dev.rocicorp.zero-benchmark.source-tree": "6c3164a01a41cbe27dfedd9bb8f0bd956544dca1",
+        "dev.rocicorp.zero-benchmark.source-diff-sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "dev.rocicorp.zero-benchmark.source-content-sha256": "f3153b5307666e672acb658b8063949bd9328cb6b2a427fc70b2ffd7cb0118ef",
+        "dev.rocicorp.zero-benchmark.harness-sha256": "3c2a28b988ccd56a8f585d903983fc8aaa2dec33fb424e3e30e194e6b89beec5",
+        "dev.rocicorp.zero-benchmark.config-sha256": "b7b3e8a3a40e10e49d4e56d2415d53332b58210a30effc679ccb9ae69b22b0ca",
+        "dev.rocicorp.zero-benchmark.runner-sha256": "2bad1f951c62794e420eefe582e5c9d8305bf77546fc7d1235ca69af1e027ec0",
+        "dev.rocicorp.zero-benchmark.node-image": "node:22-bookworm-slim@sha256:6c74791e557ce11fc957704f6d4fe134a7bc8d6f5ca4403205b2966bd488f6b3",
+        "dev.rocicorp.zero-benchmark.build-inputs-sha256": "b5a29c1e4e1a11002108edc802e88cdecfb2c06aff0958eccc0ed73d328bb903"
+      }
+    },
+    "direct-buffer-cast": {
+      "tag": "zero-copy-pipeline-direct-buffer-cast:local",
+      "reference": "zero-copy-pipeline-direct-buffer-cast:local",
+      "id": "sha256:3992b7bfb876abe91c6ac77d93e4d473f25c915513d68dbcc4332b0a3dae1bb0",
+      "repoDigests": [
+        "zero-copy-pipeline-direct-buffer-cast@sha256:3992b7bfb876abe91c6ac77d93e4d473f25c915513d68dbcc4332b0a3dae1bb0"
+      ],
+      "created": "2026-07-15T22:48:58.865812304Z",
+      "os": "linux",
+      "architecture": "arm64",
+      "variant": null,
+      "labels": {
+        "dev.rocicorp.zero-benchmark.build-inputs-sha256": "ed0e585819120c5589ad3866d17b7b521e9e7b786716de96e5056590b0c85b65",
+        "dev.rocicorp.zero-benchmark.config-sha256": "b7b3e8a3a40e10e49d4e56d2415d53332b58210a30effc679ccb9ae69b22b0ca",
+        "dev.rocicorp.zero-benchmark.harness-sha256": "3c2a28b988ccd56a8f585d903983fc8aaa2dec33fb424e3e30e194e6b89beec5",
+        "dev.rocicorp.zero-benchmark.node-image": "node:22-bookworm-slim@sha256:6c74791e557ce11fc957704f6d4fe134a7bc8d6f5ca4403205b2966bd488f6b3",
+        "dev.rocicorp.zero-benchmark.runner-sha256": "2bad1f951c62794e420eefe582e5c9d8305bf77546fc7d1235ca69af1e027ec0",
+        "dev.rocicorp.zero-benchmark.source-commit": "27683b82b1e3c31b99e7fe39959a320712646a24",
+        "dev.rocicorp.zero-benchmark.source-content-sha256": "ac8ce4b39a6b4680706cc9989120d97b0c793a682534c317ca182ab473c108ed",
+        "dev.rocicorp.zero-benchmark.source-diff-sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "dev.rocicorp.zero-benchmark.source-tree": "f033e60d315f902555d2ff7a868050eba402a635",
+        "dev.rocicorp.zero-benchmark.worktree": "direct-buffer-cast"
+      },
+      "rootFSLayers": [
+        "sha256:12cdff3b039e28c684ffd2097ff5a66df274a8500966a1431038b05f50bcf096",
+        "sha256:43e4f3df99f20979a78cc4e6fb9e52bdc4ab31172750194f853005d88964db7e",
+        "sha256:2316784a23db74c15d46af9a7f2f891d2b44f77abbb4bed1e861b3268bdd946e",
+        "sha256:888e40d812f105ea5ea1263d750cf66a552432bb12d9b7436cbe345989d0f3c1",
+        "sha256:a491c257493e76fe1e68b7d0251d2497e59c543eed2289846fa87df1e227489f",
+        "sha256:dc422b62237a258cb7e290f4174773b3e90ebbc060493f82077fe962c92e65c5",
+        "sha256:40d44b29c6e9652a7154b3ad551bff65a1762c29bd44d45013bcb509a74b2014",
+        "sha256:ad63fc7a5b4cf07bb895d54f6adc81da2fb1cdbb47d038c757d1c306bdf9d298",
+        "sha256:b7a657372e92fae380a415250c9a5f831fab59a221093bf3e2e2858a7b32fe40",
+        "sha256:4f0d4b532f9e89aef46f45b1753c21c8fa08bf76ebede6e7a0b44f3a46c161fa",
+        "sha256:2963b98a60bc1280c3436b6a3583ad9db7d249161ea8d4330a81ddc09d2cf8fd",
+        "sha256:95b404a35aaa3fd75ded92f439fc14ebf3233f999e28b61d44a800d40282b24b",
+        "sha256:b56ca3a3b03099134f7c37798f9e531bb0d6caf99f1f03d3f3ff24ff31403459",
+        "sha256:5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef"
+      ],
+      "worktree": "direct-buffer-cast",
+      "addonWorktree": null,
+      "dockerfile": "Dockerfile.linux",
+      "buildInputs": {
+        "platform": "linux/arm64",
+        "dockerfile": {
+          "path": "Dockerfile.linux",
+          "sha256": "2379eb7f04895d51088433f473bae67a525c938194995a4c4775408975ea3ca9"
+        },
+        "mono": {
+          "commit": "27683b82b1e3c31b99e7fe39959a320712646a24",
+          "tree": "f033e60d315f902555d2ff7a868050eba402a635",
+          "diffSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "trackedContentSHA256": "f5651be9c517f4e117f5f5a6fc26a37ce32934f8ba15664f7152475579c2b004",
+          "contentSHA256": "ac8ce4b39a6b4680706cc9989120d97b0c793a682534c317ca182ab473c108ed"
+        },
+        "sha256": "ed0e585819120c5589ad3866d17b7b521e9e7b786716de96e5056590b0c85b65"
+      },
+      "expectedLabels": {
+        "dev.rocicorp.zero-benchmark.worktree": "direct-buffer-cast",
+        "dev.rocicorp.zero-benchmark.source-commit": "27683b82b1e3c31b99e7fe39959a320712646a24",
+        "dev.rocicorp.zero-benchmark.source-tree": "f033e60d315f902555d2ff7a868050eba402a635",
+        "dev.rocicorp.zero-benchmark.source-diff-sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "dev.rocicorp.zero-benchmark.source-content-sha256": "ac8ce4b39a6b4680706cc9989120d97b0c793a682534c317ca182ab473c108ed",
+        "dev.rocicorp.zero-benchmark.harness-sha256": "3c2a28b988ccd56a8f585d903983fc8aaa2dec33fb424e3e30e194e6b89beec5",
+        "dev.rocicorp.zero-benchmark.config-sha256": "b7b3e8a3a40e10e49d4e56d2415d53332b58210a30effc679ccb9ae69b22b0ca",
+        "dev.rocicorp.zero-benchmark.runner-sha256": "2bad1f951c62794e420eefe582e5c9d8305bf77546fc7d1235ca69af1e027ec0",
+        "dev.rocicorp.zero-benchmark.node-image": "node:22-bookworm-slim@sha256:6c74791e557ce11fc957704f6d4fe134a7bc8d6f5ca4403205b2966bd488f6b3",
+        "dev.rocicorp.zero-benchmark.build-inputs-sha256": "ed0e585819120c5589ad3866d17b7b521e9e7b786716de96e5056590b0c85b65"
+      }
+    }
+  },
+  "postgresIsolation": {
+    "strategy": "fresh-container-per-operation",
+    "reset": "new-empty-data-directory",
+    "scope": "arm-and-repetition"
+  },
+  "postgresConstraints": {
+    "cpus": 2,
+    "memory": "2g",
+    "cpusetCpus": "2-3"
+  },
+  "appResourceInvariant": {
+    "cpus": 1,
+    "memory": "3g",
+    "nodeHeapMB": 2304
+  },
+  "expectedArtifacts": [
+    {
+      "path": "operations/001-email-683m-string-decoding-r1.log",
+      "kind": "operation-log",
+      "runID": "email-683m-string-decoding-r1",
+      "status": "complete",
+      "sha256": "fe5a8b35637c86d39b2187cc4e562607045abba707bd9d365a829b2979c32de7"
+    },
+    {
+      "path": "operations/002-email-683m-buffer-cast-r1.log",
+      "kind": "operation-log",
+      "runID": "email-683m-buffer-cast-r1",
+      "status": "complete",
+      "sha256": "bc1f7b7eae627bac639e8c0ae6d7f7c37a7b7eb395e5af03f7fec097f522d747"
+    },
+    {
+      "path": "operations/003-imports-550m-string-decoding-r1.log",
+      "kind": "operation-log",
+      "runID": "imports-550m-string-decoding-r1",
+      "status": "complete",
+      "sha256": "ee4cc4ee51ff5dcfc7f6404d54cfc5c9512ac0f3f5e8bd10a2549946c35ec4b0"
+    },
+    {
+      "path": "operations/004-imports-550m-buffer-cast-r1.log",
+      "kind": "operation-log",
+      "runID": "imports-550m-buffer-cast-r1",
+      "status": "complete",
+      "sha256": "2fdeec81a2c07b00ec817762bee93bfffd9a8cf65c1e34e1c88c553288d91bfa"
+    }
+  ],
+  "runs": [
+    {
+      "profile": "email-683m",
+      "worktree": "origin-main",
+      "label": "string-decoding",
+      "repetition": 1,
+      "overlay": null,
+      "imageKey": "origin-main",
+      "workerCount": 5,
+      "canonical": false,
+      "validationMode": "calibration",
+      "fixtureIdentity": {
+        "version": "legacy-email-fixture-v1",
+        "seed": 20250714
+      },
+      "cachePolicy": {
+        "declared": {
+          "sqlite": "default",
+          "mmapGiB": 1,
+          "osPageCache": "uncontrolled",
+          "betweenRuns": "new-replica-file"
+        },
+        "effective": {
+          "mmapGiB": 1
+        }
+      },
+      "cacheSettings": {
+        "mmapGiB": 1
+      },
+      "sourceStrategy": {
+        "clone": "regenerate-isolated-database",
+        "reset": "drop-database-after-run"
+      },
+      "postgresIsolation": {
+        "strategy": "fresh-container-per-operation",
+        "reset": "new-empty-data-directory",
+        "scope": "arm-and-repetition"
+      },
+      "expected": {
+        "rowCount": 1000,
+        "copyBytes": 683438323,
+        "copyDigest": null,
+        "contentDigest": null
+      },
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304,
+        "cpusetCpus": "0",
+        "cpuQuota": 1
+      }
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "direct-buffer-cast",
+      "label": "buffer-cast",
+      "repetition": 1,
+      "overlay": null,
+      "imageKey": "direct-buffer-cast",
+      "workerCount": 5,
+      "canonical": false,
+      "validationMode": "calibration",
+      "fixtureIdentity": {
+        "version": "legacy-email-fixture-v1",
+        "seed": 20250714
+      },
+      "cachePolicy": {
+        "declared": {
+          "sqlite": "default",
+          "mmapGiB": 1,
+          "osPageCache": "uncontrolled",
+          "betweenRuns": "new-replica-file"
+        },
+        "effective": {
+          "mmapGiB": 1
+        }
+      },
+      "cacheSettings": {
+        "mmapGiB": 1
+      },
+      "sourceStrategy": {
+        "clone": "regenerate-isolated-database",
+        "reset": "drop-database-after-run"
+      },
+      "postgresIsolation": {
+        "strategy": "fresh-container-per-operation",
+        "reset": "new-empty-data-directory",
+        "scope": "arm-and-repetition"
+      },
+      "expected": {
+        "rowCount": 1000,
+        "copyBytes": 683438323,
+        "copyDigest": null,
+        "contentDigest": null
+      },
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304,
+        "cpusetCpus": "0",
+        "cpuQuota": 1
+      }
+    },
+    {
+      "profile": "imports-550m",
+      "worktree": "origin-main",
+      "label": "string-decoding",
+      "repetition": 1,
+      "overlay": null,
+      "imageKey": "origin-main",
+      "workerCount": 5,
+      "canonical": false,
+      "validationMode": "calibration",
+      "fixtureIdentity": {
+        "version": "legacy-imports-fixture-v1",
+        "seed": 20250714
+      },
+      "cachePolicy": {
+        "declared": {
+          "sqlite": "default",
+          "mmapGiB": 1,
+          "osPageCache": "uncontrolled",
+          "betweenRuns": "new-replica-file"
+        },
+        "effective": {
+          "mmapGiB": 1
+        }
+      },
+      "cacheSettings": {
+        "mmapGiB": 1
+      },
+      "sourceStrategy": {
+        "clone": "regenerate-isolated-database",
+        "reset": "drop-database-after-run"
+      },
+      "postgresIsolation": {
+        "strategy": "fresh-container-per-operation",
+        "reset": "new-empty-data-directory",
+        "scope": "arm-and-repetition"
+      },
+      "expected": {
+        "rowCount": 2000,
+        "copyBytes": 550174715,
+        "copyDigest": null,
+        "contentDigest": null
+      },
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304,
+        "cpusetCpus": "0",
+        "cpuQuota": 1
+      }
+    },
+    {
+      "profile": "imports-550m",
+      "worktree": "direct-buffer-cast",
+      "label": "buffer-cast",
+      "repetition": 1,
+      "overlay": null,
+      "imageKey": "direct-buffer-cast",
+      "workerCount": 5,
+      "canonical": false,
+      "validationMode": "calibration",
+      "fixtureIdentity": {
+        "version": "legacy-imports-fixture-v1",
+        "seed": 20250714
+      },
+      "cachePolicy": {
+        "declared": {
+          "sqlite": "default",
+          "mmapGiB": 1,
+          "osPageCache": "uncontrolled",
+          "betweenRuns": "new-replica-file"
+        },
+        "effective": {
+          "mmapGiB": 1
+        }
+      },
+      "cacheSettings": {
+        "mmapGiB": 1
+      },
+      "sourceStrategy": {
+        "clone": "regenerate-isolated-database",
+        "reset": "drop-database-after-run"
+      },
+      "postgresIsolation": {
+        "strategy": "fresh-container-per-operation",
+        "reset": "new-empty-data-directory",
+        "scope": "arm-and-repetition"
+      },
+      "expected": {
+        "rowCount": 2000,
+        "copyBytes": 550174715,
+        "copyDigest": null,
+        "contentDigest": null
+      },
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304,
+        "cpusetCpus": "0",
+        "cpuQuota": 1
+      }
+    }
+  ],
+  "operations": [
+    {
+      "index": 1,
+      "id": "email-683m-string-decoding-r1",
+      "artifact": "operations/001-email-683m-string-decoding-r1.log",
+      "startedAt": "2026-07-15T22:49:18.454Z",
+      "completedAt": "2026-07-15T22:49:25.196Z",
+      "status": 0,
+      "signal": null,
+      "productContainer": {
+        "id": "159f442f2f1836a9cf10b127c74bcf9146a53baeeb13013553209e1d2f937275",
+        "imageID": "sha256:bf3d08284172f2dd6412242f021acc79d5632b75e28463493f21bd706e915d6a",
+        "created": "2026-07-15T22:49:18.482256132Z",
+        "state": {
+          "status": "exited",
+          "exitCode": 0,
+          "oomKilled": false
+        },
+        "constraints": {
+          "cpusetCpus": "0",
+          "nanoCpus": 1000000000,
+          "memory": 3221225472,
+          "memorySwap": 3221225472,
+          "pidsLimit": 1024
+        }
+      },
+      "postgres": {
+        "container": {
+          "id": "46f301ea8b2c5241a639d052e44ab17af44cd27082d04f27383b2f9a113c4643",
+          "imageID": "sha256:742f40ea20b9ff2ff31db5458d127452988a2164df9e17441e191f3b72252193",
+          "created": "2026-07-15T22:49:15.794865548Z",
+          "state": {
+            "status": "running",
+            "exitCode": 0,
+            "oomKilled": false
+          },
+          "constraints": {
+            "cpusetCpus": "2-3",
+            "nanoCpus": 2000000000,
+            "memory": 2147483648,
+            "memorySwap": 4294967296,
+            "pidsLimit": null
+          }
+        },
+        "systemIdentifier": "7662890626409291815",
+        "image": {
+          "reference": "postgres:17-alpine@sha256:742f40ea20b9ff2ff31db5458d127452988a2164df9e17441e191f3b72252193",
+          "id": "sha256:742f40ea20b9ff2ff31db5458d127452988a2164df9e17441e191f3b72252193",
+          "repoDigests": [
+            "postgres@sha256:742f40ea20b9ff2ff31db5458d127452988a2164df9e17441e191f3b72252193"
+          ],
+          "created": "2026-07-07T17:46:49.401690597Z",
+          "os": "linux",
+          "architecture": "arm64",
+          "variant": "v8",
+          "labels": {},
+          "rootFSLayers": [
+            "sha256:b2848c02ac6ff53d265469b5b30f649f335e546a83330cd8916d54e65e640409",
+            "sha256:3276ea79c0c0c02b7d702de4aa0bf6b60d4b3f1b295b30366973c4ec4bf91249",
+            "sha256:d7d195016259883bbb161fb50292c1be3f96f0c9b50c573cbb0ed57e64dfa2c9",
+            "sha256:1ebee87cc825164b634bd6837685531c240dcfe5a1cf507cb6e8df057f661cbf",
+            "sha256:df8da200347edec60626a356f574551d1ecb9e7727402137d7d1bc6cb3cf11db",
+            "sha256:40252c7d7df3e6b969af3fa01b51346fbff89b508a6f2c5a9f457d23e797cf64",
+            "sha256:11b7e3ae2bd33cf903077779b2178d1242006f750906c41d9941cd45be4c6175",
+            "sha256:60d0936c2e0dac1f79128a468e3259644a610850f2ce98c238027943b5e87108",
+            "sha256:60d2d3ed3afa870cf11fe567074bfc1c37e1f0488fe4f9259b4b4ccd6084c209",
+            "sha256:66c221f9d5b6c9542d87a9f5143ffa653ce6628a4db739870abede8c87da99af"
+          ]
+        },
+        "sourceStrategy": {
+          "clone": "regenerate-isolated-database",
+          "reset": "drop-database-after-run"
+        },
+        "runnerIsolation": {
+          "strategy": "fresh-container-per-operation",
+          "reset": "new-empty-data-directory",
+          "scope": "arm-and-repetition"
+        },
+        "cgroup": {
+          "before": {
+            "capturedAt": "2026-07-15T22:49:17.571Z",
+            "cpu": {
+              "cpusetCpus": "2-3",
+              "cpusetCpusEffective": "2-3",
+              "max": "200000 100000",
+              "stat": {
+                "usage_usec": 445512,
+                "user_usec": 287493,
+                "system_usec": 158019,
+                "nice_usec": 0,
+                "nr_periods": 12,
+                "nr_throttled": 0,
+                "throttled_usec": 0,
+                "nr_bursts": 0,
+                "burst_usec": 0
+              },
+              "pressure": {
+                "some": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 9087
+                },
+                "full": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 3148
+                }
+              }
+            },
+            "memory": {
+              "current": 107266048,
+              "max": 2147483648,
+              "peak": 115818496,
+              "events": {
+                "low": 0,
+                "high": 0,
+                "max": 0,
+                "oom": 0,
+                "oom_kill": 0,
+                "oom_group_kill": 0
+              },
+              "eventsLocal": {
+                "low": 0,
+                "high": 0,
+                "max": 0,
+                "oom": 0,
+                "oom_kill": 0,
+                "oom_group_kill": 0
+              },
+              "pressure": {
+                "some": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 0
+                },
+                "full": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 0
+                }
+              }
+            },
+            "io": {
+              "stat": {
+                "254:0": {
+                  "rbytes": 39522304,
+                  "wbytes": 40288256,
+                  "rios": 905,
+                  "wios": 1817,
+                  "dbytes": 0,
+                  "dios": 0
+                }
+              },
+              "pressure": {
+                "some": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 58233
+                },
+                "full": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 58142
+                }
+              }
+            }
+          },
+          "after": {
+            "capturedAt": "2026-07-15T22:49:25.234Z",
+            "cpu": {
+              "cpusetCpus": "2-3",
+              "cpusetCpusEffective": "2-3",
+              "max": "200000 100000",
+              "stat": {
+                "usage_usec": 1530740,
+                "user_usec": 776477,
+                "system_usec": 754263,
+                "nice_usec": 0,
+                "nr_periods": 52,
+                "nr_throttled": 0,
+                "throttled_usec": 0,
+                "nr_bursts": 0,
+                "burst_usec": 0
+              },
+              "pressure": {
+                "some": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 22933
+                },
+                "full": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 6299
+                }
+              }
+            },
+            "memory": {
+              "current": 215318528,
+              "max": 2147483648,
+              "peak": 257855488,
+              "events": {
+                "low": 0,
+                "high": 0,
+                "max": 0,
+                "oom": 0,
+                "oom_kill": 0,
+                "oom_group_kill": 0
+              },
+              "eventsLocal": {
+                "low": 0,
+                "high": 0,
+                "max": 0,
+                "oom": 0,
+                "oom_kill": 0,
+                "oom_group_kill": 0
+              },
+              "pressure": {
+                "some": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 0
+                },
+                "full": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 0
+                }
+              }
+            },
+            "io": {
+              "stat": {
+                "254:0": {
+                  "rbytes": 105525248,
+                  "wbytes": 71618560,
+                  "rios": 1522,
+                  "wios": 1900,
+                  "dbytes": 0,
+                  "dios": 0
+                }
+              },
+              "pressure": {
+                "some": {
+                  "avg10": "0.80",
+                  "avg60": "0.21",
+                  "avg300": "0.04",
+                  "total": 181795
+                },
+                "full": {
+                  "avg10": "0.80",
+                  "avg60": "0.21",
+                  "avg300": "0.04",
+                  "total": 181704
+                }
+              }
+            }
+          },
+          "delta": {
+            "cpu": {
+              "stat": {
+                "usage_usec": 1085228,
+                "user_usec": 488984,
+                "system_usec": 596244,
+                "nice_usec": 0,
+                "nr_periods": 40,
+                "nr_throttled": 0,
+                "throttled_usec": 0,
+                "nr_bursts": 0,
+                "burst_usec": 0
+              },
+              "pressure": {
+                "some": {
+                  "total": 13846
+                },
+                "full": {
+                  "total": 3151
+                }
+              }
+            },
+            "memory": {
+              "current": 108052480,
+              "max": 0,
+              "peak": 142036992,
+              "events": {
+                "low": 0,
+                "high": 0,
+                "max": 0,
+                "oom": 0,
+                "oom_kill": 0,
+                "oom_group_kill": 0
+              },
+              "eventsLocal": {
+                "low": 0,
+                "high": 0,
+                "max": 0,
+                "oom": 0,
+                "oom_kill": 0,
+                "oom_group_kill": 0
+              },
+              "pressure": {
+                "some": {
+                  "total": 0
+                },
+                "full": {
+                  "total": 0
+                }
+              }
+            },
+            "io": {
+              "stat": {
+                "254:0": {
+                  "rbytes": 66002944,
+                  "wbytes": 31330304,
+                  "rios": 617,
+                  "wios": 83,
+                  "dbytes": 0,
+                  "dios": 0
+                }
+              },
+              "pressure": {
+                "some": {
+                  "total": 123562
+                },
+                "full": {
+                  "total": 123562
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "index": 2,
+      "id": "email-683m-buffer-cast-r1",
+      "artifact": "operations/002-email-683m-buffer-cast-r1.log",
+      "startedAt": "2026-07-15T22:49:28.058Z",
+      "completedAt": "2026-07-15T22:49:32.229Z",
+      "status": 0,
+      "signal": null,
+      "productContainer": {
+        "id": "a98996ca5c52beb747dd322b23bf435163a177df69ef85fa6d17fc49722b3f24",
+        "imageID": "sha256:3992b7bfb876abe91c6ac77d93e4d473f25c915513d68dbcc4332b0a3dae1bb0",
+        "created": "2026-07-15T22:49:28.085110679Z",
+        "state": {
+          "status": "exited",
+          "exitCode": 0,
+          "oomKilled": false
+        },
+        "constraints": {
+          "cpusetCpus": "0",
+          "nanoCpus": 1000000000,
+          "memory": 3221225472,
+          "memorySwap": 3221225472,
+          "pidsLimit": 1024
+        }
+      },
+      "postgres": {
+        "container": {
+          "id": "6c9a2598e9d7e798bdde0448f870767c32bc6e9082f916f950bfae9e5ffcbf9d",
+          "imageID": "sha256:742f40ea20b9ff2ff31db5458d127452988a2164df9e17441e191f3b72252193",
+          "created": "2026-07-15T22:49:26.322398011Z",
+          "state": {
+            "status": "running",
+            "exitCode": 0,
+            "oomKilled": false
+          },
+          "constraints": {
+            "cpusetCpus": "2-3",
+            "nanoCpus": 2000000000,
+            "memory": 2147483648,
+            "memorySwap": 4294967296,
+            "pidsLimit": null
+          }
+        },
+        "systemIdentifier": "7662890667805433889",
+        "image": {
+          "reference": "postgres:17-alpine@sha256:742f40ea20b9ff2ff31db5458d127452988a2164df9e17441e191f3b72252193",
+          "id": "sha256:742f40ea20b9ff2ff31db5458d127452988a2164df9e17441e191f3b72252193",
+          "repoDigests": [
+            "postgres@sha256:742f40ea20b9ff2ff31db5458d127452988a2164df9e17441e191f3b72252193"
+          ],
+          "created": "2026-07-07T17:46:49.401690597Z",
+          "os": "linux",
+          "architecture": "arm64",
+          "variant": "v8",
+          "labels": {},
+          "rootFSLayers": [
+            "sha256:b2848c02ac6ff53d265469b5b30f649f335e546a83330cd8916d54e65e640409",
+            "sha256:3276ea79c0c0c02b7d702de4aa0bf6b60d4b3f1b295b30366973c4ec4bf91249",
+            "sha256:d7d195016259883bbb161fb50292c1be3f96f0c9b50c573cbb0ed57e64dfa2c9",
+            "sha256:1ebee87cc825164b634bd6837685531c240dcfe5a1cf507cb6e8df057f661cbf",
+            "sha256:df8da200347edec60626a356f574551d1ecb9e7727402137d7d1bc6cb3cf11db",
+            "sha256:40252c7d7df3e6b969af3fa01b51346fbff89b508a6f2c5a9f457d23e797cf64",
+            "sha256:11b7e3ae2bd33cf903077779b2178d1242006f750906c41d9941cd45be4c6175",
+            "sha256:60d0936c2e0dac1f79128a468e3259644a610850f2ce98c238027943b5e87108",
+            "sha256:60d2d3ed3afa870cf11fe567074bfc1c37e1f0488fe4f9259b4b4ccd6084c209",
+            "sha256:66c221f9d5b6c9542d87a9f5143ffa653ce6628a4db739870abede8c87da99af"
+          ]
+        },
+        "sourceStrategy": {
+          "clone": "regenerate-isolated-database",
+          "reset": "drop-database-after-run"
+        },
+        "runnerIsolation": {
+          "strategy": "fresh-container-per-operation",
+          "reset": "new-empty-data-directory",
+          "scope": "arm-and-repetition"
+        },
+        "cgroup": {
+          "before": {
+            "capturedAt": "2026-07-15T22:49:27.305Z",
+            "cpu": {
+              "cpusetCpus": "2-3",
+              "cpusetCpusEffective": "2-3",
+              "max": "200000 100000",
+              "stat": {
+                "usage_usec": 441804,
+                "user_usec": 294536,
+                "system_usec": 147268,
+                "nice_usec": 0,
+                "nr_periods": 11,
+                "nr_throttled": 0,
+                "throttled_usec": 0,
+                "nr_bursts": 0,
+                "burst_usec": 0
+              },
+              "pressure": {
+                "some": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 15534
+                },
+                "full": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 1909
+                }
+              }
+            },
+            "memory": {
+              "current": 66793472,
+              "max": 2147483648,
+              "peak": 76877824,
+              "events": {
+                "low": 0,
+                "high": 0,
+                "max": 0,
+                "oom": 0,
+                "oom_kill": 0,
+                "oom_group_kill": 0
+              },
+              "eventsLocal": {
+                "low": 0,
+                "high": 0,
+                "max": 0,
+                "oom": 0,
+                "oom_kill": 0,
+                "oom_group_kill": 0
+              },
+              "pressure": {
+                "some": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 0
+                },
+                "full": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 0
+                }
+              }
+            },
+            "io": {
+              "stat": {
+                "254:0": {
+                  "rbytes": 0,
+                  "wbytes": 40288256,
+                  "rios": 0,
+                  "wios": 1818,
+                  "dbytes": 0,
+                  "dios": 0
+                }
+              },
+              "pressure": {
+                "some": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 5330
+                },
+                "full": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 5283
+                }
+              }
+            }
+          },
+          "after": {
+            "capturedAt": "2026-07-15T22:49:32.262Z",
+            "cpu": {
+              "cpusetCpus": "2-3",
+              "cpusetCpusEffective": "2-3",
+              "max": "200000 100000",
+              "stat": {
+                "usage_usec": 1479049,
+                "user_usec": 728365,
+                "system_usec": 750683,
+                "nice_usec": 0,
+                "nr_periods": 44,
+                "nr_throttled": 0,
+                "throttled_usec": 0,
+                "nr_bursts": 0,
+                "burst_usec": 0
+              },
+              "pressure": {
+                "some": {
+                  "avg10": "0.12",
+                  "avg60": "0.02",
+                  "avg300": "0.00",
+                  "total": 32768
+                },
+                "full": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 4132
+                }
+              }
+            },
+            "memory": {
+              "current": 108478464,
+              "max": 2147483648,
+              "peak": 153362432,
+              "events": {
+                "low": 0,
+                "high": 0,
+                "max": 0,
+                "oom": 0,
+                "oom_kill": 0,
+                "oom_group_kill": 0
+              },
+              "eventsLocal": {
+                "low": 0,
+                "high": 0,
+                "max": 0,
+                "oom": 0,
+                "oom_kill": 0,
+                "oom_group_kill": 0
+              },
+              "pressure": {
+                "some": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 0
+                },
+                "full": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 0
+                }
+              }
+            },
+            "io": {
+              "stat": {
+                "254:0": {
+                  "rbytes": 0,
+                  "wbytes": 71618560,
+                  "rios": 0,
+                  "wios": 1903,
+                  "dbytes": 0,
+                  "dios": 0
+                }
+              },
+              "pressure": {
+                "some": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 14689
+                },
+                "full": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 14641
+                }
+              }
+            }
+          },
+          "delta": {
+            "cpu": {
+              "stat": {
+                "usage_usec": 1037245,
+                "user_usec": 433829,
+                "system_usec": 603415,
+                "nice_usec": 0,
+                "nr_periods": 33,
+                "nr_throttled": 0,
+                "throttled_usec": 0,
+                "nr_bursts": 0,
+                "burst_usec": 0
+              },
+              "pressure": {
+                "some": {
+                  "total": 17234
+                },
+                "full": {
+                  "total": 2223
+                }
+              }
+            },
+            "memory": {
+              "current": 41684992,
+              "max": 0,
+              "peak": 76484608,
+              "events": {
+                "low": 0,
+                "high": 0,
+                "max": 0,
+                "oom": 0,
+                "oom_kill": 0,
+                "oom_group_kill": 0
+              },
+              "eventsLocal": {
+                "low": 0,
+                "high": 0,
+                "max": 0,
+                "oom": 0,
+                "oom_kill": 0,
+                "oom_group_kill": 0
+              },
+              "pressure": {
+                "some": {
+                  "total": 0
+                },
+                "full": {
+                  "total": 0
+                }
+              }
+            },
+            "io": {
+              "stat": {
+                "254:0": {
+                  "rbytes": 0,
+                  "wbytes": 31330304,
+                  "rios": 0,
+                  "wios": 85,
+                  "dbytes": 0,
+                  "dios": 0
+                }
+              },
+              "pressure": {
+                "some": {
+                  "total": 9359
+                },
+                "full": {
+                  "total": 9358
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "index": 3,
+      "id": "imports-550m-string-decoding-r1",
+      "artifact": "operations/003-imports-550m-string-decoding-r1.log",
+      "startedAt": "2026-07-15T22:49:35.124Z",
+      "completedAt": "2026-07-15T22:49:41.905Z",
+      "status": 0,
+      "signal": null,
+      "productContainer": {
+        "id": "e94f3e9e5fe587c469eacaf0a98ae36698cd54c8cbb5edfce265075ea3747128",
+        "imageID": "sha256:bf3d08284172f2dd6412242f021acc79d5632b75e28463493f21bd706e915d6a",
+        "created": "2026-07-15T22:49:35.151716501Z",
+        "state": {
+          "status": "exited",
+          "exitCode": 0,
+          "oomKilled": false
+        },
+        "constraints": {
+          "cpusetCpus": "0",
+          "nanoCpus": 1000000000,
+          "memory": 3221225472,
+          "memorySwap": 3221225472,
+          "pidsLimit": 1024
+        }
+      },
+      "postgres": {
+        "container": {
+          "id": "9ed3a2416f7634bf2eb60b29ce85f69a289ea53e95b3fb661cdd8a294e5d6069",
+          "imageID": "sha256:742f40ea20b9ff2ff31db5458d127452988a2164df9e17441e191f3b72252193",
+          "created": "2026-07-15T22:49:33.307168375Z",
+          "state": {
+            "status": "running",
+            "exitCode": 0,
+            "oomKilled": false
+          },
+          "constraints": {
+            "cpusetCpus": "2-3",
+            "nanoCpus": 2000000000,
+            "memory": 2147483648,
+            "memorySwap": 4294967296,
+            "pidsLimit": null
+          }
+        },
+        "systemIdentifier": "7662890697834762273",
+        "image": {
+          "reference": "postgres:17-alpine@sha256:742f40ea20b9ff2ff31db5458d127452988a2164df9e17441e191f3b72252193",
+          "id": "sha256:742f40ea20b9ff2ff31db5458d127452988a2164df9e17441e191f3b72252193",
+          "repoDigests": [
+            "postgres@sha256:742f40ea20b9ff2ff31db5458d127452988a2164df9e17441e191f3b72252193"
+          ],
+          "created": "2026-07-07T17:46:49.401690597Z",
+          "os": "linux",
+          "architecture": "arm64",
+          "variant": "v8",
+          "labels": {},
+          "rootFSLayers": [
+            "sha256:b2848c02ac6ff53d265469b5b30f649f335e546a83330cd8916d54e65e640409",
+            "sha256:3276ea79c0c0c02b7d702de4aa0bf6b60d4b3f1b295b30366973c4ec4bf91249",
+            "sha256:d7d195016259883bbb161fb50292c1be3f96f0c9b50c573cbb0ed57e64dfa2c9",
+            "sha256:1ebee87cc825164b634bd6837685531c240dcfe5a1cf507cb6e8df057f661cbf",
+            "sha256:df8da200347edec60626a356f574551d1ecb9e7727402137d7d1bc6cb3cf11db",
+            "sha256:40252c7d7df3e6b969af3fa01b51346fbff89b508a6f2c5a9f457d23e797cf64",
+            "sha256:11b7e3ae2bd33cf903077779b2178d1242006f750906c41d9941cd45be4c6175",
+            "sha256:60d0936c2e0dac1f79128a468e3259644a610850f2ce98c238027943b5e87108",
+            "sha256:60d2d3ed3afa870cf11fe567074bfc1c37e1f0488fe4f9259b4b4ccd6084c209",
+            "sha256:66c221f9d5b6c9542d87a9f5143ffa653ce6628a4db739870abede8c87da99af"
+          ]
+        },
+        "sourceStrategy": {
+          "clone": "regenerate-isolated-database",
+          "reset": "drop-database-after-run"
+        },
+        "runnerIsolation": {
+          "strategy": "fresh-container-per-operation",
+          "reset": "new-empty-data-directory",
+          "scope": "arm-and-repetition"
+        },
+        "cgroup": {
+          "before": {
+            "capturedAt": "2026-07-15T22:49:34.291Z",
+            "cpu": {
+              "cpusetCpus": "2-3",
+              "cpusetCpusEffective": "2-3",
+              "max": "200000 100000",
+              "stat": {
+                "usage_usec": 429768,
+                "user_usec": 272487,
+                "system_usec": 157281,
+                "nice_usec": 0,
+                "nr_periods": 12,
+                "nr_throttled": 0,
+                "throttled_usec": 0,
+                "nr_bursts": 0,
+                "burst_usec": 0
+              },
+              "pressure": {
+                "some": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 10370
+                },
+                "full": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 2229
+                }
+              }
+            },
+            "memory": {
+              "current": 66703360,
+              "max": 2147483648,
+              "peak": 77086720,
+              "events": {
+                "low": 0,
+                "high": 0,
+                "max": 0,
+                "oom": 0,
+                "oom_kill": 0,
+                "oom_group_kill": 0
+              },
+              "eventsLocal": {
+                "low": 0,
+                "high": 0,
+                "max": 0,
+                "oom": 0,
+                "oom_kill": 0,
+                "oom_group_kill": 0
+              },
+              "pressure": {
+                "some": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 0
+                },
+                "full": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 0
+                }
+              }
+            },
+            "io": {
+              "stat": {
+                "254:0": {
+                  "rbytes": 0,
+                  "wbytes": 40288256,
+                  "rios": 0,
+                  "wios": 1822,
+                  "dbytes": 0,
+                  "dios": 0
+                }
+              },
+              "pressure": {
+                "some": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 6623
+                },
+                "full": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 6564
+                }
+              }
+            }
+          },
+          "after": {
+            "capturedAt": "2026-07-15T22:49:41.933Z",
+            "cpu": {
+              "cpusetCpus": "2-3",
+              "cpusetCpusEffective": "2-3",
+              "max": "200000 100000",
+              "stat": {
+                "usage_usec": 5065533,
+                "user_usec": 3836948,
+                "system_usec": 1228584,
+                "nice_usec": 0,
+                "nr_periods": 74,
+                "nr_throttled": 0,
+                "throttled_usec": 0,
+                "nr_bursts": 0,
+                "burst_usec": 0
+              },
+              "pressure": {
+                "some": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 21249
+                },
+                "full": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 4521
+                }
+              }
+            },
+            "memory": {
+              "current": 108314624,
+              "max": 2147483648,
+              "peak": 152240128,
+              "events": {
+                "low": 0,
+                "high": 0,
+                "max": 0,
+                "oom": 0,
+                "oom_kill": 0,
+                "oom_group_kill": 0
+              },
+              "eventsLocal": {
+                "low": 0,
+                "high": 0,
+                "max": 0,
+                "oom": 0,
+                "oom_kill": 0,
+                "oom_group_kill": 0
+              },
+              "pressure": {
+                "some": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 0
+                },
+                "full": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 0
+                }
+              }
+            },
+            "io": {
+              "stat": {
+                "254:0": {
+                  "rbytes": 0,
+                  "wbytes": 70119424,
+                  "rios": 0,
+                  "wios": 1915,
+                  "dbytes": 0,
+                  "dios": 0
+                }
+              },
+              "pressure": {
+                "some": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 14989
+                },
+                "full": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 14930
+                }
+              }
+            }
+          },
+          "delta": {
+            "cpu": {
+              "stat": {
+                "usage_usec": 4635765,
+                "user_usec": 3564461,
+                "system_usec": 1071303,
+                "nice_usec": 0,
+                "nr_periods": 62,
+                "nr_throttled": 0,
+                "throttled_usec": 0,
+                "nr_bursts": 0,
+                "burst_usec": 0
+              },
+              "pressure": {
+                "some": {
+                  "total": 10879
+                },
+                "full": {
+                  "total": 2292
+                }
+              }
+            },
+            "memory": {
+              "current": 41611264,
+              "max": 0,
+              "peak": 75153408,
+              "events": {
+                "low": 0,
+                "high": 0,
+                "max": 0,
+                "oom": 0,
+                "oom_kill": 0,
+                "oom_group_kill": 0
+              },
+              "eventsLocal": {
+                "low": 0,
+                "high": 0,
+                "max": 0,
+                "oom": 0,
+                "oom_kill": 0,
+                "oom_group_kill": 0
+              },
+              "pressure": {
+                "some": {
+                  "total": 0
+                },
+                "full": {
+                  "total": 0
+                }
+              }
+            },
+            "io": {
+              "stat": {
+                "254:0": {
+                  "rbytes": 0,
+                  "wbytes": 29831168,
+                  "rios": 0,
+                  "wios": 93,
+                  "dbytes": 0,
+                  "dios": 0
+                }
+              },
+              "pressure": {
+                "some": {
+                  "total": 8366
+                },
+                "full": {
+                  "total": 8366
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "index": 4,
+      "id": "imports-550m-buffer-cast-r1",
+      "artifact": "operations/004-imports-550m-buffer-cast-r1.log",
+      "startedAt": "2026-07-15T22:49:44.814Z",
+      "completedAt": "2026-07-15T22:49:51.647Z",
+      "status": 0,
+      "signal": null,
+      "productContainer": {
+        "id": "ebd23582bf469cf93c7bf24010512c0980f529d3b5bb717c4534f90eba846198",
+        "imageID": "sha256:3992b7bfb876abe91c6ac77d93e4d473f25c915513d68dbcc4332b0a3dae1bb0",
+        "created": "2026-07-15T22:49:44.842885214Z",
+        "state": {
+          "status": "exited",
+          "exitCode": 0,
+          "oomKilled": false
+        },
+        "constraints": {
+          "cpusetCpus": "0",
+          "nanoCpus": 1000000000,
+          "memory": 3221225472,
+          "memorySwap": 3221225472,
+          "pidsLimit": 1024
+        }
+      },
+      "postgres": {
+        "container": {
+          "id": "17cc870558c2e79ef2f5a7bb73f6e14e72082146a23e27d1dceef8f4b5de7aed",
+          "imageID": "sha256:742f40ea20b9ff2ff31db5458d127452988a2164df9e17441e191f3b72252193",
+          "created": "2026-07-15T22:49:43.006049005Z",
+          "state": {
+            "status": "running",
+            "exitCode": 0,
+            "oomKilled": false
+          },
+          "constraints": {
+            "cpusetCpus": "2-3",
+            "nanoCpus": 2000000000,
+            "memory": 2147483648,
+            "memorySwap": 4294967296,
+            "pidsLimit": null
+          }
+        },
+        "systemIdentifier": "7662890739491332129",
+        "image": {
+          "reference": "postgres:17-alpine@sha256:742f40ea20b9ff2ff31db5458d127452988a2164df9e17441e191f3b72252193",
+          "id": "sha256:742f40ea20b9ff2ff31db5458d127452988a2164df9e17441e191f3b72252193",
+          "repoDigests": [
+            "postgres@sha256:742f40ea20b9ff2ff31db5458d127452988a2164df9e17441e191f3b72252193"
+          ],
+          "created": "2026-07-07T17:46:49.401690597Z",
+          "os": "linux",
+          "architecture": "arm64",
+          "variant": "v8",
+          "labels": {},
+          "rootFSLayers": [
+            "sha256:b2848c02ac6ff53d265469b5b30f649f335e546a83330cd8916d54e65e640409",
+            "sha256:3276ea79c0c0c02b7d702de4aa0bf6b60d4b3f1b295b30366973c4ec4bf91249",
+            "sha256:d7d195016259883bbb161fb50292c1be3f96f0c9b50c573cbb0ed57e64dfa2c9",
+            "sha256:1ebee87cc825164b634bd6837685531c240dcfe5a1cf507cb6e8df057f661cbf",
+            "sha256:df8da200347edec60626a356f574551d1ecb9e7727402137d7d1bc6cb3cf11db",
+            "sha256:40252c7d7df3e6b969af3fa01b51346fbff89b508a6f2c5a9f457d23e797cf64",
+            "sha256:11b7e3ae2bd33cf903077779b2178d1242006f750906c41d9941cd45be4c6175",
+            "sha256:60d0936c2e0dac1f79128a468e3259644a610850f2ce98c238027943b5e87108",
+            "sha256:60d2d3ed3afa870cf11fe567074bfc1c37e1f0488fe4f9259b4b4ccd6084c209",
+            "sha256:66c221f9d5b6c9542d87a9f5143ffa653ce6628a4db739870abede8c87da99af"
+          ]
+        },
+        "sourceStrategy": {
+          "clone": "regenerate-isolated-database",
+          "reset": "drop-database-after-run"
+        },
+        "runnerIsolation": {
+          "strategy": "fresh-container-per-operation",
+          "reset": "new-empty-data-directory",
+          "scope": "arm-and-repetition"
+        },
+        "cgroup": {
+          "before": {
+            "capturedAt": "2026-07-15T22:49:43.982Z",
+            "cpu": {
+              "cpusetCpus": "2-3",
+              "cpusetCpusEffective": "2-3",
+              "max": "200000 100000",
+              "stat": {
+                "usage_usec": 434090,
+                "user_usec": 271433,
+                "system_usec": 162656,
+                "nice_usec": 0,
+                "nr_periods": 12,
+                "nr_throttled": 0,
+                "throttled_usec": 0,
+                "nr_bursts": 0,
+                "burst_usec": 0
+              },
+              "pressure": {
+                "some": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 16923
+                },
+                "full": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 2581
+                }
+              }
+            },
+            "memory": {
+              "current": 66748416,
+              "max": 2147483648,
+              "peak": 78667776,
+              "events": {
+                "low": 0,
+                "high": 0,
+                "max": 0,
+                "oom": 0,
+                "oom_kill": 0,
+                "oom_group_kill": 0
+              },
+              "eventsLocal": {
+                "low": 0,
+                "high": 0,
+                "max": 0,
+                "oom": 0,
+                "oom_kill": 0,
+                "oom_group_kill": 0
+              },
+              "pressure": {
+                "some": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 0
+                },
+                "full": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 0
+                }
+              }
+            },
+            "io": {
+              "stat": {
+                "254:0": {
+                  "rbytes": 0,
+                  "wbytes": 40288256,
+                  "rios": 0,
+                  "wios": 1822,
+                  "dbytes": 0,
+                  "dios": 0
+                }
+              },
+              "pressure": {
+                "some": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 8305
+                },
+                "full": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 8247
+                }
+              }
+            }
+          },
+          "after": {
+            "capturedAt": "2026-07-15T22:49:51.677Z",
+            "cpu": {
+              "cpusetCpus": "2-3",
+              "cpusetCpusEffective": "2-3",
+              "max": "200000 100000",
+              "stat": {
+                "usage_usec": 5043767,
+                "user_usec": 3903297,
+                "system_usec": 1140469,
+                "nice_usec": 0,
+                "nr_periods": 76,
+                "nr_throttled": 0,
+                "throttled_usec": 0,
+                "nr_bursts": 0,
+                "burst_usec": 0
+              },
+              "pressure": {
+                "some": {
+                  "avg10": "0.09",
+                  "avg60": "0.02",
+                  "avg300": "0.00",
+                  "total": 30595
+                },
+                "full": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 4515
+                }
+              }
+            },
+            "memory": {
+              "current": 108290048,
+              "max": 2147483648,
+              "peak": 150355968,
+              "events": {
+                "low": 0,
+                "high": 0,
+                "max": 0,
+                "oom": 0,
+                "oom_kill": 0,
+                "oom_group_kill": 0
+              },
+              "eventsLocal": {
+                "low": 0,
+                "high": 0,
+                "max": 0,
+                "oom": 0,
+                "oom_kill": 0,
+                "oom_group_kill": 0
+              },
+              "pressure": {
+                "some": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 0
+                },
+                "full": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 0
+                }
+              }
+            },
+            "io": {
+              "stat": {
+                "254:0": {
+                  "rbytes": 0,
+                  "wbytes": 70119424,
+                  "rios": 0,
+                  "wios": 1914,
+                  "dbytes": 0,
+                  "dios": 0
+                }
+              },
+              "pressure": {
+                "some": {
+                  "avg10": "0.72",
+                  "avg60": "0.13",
+                  "avg300": "0.02",
+                  "total": 111958
+                },
+                "full": {
+                  "avg10": "0.72",
+                  "avg60": "0.13",
+                  "avg300": "0.02",
+                  "total": 111900
+                }
+              }
+            }
+          },
+          "delta": {
+            "cpu": {
+              "stat": {
+                "usage_usec": 4609677,
+                "user_usec": 3631864,
+                "system_usec": 977813,
+                "nice_usec": 0,
+                "nr_periods": 64,
+                "nr_throttled": 0,
+                "throttled_usec": 0,
+                "nr_bursts": 0,
+                "burst_usec": 0
+              },
+              "pressure": {
+                "some": {
+                  "total": 13672
+                },
+                "full": {
+                  "total": 1934
+                }
+              }
+            },
+            "memory": {
+              "current": 41541632,
+              "max": 0,
+              "peak": 71688192,
+              "events": {
+                "low": 0,
+                "high": 0,
+                "max": 0,
+                "oom": 0,
+                "oom_kill": 0,
+                "oom_group_kill": 0
+              },
+              "eventsLocal": {
+                "low": 0,
+                "high": 0,
+                "max": 0,
+                "oom": 0,
+                "oom_kill": 0,
+                "oom_group_kill": 0
+              },
+              "pressure": {
+                "some": {
+                  "total": 0
+                },
+                "full": {
+                  "total": 0
+                }
+              }
+            },
+            "io": {
+              "stat": {
+                "254:0": {
+                  "rbytes": 0,
+                  "wbytes": 29831168,
+                  "rios": 0,
+                  "wios": 92,
+                  "dbytes": 0,
+                  "dios": 0
+                }
+              },
+              "pressure": {
+                "some": {
+                  "total": 103653
+                },
+                "full": {
+                  "total": 103653
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "completedAt": "2026-07-15T22:49:52.705Z"
+}

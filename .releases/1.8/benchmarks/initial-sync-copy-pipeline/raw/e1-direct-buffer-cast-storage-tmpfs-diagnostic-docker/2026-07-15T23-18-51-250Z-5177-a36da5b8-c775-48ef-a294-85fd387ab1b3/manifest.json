@@ -1,0 +1,5251 @@
+{
+  "schemaVersion": 2,
+  "stage": "e1-direct-buffer-cast-storage-tmpfs-diagnostic",
+  "runToken": "2026-07-15T23-18-51-250Z-5177-a36da5b8-c775-48ef-a294-85fd387ab1b3",
+  "generatedAt": "2026-07-15T23:18:51.250Z",
+  "mode": "noncanonical",
+  "execute": true,
+  "reuseImages": true,
+  "status": "complete",
+  "evidence": {
+    "eligible": false,
+    "classification": "noncanonical",
+    "reasons": [
+      "runner was explicitly noncanonical",
+      "stage has no predeclared analysis plan",
+      "one or more fixture profiles are not canonical"
+    ]
+  },
+  "platform": "linux/arm64",
+  "environment": {
+    "dockerServer": {
+      "Platform": {
+        "Name": "Docker Desktop 4.82.0 (233772)"
+      },
+      "Version": "29.6.1",
+      "ApiVersion": "1.55",
+      "MinAPIVersion": "1.40",
+      "Os": "linux",
+      "Arch": "arm64",
+      "Components": [
+        {
+          "Name": "Engine",
+          "Version": "29.6.1",
+          "Details": {
+            "ApiVersion": "1.55",
+            "Arch": "arm64",
+            "BuildTime": "Fri Jun 26 11:39:58 2026",
+            "Experimental": "false",
+            "GitCommit": "8ec5ab3",
+            "GoVersion": "go1.26.4",
+            "KernelVersion": "6.12.76-linuxkit",
+            "MinAPIVersion": "1.40",
+            "Module": "github.com/moby/moby/v2",
+            "ModuleVersion": "v2.0.0+unknown",
+            "Os": "linux"
+          }
+        },
+        {
+          "Name": "containerd",
+          "Version": "v2.2.5",
+          "Details": {
+            "GitCommit": "e53c7c1516c3b2bff98eb76f1f4117477e6f4e66"
+          }
+        },
+        {
+          "Name": "runc",
+          "Version": "1.3.6",
+          "Details": {
+            "GitCommit": "v1.3.6-0-g491b69ba"
+          }
+        },
+        {
+          "Name": "docker-init",
+          "Version": "0.19.0",
+          "Details": {
+            "GitCommit": "de40ad0"
+          }
+        }
+      ],
+      "GitCommit": "8ec5ab3",
+      "GoVersion": "go1.26.4",
+      "KernelVersion": "6.12.76-linuxkit",
+      "BuildTime": "2026-06-26T11:39:58.000000000+00:00"
+    },
+    "dockerInfo": {
+      "id": "6e6f630a-e4c8-45f6-9e6c-7f6a95d8dba5",
+      "driver": "overlayfs",
+      "cgroupDriver": "cgroupfs",
+      "cgroupVersion": "2",
+      "kernelVersion": "6.12.76-linuxkit",
+      "operatingSystem": "Docker Desktop",
+      "architecture": "aarch64",
+      "nCPU": 14,
+      "memoryBytes": 25161015296
+    }
+  },
+  "ordering": "paired-ab-ba",
+  "selection": {
+    "requestedLimit": null,
+    "completeStage": true,
+    "selectedBlocks": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "plannedBlocks": 6,
+    "selectedRunCount": 12,
+    "plannedRunCount": 12
+  },
+  "processIsolation": {
+    "measuredOperationsPerContainer": 1,
+    "measuredOperationsPerVitestInvocation": 1,
+    "fileParallelism": false,
+    "maxWorkers": 1
+  },
+  "analysisPlan": null,
+  "baseImageReferences": {
+    "node": "node:22-bookworm-slim@sha256:6c74791e557ce11fc957704f6d4fe134a7bc8d6f5ca4403205b2966bd488f6b3",
+    "postgres": "postgres:17-alpine@sha256:742f40ea20b9ff2ff31db5458d127452988a2164df9e17441e191f3b72252193"
+  },
+  "baseImages": {
+    "node": {
+      "reference": "node:22-bookworm-slim@sha256:6c74791e557ce11fc957704f6d4fe134a7bc8d6f5ca4403205b2966bd488f6b3",
+      "id": "sha256:6c74791e557ce11fc957704f6d4fe134a7bc8d6f5ca4403205b2966bd488f6b3",
+      "repoDigests": [
+        "node@sha256:6c74791e557ce11fc957704f6d4fe134a7bc8d6f5ca4403205b2966bd488f6b3"
+      ],
+      "created": "2026-07-14T01:51:48.417032893Z",
+      "os": "linux",
+      "architecture": "arm64",
+      "variant": "v8",
+      "labels": {},
+      "rootFSLayers": [
+        "sha256:12cdff3b039e28c684ffd2097ff5a66df274a8500966a1431038b05f50bcf096",
+        "sha256:43e4f3df99f20979a78cc4e6fb9e52bdc4ab31172750194f853005d88964db7e",
+        "sha256:2316784a23db74c15d46af9a7f2f891d2b44f77abbb4bed1e861b3268bdd946e",
+        "sha256:888e40d812f105ea5ea1263d750cf66a552432bb12d9b7436cbe345989d0f3c1",
+        "sha256:a491c257493e76fe1e68b7d0251d2497e59c543eed2289846fa87df1e227489f"
+      ]
+    },
+    "postgres": {
+      "reference": "postgres:17-alpine@sha256:742f40ea20b9ff2ff31db5458d127452988a2164df9e17441e191f3b72252193",
+      "id": "sha256:742f40ea20b9ff2ff31db5458d127452988a2164df9e17441e191f3b72252193",
+      "repoDigests": [
+        "postgres@sha256:742f40ea20b9ff2ff31db5458d127452988a2164df9e17441e191f3b72252193"
+      ],
+      "created": "2026-07-07T17:46:49.401690597Z",
+      "os": "linux",
+      "architecture": "arm64",
+      "variant": "v8",
+      "labels": {},
+      "rootFSLayers": [
+        "sha256:b2848c02ac6ff53d265469b5b30f649f335e546a83330cd8916d54e65e640409",
+        "sha256:3276ea79c0c0c02b7d702de4aa0bf6b60d4b3f1b295b30366973c4ec4bf91249",
+        "sha256:d7d195016259883bbb161fb50292c1be3f96f0c9b50c573cbb0ed57e64dfa2c9",
+        "sha256:1ebee87cc825164b634bd6837685531c240dcfe5a1cf507cb6e8df057f661cbf",
+        "sha256:df8da200347edec60626a356f574551d1ecb9e7727402137d7d1bc6cb3cf11db",
+        "sha256:40252c7d7df3e6b969af3fa01b51346fbff89b508a6f2c5a9f457d23e797cf64",
+        "sha256:11b7e3ae2bd33cf903077779b2178d1242006f750906c41d9941cd45be4c6175",
+        "sha256:60d0936c2e0dac1f79128a468e3259644a610850f2ce98c238027943b5e87108",
+        "sha256:60d2d3ed3afa870cf11fe567074bfc1c37e1f0488fe4f9259b4b4ccd6084c209",
+        "sha256:66c221f9d5b6c9542d87a9f5143ffa653ce6628a4db739870abede8c87da99af"
+      ]
+    }
+  },
+  "inputHashes": {
+    "initialSyncHarness": {
+      "path": "src/initial-sync-copy-pipeline.product.bench.pg.ts",
+      "sha256": "3c2a28b988ccd56a8f585d903983fc8aaa2dec33fb424e3e30e194e6b89beec5"
+    },
+    "parserHarness": {
+      "path": "src/pg-copy-parser.product.bench.ts",
+      "sha256": "94ed9b0953a0319473a139cb8c267af3fdbf0111dee30c156d2e23961bd1c012"
+    },
+    "dockerfile": {
+      "path": "Dockerfile.linux",
+      "sha256": "2379eb7f04895d51088433f473bae67a525c938194995a4c4775408975ea3ca9"
+    },
+    "adaptiveIndexDockerfile": {
+      "path": "Dockerfile.adaptive-index.linux",
+      "sha256": "9a7689f3cbb1b0d51ec58cd039c8dd67fae03e96fc86cd5fd28f4e8a498b99d1"
+    },
+    "adaptiveIndexPolicyTransform": {
+      "path": "scripts/force-eager-secondary-indexes.mjs",
+      "sha256": "329af5575f916a58cb3a550cfc2c9753512fa3c719320fbb49559efb1d384285"
+    },
+    "addonDockerfile": {
+      "path": "Dockerfile.addon-experiment.linux",
+      "sha256": "aeea538f45fcb2b307003ae1d528d5726d8b3434f03c200f990064f566e17755"
+    },
+    "addonLinker": {
+      "path": "scripts/link-local-addon.mjs",
+      "sha256": "8687773f148ff4e98e5ffd6528834480b1d69253ac72c4e02f9bfcc837ee4dd1"
+    },
+    "runner": {
+      "path": "scripts/run-docker.mjs",
+      "sha256": "f802473779b81c31965b9d03a4646a4441f37d0189c8a6df793aea59ab7ba14e"
+    },
+    "provenance": {
+      "path": "scripts/provenance.mjs",
+      "sha256": "51f0140e1f045fe46e4ea4985de8d8a76e019d20a297be2127b9736092b38d02"
+    },
+    "worktrees": {
+      "path": "config/worktrees.json",
+      "sha256": "c4f6fcba1b7111cdc4645a7b6fe0b6f566243c14c566bc4dcd00e9b9abad5468"
+    },
+    "profiles": {
+      "path": "config/integration-profiles.json",
+      "sha256": "b7b3e8a3a40e10e49d4e56d2415d53332b58210a30effc679ccb9ae69b22b0ca"
+    },
+    "stages": {
+      "path": "config/integration-stages.json",
+      "sha256": "239d87fc6bfb4b112834ddcb93efd17ea31aa8414a9acff40adf5906f8b986f0"
+    },
+    "runnerConfig": {
+      "path": "config/runner.json",
+      "sha256": "d49052232ec5c66e19db659b1a3b8204770f5162383d54b5a52cc448320b1877"
+    }
+  },
+  "sources": {
+    "origin-main": {
+      "path": "/Users/chase/.worktree/mono/initial-sync-experiment-baseline",
+      "commit": "bc1db665f30ee341011697128a5414d2bbc7ea7c",
+      "tree": "6c3164a01a41cbe27dfedd9bb8f0bd956544dca1",
+      "clean": true,
+      "status": "",
+      "diffSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "trackedDiffSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "trackedContentSHA256": "c639c29b18352d686ca0a5babe7baa82451ab1f23a7823eb8c8ccdf6457e3222",
+      "contentSHA256": "f3153b5307666e672acb658b8063949bd9328cb6b2a427fc70b2ffd7cb0118ef",
+      "untracked": []
+    },
+    "direct-buffer-cast": {
+      "path": "/Users/chase/.worktree/mono/direct-copy-text-buffers",
+      "commit": "27683b82b1e3c31b99e7fe39959a320712646a24",
+      "tree": "f033e60d315f902555d2ff7a868050eba402a635",
+      "clean": true,
+      "status": "",
+      "diffSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "trackedDiffSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "trackedContentSHA256": "f5651be9c517f4e117f5f5a6fc26a37ce32934f8ba15664f7152475579c2b004",
+      "contentSHA256": "ac8ce4b39a6b4680706cc9989120d97b0c793a682534c317ca182ab473c108ed",
+      "untracked": []
+    }
+  },
+  "addonSources": {},
+  "addonBuildPolicy": {
+    "source": "local-worktree-only",
+    "packagePublishing": false,
+    "npmCanaryFetch": false,
+    "platform": "linux/arm64"
+  },
+  "images": {
+    "origin-main": {
+      "tag": "zero-copy-pipeline-origin-main:local",
+      "reference": "zero-copy-pipeline-origin-main:local",
+      "id": "sha256:608bcd8ef3ea69112858c71e9d7517889157764fba6921cc0dbdf6790d4b889d",
+      "repoDigests": [
+        "zero-copy-pipeline-origin-main@sha256:608bcd8ef3ea69112858c71e9d7517889157764fba6921cc0dbdf6790d4b889d"
+      ],
+      "created": "2026-07-15T22:47:09.983194753Z",
+      "os": "linux",
+      "architecture": "arm64",
+      "variant": null,
+      "labels": {
+        "dev.rocicorp.zero-benchmark.build-inputs-sha256": "b5a29c1e4e1a11002108edc802e88cdecfb2c06aff0958eccc0ed73d328bb903",
+        "dev.rocicorp.zero-benchmark.config-sha256": "b7b3e8a3a40e10e49d4e56d2415d53332b58210a30effc679ccb9ae69b22b0ca",
+        "dev.rocicorp.zero-benchmark.harness-sha256": "3c2a28b988ccd56a8f585d903983fc8aaa2dec33fb424e3e30e194e6b89beec5",
+        "dev.rocicorp.zero-benchmark.node-image": "node:22-bookworm-slim@sha256:6c74791e557ce11fc957704f6d4fe134a7bc8d6f5ca4403205b2966bd488f6b3",
+        "dev.rocicorp.zero-benchmark.runner-sha256": "f802473779b81c31965b9d03a4646a4441f37d0189c8a6df793aea59ab7ba14e",
+        "dev.rocicorp.zero-benchmark.source-commit": "bc1db665f30ee341011697128a5414d2bbc7ea7c",
+        "dev.rocicorp.zero-benchmark.source-content-sha256": "f3153b5307666e672acb658b8063949bd9328cb6b2a427fc70b2ffd7cb0118ef",
+        "dev.rocicorp.zero-benchmark.source-diff-sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "dev.rocicorp.zero-benchmark.source-tree": "6c3164a01a41cbe27dfedd9bb8f0bd956544dca1",
+        "dev.rocicorp.zero-benchmark.worktree": "origin-main"
+      },
+      "rootFSLayers": [
+        "sha256:12cdff3b039e28c684ffd2097ff5a66df274a8500966a1431038b05f50bcf096",
+        "sha256:43e4f3df99f20979a78cc4e6fb9e52bdc4ab31172750194f853005d88964db7e",
+        "sha256:2316784a23db74c15d46af9a7f2f891d2b44f77abbb4bed1e861b3268bdd946e",
+        "sha256:888e40d812f105ea5ea1263d750cf66a552432bb12d9b7436cbe345989d0f3c1",
+        "sha256:a491c257493e76fe1e68b7d0251d2497e59c543eed2289846fa87df1e227489f",
+        "sha256:dc422b62237a258cb7e290f4174773b3e90ebbc060493f82077fe962c92e65c5",
+        "sha256:40d44b29c6e9652a7154b3ad551bff65a1762c29bd44d45013bcb509a74b2014",
+        "sha256:ad63fc7a5b4cf07bb895d54f6adc81da2fb1cdbb47d038c757d1c306bdf9d298",
+        "sha256:7c8204b1f862ed65c9046246a0cfb9417b912a3bde9872278295cc3eee5bd9bc",
+        "sha256:140ce742b778187278318291daf71254bac2483f6be2b848f11421b245ddb287",
+        "sha256:958f976608ad5a0234ae37a4f0c3a148a18d8166c52bbf547a25b173cb2522d8",
+        "sha256:54ed084c7ad45f44892456f5b60a5b98a36b27a10ffcf363ffb0ed6d64ff920c",
+        "sha256:e957a7f7492608ba2ae3d2b7b86b98fc6bda3297f2c528e252cde04d7652e688",
+        "sha256:5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef"
+      ],
+      "worktree": "origin-main",
+      "addonWorktree": null,
+      "dockerfile": "Dockerfile.linux",
+      "buildInputs": {
+        "platform": "linux/arm64",
+        "dockerfile": {
+          "path": "Dockerfile.linux",
+          "sha256": "2379eb7f04895d51088433f473bae67a525c938194995a4c4775408975ea3ca9"
+        },
+        "mono": {
+          "commit": "bc1db665f30ee341011697128a5414d2bbc7ea7c",
+          "tree": "6c3164a01a41cbe27dfedd9bb8f0bd956544dca1",
+          "diffSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "trackedContentSHA256": "c639c29b18352d686ca0a5babe7baa82451ab1f23a7823eb8c8ccdf6457e3222",
+          "contentSHA256": "f3153b5307666e672acb658b8063949bd9328cb6b2a427fc70b2ffd7cb0118ef"
+        },
+        "sha256": "b5a29c1e4e1a11002108edc802e88cdecfb2c06aff0958eccc0ed73d328bb903"
+      },
+      "expectedLabels": {
+        "dev.rocicorp.zero-benchmark.worktree": "origin-main",
+        "dev.rocicorp.zero-benchmark.source-commit": "bc1db665f30ee341011697128a5414d2bbc7ea7c",
+        "dev.rocicorp.zero-benchmark.source-tree": "6c3164a01a41cbe27dfedd9bb8f0bd956544dca1",
+        "dev.rocicorp.zero-benchmark.source-diff-sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "dev.rocicorp.zero-benchmark.source-content-sha256": "f3153b5307666e672acb658b8063949bd9328cb6b2a427fc70b2ffd7cb0118ef",
+        "dev.rocicorp.zero-benchmark.harness-sha256": "3c2a28b988ccd56a8f585d903983fc8aaa2dec33fb424e3e30e194e6b89beec5",
+        "dev.rocicorp.zero-benchmark.config-sha256": "b7b3e8a3a40e10e49d4e56d2415d53332b58210a30effc679ccb9ae69b22b0ca",
+        "dev.rocicorp.zero-benchmark.runner-sha256": "f802473779b81c31965b9d03a4646a4441f37d0189c8a6df793aea59ab7ba14e",
+        "dev.rocicorp.zero-benchmark.node-image": "node:22-bookworm-slim@sha256:6c74791e557ce11fc957704f6d4fe134a7bc8d6f5ca4403205b2966bd488f6b3",
+        "dev.rocicorp.zero-benchmark.build-inputs-sha256": "b5a29c1e4e1a11002108edc802e88cdecfb2c06aff0958eccc0ed73d328bb903"
+      }
+    },
+    "direct-buffer-cast": {
+      "tag": "zero-copy-pipeline-direct-buffer-cast:local",
+      "reference": "zero-copy-pipeline-direct-buffer-cast:local",
+      "id": "sha256:3090a0fd3653f375d515c9a082ea90c4deb6099f990b2b32c01e2ce9d1431eba",
+      "repoDigests": [
+        "zero-copy-pipeline-direct-buffer-cast@sha256:3090a0fd3653f375d515c9a082ea90c4deb6099f990b2b32c01e2ce9d1431eba"
+      ],
+      "created": "2026-07-15T22:48:58.865812304Z",
+      "os": "linux",
+      "architecture": "arm64",
+      "variant": null,
+      "labels": {
+        "dev.rocicorp.zero-benchmark.build-inputs-sha256": "ed0e585819120c5589ad3866d17b7b521e9e7b786716de96e5056590b0c85b65",
+        "dev.rocicorp.zero-benchmark.config-sha256": "b7b3e8a3a40e10e49d4e56d2415d53332b58210a30effc679ccb9ae69b22b0ca",
+        "dev.rocicorp.zero-benchmark.harness-sha256": "3c2a28b988ccd56a8f585d903983fc8aaa2dec33fb424e3e30e194e6b89beec5",
+        "dev.rocicorp.zero-benchmark.node-image": "node:22-bookworm-slim@sha256:6c74791e557ce11fc957704f6d4fe134a7bc8d6f5ca4403205b2966bd488f6b3",
+        "dev.rocicorp.zero-benchmark.runner-sha256": "f802473779b81c31965b9d03a4646a4441f37d0189c8a6df793aea59ab7ba14e",
+        "dev.rocicorp.zero-benchmark.source-commit": "27683b82b1e3c31b99e7fe39959a320712646a24",
+        "dev.rocicorp.zero-benchmark.source-content-sha256": "ac8ce4b39a6b4680706cc9989120d97b0c793a682534c317ca182ab473c108ed",
+        "dev.rocicorp.zero-benchmark.source-diff-sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "dev.rocicorp.zero-benchmark.source-tree": "f033e60d315f902555d2ff7a868050eba402a635",
+        "dev.rocicorp.zero-benchmark.worktree": "direct-buffer-cast"
+      },
+      "rootFSLayers": [
+        "sha256:12cdff3b039e28c684ffd2097ff5a66df274a8500966a1431038b05f50bcf096",
+        "sha256:43e4f3df99f20979a78cc4e6fb9e52bdc4ab31172750194f853005d88964db7e",
+        "sha256:2316784a23db74c15d46af9a7f2f891d2b44f77abbb4bed1e861b3268bdd946e",
+        "sha256:888e40d812f105ea5ea1263d750cf66a552432bb12d9b7436cbe345989d0f3c1",
+        "sha256:a491c257493e76fe1e68b7d0251d2497e59c543eed2289846fa87df1e227489f",
+        "sha256:dc422b62237a258cb7e290f4174773b3e90ebbc060493f82077fe962c92e65c5",
+        "sha256:40d44b29c6e9652a7154b3ad551bff65a1762c29bd44d45013bcb509a74b2014",
+        "sha256:ad63fc7a5b4cf07bb895d54f6adc81da2fb1cdbb47d038c757d1c306bdf9d298",
+        "sha256:b7a657372e92fae380a415250c9a5f831fab59a221093bf3e2e2858a7b32fe40",
+        "sha256:4f0d4b532f9e89aef46f45b1753c21c8fa08bf76ebede6e7a0b44f3a46c161fa",
+        "sha256:2963b98a60bc1280c3436b6a3583ad9db7d249161ea8d4330a81ddc09d2cf8fd",
+        "sha256:95b404a35aaa3fd75ded92f439fc14ebf3233f999e28b61d44a800d40282b24b",
+        "sha256:b56ca3a3b03099134f7c37798f9e531bb0d6caf99f1f03d3f3ff24ff31403459",
+        "sha256:5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef"
+      ],
+      "worktree": "direct-buffer-cast",
+      "addonWorktree": null,
+      "dockerfile": "Dockerfile.linux",
+      "buildInputs": {
+        "platform": "linux/arm64",
+        "dockerfile": {
+          "path": "Dockerfile.linux",
+          "sha256": "2379eb7f04895d51088433f473bae67a525c938194995a4c4775408975ea3ca9"
+        },
+        "mono": {
+          "commit": "27683b82b1e3c31b99e7fe39959a320712646a24",
+          "tree": "f033e60d315f902555d2ff7a868050eba402a635",
+          "diffSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "trackedContentSHA256": "f5651be9c517f4e117f5f5a6fc26a37ce32934f8ba15664f7152475579c2b004",
+          "contentSHA256": "ac8ce4b39a6b4680706cc9989120d97b0c793a682534c317ca182ab473c108ed"
+        },
+        "sha256": "ed0e585819120c5589ad3866d17b7b521e9e7b786716de96e5056590b0c85b65"
+      },
+      "expectedLabels": {
+        "dev.rocicorp.zero-benchmark.worktree": "direct-buffer-cast",
+        "dev.rocicorp.zero-benchmark.source-commit": "27683b82b1e3c31b99e7fe39959a320712646a24",
+        "dev.rocicorp.zero-benchmark.source-tree": "f033e60d315f902555d2ff7a868050eba402a635",
+        "dev.rocicorp.zero-benchmark.source-diff-sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "dev.rocicorp.zero-benchmark.source-content-sha256": "ac8ce4b39a6b4680706cc9989120d97b0c793a682534c317ca182ab473c108ed",
+        "dev.rocicorp.zero-benchmark.harness-sha256": "3c2a28b988ccd56a8f585d903983fc8aaa2dec33fb424e3e30e194e6b89beec5",
+        "dev.rocicorp.zero-benchmark.config-sha256": "b7b3e8a3a40e10e49d4e56d2415d53332b58210a30effc679ccb9ae69b22b0ca",
+        "dev.rocicorp.zero-benchmark.runner-sha256": "f802473779b81c31965b9d03a4646a4441f37d0189c8a6df793aea59ab7ba14e",
+        "dev.rocicorp.zero-benchmark.node-image": "node:22-bookworm-slim@sha256:6c74791e557ce11fc957704f6d4fe134a7bc8d6f5ca4403205b2966bd488f6b3",
+        "dev.rocicorp.zero-benchmark.build-inputs-sha256": "ed0e585819120c5589ad3866d17b7b521e9e7b786716de96e5056590b0c85b65"
+      }
+    }
+  },
+  "postgresIsolation": {
+    "strategy": "fresh-container-per-operation",
+    "reset": "new-empty-data-directory",
+    "scope": "arm-and-repetition"
+  },
+  "postgresConstraints": {
+    "cpus": 2,
+    "memory": "2g",
+    "cpusetCpus": "2-3"
+  },
+  "sqliteStorage": {
+    "mode": "tmpfs",
+    "path": "/tmp",
+    "size": "1536m"
+  },
+  "appResourceInvariant": {
+    "cpus": 1,
+    "memory": "3g",
+    "nodeHeapMB": 2304
+  },
+  "expectedArtifacts": [
+    {
+      "path": "operations/001-email-683m-string-decoding-r1.log",
+      "kind": "operation-log",
+      "runID": "email-683m-string-decoding-r1",
+      "status": "complete",
+      "sha256": "4a8199a6440f567fec79a21d2288bfa3e303d73b5996d5b993120763e3b7cd36"
+    },
+    {
+      "path": "operations/002-email-683m-buffer-cast-r1.log",
+      "kind": "operation-log",
+      "runID": "email-683m-buffer-cast-r1",
+      "status": "complete",
+      "sha256": "6a8bd7957d002652ba98ad59351a7b9bf79d0c564c8c7f18a547f5fad79cc266"
+    },
+    {
+      "path": "operations/003-email-683m-buffer-cast-r2.log",
+      "kind": "operation-log",
+      "runID": "email-683m-buffer-cast-r2",
+      "status": "complete",
+      "sha256": "9ed64f2e0a0fa510fcffe1fd36f635f80116ff4b5be6aaf8c5852bb2503b7c98"
+    },
+    {
+      "path": "operations/004-email-683m-string-decoding-r2.log",
+      "kind": "operation-log",
+      "runID": "email-683m-string-decoding-r2",
+      "status": "complete",
+      "sha256": "84fd1d53c7648eae8540144ffb6bee093396453a4143ecc201eceafaca3e50c6"
+    },
+    {
+      "path": "operations/005-email-683m-string-decoding-r3.log",
+      "kind": "operation-log",
+      "runID": "email-683m-string-decoding-r3",
+      "status": "complete",
+      "sha256": "31621d70902db9553c5dffaf8733512f5e338b50033afe0a10c582bb27463d23"
+    },
+    {
+      "path": "operations/006-email-683m-buffer-cast-r3.log",
+      "kind": "operation-log",
+      "runID": "email-683m-buffer-cast-r3",
+      "status": "complete",
+      "sha256": "ac57ff25ff04182234323afc7503aaa3e9a2f43e0701aa64fd8f26004194e7d9"
+    },
+    {
+      "path": "operations/007-email-683m-buffer-cast-r4.log",
+      "kind": "operation-log",
+      "runID": "email-683m-buffer-cast-r4",
+      "status": "complete",
+      "sha256": "919267ec48bcf1df113558962b36b2c58ff9b38cb01962259e8e81a9c76781e1"
+    },
+    {
+      "path": "operations/008-email-683m-string-decoding-r4.log",
+      "kind": "operation-log",
+      "runID": "email-683m-string-decoding-r4",
+      "status": "complete",
+      "sha256": "4798929750c353bf0bcdedcd303b90359bfa17f5ae0bd9abdfc76a1c99ce79f0"
+    },
+    {
+      "path": "operations/009-email-683m-string-decoding-r5.log",
+      "kind": "operation-log",
+      "runID": "email-683m-string-decoding-r5",
+      "status": "complete",
+      "sha256": "622d727986616a127b0439189cc54e586fed9e70f2a0866e8767c6f9f177b611"
+    },
+    {
+      "path": "operations/010-email-683m-buffer-cast-r5.log",
+      "kind": "operation-log",
+      "runID": "email-683m-buffer-cast-r5",
+      "status": "complete",
+      "sha256": "3d61a5aedfdef6d59e7aa26a9a2718ee79de83fd78a374eb2748318d92a53ddb"
+    },
+    {
+      "path": "operations/011-email-683m-buffer-cast-r6.log",
+      "kind": "operation-log",
+      "runID": "email-683m-buffer-cast-r6",
+      "status": "complete",
+      "sha256": "c80a154f331f704ae5c94bc52b8f8a36585faf8a7f8cd913b3f9b17c20d367ef"
+    },
+    {
+      "path": "operations/012-email-683m-string-decoding-r6.log",
+      "kind": "operation-log",
+      "runID": "email-683m-string-decoding-r6",
+      "status": "complete",
+      "sha256": "8dae2242077df1f1d8ccad4b4407588a6599c0ec7e8fd14ca06829748052fb7e"
+    }
+  ],
+  "runs": [
+    {
+      "profile": "email-683m",
+      "worktree": "origin-main",
+      "label": "string-decoding",
+      "repetition": 1,
+      "overlay": null,
+      "imageKey": "origin-main",
+      "workerCount": 5,
+      "canonical": false,
+      "validationMode": "calibration",
+      "fixtureIdentity": {
+        "version": "legacy-email-fixture-v1",
+        "seed": 20250714
+      },
+      "cachePolicy": {
+        "declared": {
+          "sqlite": "default",
+          "mmapGiB": 1,
+          "osPageCache": "uncontrolled",
+          "betweenRuns": "new-replica-file"
+        },
+        "effective": {
+          "mmapGiB": 1
+        }
+      },
+      "cacheSettings": {
+        "mmapGiB": 1
+      },
+      "sourceStrategy": {
+        "clone": "regenerate-isolated-database",
+        "reset": "drop-database-after-run"
+      },
+      "postgresIsolation": {
+        "strategy": "fresh-container-per-operation",
+        "reset": "new-empty-data-directory",
+        "scope": "arm-and-repetition"
+      },
+      "expected": {
+        "rowCount": 1000,
+        "copyBytes": 683438323,
+        "copyDigest": null,
+        "contentDigest": null
+      },
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304,
+        "cpusetCpus": "0",
+        "cpuQuota": 1
+      }
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "direct-buffer-cast",
+      "label": "buffer-cast",
+      "repetition": 1,
+      "overlay": null,
+      "imageKey": "direct-buffer-cast",
+      "workerCount": 5,
+      "canonical": false,
+      "validationMode": "calibration",
+      "fixtureIdentity": {
+        "version": "legacy-email-fixture-v1",
+        "seed": 20250714
+      },
+      "cachePolicy": {
+        "declared": {
+          "sqlite": "default",
+          "mmapGiB": 1,
+          "osPageCache": "uncontrolled",
+          "betweenRuns": "new-replica-file"
+        },
+        "effective": {
+          "mmapGiB": 1
+        }
+      },
+      "cacheSettings": {
+        "mmapGiB": 1
+      },
+      "sourceStrategy": {
+        "clone": "regenerate-isolated-database",
+        "reset": "drop-database-after-run"
+      },
+      "postgresIsolation": {
+        "strategy": "fresh-container-per-operation",
+        "reset": "new-empty-data-directory",
+        "scope": "arm-and-repetition"
+      },
+      "expected": {
+        "rowCount": 1000,
+        "copyBytes": 683438323,
+        "copyDigest": null,
+        "contentDigest": null
+      },
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304,
+        "cpusetCpus": "0",
+        "cpuQuota": 1
+      }
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "direct-buffer-cast",
+      "label": "buffer-cast",
+      "repetition": 2,
+      "overlay": null,
+      "imageKey": "direct-buffer-cast",
+      "workerCount": 5,
+      "canonical": false,
+      "validationMode": "calibration",
+      "fixtureIdentity": {
+        "version": "legacy-email-fixture-v1",
+        "seed": 20250714
+      },
+      "cachePolicy": {
+        "declared": {
+          "sqlite": "default",
+          "mmapGiB": 1,
+          "osPageCache": "uncontrolled",
+          "betweenRuns": "new-replica-file"
+        },
+        "effective": {
+          "mmapGiB": 1
+        }
+      },
+      "cacheSettings": {
+        "mmapGiB": 1
+      },
+      "sourceStrategy": {
+        "clone": "regenerate-isolated-database",
+        "reset": "drop-database-after-run"
+      },
+      "postgresIsolation": {
+        "strategy": "fresh-container-per-operation",
+        "reset": "new-empty-data-directory",
+        "scope": "arm-and-repetition"
+      },
+      "expected": {
+        "rowCount": 1000,
+        "copyBytes": 683438323,
+        "copyDigest": null,
+        "contentDigest": null
+      },
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304,
+        "cpusetCpus": "0",
+        "cpuQuota": 1
+      }
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "origin-main",
+      "label": "string-decoding",
+      "repetition": 2,
+      "overlay": null,
+      "imageKey": "origin-main",
+      "workerCount": 5,
+      "canonical": false,
+      "validationMode": "calibration",
+      "fixtureIdentity": {
+        "version": "legacy-email-fixture-v1",
+        "seed": 20250714
+      },
+      "cachePolicy": {
+        "declared": {
+          "sqlite": "default",
+          "mmapGiB": 1,
+          "osPageCache": "uncontrolled",
+          "betweenRuns": "new-replica-file"
+        },
+        "effective": {
+          "mmapGiB": 1
+        }
+      },
+      "cacheSettings": {
+        "mmapGiB": 1
+      },
+      "sourceStrategy": {
+        "clone": "regenerate-isolated-database",
+        "reset": "drop-database-after-run"
+      },
+      "postgresIsolation": {
+        "strategy": "fresh-container-per-operation",
+        "reset": "new-empty-data-directory",
+        "scope": "arm-and-repetition"
+      },
+      "expected": {
+        "rowCount": 1000,
+        "copyBytes": 683438323,
+        "copyDigest": null,
+        "contentDigest": null
+      },
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304,
+        "cpusetCpus": "0",
+        "cpuQuota": 1
+      }
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "origin-main",
+      "label": "string-decoding",
+      "repetition": 3,
+      "overlay": null,
+      "imageKey": "origin-main",
+      "workerCount": 5,
+      "canonical": false,
+      "validationMode": "calibration",
+      "fixtureIdentity": {
+        "version": "legacy-email-fixture-v1",
+        "seed": 20250714
+      },
+      "cachePolicy": {
+        "declared": {
+          "sqlite": "default",
+          "mmapGiB": 1,
+          "osPageCache": "uncontrolled",
+          "betweenRuns": "new-replica-file"
+        },
+        "effective": {
+          "mmapGiB": 1
+        }
+      },
+      "cacheSettings": {
+        "mmapGiB": 1
+      },
+      "sourceStrategy": {
+        "clone": "regenerate-isolated-database",
+        "reset": "drop-database-after-run"
+      },
+      "postgresIsolation": {
+        "strategy": "fresh-container-per-operation",
+        "reset": "new-empty-data-directory",
+        "scope": "arm-and-repetition"
+      },
+      "expected": {
+        "rowCount": 1000,
+        "copyBytes": 683438323,
+        "copyDigest": null,
+        "contentDigest": null
+      },
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304,
+        "cpusetCpus": "0",
+        "cpuQuota": 1
+      }
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "direct-buffer-cast",
+      "label": "buffer-cast",
+      "repetition": 3,
+      "overlay": null,
+      "imageKey": "direct-buffer-cast",
+      "workerCount": 5,
+      "canonical": false,
+      "validationMode": "calibration",
+      "fixtureIdentity": {
+        "version": "legacy-email-fixture-v1",
+        "seed": 20250714
+      },
+      "cachePolicy": {
+        "declared": {
+          "sqlite": "default",
+          "mmapGiB": 1,
+          "osPageCache": "uncontrolled",
+          "betweenRuns": "new-replica-file"
+        },
+        "effective": {
+          "mmapGiB": 1
+        }
+      },
+      "cacheSettings": {
+        "mmapGiB": 1
+      },
+      "sourceStrategy": {
+        "clone": "regenerate-isolated-database",
+        "reset": "drop-database-after-run"
+      },
+      "postgresIsolation": {
+        "strategy": "fresh-container-per-operation",
+        "reset": "new-empty-data-directory",
+        "scope": "arm-and-repetition"
+      },
+      "expected": {
+        "rowCount": 1000,
+        "copyBytes": 683438323,
+        "copyDigest": null,
+        "contentDigest": null
+      },
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304,
+        "cpusetCpus": "0",
+        "cpuQuota": 1
+      }
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "direct-buffer-cast",
+      "label": "buffer-cast",
+      "repetition": 4,
+      "overlay": null,
+      "imageKey": "direct-buffer-cast",
+      "workerCount": 5,
+      "canonical": false,
+      "validationMode": "calibration",
+      "fixtureIdentity": {
+        "version": "legacy-email-fixture-v1",
+        "seed": 20250714
+      },
+      "cachePolicy": {
+        "declared": {
+          "sqlite": "default",
+          "mmapGiB": 1,
+          "osPageCache": "uncontrolled",
+          "betweenRuns": "new-replica-file"
+        },
+        "effective": {
+          "mmapGiB": 1
+        }
+      },
+      "cacheSettings": {
+        "mmapGiB": 1
+      },
+      "sourceStrategy": {
+        "clone": "regenerate-isolated-database",
+        "reset": "drop-database-after-run"
+      },
+      "postgresIsolation": {
+        "strategy": "fresh-container-per-operation",
+        "reset": "new-empty-data-directory",
+        "scope": "arm-and-repetition"
+      },
+      "expected": {
+        "rowCount": 1000,
+        "copyBytes": 683438323,
+        "copyDigest": null,
+        "contentDigest": null
+      },
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304,
+        "cpusetCpus": "0",
+        "cpuQuota": 1
+      }
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "origin-main",
+      "label": "string-decoding",
+      "repetition": 4,
+      "overlay": null,
+      "imageKey": "origin-main",
+      "workerCount": 5,
+      "canonical": false,
+      "validationMode": "calibration",
+      "fixtureIdentity": {
+        "version": "legacy-email-fixture-v1",
+        "seed": 20250714
+      },
+      "cachePolicy": {
+        "declared": {
+          "sqlite": "default",
+          "mmapGiB": 1,
+          "osPageCache": "uncontrolled",
+          "betweenRuns": "new-replica-file"
+        },
+        "effective": {
+          "mmapGiB": 1
+        }
+      },
+      "cacheSettings": {
+        "mmapGiB": 1
+      },
+      "sourceStrategy": {
+        "clone": "regenerate-isolated-database",
+        "reset": "drop-database-after-run"
+      },
+      "postgresIsolation": {
+        "strategy": "fresh-container-per-operation",
+        "reset": "new-empty-data-directory",
+        "scope": "arm-and-repetition"
+      },
+      "expected": {
+        "rowCount": 1000,
+        "copyBytes": 683438323,
+        "copyDigest": null,
+        "contentDigest": null
+      },
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304,
+        "cpusetCpus": "0",
+        "cpuQuota": 1
+      }
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "origin-main",
+      "label": "string-decoding",
+      "repetition": 5,
+      "overlay": null,
+      "imageKey": "origin-main",
+      "workerCount": 5,
+      "canonical": false,
+      "validationMode": "calibration",
+      "fixtureIdentity": {
+        "version": "legacy-email-fixture-v1",
+        "seed": 20250714
+      },
+      "cachePolicy": {
+        "declared": {
+          "sqlite": "default",
+          "mmapGiB": 1,
+          "osPageCache": "uncontrolled",
+          "betweenRuns": "new-replica-file"
+        },
+        "effective": {
+          "mmapGiB": 1
+        }
+      },
+      "cacheSettings": {
+        "mmapGiB": 1
+      },
+      "sourceStrategy": {
+        "clone": "regenerate-isolated-database",
+        "reset": "drop-database-after-run"
+      },
+      "postgresIsolation": {
+        "strategy": "fresh-container-per-operation",
+        "reset": "new-empty-data-directory",
+        "scope": "arm-and-repetition"
+      },
+      "expected": {
+        "rowCount": 1000,
+        "copyBytes": 683438323,
+        "copyDigest": null,
+        "contentDigest": null
+      },
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304,
+        "cpusetCpus": "0",
+        "cpuQuota": 1
+      }
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "direct-buffer-cast",
+      "label": "buffer-cast",
+      "repetition": 5,
+      "overlay": null,
+      "imageKey": "direct-buffer-cast",
+      "workerCount": 5,
+      "canonical": false,
+      "validationMode": "calibration",
+      "fixtureIdentity": {
+        "version": "legacy-email-fixture-v1",
+        "seed": 20250714
+      },
+      "cachePolicy": {
+        "declared": {
+          "sqlite": "default",
+          "mmapGiB": 1,
+          "osPageCache": "uncontrolled",
+          "betweenRuns": "new-replica-file"
+        },
+        "effective": {
+          "mmapGiB": 1
+        }
+      },
+      "cacheSettings": {
+        "mmapGiB": 1
+      },
+      "sourceStrategy": {
+        "clone": "regenerate-isolated-database",
+        "reset": "drop-database-after-run"
+      },
+      "postgresIsolation": {
+        "strategy": "fresh-container-per-operation",
+        "reset": "new-empty-data-directory",
+        "scope": "arm-and-repetition"
+      },
+      "expected": {
+        "rowCount": 1000,
+        "copyBytes": 683438323,
+        "copyDigest": null,
+        "contentDigest": null
+      },
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304,
+        "cpusetCpus": "0",
+        "cpuQuota": 1
+      }
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "direct-buffer-cast",
+      "label": "buffer-cast",
+      "repetition": 6,
+      "overlay": null,
+      "imageKey": "direct-buffer-cast",
+      "workerCount": 5,
+      "canonical": false,
+      "validationMode": "calibration",
+      "fixtureIdentity": {
+        "version": "legacy-email-fixture-v1",
+        "seed": 20250714
+      },
+      "cachePolicy": {
+        "declared": {
+          "sqlite": "default",
+          "mmapGiB": 1,
+          "osPageCache": "uncontrolled",
+          "betweenRuns": "new-replica-file"
+        },
+        "effective": {
+          "mmapGiB": 1
+        }
+      },
+      "cacheSettings": {
+        "mmapGiB": 1
+      },
+      "sourceStrategy": {
+        "clone": "regenerate-isolated-database",
+        "reset": "drop-database-after-run"
+      },
+      "postgresIsolation": {
+        "strategy": "fresh-container-per-operation",
+        "reset": "new-empty-data-directory",
+        "scope": "arm-and-repetition"
+      },
+      "expected": {
+        "rowCount": 1000,
+        "copyBytes": 683438323,
+        "copyDigest": null,
+        "contentDigest": null
+      },
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304,
+        "cpusetCpus": "0",
+        "cpuQuota": 1
+      }
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "origin-main",
+      "label": "string-decoding",
+      "repetition": 6,
+      "overlay": null,
+      "imageKey": "origin-main",
+      "workerCount": 5,
+      "canonical": false,
+      "validationMode": "calibration",
+      "fixtureIdentity": {
+        "version": "legacy-email-fixture-v1",
+        "seed": 20250714
+      },
+      "cachePolicy": {
+        "declared": {
+          "sqlite": "default",
+          "mmapGiB": 1,
+          "osPageCache": "uncontrolled",
+          "betweenRuns": "new-replica-file"
+        },
+        "effective": {
+          "mmapGiB": 1
+        }
+      },
+      "cacheSettings": {
+        "mmapGiB": 1
+      },
+      "sourceStrategy": {
+        "clone": "regenerate-isolated-database",
+        "reset": "drop-database-after-run"
+      },
+      "postgresIsolation": {
+        "strategy": "fresh-container-per-operation",
+        "reset": "new-empty-data-directory",
+        "scope": "arm-and-repetition"
+      },
+      "expected": {
+        "rowCount": 1000,
+        "copyBytes": 683438323,
+        "copyDigest": null,
+        "contentDigest": null
+      },
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304,
+        "cpusetCpus": "0",
+        "cpuQuota": 1
+      }
+    }
+  ],
+  "operations": [
+    {
+      "index": 1,
+      "id": "email-683m-string-decoding-r1",
+      "artifact": "operations/001-email-683m-string-decoding-r1.log",
+      "startedAt": "2026-07-15T23:18:57.430Z",
+      "completedAt": "2026-07-15T23:19:01.455Z",
+      "status": 0,
+      "signal": null,
+      "productContainer": {
+        "id": "b11e3293697c7a3410a1e8af594dca252c7b8ecabece8b814200c4fa1cbf8735",
+        "imageID": "sha256:608bcd8ef3ea69112858c71e9d7517889157764fba6921cc0dbdf6790d4b889d",
+        "created": "2026-07-15T23:18:57.455673794Z",
+        "state": {
+          "status": "exited",
+          "exitCode": 0,
+          "oomKilled": false
+        },
+        "constraints": {
+          "cpusetCpus": "0",
+          "nanoCpus": 1000000000,
+          "memory": 3221225472,
+          "memorySwap": 3221225472,
+          "pidsLimit": 1024
+        }
+      },
+      "postgres": {
+        "container": {
+          "id": "e6106249bd9dfed3293b058eaa870bced175bfa86b00dd127d7d8a5fc4725929",
+          "imageID": "sha256:742f40ea20b9ff2ff31db5458d127452988a2164df9e17441e191f3b72252193",
+          "created": "2026-07-15T23:18:55.583121168Z",
+          "state": {
+            "status": "running",
+            "exitCode": 0,
+            "oomKilled": false
+          },
+          "constraints": {
+            "cpusetCpus": "2-3",
+            "nanoCpus": 2000000000,
+            "memory": 2147483648,
+            "memorySwap": 4294967296,
+            "pidsLimit": null
+          }
+        },
+        "systemIdentifier": "7662898266886410279",
+        "image": {
+          "reference": "postgres:17-alpine@sha256:742f40ea20b9ff2ff31db5458d127452988a2164df9e17441e191f3b72252193",
+          "id": "sha256:742f40ea20b9ff2ff31db5458d127452988a2164df9e17441e191f3b72252193",
+          "repoDigests": [
+            "postgres@sha256:742f40ea20b9ff2ff31db5458d127452988a2164df9e17441e191f3b72252193"
+          ],
+          "created": "2026-07-07T17:46:49.401690597Z",
+          "os": "linux",
+          "architecture": "arm64",
+          "variant": "v8",
+          "labels": {},
+          "rootFSLayers": [
+            "sha256:b2848c02ac6ff53d265469b5b30f649f335e546a83330cd8916d54e65e640409",
+            "sha256:3276ea79c0c0c02b7d702de4aa0bf6b60d4b3f1b295b30366973c4ec4bf91249",
+            "sha256:d7d195016259883bbb161fb50292c1be3f96f0c9b50c573cbb0ed57e64dfa2c9",
+            "sha256:1ebee87cc825164b634bd6837685531c240dcfe5a1cf507cb6e8df057f661cbf",
+            "sha256:df8da200347edec60626a356f574551d1ecb9e7727402137d7d1bc6cb3cf11db",
+            "sha256:40252c7d7df3e6b969af3fa01b51346fbff89b508a6f2c5a9f457d23e797cf64",
+            "sha256:11b7e3ae2bd33cf903077779b2178d1242006f750906c41d9941cd45be4c6175",
+            "sha256:60d0936c2e0dac1f79128a468e3259644a610850f2ce98c238027943b5e87108",
+            "sha256:60d2d3ed3afa870cf11fe567074bfc1c37e1f0488fe4f9259b4b4ccd6084c209",
+            "sha256:66c221f9d5b6c9542d87a9f5143ffa653ce6628a4db739870abede8c87da99af"
+          ]
+        },
+        "sourceStrategy": {
+          "clone": "regenerate-isolated-database",
+          "reset": "drop-database-after-run"
+        },
+        "runnerIsolation": {
+          "strategy": "fresh-container-per-operation",
+          "reset": "new-empty-data-directory",
+          "scope": "arm-and-repetition"
+        },
+        "cgroup": {
+          "before": {
+            "capturedAt": "2026-07-15T23:18:56.544Z",
+            "cpu": {
+              "cpusetCpus": "2-3",
+              "cpusetCpusEffective": "2-3",
+              "max": "200000 100000",
+              "stat": {
+                "usage_usec": 441122,
+                "user_usec": 257665,
+                "system_usec": 183457,
+                "nice_usec": 0,
+                "nr_periods": 12,
+                "nr_throttled": 0,
+                "throttled_usec": 0,
+                "nr_bursts": 0,
+                "burst_usec": 0
+              },
+              "pressure": {
+                "some": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 9563
+                },
+                "full": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 3065
+                }
+              }
+            },
+            "memory": {
+              "current": 107929600,
+              "max": 2147483648,
+              "peak": 116875264,
+              "events": {
+                "low": 0,
+                "high": 0,
+                "max": 0,
+                "oom": 0,
+                "oom_kill": 0,
+                "oom_group_kill": 0
+              },
+              "eventsLocal": {
+                "low": 0,
+                "high": 0,
+                "max": 0,
+                "oom": 0,
+                "oom_kill": 0,
+                "oom_group_kill": 0
+              },
+              "pressure": {
+                "some": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 0
+                },
+                "full": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 0
+                }
+              }
+            },
+            "io": {
+              "stat": {
+                "254:0": {
+                  "rbytes": 39800832,
+                  "wbytes": 40288256,
+                  "rios": 973,
+                  "wios": 1815,
+                  "dbytes": 0,
+                  "dios": 0
+                },
+                "254:16": {
+                  "rbytes": 135168,
+                  "wbytes": 0,
+                  "rios": 4,
+                  "wios": 0,
+                  "dbytes": 0,
+                  "dios": 0
+                }
+              },
+              "pressure": {
+                "some": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 22341
+                },
+                "full": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 22232
+                }
+              }
+            }
+          },
+          "after": {
+            "capturedAt": "2026-07-15T23:19:01.485Z",
+            "cpu": {
+              "cpusetCpus": "2-3",
+              "cpusetCpusEffective": "2-3",
+              "max": "200000 100000",
+              "stat": {
+                "usage_usec": 1441473,
+                "user_usec": 703975,
+                "system_usec": 737498,
+                "nice_usec": 0,
+                "nr_periods": 44,
+                "nr_throttled": 0,
+                "throttled_usec": 0,
+                "nr_bursts": 0,
+                "burst_usec": 0
+              },
+              "pressure": {
+                "some": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 21605
+                },
+                "full": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 7053
+                }
+              }
+            },
+            "memory": {
+              "current": 215736320,
+              "max": 2147483648,
+              "peak": 257269760,
+              "events": {
+                "low": 0,
+                "high": 0,
+                "max": 0,
+                "oom": 0,
+                "oom_kill": 0,
+                "oom_group_kill": 0
+              },
+              "eventsLocal": {
+                "low": 0,
+                "high": 0,
+                "max": 0,
+                "oom": 0,
+                "oom_kill": 0,
+                "oom_group_kill": 0
+              },
+              "pressure": {
+                "some": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 0
+                },
+                "full": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 0
+                }
+              }
+            },
+            "io": {
+              "stat": {
+                "254:0": {
+                  "rbytes": 105803776,
+                  "wbytes": 71618560,
+                  "rios": 1590,
+                  "wios": 1896,
+                  "dbytes": 0,
+                  "dios": 0
+                },
+                "254:16": {
+                  "rbytes": 135168,
+                  "wbytes": 0,
+                  "rios": 4,
+                  "wios": 0,
+                  "dbytes": 0,
+                  "dios": 0
+                }
+              },
+              "pressure": {
+                "some": {
+                  "avg10": "0.26",
+                  "avg60": "0.06",
+                  "avg300": "0.01",
+                  "total": 51012
+                },
+                "full": {
+                  "avg10": "0.26",
+                  "avg60": "0.06",
+                  "avg300": "0.01",
+                  "total": 50507
+                }
+              }
+            }
+          },
+          "delta": {
+            "cpu": {
+              "stat": {
+                "usage_usec": 1000351,
+                "user_usec": 446310,
+                "system_usec": 554041,
+                "nice_usec": 0,
+                "nr_periods": 32,
+                "nr_throttled": 0,
+                "throttled_usec": 0,
+                "nr_bursts": 0,
+                "burst_usec": 0
+              },
+              "pressure": {
+                "some": {
+                  "total": 12042
+                },
+                "full": {
+                  "total": 3988
+                }
+              }
+            },
+            "memory": {
+              "current": 107806720,
+              "max": 0,
+              "peak": 140394496,
+              "events": {
+                "low": 0,
+                "high": 0,
+                "max": 0,
+                "oom": 0,
+                "oom_kill": 0,
+                "oom_group_kill": 0
+              },
+              "eventsLocal": {
+                "low": 0,
+                "high": 0,
+                "max": 0,
+                "oom": 0,
+                "oom_kill": 0,
+                "oom_group_kill": 0
+              },
+              "pressure": {
+                "some": {
+                  "total": 0
+                },
+                "full": {
+                  "total": 0
+                }
+              }
+            },
+            "io": {
+              "stat": {
+                "254:0": {
+                  "rbytes": 66002944,
+                  "wbytes": 31330304,
+                  "rios": 617,
+                  "wios": 81,
+                  "dbytes": 0,
+                  "dios": 0
+                },
+                "254:16": {
+                  "rbytes": 0,
+                  "wbytes": 0,
+                  "rios": 0,
+                  "wios": 0,
+                  "dbytes": 0,
+                  "dios": 0
+                }
+              },
+              "pressure": {
+                "some": {
+                  "total": 28671
+                },
+                "full": {
+                  "total": 28275
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "index": 2,
+      "id": "email-683m-buffer-cast-r1",
+      "artifact": "operations/002-email-683m-buffer-cast-r1.log",
+      "startedAt": "2026-07-15T23:19:04.336Z",
+      "completedAt": "2026-07-15T23:19:07.838Z",
+      "status": 0,
+      "signal": null,
+      "productContainer": {
+        "id": "373be85d7c4bbed9b674a8daff7941748e1afadda547e6266a73ec152c4e0b09",
+        "imageID": "sha256:3090a0fd3653f375d515c9a082ea90c4deb6099f990b2b32c01e2ce9d1431eba",
+        "created": "2026-07-15T23:19:04.356287839Z",
+        "state": {
+          "status": "exited",
+          "exitCode": 0,
+          "oomKilled": false
+        },
+        "constraints": {
+          "cpusetCpus": "0",
+          "nanoCpus": 1000000000,
+          "memory": 3221225472,
+          "memorySwap": 3221225472,
+          "pidsLimit": 1024
+        }
+      },
+      "postgres": {
+        "container": {
+          "id": "74fb2167995ef5b3b20026baaab3eac0ca2f967ad0ead2f4c6dab9c318ea7e08",
+          "imageID": "sha256:742f40ea20b9ff2ff31db5458d127452988a2164df9e17441e191f3b72252193",
+          "created": "2026-07-15T23:19:02.601615963Z",
+          "state": {
+            "status": "running",
+            "exitCode": 0,
+            "oomKilled": false
+          },
+          "constraints": {
+            "cpusetCpus": "2-3",
+            "nanoCpus": 2000000000,
+            "memory": 2147483648,
+            "memorySwap": 4294967296,
+            "pidsLimit": null
+          }
+        },
+        "systemIdentifier": "7662898296802132001",
+        "image": {
+          "reference": "postgres:17-alpine@sha256:742f40ea20b9ff2ff31db5458d127452988a2164df9e17441e191f3b72252193",
+          "id": "sha256:742f40ea20b9ff2ff31db5458d127452988a2164df9e17441e191f3b72252193",
+          "repoDigests": [
+            "postgres@sha256:742f40ea20b9ff2ff31db5458d127452988a2164df9e17441e191f3b72252193"
+          ],
+          "created": "2026-07-07T17:46:49.401690597Z",
+          "os": "linux",
+          "architecture": "arm64",
+          "variant": "v8",
+          "labels": {},
+          "rootFSLayers": [
+            "sha256:b2848c02ac6ff53d265469b5b30f649f335e546a83330cd8916d54e65e640409",
+            "sha256:3276ea79c0c0c02b7d702de4aa0bf6b60d4b3f1b295b30366973c4ec4bf91249",
+            "sha256:d7d195016259883bbb161fb50292c1be3f96f0c9b50c573cbb0ed57e64dfa2c9",
+            "sha256:1ebee87cc825164b634bd6837685531c240dcfe5a1cf507cb6e8df057f661cbf",
+            "sha256:df8da200347edec60626a356f574551d1ecb9e7727402137d7d1bc6cb3cf11db",
+            "sha256:40252c7d7df3e6b969af3fa01b51346fbff89b508a6f2c5a9f457d23e797cf64",
+            "sha256:11b7e3ae2bd33cf903077779b2178d1242006f750906c41d9941cd45be4c6175",
+            "sha256:60d0936c2e0dac1f79128a468e3259644a610850f2ce98c238027943b5e87108",
+            "sha256:60d2d3ed3afa870cf11fe567074bfc1c37e1f0488fe4f9259b4b4ccd6084c209",
+            "sha256:66c221f9d5b6c9542d87a9f5143ffa653ce6628a4db739870abede8c87da99af"
+          ]
+        },
+        "sourceStrategy": {
+          "clone": "regenerate-isolated-database",
+          "reset": "drop-database-after-run"
+        },
+        "runnerIsolation": {
+          "strategy": "fresh-container-per-operation",
+          "reset": "new-empty-data-directory",
+          "scope": "arm-and-repetition"
+        },
+        "cgroup": {
+          "before": {
+            "capturedAt": "2026-07-15T23:19:03.551Z",
+            "cpu": {
+              "cpusetCpus": "2-3",
+              "cpusetCpusEffective": "2-3",
+              "max": "200000 100000",
+              "stat": {
+                "usage_usec": 419618,
+                "user_usec": 277374,
+                "system_usec": 142243,
+                "nice_usec": 0,
+                "nr_periods": 11,
+                "nr_throttled": 0,
+                "throttled_usec": 0,
+                "nr_bursts": 0,
+                "burst_usec": 0
+              },
+              "pressure": {
+                "some": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 7860
+                },
+                "full": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 2107
+                }
+              }
+            },
+            "memory": {
+              "current": 66932736,
+              "max": 2147483648,
+              "peak": 76492800,
+              "events": {
+                "low": 0,
+                "high": 0,
+                "max": 0,
+                "oom": 0,
+                "oom_kill": 0,
+                "oom_group_kill": 0
+              },
+              "eventsLocal": {
+                "low": 0,
+                "high": 0,
+                "max": 0,
+                "oom": 0,
+                "oom_kill": 0,
+                "oom_group_kill": 0
+              },
+              "pressure": {
+                "some": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 0
+                },
+                "full": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 0
+                }
+              }
+            },
+            "io": {
+              "stat": {
+                "254:16": {
+                  "rbytes": 90112,
+                  "wbytes": 0,
+                  "rios": 1,
+                  "wios": 0,
+                  "dbytes": 0,
+                  "dios": 0
+                },
+                "254:0": {
+                  "rbytes": 0,
+                  "wbytes": 40288256,
+                  "rios": 0,
+                  "wios": 1820,
+                  "dbytes": 0,
+                  "dios": 0
+                }
+              },
+              "pressure": {
+                "some": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 9075
+                },
+                "full": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 8970
+                }
+              }
+            }
+          },
+          "after": {
+            "capturedAt": "2026-07-15T23:19:07.871Z",
+            "cpu": {
+              "cpusetCpus": "2-3",
+              "cpusetCpusEffective": "2-3",
+              "max": "200000 100000",
+              "stat": {
+                "usage_usec": 1393638,
+                "user_usec": 715354,
+                "system_usec": 678284,
+                "nice_usec": 0,
+                "nr_periods": 38,
+                "nr_throttled": 0,
+                "throttled_usec": 0,
+                "nr_bursts": 0,
+                "burst_usec": 0
+              },
+              "pressure": {
+                "some": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 18604
+                },
+                "full": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 3923
+                }
+              }
+            },
+            "memory": {
+              "current": 108699648,
+              "max": 2147483648,
+              "peak": 154042368,
+              "events": {
+                "low": 0,
+                "high": 0,
+                "max": 0,
+                "oom": 0,
+                "oom_kill": 0,
+                "oom_group_kill": 0
+              },
+              "eventsLocal": {
+                "low": 0,
+                "high": 0,
+                "max": 0,
+                "oom": 0,
+                "oom_kill": 0,
+                "oom_group_kill": 0
+              },
+              "pressure": {
+                "some": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 0
+                },
+                "full": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 0
+                }
+              }
+            },
+            "io": {
+              "stat": {
+                "254:16": {
+                  "rbytes": 90112,
+                  "wbytes": 0,
+                  "rios": 1,
+                  "wios": 0,
+                  "dbytes": 0,
+                  "dios": 0
+                },
+                "254:0": {
+                  "rbytes": 0,
+                  "wbytes": 71618560,
+                  "rios": 0,
+                  "wios": 1902,
+                  "dbytes": 0,
+                  "dios": 0
+                }
+              },
+              "pressure": {
+                "some": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 16102
+                },
+                "full": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 15989
+                }
+              }
+            }
+          },
+          "delta": {
+            "cpu": {
+              "stat": {
+                "usage_usec": 974020,
+                "user_usec": 437980,
+                "system_usec": 536041,
+                "nice_usec": 0,
+                "nr_periods": 27,
+                "nr_throttled": 0,
+                "throttled_usec": 0,
+                "nr_bursts": 0,
+                "burst_usec": 0
+              },
+              "pressure": {
+                "some": {
+                  "total": 10744
+                },
+                "full": {
+                  "total": 1816
+                }
+              }
+            },
+            "memory": {
+              "current": 41766912,
+              "max": 0,
+              "peak": 77549568,
+              "events": {
+                "low": 0,
+                "high": 0,
+                "max": 0,
+                "oom": 0,
+                "oom_kill": 0,
+                "oom_group_kill": 0
+              },
+              "eventsLocal": {
+                "low": 0,
+                "high": 0,
+                "max": 0,
+                "oom": 0,
+                "oom_kill": 0,
+                "oom_group_kill": 0
+              },
+              "pressure": {
+                "some": {
+                  "total": 0
+                },
+                "full": {
+                  "total": 0
+                }
+              }
+            },
+            "io": {
+              "stat": {
+                "254:16": {
+                  "rbytes": 0,
+                  "wbytes": 0,
+                  "rios": 0,
+                  "wios": 0,
+                  "dbytes": 0,
+                  "dios": 0
+                },
+                "254:0": {
+                  "rbytes": 0,
+                  "wbytes": 31330304,
+                  "rios": 0,
+                  "wios": 82,
+                  "dbytes": 0,
+                  "dios": 0
+                }
+              },
+              "pressure": {
+                "some": {
+                  "total": 7027
+                },
+                "full": {
+                  "total": 7019
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "index": 3,
+      "id": "email-683m-buffer-cast-r2",
+      "artifact": "operations/003-email-683m-buffer-cast-r2.log",
+      "startedAt": "2026-07-15T23:19:10.677Z",
+      "completedAt": "2026-07-15T23:19:14.115Z",
+      "status": 0,
+      "signal": null,
+      "productContainer": {
+        "id": "f67c48619e2849902a10898bc79e13c586f3e169047a030bbbe9d20fd1dbe729",
+        "imageID": "sha256:3090a0fd3653f375d515c9a082ea90c4deb6099f990b2b32c01e2ce9d1431eba",
+        "created": "2026-07-15T23:19:10.702333134Z",
+        "state": {
+          "status": "exited",
+          "exitCode": 0,
+          "oomKilled": false
+        },
+        "constraints": {
+          "cpusetCpus": "0",
+          "nanoCpus": 1000000000,
+          "memory": 3221225472,
+          "memorySwap": 3221225472,
+          "pidsLimit": 1024
+        }
+      },
+      "postgres": {
+        "container": {
+          "id": "1951b8825bf3e997b29c89b4aa7cdbe2142d349489025ce848116b61f271e877",
+          "imageID": "sha256:742f40ea20b9ff2ff31db5458d127452988a2164df9e17441e191f3b72252193",
+          "created": "2026-07-15T23:19:08.921687633Z",
+          "state": {
+            "status": "running",
+            "exitCode": 0,
+            "oomKilled": false
+          },
+          "constraints": {
+            "cpusetCpus": "2-3",
+            "nanoCpus": 2000000000,
+            "memory": 2147483648,
+            "memorySwap": 4294967296,
+            "pidsLimit": null
+          }
+        },
+        "systemIdentifier": "7662898324131766305",
+        "image": {
+          "reference": "postgres:17-alpine@sha256:742f40ea20b9ff2ff31db5458d127452988a2164df9e17441e191f3b72252193",
+          "id": "sha256:742f40ea20b9ff2ff31db5458d127452988a2164df9e17441e191f3b72252193",
+          "repoDigests": [
+            "postgres@sha256:742f40ea20b9ff2ff31db5458d127452988a2164df9e17441e191f3b72252193"
+          ],
+          "created": "2026-07-07T17:46:49.401690597Z",
+          "os": "linux",
+          "architecture": "arm64",
+          "variant": "v8",
+          "labels": {},
+          "rootFSLayers": [
+            "sha256:b2848c02ac6ff53d265469b5b30f649f335e546a83330cd8916d54e65e640409",
+            "sha256:3276ea79c0c0c02b7d702de4aa0bf6b60d4b3f1b295b30366973c4ec4bf91249",
+            "sha256:d7d195016259883bbb161fb50292c1be3f96f0c9b50c573cbb0ed57e64dfa2c9",
+            "sha256:1ebee87cc825164b634bd6837685531c240dcfe5a1cf507cb6e8df057f661cbf",
+            "sha256:df8da200347edec60626a356f574551d1ecb9e7727402137d7d1bc6cb3cf11db",
+            "sha256:40252c7d7df3e6b969af3fa01b51346fbff89b508a6f2c5a9f457d23e797cf64",
+            "sha256:11b7e3ae2bd33cf903077779b2178d1242006f750906c41d9941cd45be4c6175",
+            "sha256:60d0936c2e0dac1f79128a468e3259644a610850f2ce98c238027943b5e87108",
+            "sha256:60d2d3ed3afa870cf11fe567074bfc1c37e1f0488fe4f9259b4b4ccd6084c209",
+            "sha256:66c221f9d5b6c9542d87a9f5143ffa653ce6628a4db739870abede8c87da99af"
+          ]
+        },
+        "sourceStrategy": {
+          "clone": "regenerate-isolated-database",
+          "reset": "drop-database-after-run"
+        },
+        "runnerIsolation": {
+          "strategy": "fresh-container-per-operation",
+          "reset": "new-empty-data-directory",
+          "scope": "arm-and-repetition"
+        },
+        "cgroup": {
+          "before": {
+            "capturedAt": "2026-07-15T23:19:09.907Z",
+            "cpu": {
+              "cpusetCpus": "2-3",
+              "cpusetCpusEffective": "2-3",
+              "max": "200000 100000",
+              "stat": {
+                "usage_usec": 416214,
+                "user_usec": 234557,
+                "system_usec": 181657,
+                "nice_usec": 0,
+                "nr_periods": 12,
+                "nr_throttled": 0,
+                "throttled_usec": 0,
+                "nr_bursts": 0,
+                "burst_usec": 0
+              },
+              "pressure": {
+                "some": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 14870
+                },
+                "full": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 1650
+                }
+              }
+            },
+            "memory": {
+              "current": 66740224,
+              "max": 2147483648,
+              "peak": 76623872,
+              "events": {
+                "low": 0,
+                "high": 0,
+                "max": 0,
+                "oom": 0,
+                "oom_kill": 0,
+                "oom_group_kill": 0
+              },
+              "eventsLocal": {
+                "low": 0,
+                "high": 0,
+                "max": 0,
+                "oom": 0,
+                "oom_kill": 0,
+                "oom_group_kill": 0
+              },
+              "pressure": {
+                "some": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 0
+                },
+                "full": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 0
+                }
+              }
+            },
+            "io": {
+              "stat": {
+                "254:0": {
+                  "rbytes": 0,
+                  "wbytes": 40288256,
+                  "rios": 0,
+                  "wios": 1830,
+                  "dbytes": 0,
+                  "dios": 0
+                }
+              },
+              "pressure": {
+                "some": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 5094
+                },
+                "full": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 5008
+                }
+              }
+            }
+          },
+          "after": {
+            "capturedAt": "2026-07-15T23:19:14.145Z",
+            "cpu": {
+              "cpusetCpus": "2-3",
+              "cpusetCpusEffective": "2-3",
+              "max": "200000 100000",
+              "stat": {
+                "usage_usec": 1421279,
+                "user_usec": 701542,
+                "system_usec": 719737,
+                "nice_usec": 0,
+                "nr_periods": 39,
+                "nr_throttled": 0,
+                "throttled_usec": 0,
+                "nr_bursts": 0,
+                "burst_usec": 0
+              },
+              "pressure": {
+                "some": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 25844
+                },
+                "full": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 4166
+                }
+              }
+            },
+            "memory": {
+              "current": 108433408,
+              "max": 2147483648,
+              "peak": 153427968,
+              "events": {
+                "low": 0,
+                "high": 0,
+                "max": 0,
+                "oom": 0,
+                "oom_kill": 0,
+                "oom_group_kill": 0
+              },
+              "eventsLocal": {
+                "low": 0,
+                "high": 0,
+                "max": 0,
+                "oom": 0,
+                "oom_kill": 0,
+                "oom_group_kill": 0
+              },
+              "pressure": {
+                "some": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 0
+                },
+                "full": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 0
+                }
+              }
+            },
+            "io": {
+              "stat": {
+                "254:0": {
+                  "rbytes": 0,
+                  "wbytes": 71618560,
+                  "rios": 0,
+                  "wios": 1924,
+                  "dbytes": 0,
+                  "dios": 0
+                }
+              },
+              "pressure": {
+                "some": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 13034
+                },
+                "full": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 12947
+                }
+              }
+            }
+          },
+          "delta": {
+            "cpu": {
+              "stat": {
+                "usage_usec": 1005065,
+                "user_usec": 466985,
+                "system_usec": 538080,
+                "nice_usec": 0,
+                "nr_periods": 27,
+                "nr_throttled": 0,
+                "throttled_usec": 0,
+                "nr_bursts": 0,
+                "burst_usec": 0
+              },
+              "pressure": {
+                "some": {
+                  "total": 10974
+                },
+                "full": {
+                  "total": 2516
+                }
+              }
+            },
+            "memory": {
+              "current": 41693184,
+              "max": 0,
+              "peak": 76804096,
+              "events": {
+                "low": 0,
+                "high": 0,
+                "max": 0,
+                "oom": 0,
+                "oom_kill": 0,
+                "oom_group_kill": 0
+              },
+              "eventsLocal": {
+                "low": 0,
+                "high": 0,
+                "max": 0,
+                "oom": 0,
+                "oom_kill": 0,
+                "oom_group_kill": 0
+              },
+              "pressure": {
+                "some": {
+                  "total": 0
+                },
+                "full": {
+                  "total": 0
+                }
+              }
+            },
+            "io": {
+              "stat": {
+                "254:0": {
+                  "rbytes": 0,
+                  "wbytes": 31330304,
+                  "rios": 0,
+                  "wios": 94,
+                  "dbytes": 0,
+                  "dios": 0
+                }
+              },
+              "pressure": {
+                "some": {
+                  "total": 7940
+                },
+                "full": {
+                  "total": 7939
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "index": 4,
+      "id": "email-683m-string-decoding-r2",
+      "artifact": "operations/004-email-683m-string-decoding-r2.log",
+      "startedAt": "2026-07-15T23:19:17.025Z",
+      "completedAt": "2026-07-15T23:19:20.736Z",
+      "status": 0,
+      "signal": null,
+      "productContainer": {
+        "id": "81fccc15179b89ca7effca1182dca5797375245c1735a0e3e24fb03a26bd17d1",
+        "imageID": "sha256:608bcd8ef3ea69112858c71e9d7517889157764fba6921cc0dbdf6790d4b889d",
+        "created": "2026-07-15T23:19:17.054736637Z",
+        "state": {
+          "status": "exited",
+          "exitCode": 0,
+          "oomKilled": false
+        },
+        "constraints": {
+          "cpusetCpus": "0",
+          "nanoCpus": 1000000000,
+          "memory": 3221225472,
+          "memorySwap": 3221225472,
+          "pidsLimit": 1024
+        }
+      },
+      "postgres": {
+        "container": {
+          "id": "31698db11264f82b497828e0cf415e5641759828f544e3e860a61f95556b4d7d",
+          "imageID": "sha256:742f40ea20b9ff2ff31db5458d127452988a2164df9e17441e191f3b72252193",
+          "created": "2026-07-15T23:19:15.211952136Z",
+          "state": {
+            "status": "running",
+            "exitCode": 0,
+            "oomKilled": false
+          },
+          "constraints": {
+            "cpusetCpus": "2-3",
+            "nanoCpus": 2000000000,
+            "memory": 2147483648,
+            "memorySwap": 4294967296,
+            "pidsLimit": null
+          }
+        },
+        "systemIdentifier": "7662898351063322657",
+        "image": {
+          "reference": "postgres:17-alpine@sha256:742f40ea20b9ff2ff31db5458d127452988a2164df9e17441e191f3b72252193",
+          "id": "sha256:742f40ea20b9ff2ff31db5458d127452988a2164df9e17441e191f3b72252193",
+          "repoDigests": [
+            "postgres@sha256:742f40ea20b9ff2ff31db5458d127452988a2164df9e17441e191f3b72252193"
+          ],
+          "created": "2026-07-07T17:46:49.401690597Z",
+          "os": "linux",
+          "architecture": "arm64",
+          "variant": "v8",
+          "labels": {},
+          "rootFSLayers": [
+            "sha256:b2848c02ac6ff53d265469b5b30f649f335e546a83330cd8916d54e65e640409",
+            "sha256:3276ea79c0c0c02b7d702de4aa0bf6b60d4b3f1b295b30366973c4ec4bf91249",
+            "sha256:d7d195016259883bbb161fb50292c1be3f96f0c9b50c573cbb0ed57e64dfa2c9",
+            "sha256:1ebee87cc825164b634bd6837685531c240dcfe5a1cf507cb6e8df057f661cbf",
+            "sha256:df8da200347edec60626a356f574551d1ecb9e7727402137d7d1bc6cb3cf11db",
+            "sha256:40252c7d7df3e6b969af3fa01b51346fbff89b508a6f2c5a9f457d23e797cf64",
+            "sha256:11b7e3ae2bd33cf903077779b2178d1242006f750906c41d9941cd45be4c6175",
+            "sha256:60d0936c2e0dac1f79128a468e3259644a610850f2ce98c238027943b5e87108",
+            "sha256:60d2d3ed3afa870cf11fe567074bfc1c37e1f0488fe4f9259b4b4ccd6084c209",
+            "sha256:66c221f9d5b6c9542d87a9f5143ffa653ce6628a4db739870abede8c87da99af"
+          ]
+        },
+        "sourceStrategy": {
+          "clone": "regenerate-isolated-database",
+          "reset": "drop-database-after-run"
+        },
+        "runnerIsolation": {
+          "strategy": "fresh-container-per-operation",
+          "reset": "new-empty-data-directory",
+          "scope": "arm-and-repetition"
+        },
+        "cgroup": {
+          "before": {
+            "capturedAt": "2026-07-15T23:19:16.206Z",
+            "cpu": {
+              "cpusetCpus": "2-3",
+              "cpusetCpusEffective": "2-3",
+              "max": "200000 100000",
+              "stat": {
+                "usage_usec": 421589,
+                "user_usec": 252953,
+                "system_usec": 168635,
+                "nice_usec": 0,
+                "nr_periods": 12,
+                "nr_throttled": 0,
+                "throttled_usec": 0,
+                "nr_bursts": 0,
+                "burst_usec": 0
+              },
+              "pressure": {
+                "some": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 23435
+                },
+                "full": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 1609
+                }
+              }
+            },
+            "memory": {
+              "current": 66641920,
+              "max": 2147483648,
+              "peak": 77029376,
+              "events": {
+                "low": 0,
+                "high": 0,
+                "max": 0,
+                "oom": 0,
+                "oom_kill": 0,
+                "oom_group_kill": 0
+              },
+              "eventsLocal": {
+                "low": 0,
+                "high": 0,
+                "max": 0,
+                "oom": 0,
+                "oom_kill": 0,
+                "oom_group_kill": 0
+              },
+              "pressure": {
+                "some": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 0
+                },
+                "full": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 0
+                }
+              }
+            },
+            "io": {
+              "stat": {
+                "254:0": {
+                  "rbytes": 0,
+                  "wbytes": 40288256,
+                  "rios": 0,
+                  "wios": 1826,
+                  "dbytes": 0,
+                  "dios": 0
+                }
+              },
+              "pressure": {
+                "some": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 4592
+                },
+                "full": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 4540
+                }
+              }
+            }
+          },
+          "after": {
+            "capturedAt": "2026-07-15T23:19:20.766Z",
+            "cpu": {
+              "cpusetCpus": "2-3",
+              "cpusetCpusEffective": "2-3",
+              "max": "200000 100000",
+              "stat": {
+                "usage_usec": 1408420,
+                "user_usec": 706211,
+                "system_usec": 702209,
+                "nice_usec": 0,
+                "nr_periods": 42,
+                "nr_throttled": 0,
+                "throttled_usec": 0,
+                "nr_bursts": 0,
+                "burst_usec": 0
+              },
+              "pressure": {
+                "some": {
+                  "avg10": "0.14",
+                  "avg60": "0.03",
+                  "avg300": "0.00",
+                  "total": 35900
+                },
+                "full": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 4476
+                }
+              }
+            },
+            "memory": {
+              "current": 108556288,
+              "max": 2147483648,
+              "peak": 153567232,
+              "events": {
+                "low": 0,
+                "high": 0,
+                "max": 0,
+                "oom": 0,
+                "oom_kill": 0,
+                "oom_group_kill": 0
+              },
+              "eventsLocal": {
+                "low": 0,
+                "high": 0,
+                "max": 0,
+                "oom": 0,
+                "oom_kill": 0,
+                "oom_group_kill": 0
+              },
+              "pressure": {
+                "some": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 0
+                },
+                "full": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 0
+                }
+              }
+            },
+            "io": {
+              "stat": {
+                "254:0": {
+                  "rbytes": 0,
+                  "wbytes": 71618560,
+                  "rios": 0,
+                  "wios": 1918,
+                  "dbytes": 0,
+                  "dios": 0
+                }
+              },
+              "pressure": {
+                "some": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 10349
+                },
+                "full": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 10297
+                }
+              }
+            }
+          },
+          "delta": {
+            "cpu": {
+              "stat": {
+                "usage_usec": 986831,
+                "user_usec": 453258,
+                "system_usec": 533574,
+                "nice_usec": 0,
+                "nr_periods": 30,
+                "nr_throttled": 0,
+                "throttled_usec": 0,
+                "nr_bursts": 0,
+                "burst_usec": 0
+              },
+              "pressure": {
+                "some": {
+                  "total": 12465
+                },
+                "full": {
+                  "total": 2867
+                }
+              }
+            },
+            "memory": {
+              "current": 41914368,
+              "max": 0,
+              "peak": 76537856,
+              "events": {
+                "low": 0,
+                "high": 0,
+                "max": 0,
+                "oom": 0,
+                "oom_kill": 0,
+                "oom_group_kill": 0
+              },
+              "eventsLocal": {
+                "low": 0,
+                "high": 0,
+                "max": 0,
+                "oom": 0,
+                "oom_kill": 0,
+                "oom_group_kill": 0
+              },
+              "pressure": {
+                "some": {
+                  "total": 0
+                },
+                "full": {
+                  "total": 0
+                }
+              }
+            },
+            "io": {
+              "stat": {
+                "254:0": {
+                  "rbytes": 0,
+                  "wbytes": 31330304,
+                  "rios": 0,
+                  "wios": 92,
+                  "dbytes": 0,
+                  "dios": 0
+                }
+              },
+              "pressure": {
+                "some": {
+                  "total": 5757
+                },
+                "full": {
+                  "total": 5757
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "index": 5,
+      "id": "email-683m-string-decoding-r3",
+      "artifact": "operations/005-email-683m-string-decoding-r3.log",
+      "startedAt": "2026-07-15T23:19:23.545Z",
+      "completedAt": "2026-07-15T23:19:27.264Z",
+      "status": 0,
+      "signal": null,
+      "productContainer": {
+        "id": "1b66ee336f33994f4c0301239be7d418302c26e67a32f5b66c547532cd0a633b",
+        "imageID": "sha256:608bcd8ef3ea69112858c71e9d7517889157764fba6921cc0dbdf6790d4b889d",
+        "created": "2026-07-15T23:19:23.5683515Z",
+        "state": {
+          "status": "exited",
+          "exitCode": 0,
+          "oomKilled": false
+        },
+        "constraints": {
+          "cpusetCpus": "0",
+          "nanoCpus": 1000000000,
+          "memory": 3221225472,
+          "memorySwap": 3221225472,
+          "pidsLimit": 1024
+        }
+      },
+      "postgres": {
+        "container": {
+          "id": "c0c22f8cc5fe39e55275dfaf82c50a52149a1c940d0f54f87fdf0e1d434bc931",
+          "imageID": "sha256:742f40ea20b9ff2ff31db5458d127452988a2164df9e17441e191f3b72252193",
+          "created": "2026-07-15T23:19:21.837438625Z",
+          "state": {
+            "status": "running",
+            "exitCode": 0,
+            "oomKilled": false
+          },
+          "constraints": {
+            "cpusetCpus": "2-3",
+            "nanoCpus": 2000000000,
+            "memory": 2147483648,
+            "memorySwap": 4294967296,
+            "pidsLimit": null
+          }
+        },
+        "systemIdentifier": "7662898379357548577",
+        "image": {
+          "reference": "postgres:17-alpine@sha256:742f40ea20b9ff2ff31db5458d127452988a2164df9e17441e191f3b72252193",
+          "id": "sha256:742f40ea20b9ff2ff31db5458d127452988a2164df9e17441e191f3b72252193",
+          "repoDigests": [
+            "postgres@sha256:742f40ea20b9ff2ff31db5458d127452988a2164df9e17441e191f3b72252193"
+          ],
+          "created": "2026-07-07T17:46:49.401690597Z",
+          "os": "linux",
+          "architecture": "arm64",
+          "variant": "v8",
+          "labels": {},
+          "rootFSLayers": [
+            "sha256:b2848c02ac6ff53d265469b5b30f649f335e546a83330cd8916d54e65e640409",
+            "sha256:3276ea79c0c0c02b7d702de4aa0bf6b60d4b3f1b295b30366973c4ec4bf91249",
+            "sha256:d7d195016259883bbb161fb50292c1be3f96f0c9b50c573cbb0ed57e64dfa2c9",
+            "sha256:1ebee87cc825164b634bd6837685531c240dcfe5a1cf507cb6e8df057f661cbf",
+            "sha256:df8da200347edec60626a356f574551d1ecb9e7727402137d7d1bc6cb3cf11db",
+            "sha256:40252c7d7df3e6b969af3fa01b51346fbff89b508a6f2c5a9f457d23e797cf64",
+            "sha256:11b7e3ae2bd33cf903077779b2178d1242006f750906c41d9941cd45be4c6175",
+            "sha256:60d0936c2e0dac1f79128a468e3259644a610850f2ce98c238027943b5e87108",
+            "sha256:60d2d3ed3afa870cf11fe567074bfc1c37e1f0488fe4f9259b4b4ccd6084c209",
+            "sha256:66c221f9d5b6c9542d87a9f5143ffa653ce6628a4db739870abede8c87da99af"
+          ]
+        },
+        "sourceStrategy": {
+          "clone": "regenerate-isolated-database",
+          "reset": "drop-database-after-run"
+        },
+        "runnerIsolation": {
+          "strategy": "fresh-container-per-operation",
+          "reset": "new-empty-data-directory",
+          "scope": "arm-and-repetition"
+        },
+        "cgroup": {
+          "before": {
+            "capturedAt": "2026-07-15T23:19:22.760Z",
+            "cpu": {
+              "cpusetCpus": "2-3",
+              "cpusetCpusEffective": "2-3",
+              "max": "200000 100000",
+              "stat": {
+                "usage_usec": 416975,
+                "user_usec": 261237,
+                "system_usec": 155737,
+                "nice_usec": 0,
+                "nr_periods": 11,
+                "nr_throttled": 0,
+                "throttled_usec": 0,
+                "nr_bursts": 0,
+                "burst_usec": 0
+              },
+              "pressure": {
+                "some": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 8262
+                },
+                "full": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 1922
+                }
+              }
+            },
+            "memory": {
+              "current": 66654208,
+              "max": 2147483648,
+              "peak": 76296192,
+              "events": {
+                "low": 0,
+                "high": 0,
+                "max": 0,
+                "oom": 0,
+                "oom_kill": 0,
+                "oom_group_kill": 0
+              },
+              "eventsLocal": {
+                "low": 0,
+                "high": 0,
+                "max": 0,
+                "oom": 0,
+                "oom_kill": 0,
+                "oom_group_kill": 0
+              },
+              "pressure": {
+                "some": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 0
+                },
+                "full": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 0
+                }
+              }
+            },
+            "io": {
+              "stat": {
+                "254:0": {
+                  "rbytes": 0,
+                  "wbytes": 40288256,
+                  "rios": 0,
+                  "wios": 1830,
+                  "dbytes": 0,
+                  "dios": 0
+                }
+              },
+              "pressure": {
+                "some": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 6846
+                },
+                "full": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 6802
+                }
+              }
+            }
+          },
+          "after": {
+            "capturedAt": "2026-07-15T23:19:27.298Z",
+            "cpu": {
+              "cpusetCpus": "2-3",
+              "cpusetCpusEffective": "2-3",
+              "max": "200000 100000",
+              "stat": {
+                "usage_usec": 1395247,
+                "user_usec": 700643,
+                "system_usec": 694603,
+                "nice_usec": 0,
+                "nr_periods": 43,
+                "nr_throttled": 0,
+                "throttled_usec": 0,
+                "nr_bursts": 0,
+                "burst_usec": 0
+              },
+              "pressure": {
+                "some": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 20731
+                },
+                "full": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 4194
+                }
+              }
+            },
+            "memory": {
+              "current": 108605440,
+              "max": 2147483648,
+              "peak": 153628672,
+              "events": {
+                "low": 0,
+                "high": 0,
+                "max": 0,
+                "oom": 0,
+                "oom_kill": 0,
+                "oom_group_kill": 0
+              },
+              "eventsLocal": {
+                "low": 0,
+                "high": 0,
+                "max": 0,
+                "oom": 0,
+                "oom_kill": 0,
+                "oom_group_kill": 0
+              },
+              "pressure": {
+                "some": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 0
+                },
+                "full": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 0
+                }
+              }
+            },
+            "io": {
+              "stat": {
+                "254:0": {
+                  "rbytes": 0,
+                  "wbytes": 71618560,
+                  "rios": 0,
+                  "wios": 1920,
+                  "dbytes": 0,
+                  "dios": 0
+                }
+              },
+              "pressure": {
+                "some": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 11781
+                },
+                "full": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 11737
+                }
+              }
+            }
+          },
+          "delta": {
+            "cpu": {
+              "stat": {
+                "usage_usec": 978272,
+                "user_usec": 439406,
+                "system_usec": 538866,
+                "nice_usec": 0,
+                "nr_periods": 32,
+                "nr_throttled": 0,
+                "throttled_usec": 0,
+                "nr_bursts": 0,
+                "burst_usec": 0
+              },
+              "pressure": {
+                "some": {
+                  "total": 12469
+                },
+                "full": {
+                  "total": 2272
+                }
+              }
+            },
+            "memory": {
+              "current": 41951232,
+              "max": 0,
+              "peak": 77332480,
+              "events": {
+                "low": 0,
+                "high": 0,
+                "max": 0,
+                "oom": 0,
+                "oom_kill": 0,
+                "oom_group_kill": 0
+              },
+              "eventsLocal": {
+                "low": 0,
+                "high": 0,
+                "max": 0,
+                "oom": 0,
+                "oom_kill": 0,
+                "oom_group_kill": 0
+              },
+              "pressure": {
+                "some": {
+                  "total": 0
+                },
+                "full": {
+                  "total": 0
+                }
+              }
+            },
+            "io": {
+              "stat": {
+                "254:0": {
+                  "rbytes": 0,
+                  "wbytes": 31330304,
+                  "rios": 0,
+                  "wios": 90,
+                  "dbytes": 0,
+                  "dios": 0
+                }
+              },
+              "pressure": {
+                "some": {
+                  "total": 4935
+                },
+                "full": {
+                  "total": 4935
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "index": 6,
+      "id": "email-683m-buffer-cast-r3",
+      "artifact": "operations/006-email-683m-buffer-cast-r3.log",
+      "startedAt": "2026-07-15T23:19:30.164Z",
+      "completedAt": "2026-07-15T23:19:33.587Z",
+      "status": 0,
+      "signal": null,
+      "productContainer": {
+        "id": "7dddcf8672e39aa9f43cb8fc210bcabdea52aee062d99669e26fadca7dfa3f6c",
+        "imageID": "sha256:3090a0fd3653f375d515c9a082ea90c4deb6099f990b2b32c01e2ce9d1431eba",
+        "created": "2026-07-15T23:19:30.19363592Z",
+        "state": {
+          "status": "exited",
+          "exitCode": 0,
+          "oomKilled": false
+        },
+        "constraints": {
+          "cpusetCpus": "0",
+          "nanoCpus": 1000000000,
+          "memory": 3221225472,
+          "memorySwap": 3221225472,
+          "pidsLimit": 1024
+        }
+      },
+      "postgres": {
+        "container": {
+          "id": "328380d304df3af3787daac9411b21b7db6346b8345ae718cf706d4b55b7f39b",
+          "imageID": "sha256:742f40ea20b9ff2ff31db5458d127452988a2164df9e17441e191f3b72252193",
+          "created": "2026-07-15T23:19:28.371663044Z",
+          "state": {
+            "status": "running",
+            "exitCode": 0,
+            "oomKilled": false
+          },
+          "constraints": {
+            "cpusetCpus": "2-3",
+            "nanoCpus": 2000000000,
+            "memory": 2147483648,
+            "memorySwap": 4294967296,
+            "pidsLimit": null
+          }
+        },
+        "systemIdentifier": "7662898407564017697",
+        "image": {
+          "reference": "postgres:17-alpine@sha256:742f40ea20b9ff2ff31db5458d127452988a2164df9e17441e191f3b72252193",
+          "id": "sha256:742f40ea20b9ff2ff31db5458d127452988a2164df9e17441e191f3b72252193",
+          "repoDigests": [
+            "postgres@sha256:742f40ea20b9ff2ff31db5458d127452988a2164df9e17441e191f3b72252193"
+          ],
+          "created": "2026-07-07T17:46:49.401690597Z",
+          "os": "linux",
+          "architecture": "arm64",
+          "variant": "v8",
+          "labels": {},
+          "rootFSLayers": [
+            "sha256:b2848c02ac6ff53d265469b5b30f649f335e546a83330cd8916d54e65e640409",
+            "sha256:3276ea79c0c0c02b7d702de4aa0bf6b60d4b3f1b295b30366973c4ec4bf91249",
+            "sha256:d7d195016259883bbb161fb50292c1be3f96f0c9b50c573cbb0ed57e64dfa2c9",
+            "sha256:1ebee87cc825164b634bd6837685531c240dcfe5a1cf507cb6e8df057f661cbf",
+            "sha256:df8da200347edec60626a356f574551d1ecb9e7727402137d7d1bc6cb3cf11db",
+            "sha256:40252c7d7df3e6b969af3fa01b51346fbff89b508a6f2c5a9f457d23e797cf64",
+            "sha256:11b7e3ae2bd33cf903077779b2178d1242006f750906c41d9941cd45be4c6175",
+            "sha256:60d0936c2e0dac1f79128a468e3259644a610850f2ce98c238027943b5e87108",
+            "sha256:60d2d3ed3afa870cf11fe567074bfc1c37e1f0488fe4f9259b4b4ccd6084c209",
+            "sha256:66c221f9d5b6c9542d87a9f5143ffa653ce6628a4db739870abede8c87da99af"
+          ]
+        },
+        "sourceStrategy": {
+          "clone": "regenerate-isolated-database",
+          "reset": "drop-database-after-run"
+        },
+        "runnerIsolation": {
+          "strategy": "fresh-container-per-operation",
+          "reset": "new-empty-data-directory",
+          "scope": "arm-and-repetition"
+        },
+        "cgroup": {
+          "before": {
+            "capturedAt": "2026-07-15T23:19:29.341Z",
+            "cpu": {
+              "cpusetCpus": "2-3",
+              "cpusetCpusEffective": "2-3",
+              "max": "200000 100000",
+              "stat": {
+                "usage_usec": 430305,
+                "user_usec": 263866,
+                "system_usec": 166439,
+                "nice_usec": 0,
+                "nr_periods": 12,
+                "nr_throttled": 0,
+                "throttled_usec": 0,
+                "nr_bursts": 0,
+                "burst_usec": 0
+              },
+              "pressure": {
+                "some": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 10333
+                },
+                "full": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 2142
+                }
+              }
+            },
+            "memory": {
+              "current": 66760704,
+              "max": 2147483648,
+              "peak": 76599296,
+              "events": {
+                "low": 0,
+                "high": 0,
+                "max": 0,
+                "oom": 0,
+                "oom_kill": 0,
+                "oom_group_kill": 0
+              },
+              "eventsLocal": {
+                "low": 0,
+                "high": 0,
+                "max": 0,
+                "oom": 0,
+                "oom_kill": 0,
+                "oom_group_kill": 0
+              },
+              "pressure": {
+                "some": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 0
+                },
+                "full": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 0
+                }
+              }
+            },
+            "io": {
+              "stat": {
+                "254:0": {
+                  "rbytes": 0,
+                  "wbytes": 40288256,
+                  "rios": 0,
+                  "wios": 1833,
+                  "dbytes": 0,
+                  "dios": 0
+                }
+              },
+              "pressure": {
+                "some": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 8097
+                },
+                "full": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 7999
+                }
+              }
+            }
+          },
+          "after": {
+            "capturedAt": "2026-07-15T23:19:33.620Z",
+            "cpu": {
+              "cpusetCpus": "2-3",
+              "cpusetCpusEffective": "2-3",
+              "max": "200000 100000",
+              "stat": {
+                "usage_usec": 1418223,
+                "user_usec": 709610,
+                "system_usec": 708612,
+                "nice_usec": 0,
+                "nr_periods": 40,
+                "nr_throttled": 0,
+                "throttled_usec": 0,
+                "nr_bursts": 0,
+                "burst_usec": 0
+              },
+              "pressure": {
+                "some": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 25871
+                },
+                "full": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 4078
+                }
+              }
+            },
+            "memory": {
+              "current": 108269568,
+              "max": 2147483648,
+              "peak": 153489408,
+              "events": {
+                "low": 0,
+                "high": 0,
+                "max": 0,
+                "oom": 0,
+                "oom_kill": 0,
+                "oom_group_kill": 0
+              },
+              "eventsLocal": {
+                "low": 0,
+                "high": 0,
+                "max": 0,
+                "oom": 0,
+                "oom_kill": 0,
+                "oom_group_kill": 0
+              },
+              "pressure": {
+                "some": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 0
+                },
+                "full": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 0
+                }
+              }
+            },
+            "io": {
+              "stat": {
+                "254:0": {
+                  "rbytes": 0,
+                  "wbytes": 71618560,
+                  "rios": 0,
+                  "wios": 1927,
+                  "dbytes": 0,
+                  "dios": 0
+                }
+              },
+              "pressure": {
+                "some": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 15346
+                },
+                "full": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 15248
+                }
+              }
+            }
+          },
+          "delta": {
+            "cpu": {
+              "stat": {
+                "usage_usec": 987918,
+                "user_usec": 445744,
+                "system_usec": 542173,
+                "nice_usec": 0,
+                "nr_periods": 28,
+                "nr_throttled": 0,
+                "throttled_usec": 0,
+                "nr_bursts": 0,
+                "burst_usec": 0
+              },
+              "pressure": {
+                "some": {
+                  "total": 15538
+                },
+                "full": {
+                  "total": 1936
+                }
+              }
+            },
+            "memory": {
+              "current": 41508864,
+              "max": 0,
+              "peak": 76890112,
+              "events": {
+                "low": 0,
+                "high": 0,
+                "max": 0,
+                "oom": 0,
+                "oom_kill": 0,
+                "oom_group_kill": 0
+              },
+              "eventsLocal": {
+                "low": 0,
+                "high": 0,
+                "max": 0,
+                "oom": 0,
+                "oom_kill": 0,
+                "oom_group_kill": 0
+              },
+              "pressure": {
+                "some": {
+                  "total": 0
+                },
+                "full": {
+                  "total": 0
+                }
+              }
+            },
+            "io": {
+              "stat": {
+                "254:0": {
+                  "rbytes": 0,
+                  "wbytes": 31330304,
+                  "rios": 0,
+                  "wios": 94,
+                  "dbytes": 0,
+                  "dios": 0
+                }
+              },
+              "pressure": {
+                "some": {
+                  "total": 7249
+                },
+                "full": {
+                  "total": 7249
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "index": 7,
+      "id": "email-683m-buffer-cast-r4",
+      "artifact": "operations/007-email-683m-buffer-cast-r4.log",
+      "startedAt": "2026-07-15T23:19:36.453Z",
+      "completedAt": "2026-07-15T23:19:39.857Z",
+      "status": 0,
+      "signal": null,
+      "productContainer": {
+        "id": "386db6be1f2f2cda95ff93342d265c4f6e53b77414b665ee64f3508f82aa9659",
+        "imageID": "sha256:3090a0fd3653f375d515c9a082ea90c4deb6099f990b2b32c01e2ce9d1431eba",
+        "created": "2026-07-15T23:19:36.481520632Z",
+        "state": {
+          "status": "exited",
+          "exitCode": 0,
+          "oomKilled": false
+        },
+        "constraints": {
+          "cpusetCpus": "0",
+          "nanoCpus": 1000000000,
+          "memory": 3221225472,
+          "memorySwap": 3221225472,
+          "pidsLimit": 1024
+        }
+      },
+      "postgres": {
+        "container": {
+          "id": "353a734aed5938b0c52b97ec851a912da6faf3aecb84eed1f56805df0c7d856f",
+          "imageID": "sha256:742f40ea20b9ff2ff31db5458d127452988a2164df9e17441e191f3b72252193",
+          "created": "2026-07-15T23:19:34.693095256Z",
+          "state": {
+            "status": "running",
+            "exitCode": 0,
+            "oomKilled": false
+          },
+          "constraints": {
+            "cpusetCpus": "2-3",
+            "nanoCpus": 2000000000,
+            "memory": 2147483648,
+            "memorySwap": 4294967296,
+            "pidsLimit": null
+          }
+        },
+        "systemIdentifier": "7662898434612633633",
+        "image": {
+          "reference": "postgres:17-alpine@sha256:742f40ea20b9ff2ff31db5458d127452988a2164df9e17441e191f3b72252193",
+          "id": "sha256:742f40ea20b9ff2ff31db5458d127452988a2164df9e17441e191f3b72252193",
+          "repoDigests": [
+            "postgres@sha256:742f40ea20b9ff2ff31db5458d127452988a2164df9e17441e191f3b72252193"
+          ],
+          "created": "2026-07-07T17:46:49.401690597Z",
+          "os": "linux",
+          "architecture": "arm64",
+          "variant": "v8",
+          "labels": {},
+          "rootFSLayers": [
+            "sha256:b2848c02ac6ff53d265469b5b30f649f335e546a83330cd8916d54e65e640409",
+            "sha256:3276ea79c0c0c02b7d702de4aa0bf6b60d4b3f1b295b30366973c4ec4bf91249",
+            "sha256:d7d195016259883bbb161fb50292c1be3f96f0c9b50c573cbb0ed57e64dfa2c9",
+            "sha256:1ebee87cc825164b634bd6837685531c240dcfe5a1cf507cb6e8df057f661cbf",
+            "sha256:df8da200347edec60626a356f574551d1ecb9e7727402137d7d1bc6cb3cf11db",
+            "sha256:40252c7d7df3e6b969af3fa01b51346fbff89b508a6f2c5a9f457d23e797cf64",
+            "sha256:11b7e3ae2bd33cf903077779b2178d1242006f750906c41d9941cd45be4c6175",
+            "sha256:60d0936c2e0dac1f79128a468e3259644a610850f2ce98c238027943b5e87108",
+            "sha256:60d2d3ed3afa870cf11fe567074bfc1c37e1f0488fe4f9259b4b4ccd6084c209",
+            "sha256:66c221f9d5b6c9542d87a9f5143ffa653ce6628a4db739870abede8c87da99af"
+          ]
+        },
+        "sourceStrategy": {
+          "clone": "regenerate-isolated-database",
+          "reset": "drop-database-after-run"
+        },
+        "runnerIsolation": {
+          "strategy": "fresh-container-per-operation",
+          "reset": "new-empty-data-directory",
+          "scope": "arm-and-repetition"
+        },
+        "cgroup": {
+          "before": {
+            "capturedAt": "2026-07-15T23:19:35.689Z",
+            "cpu": {
+              "cpusetCpus": "2-3",
+              "cpusetCpusEffective": "2-3",
+              "max": "200000 100000",
+              "stat": {
+                "usage_usec": 426978,
+                "user_usec": 272185,
+                "system_usec": 154792,
+                "nice_usec": 0,
+                "nr_periods": 12,
+                "nr_throttled": 0,
+                "throttled_usec": 0,
+                "nr_bursts": 0,
+                "burst_usec": 0
+              },
+              "pressure": {
+                "some": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 21045
+                },
+                "full": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 1800
+                }
+              }
+            },
+            "memory": {
+              "current": 66691072,
+              "max": 2147483648,
+              "peak": 76627968,
+              "events": {
+                "low": 0,
+                "high": 0,
+                "max": 0,
+                "oom": 0,
+                "oom_kill": 0,
+                "oom_group_kill": 0
+              },
+              "eventsLocal": {
+                "low": 0,
+                "high": 0,
+                "max": 0,
+                "oom": 0,
+                "oom_kill": 0,
+                "oom_group_kill": 0
+              },
+              "pressure": {
+                "some": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 0
+                },
+                "full": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 0
+                }
+              }
+            },
+            "io": {
+              "stat": {
+                "254:0": {
+                  "rbytes": 0,
+                  "wbytes": 40288256,
+                  "rios": 0,
+                  "wios": 1832,
+                  "dbytes": 0,
+                  "dios": 0
+                }
+              },
+              "pressure": {
+                "some": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 5239
+                },
+                "full": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 5135
+                }
+              }
+            }
+          },
+          "after": {
+            "capturedAt": "2026-07-15T23:19:39.889Z",
+            "cpu": {
+              "cpusetCpus": "2-3",
+              "cpusetCpusEffective": "2-3",
+              "max": "200000 100000",
+              "stat": {
+                "usage_usec": 1406657,
+                "user_usec": 697248,
+                "system_usec": 709409,
+                "nice_usec": 0,
+                "nr_periods": 40,
+                "nr_throttled": 0,
+                "throttled_usec": 0,
+                "nr_bursts": 0,
+                "burst_usec": 0
+              },
+              "pressure": {
+                "some": {
+                  "avg10": "0.14",
+                  "avg60": "0.03",
+                  "avg300": "0.00",
+                  "total": 38017
+                },
+                "full": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 4201
+                }
+              }
+            },
+            "memory": {
+              "current": 108478464,
+              "max": 2147483648,
+              "peak": 153317376,
+              "events": {
+                "low": 0,
+                "high": 0,
+                "max": 0,
+                "oom": 0,
+                "oom_kill": 0,
+                "oom_group_kill": 0
+              },
+              "eventsLocal": {
+                "low": 0,
+                "high": 0,
+                "max": 0,
+                "oom": 0,
+                "oom_kill": 0,
+                "oom_group_kill": 0
+              },
+              "pressure": {
+                "some": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 0
+                },
+                "full": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 0
+                }
+              }
+            },
+            "io": {
+              "stat": {
+                "254:0": {
+                  "rbytes": 0,
+                  "wbytes": 71618560,
+                  "rios": 0,
+                  "wios": 1926,
+                  "dbytes": 0,
+                  "dios": 0
+                }
+              },
+              "pressure": {
+                "some": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 13723
+                },
+                "full": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 13619
+                }
+              }
+            }
+          },
+          "delta": {
+            "cpu": {
+              "stat": {
+                "usage_usec": 979679,
+                "user_usec": 425063,
+                "system_usec": 554617,
+                "nice_usec": 0,
+                "nr_periods": 28,
+                "nr_throttled": 0,
+                "throttled_usec": 0,
+                "nr_bursts": 0,
+                "burst_usec": 0
+              },
+              "pressure": {
+                "some": {
+                  "total": 16972
+                },
+                "full": {
+                  "total": 2401
+                }
+              }
+            },
+            "memory": {
+              "current": 41787392,
+              "max": 0,
+              "peak": 76689408,
+              "events": {
+                "low": 0,
+                "high": 0,
+                "max": 0,
+                "oom": 0,
+                "oom_kill": 0,
+                "oom_group_kill": 0
+              },
+              "eventsLocal": {
+                "low": 0,
+                "high": 0,
+                "max": 0,
+                "oom": 0,
+                "oom_kill": 0,
+                "oom_group_kill": 0
+              },
+              "pressure": {
+                "some": {
+                  "total": 0
+                },
+                "full": {
+                  "total": 0
+                }
+              }
+            },
+            "io": {
+              "stat": {
+                "254:0": {
+                  "rbytes": 0,
+                  "wbytes": 31330304,
+                  "rios": 0,
+                  "wios": 94,
+                  "dbytes": 0,
+                  "dios": 0
+                }
+              },
+              "pressure": {
+                "some": {
+                  "total": 8484
+                },
+                "full": {
+                  "total": 8484
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "index": 8,
+      "id": "email-683m-string-decoding-r4",
+      "artifact": "operations/008-email-683m-string-decoding-r4.log",
+      "startedAt": "2026-07-15T23:19:42.785Z",
+      "completedAt": "2026-07-15T23:19:46.531Z",
+      "status": 0,
+      "signal": null,
+      "productContainer": {
+        "id": "e04e208ef372cffed0014a737b1d7f603200239632eb61895ebcf495a8ea9f0b",
+        "imageID": "sha256:608bcd8ef3ea69112858c71e9d7517889157764fba6921cc0dbdf6790d4b889d",
+        "created": "2026-07-15T23:19:42.813292718Z",
+        "state": {
+          "status": "exited",
+          "exitCode": 0,
+          "oomKilled": false
+        },
+        "constraints": {
+          "cpusetCpus": "0",
+          "nanoCpus": 1000000000,
+          "memory": 3221225472,
+          "memorySwap": 3221225472,
+          "pidsLimit": 1024
+        }
+      },
+      "postgres": {
+        "container": {
+          "id": "ba66b7cd1eaf222f74a74a05811dd32290bfb44d9071b0ab1a9d5ffa5e68f7d3",
+          "imageID": "sha256:742f40ea20b9ff2ff31db5458d127452988a2164df9e17441e191f3b72252193",
+          "created": "2026-07-15T23:19:40.972057592Z",
+          "state": {
+            "status": "running",
+            "exitCode": 0,
+            "oomKilled": false
+          },
+          "constraints": {
+            "cpusetCpus": "2-3",
+            "nanoCpus": 2000000000,
+            "memory": 2147483648,
+            "memorySwap": 4294967296,
+            "pidsLimit": null
+          }
+        },
+        "systemIdentifier": "7662898461730652193",
+        "image": {
+          "reference": "postgres:17-alpine@sha256:742f40ea20b9ff2ff31db5458d127452988a2164df9e17441e191f3b72252193",
+          "id": "sha256:742f40ea20b9ff2ff31db5458d127452988a2164df9e17441e191f3b72252193",
+          "repoDigests": [
+            "postgres@sha256:742f40ea20b9ff2ff31db5458d127452988a2164df9e17441e191f3b72252193"
+          ],
+          "created": "2026-07-07T17:46:49.401690597Z",
+          "os": "linux",
+          "architecture": "arm64",
+          "variant": "v8",
+          "labels": {},
+          "rootFSLayers": [
+            "sha256:b2848c02ac6ff53d265469b5b30f649f335e546a83330cd8916d54e65e640409",
+            "sha256:3276ea79c0c0c02b7d702de4aa0bf6b60d4b3f1b295b30366973c4ec4bf91249",
+            "sha256:d7d195016259883bbb161fb50292c1be3f96f0c9b50c573cbb0ed57e64dfa2c9",
+            "sha256:1ebee87cc825164b634bd6837685531c240dcfe5a1cf507cb6e8df057f661cbf",
+            "sha256:df8da200347edec60626a356f574551d1ecb9e7727402137d7d1bc6cb3cf11db",
+            "sha256:40252c7d7df3e6b969af3fa01b51346fbff89b508a6f2c5a9f457d23e797cf64",
+            "sha256:11b7e3ae2bd33cf903077779b2178d1242006f750906c41d9941cd45be4c6175",
+            "sha256:60d0936c2e0dac1f79128a468e3259644a610850f2ce98c238027943b5e87108",
+            "sha256:60d2d3ed3afa870cf11fe567074bfc1c37e1f0488fe4f9259b4b4ccd6084c209",
+            "sha256:66c221f9d5b6c9542d87a9f5143ffa653ce6628a4db739870abede8c87da99af"
+          ]
+        },
+        "sourceStrategy": {
+          "clone": "regenerate-isolated-database",
+          "reset": "drop-database-after-run"
+        },
+        "runnerIsolation": {
+          "strategy": "fresh-container-per-operation",
+          "reset": "new-empty-data-directory",
+          "scope": "arm-and-repetition"
+        },
+        "cgroup": {
+          "before": {
+            "capturedAt": "2026-07-15T23:19:41.947Z",
+            "cpu": {
+              "cpusetCpus": "2-3",
+              "cpusetCpusEffective": "2-3",
+              "max": "200000 100000",
+              "stat": {
+                "usage_usec": 425988,
+                "user_usec": 269586,
+                "system_usec": 156401,
+                "nice_usec": 0,
+                "nr_periods": 11,
+                "nr_throttled": 0,
+                "throttled_usec": 0,
+                "nr_bursts": 0,
+                "burst_usec": 0
+              },
+              "pressure": {
+                "some": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 18230
+                },
+                "full": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 1720
+                }
+              }
+            },
+            "memory": {
+              "current": 66707456,
+              "max": 2147483648,
+              "peak": 76304384,
+              "events": {
+                "low": 0,
+                "high": 0,
+                "max": 0,
+                "oom": 0,
+                "oom_kill": 0,
+                "oom_group_kill": 0
+              },
+              "eventsLocal": {
+                "low": 0,
+                "high": 0,
+                "max": 0,
+                "oom": 0,
+                "oom_kill": 0,
+                "oom_group_kill": 0
+              },
+              "pressure": {
+                "some": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 0
+                },
+                "full": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 0
+                }
+              }
+            },
+            "io": {
+              "stat": {
+                "254:0": {
+                  "rbytes": 0,
+                  "wbytes": 40288256,
+                  "rios": 0,
+                  "wios": 1833,
+                  "dbytes": 0,
+                  "dios": 0
+                }
+              },
+              "pressure": {
+                "some": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 5128
+                },
+                "full": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 5003
+                }
+              }
+            }
+          },
+          "after": {
+            "capturedAt": "2026-07-15T23:19:46.563Z",
+            "cpu": {
+              "cpusetCpus": "2-3",
+              "cpusetCpusEffective": "2-3",
+              "max": "200000 100000",
+              "stat": {
+                "usage_usec": 1422425,
+                "user_usec": 704604,
+                "system_usec": 717821,
+                "nice_usec": 0,
+                "nr_periods": 42,
+                "nr_throttled": 0,
+                "throttled_usec": 0,
+                "nr_bursts": 0,
+                "burst_usec": 0
+              },
+              "pressure": {
+                "some": {
+                  "avg10": "0.14",
+                  "avg60": "0.03",
+                  "avg300": "0.00",
+                  "total": 29890
+                },
+                "full": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 4303
+                }
+              }
+            },
+            "memory": {
+              "current": 108482560,
+              "max": 2147483648,
+              "peak": 153612288,
+              "events": {
+                "low": 0,
+                "high": 0,
+                "max": 0,
+                "oom": 0,
+                "oom_kill": 0,
+                "oom_group_kill": 0
+              },
+              "eventsLocal": {
+                "low": 0,
+                "high": 0,
+                "max": 0,
+                "oom": 0,
+                "oom_kill": 0,
+                "oom_group_kill": 0
+              },
+              "pressure": {
+                "some": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 0
+                },
+                "full": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 0
+                }
+              }
+            },
+            "io": {
+              "stat": {
+                "254:0": {
+                  "rbytes": 0,
+                  "wbytes": 71618560,
+                  "rios": 0,
+                  "wios": 1927,
+                  "dbytes": 0,
+                  "dios": 0
+                }
+              },
+              "pressure": {
+                "some": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 11790
+                },
+                "full": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 11665
+                }
+              }
+            }
+          },
+          "delta": {
+            "cpu": {
+              "stat": {
+                "usage_usec": 996437,
+                "user_usec": 435018,
+                "system_usec": 561420,
+                "nice_usec": 0,
+                "nr_periods": 31,
+                "nr_throttled": 0,
+                "throttled_usec": 0,
+                "nr_bursts": 0,
+                "burst_usec": 0
+              },
+              "pressure": {
+                "some": {
+                  "total": 11660
+                },
+                "full": {
+                  "total": 2583
+                }
+              }
+            },
+            "memory": {
+              "current": 41775104,
+              "max": 0,
+              "peak": 77307904,
+              "events": {
+                "low": 0,
+                "high": 0,
+                "max": 0,
+                "oom": 0,
+                "oom_kill": 0,
+                "oom_group_kill": 0
+              },
+              "eventsLocal": {
+                "low": 0,
+                "high": 0,
+                "max": 0,
+                "oom": 0,
+                "oom_kill": 0,
+                "oom_group_kill": 0
+              },
+              "pressure": {
+                "some": {
+                  "total": 0
+                },
+                "full": {
+                  "total": 0
+                }
+              }
+            },
+            "io": {
+              "stat": {
+                "254:0": {
+                  "rbytes": 0,
+                  "wbytes": 31330304,
+                  "rios": 0,
+                  "wios": 94,
+                  "dbytes": 0,
+                  "dios": 0
+                }
+              },
+              "pressure": {
+                "some": {
+                  "total": 6662
+                },
+                "full": {
+                  "total": 6662
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "index": 9,
+      "id": "email-683m-string-decoding-r5",
+      "artifact": "operations/009-email-683m-string-decoding-r5.log",
+      "startedAt": "2026-07-15T23:19:49.350Z",
+      "completedAt": "2026-07-15T23:19:53.087Z",
+      "status": 0,
+      "signal": null,
+      "productContainer": {
+        "id": "70bebf5a96174cf07e9161608ecd2b72a578ccd89253cd83beb33c8d6b0c4118",
+        "imageID": "sha256:608bcd8ef3ea69112858c71e9d7517889157764fba6921cc0dbdf6790d4b889d",
+        "created": "2026-07-15T23:19:49.379092304Z",
+        "state": {
+          "status": "exited",
+          "exitCode": 0,
+          "oomKilled": false
+        },
+        "constraints": {
+          "cpusetCpus": "0",
+          "nanoCpus": 1000000000,
+          "memory": 3221225472,
+          "memorySwap": 3221225472,
+          "pidsLimit": 1024
+        }
+      },
+      "postgres": {
+        "container": {
+          "id": "5f9f40e29a561033fe9e08a71200756d8a9992a31797dcedc67b1ae5a948b3a6",
+          "imageID": "sha256:742f40ea20b9ff2ff31db5458d127452988a2164df9e17441e191f3b72252193",
+          "created": "2026-07-15T23:19:47.637975345Z",
+          "state": {
+            "status": "running",
+            "exitCode": 0,
+            "oomKilled": false
+          },
+          "constraints": {
+            "cpusetCpus": "2-3",
+            "nanoCpus": 2000000000,
+            "memory": 2147483648,
+            "memorySwap": 4294967296,
+            "pidsLimit": null
+          }
+        },
+        "systemIdentifier": "7662898490206818337",
+        "image": {
+          "reference": "postgres:17-alpine@sha256:742f40ea20b9ff2ff31db5458d127452988a2164df9e17441e191f3b72252193",
+          "id": "sha256:742f40ea20b9ff2ff31db5458d127452988a2164df9e17441e191f3b72252193",
+          "repoDigests": [
+            "postgres@sha256:742f40ea20b9ff2ff31db5458d127452988a2164df9e17441e191f3b72252193"
+          ],
+          "created": "2026-07-07T17:46:49.401690597Z",
+          "os": "linux",
+          "architecture": "arm64",
+          "variant": "v8",
+          "labels": {},
+          "rootFSLayers": [
+            "sha256:b2848c02ac6ff53d265469b5b30f649f335e546a83330cd8916d54e65e640409",
+            "sha256:3276ea79c0c0c02b7d702de4aa0bf6b60d4b3f1b295b30366973c4ec4bf91249",
+            "sha256:d7d195016259883bbb161fb50292c1be3f96f0c9b50c573cbb0ed57e64dfa2c9",
+            "sha256:1ebee87cc825164b634bd6837685531c240dcfe5a1cf507cb6e8df057f661cbf",
+            "sha256:df8da200347edec60626a356f574551d1ecb9e7727402137d7d1bc6cb3cf11db",
+            "sha256:40252c7d7df3e6b969af3fa01b51346fbff89b508a6f2c5a9f457d23e797cf64",
+            "sha256:11b7e3ae2bd33cf903077779b2178d1242006f750906c41d9941cd45be4c6175",
+            "sha256:60d0936c2e0dac1f79128a468e3259644a610850f2ce98c238027943b5e87108",
+            "sha256:60d2d3ed3afa870cf11fe567074bfc1c37e1f0488fe4f9259b4b4ccd6084c209",
+            "sha256:66c221f9d5b6c9542d87a9f5143ffa653ce6628a4db739870abede8c87da99af"
+          ]
+        },
+        "sourceStrategy": {
+          "clone": "regenerate-isolated-database",
+          "reset": "drop-database-after-run"
+        },
+        "runnerIsolation": {
+          "strategy": "fresh-container-per-operation",
+          "reset": "new-empty-data-directory",
+          "scope": "arm-and-repetition"
+        },
+        "cgroup": {
+          "before": {
+            "capturedAt": "2026-07-15T23:19:48.532Z",
+            "cpu": {
+              "cpusetCpus": "2-3",
+              "cpusetCpusEffective": "2-3",
+              "max": "200000 100000",
+              "stat": {
+                "usage_usec": 423014,
+                "user_usec": 261333,
+                "system_usec": 161680,
+                "nice_usec": 0,
+                "nr_periods": 11,
+                "nr_throttled": 0,
+                "throttled_usec": 0,
+                "nr_bursts": 0,
+                "burst_usec": 0
+              },
+              "pressure": {
+                "some": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 21531
+                },
+                "full": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 1527
+                }
+              }
+            },
+            "memory": {
+              "current": 66691072,
+              "max": 2147483648,
+              "peak": 76886016,
+              "events": {
+                "low": 0,
+                "high": 0,
+                "max": 0,
+                "oom": 0,
+                "oom_kill": 0,
+                "oom_group_kill": 0
+              },
+              "eventsLocal": {
+                "low": 0,
+                "high": 0,
+                "max": 0,
+                "oom": 0,
+                "oom_kill": 0,
+                "oom_group_kill": 0
+              },
+              "pressure": {
+                "some": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 0
+                },
+                "full": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 0
+                }
+              }
+            },
+            "io": {
+              "stat": {
+                "254:0": {
+                  "rbytes": 0,
+                  "wbytes": 40288256,
+                  "rios": 0,
+                  "wios": 1832,
+                  "dbytes": 0,
+                  "dios": 0
+                }
+              },
+              "pressure": {
+                "some": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 4768
+                },
+                "full": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 4694
+                }
+              }
+            }
+          },
+          "after": {
+            "capturedAt": "2026-07-15T23:19:53.117Z",
+            "cpu": {
+              "cpusetCpus": "2-3",
+              "cpusetCpusEffective": "2-3",
+              "max": "200000 100000",
+              "stat": {
+                "usage_usec": 1419610,
+                "user_usec": 723543,
+                "system_usec": 696066,
+                "nice_usec": 0,
+                "nr_periods": 43,
+                "nr_throttled": 0,
+                "throttled_usec": 0,
+                "nr_bursts": 0,
+                "burst_usec": 0
+              },
+              "pressure": {
+                "some": {
+                  "avg10": "0.14",
+                  "avg60": "0.03",
+                  "avg300": "0.00",
+                  "total": 34568
+                },
+                "full": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 4324
+                }
+              }
+            },
+            "memory": {
+              "current": 108494848,
+              "max": 2147483648,
+              "peak": 151093248,
+              "events": {
+                "low": 0,
+                "high": 0,
+                "max": 0,
+                "oom": 0,
+                "oom_kill": 0,
+                "oom_group_kill": 0
+              },
+              "eventsLocal": {
+                "low": 0,
+                "high": 0,
+                "max": 0,
+                "oom": 0,
+                "oom_kill": 0,
+                "oom_group_kill": 0
+              },
+              "pressure": {
+                "some": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 0
+                },
+                "full": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 0
+                }
+              }
+            },
+            "io": {
+              "stat": {
+                "254:0": {
+                  "rbytes": 0,
+                  "wbytes": 71626752,
+                  "rios": 0,
+                  "wios": 1929,
+                  "dbytes": 0,
+                  "dios": 0
+                }
+              },
+              "pressure": {
+                "some": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 11637
+                },
+                "full": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 11563
+                }
+              }
+            }
+          },
+          "delta": {
+            "cpu": {
+              "stat": {
+                "usage_usec": 996596,
+                "user_usec": 462210,
+                "system_usec": 534386,
+                "nice_usec": 0,
+                "nr_periods": 32,
+                "nr_throttled": 0,
+                "throttled_usec": 0,
+                "nr_bursts": 0,
+                "burst_usec": 0
+              },
+              "pressure": {
+                "some": {
+                  "total": 13037
+                },
+                "full": {
+                  "total": 2797
+                }
+              }
+            },
+            "memory": {
+              "current": 41803776,
+              "max": 0,
+              "peak": 74207232,
+              "events": {
+                "low": 0,
+                "high": 0,
+                "max": 0,
+                "oom": 0,
+                "oom_kill": 0,
+                "oom_group_kill": 0
+              },
+              "eventsLocal": {
+                "low": 0,
+                "high": 0,
+                "max": 0,
+                "oom": 0,
+                "oom_kill": 0,
+                "oom_group_kill": 0
+              },
+              "pressure": {
+                "some": {
+                  "total": 0
+                },
+                "full": {
+                  "total": 0
+                }
+              }
+            },
+            "io": {
+              "stat": {
+                "254:0": {
+                  "rbytes": 0,
+                  "wbytes": 31338496,
+                  "rios": 0,
+                  "wios": 97,
+                  "dbytes": 0,
+                  "dios": 0
+                }
+              },
+              "pressure": {
+                "some": {
+                  "total": 6869
+                },
+                "full": {
+                  "total": 6869
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "index": 10,
+      "id": "email-683m-buffer-cast-r5",
+      "artifact": "operations/010-email-683m-buffer-cast-r5.log",
+      "startedAt": "2026-07-15T23:19:55.950Z",
+      "completedAt": "2026-07-15T23:19:59.413Z",
+      "status": 0,
+      "signal": null,
+      "productContainer": {
+        "id": "4674d4630d79023414bbebba5f21587af6858d2beafdfa71bf5b5629f3844410",
+        "imageID": "sha256:3090a0fd3653f375d515c9a082ea90c4deb6099f990b2b32c01e2ce9d1431eba",
+        "created": "2026-07-15T23:19:55.977988127Z",
+        "state": {
+          "status": "exited",
+          "exitCode": 0,
+          "oomKilled": false
+        },
+        "constraints": {
+          "cpusetCpus": "0",
+          "nanoCpus": 1000000000,
+          "memory": 3221225472,
+          "memorySwap": 3221225472,
+          "pidsLimit": 1024
+        }
+      },
+      "postgres": {
+        "container": {
+          "id": "b460e1cab0a4c7fb70b0be83007cb5ae9f11da73c86a90c32643bcb442d6c27a",
+          "imageID": "sha256:742f40ea20b9ff2ff31db5458d127452988a2164df9e17441e191f3b72252193",
+          "created": "2026-07-15T23:19:54.174214167Z",
+          "state": {
+            "status": "running",
+            "exitCode": 0,
+            "oomKilled": false
+          },
+          "constraints": {
+            "cpusetCpus": "2-3",
+            "nanoCpus": 2000000000,
+            "memory": 2147483648,
+            "memorySwap": 4294967296,
+            "pidsLimit": null
+          }
+        },
+        "systemIdentifier": "7662898518382161953",
+        "image": {
+          "reference": "postgres:17-alpine@sha256:742f40ea20b9ff2ff31db5458d127452988a2164df9e17441e191f3b72252193",
+          "id": "sha256:742f40ea20b9ff2ff31db5458d127452988a2164df9e17441e191f3b72252193",
+          "repoDigests": [
+            "postgres@sha256:742f40ea20b9ff2ff31db5458d127452988a2164df9e17441e191f3b72252193"
+          ],
+          "created": "2026-07-07T17:46:49.401690597Z",
+          "os": "linux",
+          "architecture": "arm64",
+          "variant": "v8",
+          "labels": {},
+          "rootFSLayers": [
+            "sha256:b2848c02ac6ff53d265469b5b30f649f335e546a83330cd8916d54e65e640409",
+            "sha256:3276ea79c0c0c02b7d702de4aa0bf6b60d4b3f1b295b30366973c4ec4bf91249",
+            "sha256:d7d195016259883bbb161fb50292c1be3f96f0c9b50c573cbb0ed57e64dfa2c9",
+            "sha256:1ebee87cc825164b634bd6837685531c240dcfe5a1cf507cb6e8df057f661cbf",
+            "sha256:df8da200347edec60626a356f574551d1ecb9e7727402137d7d1bc6cb3cf11db",
+            "sha256:40252c7d7df3e6b969af3fa01b51346fbff89b508a6f2c5a9f457d23e797cf64",
+            "sha256:11b7e3ae2bd33cf903077779b2178d1242006f750906c41d9941cd45be4c6175",
+            "sha256:60d0936c2e0dac1f79128a468e3259644a610850f2ce98c238027943b5e87108",
+            "sha256:60d2d3ed3afa870cf11fe567074bfc1c37e1f0488fe4f9259b4b4ccd6084c209",
+            "sha256:66c221f9d5b6c9542d87a9f5143ffa653ce6628a4db739870abede8c87da99af"
+          ]
+        },
+        "sourceStrategy": {
+          "clone": "regenerate-isolated-database",
+          "reset": "drop-database-after-run"
+        },
+        "runnerIsolation": {
+          "strategy": "fresh-container-per-operation",
+          "reset": "new-empty-data-directory",
+          "scope": "arm-and-repetition"
+        },
+        "cgroup": {
+          "before": {
+            "capturedAt": "2026-07-15T23:19:55.151Z",
+            "cpu": {
+              "cpusetCpus": "2-3",
+              "cpusetCpusEffective": "2-3",
+              "max": "200000 100000",
+              "stat": {
+                "usage_usec": 431914,
+                "user_usec": 266180,
+                "system_usec": 165734,
+                "nice_usec": 0,
+                "nr_periods": 12,
+                "nr_throttled": 0,
+                "throttled_usec": 0,
+                "nr_bursts": 0,
+                "burst_usec": 0
+              },
+              "pressure": {
+                "some": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 8429
+                },
+                "full": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 2199
+                }
+              }
+            },
+            "memory": {
+              "current": 66646016,
+              "max": 2147483648,
+              "peak": 76365824,
+              "events": {
+                "low": 0,
+                "high": 0,
+                "max": 0,
+                "oom": 0,
+                "oom_kill": 0,
+                "oom_group_kill": 0
+              },
+              "eventsLocal": {
+                "low": 0,
+                "high": 0,
+                "max": 0,
+                "oom": 0,
+                "oom_kill": 0,
+                "oom_group_kill": 0
+              },
+              "pressure": {
+                "some": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 0
+                },
+                "full": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 0
+                }
+              }
+            },
+            "io": {
+              "stat": {
+                "254:0": {
+                  "rbytes": 0,
+                  "wbytes": 40288256,
+                  "rios": 0,
+                  "wios": 1831,
+                  "dbytes": 0,
+                  "dios": 0
+                }
+              },
+              "pressure": {
+                "some": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 6538
+                },
+                "full": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 6484
+                }
+              }
+            }
+          },
+          "after": {
+            "capturedAt": "2026-07-15T23:19:59.443Z",
+            "cpu": {
+              "cpusetCpus": "2-3",
+              "cpusetCpusEffective": "2-3",
+              "max": "200000 100000",
+              "stat": {
+                "usage_usec": 1421016,
+                "user_usec": 725111,
+                "system_usec": 695905,
+                "nice_usec": 0,
+                "nr_periods": 39,
+                "nr_throttled": 0,
+                "throttled_usec": 0,
+                "nr_bursts": 0,
+                "burst_usec": 0
+              },
+              "pressure": {
+                "some": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 21341
+                },
+                "full": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 4799
+                }
+              }
+            },
+            "memory": {
+              "current": 108363776,
+              "max": 2147483648,
+              "peak": 151846912,
+              "events": {
+                "low": 0,
+                "high": 0,
+                "max": 0,
+                "oom": 0,
+                "oom_kill": 0,
+                "oom_group_kill": 0
+              },
+              "eventsLocal": {
+                "low": 0,
+                "high": 0,
+                "max": 0,
+                "oom": 0,
+                "oom_kill": 0,
+                "oom_group_kill": 0
+              },
+              "pressure": {
+                "some": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 0
+                },
+                "full": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 0
+                }
+              }
+            },
+            "io": {
+              "stat": {
+                "254:0": {
+                  "rbytes": 0,
+                  "wbytes": 71626752,
+                  "rios": 0,
+                  "wios": 1927,
+                  "dbytes": 0,
+                  "dios": 0
+                }
+              },
+              "pressure": {
+                "some": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 15086
+                },
+                "full": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 15006
+                }
+              }
+            }
+          },
+          "delta": {
+            "cpu": {
+              "stat": {
+                "usage_usec": 989102,
+                "user_usec": 458931,
+                "system_usec": 530171,
+                "nice_usec": 0,
+                "nr_periods": 27,
+                "nr_throttled": 0,
+                "throttled_usec": 0,
+                "nr_bursts": 0,
+                "burst_usec": 0
+              },
+              "pressure": {
+                "some": {
+                  "total": 12912
+                },
+                "full": {
+                  "total": 2600
+                }
+              }
+            },
+            "memory": {
+              "current": 41717760,
+              "max": 0,
+              "peak": 75481088,
+              "events": {
+                "low": 0,
+                "high": 0,
+                "max": 0,
+                "oom": 0,
+                "oom_kill": 0,
+                "oom_group_kill": 0
+              },
+              "eventsLocal": {
+                "low": 0,
+                "high": 0,
+                "max": 0,
+                "oom": 0,
+                "oom_kill": 0,
+                "oom_group_kill": 0
+              },
+              "pressure": {
+                "some": {
+                  "total": 0
+                },
+                "full": {
+                  "total": 0
+                }
+              }
+            },
+            "io": {
+              "stat": {
+                "254:0": {
+                  "rbytes": 0,
+                  "wbytes": 31338496,
+                  "rios": 0,
+                  "wios": 96,
+                  "dbytes": 0,
+                  "dios": 0
+                }
+              },
+              "pressure": {
+                "some": {
+                  "total": 8548
+                },
+                "full": {
+                  "total": 8522
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "index": 11,
+      "id": "email-683m-buffer-cast-r6",
+      "artifact": "operations/011-email-683m-buffer-cast-r6.log",
+      "startedAt": "2026-07-15T23:20:02.346Z",
+      "completedAt": "2026-07-15T23:20:05.800Z",
+      "status": 0,
+      "signal": null,
+      "productContainer": {
+        "id": "39b2f4d246b2f4629c8aaf66cf272dbc2093b049201a3010afc035804f4c83e7",
+        "imageID": "sha256:3090a0fd3653f375d515c9a082ea90c4deb6099f990b2b32c01e2ce9d1431eba",
+        "created": "2026-07-15T23:20:02.373905796Z",
+        "state": {
+          "status": "exited",
+          "exitCode": 0,
+          "oomKilled": false
+        },
+        "constraints": {
+          "cpusetCpus": "0",
+          "nanoCpus": 1000000000,
+          "memory": 3221225472,
+          "memorySwap": 3221225472,
+          "pidsLimit": 1024
+        }
+      },
+      "postgres": {
+        "container": {
+          "id": "9aa2b7d1f3c9267c9b98459c739494707cf04a3f17c9aff09e18c7207d68b5a9",
+          "imageID": "sha256:742f40ea20b9ff2ff31db5458d127452988a2164df9e17441e191f3b72252193",
+          "created": "2026-07-15T23:20:00.531169295Z",
+          "state": {
+            "status": "running",
+            "exitCode": 0,
+            "oomKilled": false
+          },
+          "constraints": {
+            "cpusetCpus": "2-3",
+            "nanoCpus": 2000000000,
+            "memory": 2147483648,
+            "memorySwap": 4294967296,
+            "pidsLimit": null
+          }
+        },
+        "systemIdentifier": "7662898545650343969",
+        "image": {
+          "reference": "postgres:17-alpine@sha256:742f40ea20b9ff2ff31db5458d127452988a2164df9e17441e191f3b72252193",
+          "id": "sha256:742f40ea20b9ff2ff31db5458d127452988a2164df9e17441e191f3b72252193",
+          "repoDigests": [
+            "postgres@sha256:742f40ea20b9ff2ff31db5458d127452988a2164df9e17441e191f3b72252193"
+          ],
+          "created": "2026-07-07T17:46:49.401690597Z",
+          "os": "linux",
+          "architecture": "arm64",
+          "variant": "v8",
+          "labels": {},
+          "rootFSLayers": [
+            "sha256:b2848c02ac6ff53d265469b5b30f649f335e546a83330cd8916d54e65e640409",
+            "sha256:3276ea79c0c0c02b7d702de4aa0bf6b60d4b3f1b295b30366973c4ec4bf91249",
+            "sha256:d7d195016259883bbb161fb50292c1be3f96f0c9b50c573cbb0ed57e64dfa2c9",
+            "sha256:1ebee87cc825164b634bd6837685531c240dcfe5a1cf507cb6e8df057f661cbf",
+            "sha256:df8da200347edec60626a356f574551d1ecb9e7727402137d7d1bc6cb3cf11db",
+            "sha256:40252c7d7df3e6b969af3fa01b51346fbff89b508a6f2c5a9f457d23e797cf64",
+            "sha256:11b7e3ae2bd33cf903077779b2178d1242006f750906c41d9941cd45be4c6175",
+            "sha256:60d0936c2e0dac1f79128a468e3259644a610850f2ce98c238027943b5e87108",
+            "sha256:60d2d3ed3afa870cf11fe567074bfc1c37e1f0488fe4f9259b4b4ccd6084c209",
+            "sha256:66c221f9d5b6c9542d87a9f5143ffa653ce6628a4db739870abede8c87da99af"
+          ]
+        },
+        "sourceStrategy": {
+          "clone": "regenerate-isolated-database",
+          "reset": "drop-database-after-run"
+        },
+        "runnerIsolation": {
+          "strategy": "fresh-container-per-operation",
+          "reset": "new-empty-data-directory",
+          "scope": "arm-and-repetition"
+        },
+        "cgroup": {
+          "before": {
+            "capturedAt": "2026-07-15T23:20:01.507Z",
+            "cpu": {
+              "cpusetCpus": "2-3",
+              "cpusetCpusEffective": "2-3",
+              "max": "200000 100000",
+              "stat": {
+                "usage_usec": 425378,
+                "user_usec": 262081,
+                "system_usec": 163297,
+                "nice_usec": 0,
+                "nr_periods": 12,
+                "nr_throttled": 0,
+                "throttled_usec": 0,
+                "nr_bursts": 0,
+                "burst_usec": 0
+              },
+              "pressure": {
+                "some": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 15012
+                },
+                "full": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 1720
+                }
+              }
+            },
+            "memory": {
+              "current": 66703360,
+              "max": 2147483648,
+              "peak": 76627968,
+              "events": {
+                "low": 0,
+                "high": 0,
+                "max": 0,
+                "oom": 0,
+                "oom_kill": 0,
+                "oom_group_kill": 0
+              },
+              "eventsLocal": {
+                "low": 0,
+                "high": 0,
+                "max": 0,
+                "oom": 0,
+                "oom_kill": 0,
+                "oom_group_kill": 0
+              },
+              "pressure": {
+                "some": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 0
+                },
+                "full": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 0
+                }
+              }
+            },
+            "io": {
+              "stat": {
+                "254:0": {
+                  "rbytes": 0,
+                  "wbytes": 40288256,
+                  "rios": 0,
+                  "wios": 1829,
+                  "dbytes": 0,
+                  "dios": 0
+                }
+              },
+              "pressure": {
+                "some": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 5596
+                },
+                "full": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 5546
+                }
+              }
+            }
+          },
+          "after": {
+            "capturedAt": "2026-07-15T23:20:05.833Z",
+            "cpu": {
+              "cpusetCpus": "2-3",
+              "cpusetCpusEffective": "2-3",
+              "max": "200000 100000",
+              "stat": {
+                "usage_usec": 1425591,
+                "user_usec": 714294,
+                "system_usec": 711297,
+                "nice_usec": 0,
+                "nr_periods": 40,
+                "nr_throttled": 0,
+                "throttled_usec": 0,
+                "nr_bursts": 0,
+                "burst_usec": 0
+              },
+              "pressure": {
+                "some": {
+                  "avg10": "0.14",
+                  "avg60": "0.03",
+                  "avg300": "0.00",
+                  "total": 30122
+                },
+                "full": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 3960
+                }
+              }
+            },
+            "memory": {
+              "current": 108539904,
+              "max": 2147483648,
+              "peak": 152076288,
+              "events": {
+                "low": 0,
+                "high": 0,
+                "max": 0,
+                "oom": 0,
+                "oom_kill": 0,
+                "oom_group_kill": 0
+              },
+              "eventsLocal": {
+                "low": 0,
+                "high": 0,
+                "max": 0,
+                "oom": 0,
+                "oom_kill": 0,
+                "oom_group_kill": 0
+              },
+              "pressure": {
+                "some": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 0
+                },
+                "full": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 0
+                }
+              }
+            },
+            "io": {
+              "stat": {
+                "254:0": {
+                  "rbytes": 0,
+                  "wbytes": 71618560,
+                  "rios": 0,
+                  "wios": 1917,
+                  "dbytes": 0,
+                  "dios": 0
+                }
+              },
+              "pressure": {
+                "some": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 13842
+                },
+                "full": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 13792
+                }
+              }
+            }
+          },
+          "delta": {
+            "cpu": {
+              "stat": {
+                "usage_usec": 1000213,
+                "user_usec": 452213,
+                "system_usec": 548000,
+                "nice_usec": 0,
+                "nr_periods": 28,
+                "nr_throttled": 0,
+                "throttled_usec": 0,
+                "nr_bursts": 0,
+                "burst_usec": 0
+              },
+              "pressure": {
+                "some": {
+                  "total": 15110
+                },
+                "full": {
+                  "total": 2240
+                }
+              }
+            },
+            "memory": {
+              "current": 41836544,
+              "max": 0,
+              "peak": 75448320,
+              "events": {
+                "low": 0,
+                "high": 0,
+                "max": 0,
+                "oom": 0,
+                "oom_kill": 0,
+                "oom_group_kill": 0
+              },
+              "eventsLocal": {
+                "low": 0,
+                "high": 0,
+                "max": 0,
+                "oom": 0,
+                "oom_kill": 0,
+                "oom_group_kill": 0
+              },
+              "pressure": {
+                "some": {
+                  "total": 0
+                },
+                "full": {
+                  "total": 0
+                }
+              }
+            },
+            "io": {
+              "stat": {
+                "254:0": {
+                  "rbytes": 0,
+                  "wbytes": 31330304,
+                  "rios": 0,
+                  "wios": 88,
+                  "dbytes": 0,
+                  "dios": 0
+                }
+              },
+              "pressure": {
+                "some": {
+                  "total": 8246
+                },
+                "full": {
+                  "total": 8246
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "index": 12,
+      "id": "email-683m-string-decoding-r6",
+      "artifact": "operations/012-email-683m-string-decoding-r6.log",
+      "startedAt": "2026-07-15T23:20:08.563Z",
+      "completedAt": "2026-07-15T23:20:12.325Z",
+      "status": 0,
+      "signal": null,
+      "productContainer": {
+        "id": "3b483e4c71d610f5b84e4e8ce937bba9673cf704f617035446f1aafe6998547d",
+        "imageID": "sha256:608bcd8ef3ea69112858c71e9d7517889157764fba6921cc0dbdf6790d4b889d",
+        "created": "2026-07-15T23:20:08.591367424Z",
+        "state": {
+          "status": "exited",
+          "exitCode": 0,
+          "oomKilled": false
+        },
+        "constraints": {
+          "cpusetCpus": "0",
+          "nanoCpus": 1000000000,
+          "memory": 3221225472,
+          "memorySwap": 3221225472,
+          "pidsLimit": 1024
+        }
+      },
+      "postgres": {
+        "container": {
+          "id": "c68b5551c82e482b522bc78655bc52da1604b0b05825371b77fc452bfe3abaa3",
+          "imageID": "sha256:742f40ea20b9ff2ff31db5458d127452988a2164df9e17441e191f3b72252193",
+          "created": "2026-07-15T23:20:06.839170632Z",
+          "state": {
+            "status": "running",
+            "exitCode": 0,
+            "oomKilled": false
+          },
+          "constraints": {
+            "cpusetCpus": "2-3",
+            "nanoCpus": 2000000000,
+            "memory": 2147483648,
+            "memorySwap": 4294967296,
+            "pidsLimit": null
+          }
+        },
+        "systemIdentifier": "7662898572665311265",
+        "image": {
+          "reference": "postgres:17-alpine@sha256:742f40ea20b9ff2ff31db5458d127452988a2164df9e17441e191f3b72252193",
+          "id": "sha256:742f40ea20b9ff2ff31db5458d127452988a2164df9e17441e191f3b72252193",
+          "repoDigests": [
+            "postgres@sha256:742f40ea20b9ff2ff31db5458d127452988a2164df9e17441e191f3b72252193"
+          ],
+          "created": "2026-07-07T17:46:49.401690597Z",
+          "os": "linux",
+          "architecture": "arm64",
+          "variant": "v8",
+          "labels": {},
+          "rootFSLayers": [
+            "sha256:b2848c02ac6ff53d265469b5b30f649f335e546a83330cd8916d54e65e640409",
+            "sha256:3276ea79c0c0c02b7d702de4aa0bf6b60d4b3f1b295b30366973c4ec4bf91249",
+            "sha256:d7d195016259883bbb161fb50292c1be3f96f0c9b50c573cbb0ed57e64dfa2c9",
+            "sha256:1ebee87cc825164b634bd6837685531c240dcfe5a1cf507cb6e8df057f661cbf",
+            "sha256:df8da200347edec60626a356f574551d1ecb9e7727402137d7d1bc6cb3cf11db",
+            "sha256:40252c7d7df3e6b969af3fa01b51346fbff89b508a6f2c5a9f457d23e797cf64",
+            "sha256:11b7e3ae2bd33cf903077779b2178d1242006f750906c41d9941cd45be4c6175",
+            "sha256:60d0936c2e0dac1f79128a468e3259644a610850f2ce98c238027943b5e87108",
+            "sha256:60d2d3ed3afa870cf11fe567074bfc1c37e1f0488fe4f9259b4b4ccd6084c209",
+            "sha256:66c221f9d5b6c9542d87a9f5143ffa653ce6628a4db739870abede8c87da99af"
+          ]
+        },
+        "sourceStrategy": {
+          "clone": "regenerate-isolated-database",
+          "reset": "drop-database-after-run"
+        },
+        "runnerIsolation": {
+          "strategy": "fresh-container-per-operation",
+          "reset": "new-empty-data-directory",
+          "scope": "arm-and-repetition"
+        },
+        "cgroup": {
+          "before": {
+            "capturedAt": "2026-07-15T23:20:07.784Z",
+            "cpu": {
+              "cpusetCpus": "2-3",
+              "cpusetCpusEffective": "2-3",
+              "max": "200000 100000",
+              "stat": {
+                "usage_usec": 428736,
+                "user_usec": 270833,
+                "system_usec": 157902,
+                "nice_usec": 0,
+                "nr_periods": 11,
+                "nr_throttled": 0,
+                "throttled_usec": 0,
+                "nr_bursts": 0,
+                "burst_usec": 0
+              },
+              "pressure": {
+                "some": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 11790
+                },
+                "full": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 2161
+                }
+              }
+            },
+            "memory": {
+              "current": 66699264,
+              "max": 2147483648,
+              "peak": 76476416,
+              "events": {
+                "low": 0,
+                "high": 0,
+                "max": 0,
+                "oom": 0,
+                "oom_kill": 0,
+                "oom_group_kill": 0
+              },
+              "eventsLocal": {
+                "low": 0,
+                "high": 0,
+                "max": 0,
+                "oom": 0,
+                "oom_kill": 0,
+                "oom_group_kill": 0
+              },
+              "pressure": {
+                "some": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 0
+                },
+                "full": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 0
+                }
+              }
+            },
+            "io": {
+              "stat": {
+                "254:0": {
+                  "rbytes": 0,
+                  "wbytes": 40288256,
+                  "rios": 0,
+                  "wios": 1831,
+                  "dbytes": 0,
+                  "dios": 0
+                }
+              },
+              "pressure": {
+                "some": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 7657
+                },
+                "full": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 7572
+                }
+              }
+            }
+          },
+          "after": {
+            "capturedAt": "2026-07-15T23:20:12.356Z",
+            "cpu": {
+              "cpusetCpus": "2-3",
+              "cpusetCpusEffective": "2-3",
+              "max": "200000 100000",
+              "stat": {
+                "usage_usec": 1432435,
+                "user_usec": 748933,
+                "system_usec": 683502,
+                "nice_usec": 0,
+                "nr_periods": 41,
+                "nr_throttled": 0,
+                "throttled_usec": 0,
+                "nr_bursts": 0,
+                "burst_usec": 0
+              },
+              "pressure": {
+                "some": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 23174
+                },
+                "full": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 4510
+                }
+              }
+            },
+            "memory": {
+              "current": 108584960,
+              "max": 2147483648,
+              "peak": 153571328,
+              "events": {
+                "low": 0,
+                "high": 0,
+                "max": 0,
+                "oom": 0,
+                "oom_kill": 0,
+                "oom_group_kill": 0
+              },
+              "eventsLocal": {
+                "low": 0,
+                "high": 0,
+                "max": 0,
+                "oom": 0,
+                "oom_kill": 0,
+                "oom_group_kill": 0
+              },
+              "pressure": {
+                "some": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 0
+                },
+                "full": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 0
+                }
+              }
+            },
+            "io": {
+              "stat": {
+                "254:0": {
+                  "rbytes": 0,
+                  "wbytes": 71618560,
+                  "rios": 0,
+                  "wios": 1925,
+                  "dbytes": 0,
+                  "dios": 0
+                }
+              },
+              "pressure": {
+                "some": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 14668
+                },
+                "full": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 14580
+                }
+              }
+            }
+          },
+          "delta": {
+            "cpu": {
+              "stat": {
+                "usage_usec": 1003699,
+                "user_usec": 478100,
+                "system_usec": 525600,
+                "nice_usec": 0,
+                "nr_periods": 30,
+                "nr_throttled": 0,
+                "throttled_usec": 0,
+                "nr_bursts": 0,
+                "burst_usec": 0
+              },
+              "pressure": {
+                "some": {
+                  "total": 11384
+                },
+                "full": {
+                  "total": 2349
+                }
+              }
+            },
+            "memory": {
+              "current": 41885696,
+              "max": 0,
+              "peak": 77094912,
+              "events": {
+                "low": 0,
+                "high": 0,
+                "max": 0,
+                "oom": 0,
+                "oom_kill": 0,
+                "oom_group_kill": 0
+              },
+              "eventsLocal": {
+                "low": 0,
+                "high": 0,
+                "max": 0,
+                "oom": 0,
+                "oom_kill": 0,
+                "oom_group_kill": 0
+              },
+              "pressure": {
+                "some": {
+                  "total": 0
+                },
+                "full": {
+                  "total": 0
+                }
+              }
+            },
+            "io": {
+              "stat": {
+                "254:0": {
+                  "rbytes": 0,
+                  "wbytes": 31330304,
+                  "rios": 0,
+                  "wios": 94,
+                  "dbytes": 0,
+                  "dios": 0
+                }
+              },
+              "pressure": {
+                "some": {
+                  "total": 7011
+                },
+                "full": {
+                  "total": 7008
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "completedAt": "2026-07-15T23:20:13.378Z"
+}

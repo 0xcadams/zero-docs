@@ -5,6 +5,7 @@
     "profiles": ["email-683m", "imports-550m"],
     "repetitions": 6,
     "ordering": "paired-ab-ba",
+    "sqliteStorage": {"mode": "tmpfs", "path": "/tmp", "size": "1536m"},
     "treatments": [
       {"worktree": "origin-main", "label": "string-decoding"},
       {"worktree": "direct-buffer-cast", "label": "buffer-cast"}
@@ -26,6 +27,7 @@
     ],
     "repetitions": 12,
     "ordering": "paired-ab-ba",
+    "sqliteStorage": {"mode": "tmpfs", "path": "/tmp", "size": "1536m"},
     "treatments": [
       {"worktree": "origin-main", "label": "string-decoding"},
       {"worktree": "direct-buffer-cast", "label": "buffer-cast"}

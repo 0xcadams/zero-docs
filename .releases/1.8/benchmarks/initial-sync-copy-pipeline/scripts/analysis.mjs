@@ -360,6 +360,9 @@ export function conditionDescriptor(runConfig, manifest = {}) {
   if (manifest.environment !== undefined) {
     condition.environment = manifest.environment;
   }
+  if (manifest.sqliteStorage !== undefined) {
+    condition.sqliteStorage = manifest.sqliteStorage;
+  }
   if (manifest.conditions !== undefined) {
     condition.manifestConditions = manifest.conditions;
   }

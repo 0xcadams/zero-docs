@@ -1,0 +1,2142 @@
+{
+  "schemaVersion": 2,
+  "stage": "e1-direct-buffer-cast-screening",
+  "runToken": "2026-07-15T21-51-39-149Z-30869-becc5820-c53b-4874-a80b-395399fcfc45",
+  "generatedAt": "2026-07-15T21:51:39.149Z",
+  "mode": "noncanonical",
+  "execute": true,
+  "reuseImages": false,
+  "status": "failed",
+  "evidence": {
+    "eligible": false,
+    "classification": "incomplete",
+    "reasons": [
+      "execution failed or is incomplete"
+    ]
+  },
+  "platform": "linux/arm64",
+  "environment": {
+    "dockerServer": {
+      "Platform": {
+        "Name": "Docker Desktop 4.82.0 (233772)"
+      },
+      "Version": "29.6.1",
+      "ApiVersion": "1.55",
+      "MinAPIVersion": "1.40",
+      "Os": "linux",
+      "Arch": "arm64",
+      "Components": [
+        {
+          "Name": "Engine",
+          "Version": "29.6.1",
+          "Details": {
+            "ApiVersion": "1.55",
+            "Arch": "arm64",
+            "BuildTime": "Fri Jun 26 11:39:58 2026",
+            "Experimental": "false",
+            "GitCommit": "8ec5ab3",
+            "GoVersion": "go1.26.4",
+            "KernelVersion": "6.12.76-linuxkit",
+            "MinAPIVersion": "1.40",
+            "Module": "github.com/moby/moby/v2",
+            "ModuleVersion": "v2.0.0+unknown",
+            "Os": "linux"
+          }
+        },
+        {
+          "Name": "containerd",
+          "Version": "v2.2.5",
+          "Details": {
+            "GitCommit": "e53c7c1516c3b2bff98eb76f1f4117477e6f4e66"
+          }
+        },
+        {
+          "Name": "runc",
+          "Version": "1.3.6",
+          "Details": {
+            "GitCommit": "v1.3.6-0-g491b69ba"
+          }
+        },
+        {
+          "Name": "docker-init",
+          "Version": "0.19.0",
+          "Details": {
+            "GitCommit": "de40ad0"
+          }
+        }
+      ],
+      "GitCommit": "8ec5ab3",
+      "GoVersion": "go1.26.4",
+      "KernelVersion": "6.12.76-linuxkit",
+      "BuildTime": "2026-06-26T11:39:58.000000000+00:00"
+    },
+    "dockerInfo": {
+      "id": "6e6f630a-e4c8-45f6-9e6c-7f6a95d8dba5",
+      "driver": "overlayfs",
+      "cgroupDriver": "cgroupfs",
+      "cgroupVersion": "2",
+      "kernelVersion": "6.12.76-linuxkit",
+      "operatingSystem": "Docker Desktop",
+      "architecture": "aarch64",
+      "nCPU": 14,
+      "memoryBytes": 25161015296
+    }
+  },
+  "ordering": "paired-ab-ba",
+  "selection": {
+    "requestedLimit": null,
+    "completeStage": true,
+    "selectedBlocks": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "plannedBlocks": 6,
+    "selectedRunCount": 24,
+    "plannedRunCount": 24
+  },
+  "processIsolation": {
+    "measuredOperationsPerContainer": 1,
+    "measuredOperationsPerVitestInvocation": 1,
+    "fileParallelism": false,
+    "maxWorkers": 1
+  },
+  "analysisPlan": null,
+  "baseImageReferences": {
+    "node": "node:22-bookworm-slim@sha256:6c74791e557ce11fc957704f6d4fe134a7bc8d6f5ca4403205b2966bd488f6b3",
+    "postgres": "postgres:17-alpine@sha256:742f40ea20b9ff2ff31db5458d127452988a2164df9e17441e191f3b72252193"
+  },
+  "baseImages": {
+    "node": {
+      "reference": "node:22-bookworm-slim@sha256:6c74791e557ce11fc957704f6d4fe134a7bc8d6f5ca4403205b2966bd488f6b3",
+      "id": "sha256:6c74791e557ce11fc957704f6d4fe134a7bc8d6f5ca4403205b2966bd488f6b3",
+      "repoDigests": [
+        "node@sha256:6c74791e557ce11fc957704f6d4fe134a7bc8d6f5ca4403205b2966bd488f6b3"
+      ],
+      "created": "2026-07-14T01:51:48.417032893Z",
+      "os": "linux",
+      "architecture": "arm64",
+      "variant": "v8",
+      "labels": {},
+      "rootFSLayers": [
+        "sha256:12cdff3b039e28c684ffd2097ff5a66df274a8500966a1431038b05f50bcf096",
+        "sha256:43e4f3df99f20979a78cc4e6fb9e52bdc4ab31172750194f853005d88964db7e",
+        "sha256:2316784a23db74c15d46af9a7f2f891d2b44f77abbb4bed1e861b3268bdd946e",
+        "sha256:888e40d812f105ea5ea1263d750cf66a552432bb12d9b7436cbe345989d0f3c1",
+        "sha256:a491c257493e76fe1e68b7d0251d2497e59c543eed2289846fa87df1e227489f"
+      ]
+    },
+    "postgres": {
+      "reference": "postgres:17-alpine@sha256:742f40ea20b9ff2ff31db5458d127452988a2164df9e17441e191f3b72252193",
+      "id": "sha256:742f40ea20b9ff2ff31db5458d127452988a2164df9e17441e191f3b72252193",
+      "repoDigests": [
+        "postgres@sha256:742f40ea20b9ff2ff31db5458d127452988a2164df9e17441e191f3b72252193"
+      ],
+      "created": "2026-07-07T17:46:49.401690597Z",
+      "os": "linux",
+      "architecture": "arm64",
+      "variant": "v8",
+      "labels": {},
+      "rootFSLayers": [
+        "sha256:b2848c02ac6ff53d265469b5b30f649f335e546a83330cd8916d54e65e640409",
+        "sha256:3276ea79c0c0c02b7d702de4aa0bf6b60d4b3f1b295b30366973c4ec4bf91249",
+        "sha256:d7d195016259883bbb161fb50292c1be3f96f0c9b50c573cbb0ed57e64dfa2c9",
+        "sha256:1ebee87cc825164b634bd6837685531c240dcfe5a1cf507cb6e8df057f661cbf",
+        "sha256:df8da200347edec60626a356f574551d1ecb9e7727402137d7d1bc6cb3cf11db",
+        "sha256:40252c7d7df3e6b969af3fa01b51346fbff89b508a6f2c5a9f457d23e797cf64",
+        "sha256:11b7e3ae2bd33cf903077779b2178d1242006f750906c41d9941cd45be4c6175",
+        "sha256:60d0936c2e0dac1f79128a468e3259644a610850f2ce98c238027943b5e87108",
+        "sha256:60d2d3ed3afa870cf11fe567074bfc1c37e1f0488fe4f9259b4b4ccd6084c209",
+        "sha256:66c221f9d5b6c9542d87a9f5143ffa653ce6628a4db739870abede8c87da99af"
+      ]
+    }
+  },
+  "inputHashes": {
+    "initialSyncHarness": {
+      "path": "src/initial-sync-copy-pipeline.product.bench.pg.ts",
+      "sha256": "72283c04c0cb264a1f0f12a04209d4a39a4159f7152efbc041f7c8847d1dbad9"
+    },
+    "parserHarness": {
+      "path": "src/pg-copy-parser.product.bench.ts",
+      "sha256": "94ed9b0953a0319473a139cb8c267af3fdbf0111dee30c156d2e23961bd1c012"
+    },
+    "dockerfile": {
+      "path": "Dockerfile.linux",
+      "sha256": "2379eb7f04895d51088433f473bae67a525c938194995a4c4775408975ea3ca9"
+    },
+    "adaptiveIndexDockerfile": {
+      "path": "Dockerfile.adaptive-index.linux",
+      "sha256": "9a7689f3cbb1b0d51ec58cd039c8dd67fae03e96fc86cd5fd28f4e8a498b99d1"
+    },
+    "adaptiveIndexPolicyTransform": {
+      "path": "scripts/force-eager-secondary-indexes.mjs",
+      "sha256": "329af5575f916a58cb3a550cfc2c9753512fa3c719320fbb49559efb1d384285"
+    },
+    "addonDockerfile": {
+      "path": "Dockerfile.addon-experiment.linux",
+      "sha256": "aeea538f45fcb2b307003ae1d528d5726d8b3434f03c200f990064f566e17755"
+    },
+    "addonLinker": {
+      "path": "scripts/link-local-addon.mjs",
+      "sha256": "8687773f148ff4e98e5ffd6528834480b1d69253ac72c4e02f9bfcc837ee4dd1"
+    },
+    "runner": {
+      "path": "scripts/run-docker.mjs",
+      "sha256": "7bb53e6fd9ed6afeb95ba2207f2aaf5e55439d3fc05c87fc49e71bf965e9f4c2"
+    },
+    "provenance": {
+      "path": "scripts/provenance.mjs",
+      "sha256": "51f0140e1f045fe46e4ea4985de8d8a76e019d20a297be2127b9736092b38d02"
+    },
+    "worktrees": {
+      "path": "config/worktrees.json",
+      "sha256": "c4f6fcba1b7111cdc4645a7b6fe0b6f566243c14c566bc4dcd00e9b9abad5468"
+    },
+    "profiles": {
+      "path": "config/integration-profiles.json",
+      "sha256": "b7b3e8a3a40e10e49d4e56d2415d53332b58210a30effc679ccb9ae69b22b0ca"
+    },
+    "stages": {
+      "path": "config/integration-stages.json",
+      "sha256": "81b9177b27fd87e32806e9dd4037a671c81d00b7203f5bd29a0042b1d59242d4"
+    },
+    "runnerConfig": {
+      "path": "config/runner.json",
+      "sha256": "d49052232ec5c66e19db659b1a3b8204770f5162383d54b5a52cc448320b1877"
+    }
+  },
+  "sources": {
+    "origin-main": {
+      "path": "/Users/chase/.worktree/mono/initial-sync-experiment-baseline",
+      "commit": "bc1db665f30ee341011697128a5414d2bbc7ea7c",
+      "tree": "6c3164a01a41cbe27dfedd9bb8f0bd956544dca1",
+      "clean": true,
+      "status": "",
+      "diffSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "trackedDiffSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "trackedContentSHA256": "c639c29b18352d686ca0a5babe7baa82451ab1f23a7823eb8c8ccdf6457e3222",
+      "contentSHA256": "f3153b5307666e672acb658b8063949bd9328cb6b2a427fc70b2ffd7cb0118ef",
+      "untracked": []
+    },
+    "direct-buffer-cast": {
+      "path": "/Users/chase/.worktree/mono/direct-copy-text-buffers",
+      "commit": "27683b82b1e3c31b99e7fe39959a320712646a24",
+      "tree": "f033e60d315f902555d2ff7a868050eba402a635",
+      "clean": true,
+      "status": "",
+      "diffSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "trackedDiffSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "trackedContentSHA256": "f5651be9c517f4e117f5f5a6fc26a37ce32934f8ba15664f7152475579c2b004",
+      "contentSHA256": "ac8ce4b39a6b4680706cc9989120d97b0c793a682534c317ca182ab473c108ed",
+      "untracked": []
+    }
+  },
+  "addonSources": {},
+  "addonBuildPolicy": {
+    "source": "local-worktree-only",
+    "packagePublishing": false,
+    "npmCanaryFetch": false,
+    "platform": "linux/arm64"
+  },
+  "images": {
+    "origin-main": {
+      "tag": "zero-copy-pipeline-origin-main:local",
+      "reference": "zero-copy-pipeline-origin-main:local",
+      "id": "sha256:5b7582538302013cffb8024d206f08135cffcb917f0d731b2f6e5415309206f4",
+      "repoDigests": [
+        "zero-copy-pipeline-origin-main@sha256:5b7582538302013cffb8024d206f08135cffcb917f0d731b2f6e5415309206f4"
+      ],
+      "created": "2026-07-15T21:53:25.758122592Z",
+      "os": "linux",
+      "architecture": "arm64",
+      "variant": null,
+      "labels": {
+        "dev.rocicorp.zero-benchmark.build-inputs-sha256": "b5a29c1e4e1a11002108edc802e88cdecfb2c06aff0958eccc0ed73d328bb903",
+        "dev.rocicorp.zero-benchmark.config-sha256": "b7b3e8a3a40e10e49d4e56d2415d53332b58210a30effc679ccb9ae69b22b0ca",
+        "dev.rocicorp.zero-benchmark.harness-sha256": "72283c04c0cb264a1f0f12a04209d4a39a4159f7152efbc041f7c8847d1dbad9",
+        "dev.rocicorp.zero-benchmark.node-image": "node:22-bookworm-slim@sha256:6c74791e557ce11fc957704f6d4fe134a7bc8d6f5ca4403205b2966bd488f6b3",
+        "dev.rocicorp.zero-benchmark.runner-sha256": "7bb53e6fd9ed6afeb95ba2207f2aaf5e55439d3fc05c87fc49e71bf965e9f4c2",
+        "dev.rocicorp.zero-benchmark.source-commit": "bc1db665f30ee341011697128a5414d2bbc7ea7c",
+        "dev.rocicorp.zero-benchmark.source-content-sha256": "f3153b5307666e672acb658b8063949bd9328cb6b2a427fc70b2ffd7cb0118ef",
+        "dev.rocicorp.zero-benchmark.source-diff-sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "dev.rocicorp.zero-benchmark.source-tree": "6c3164a01a41cbe27dfedd9bb8f0bd956544dca1",
+        "dev.rocicorp.zero-benchmark.worktree": "origin-main"
+      },
+      "rootFSLayers": [
+        "sha256:12cdff3b039e28c684ffd2097ff5a66df274a8500966a1431038b05f50bcf096",
+        "sha256:43e4f3df99f20979a78cc4e6fb9e52bdc4ab31172750194f853005d88964db7e",
+        "sha256:2316784a23db74c15d46af9a7f2f891d2b44f77abbb4bed1e861b3268bdd946e",
+        "sha256:888e40d812f105ea5ea1263d750cf66a552432bb12d9b7436cbe345989d0f3c1",
+        "sha256:a491c257493e76fe1e68b7d0251d2497e59c543eed2289846fa87df1e227489f",
+        "sha256:dc422b62237a258cb7e290f4174773b3e90ebbc060493f82077fe962c92e65c5",
+        "sha256:40d44b29c6e9652a7154b3ad551bff65a1762c29bd44d45013bcb509a74b2014",
+        "sha256:ad63fc7a5b4cf07bb895d54f6adc81da2fb1cdbb47d038c757d1c306bdf9d298",
+        "sha256:7c8204b1f862ed65c9046246a0cfb9417b912a3bde9872278295cc3eee5bd9bc",
+        "sha256:140ce742b778187278318291daf71254bac2483f6be2b848f11421b245ddb287",
+        "sha256:00776689ef3eccee9f83c220bb061ba7cfeb2c38f04c46bae74313593ee9e0c2",
+        "sha256:308c75d3e4622f1bba25511a15f041cde31eb5ec29b89c440ce859e1f7a4443f",
+        "sha256:8d5d0956f4f1f126e2166db894b7ea519959c30dbe65a53dc1c0ea9032e9816c",
+        "sha256:5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef"
+      ],
+      "worktree": "origin-main",
+      "addonWorktree": null,
+      "dockerfile": "Dockerfile.linux",
+      "buildInputs": {
+        "platform": "linux/arm64",
+        "dockerfile": {
+          "path": "Dockerfile.linux",
+          "sha256": "2379eb7f04895d51088433f473bae67a525c938194995a4c4775408975ea3ca9"
+        },
+        "mono": {
+          "commit": "bc1db665f30ee341011697128a5414d2bbc7ea7c",
+          "tree": "6c3164a01a41cbe27dfedd9bb8f0bd956544dca1",
+          "diffSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "trackedContentSHA256": "c639c29b18352d686ca0a5babe7baa82451ab1f23a7823eb8c8ccdf6457e3222",
+          "contentSHA256": "f3153b5307666e672acb658b8063949bd9328cb6b2a427fc70b2ffd7cb0118ef"
+        },
+        "sha256": "b5a29c1e4e1a11002108edc802e88cdecfb2c06aff0958eccc0ed73d328bb903"
+      },
+      "expectedLabels": {
+        "dev.rocicorp.zero-benchmark.worktree": "origin-main",
+        "dev.rocicorp.zero-benchmark.source-commit": "bc1db665f30ee341011697128a5414d2bbc7ea7c",
+        "dev.rocicorp.zero-benchmark.source-tree": "6c3164a01a41cbe27dfedd9bb8f0bd956544dca1",
+        "dev.rocicorp.zero-benchmark.source-diff-sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "dev.rocicorp.zero-benchmark.source-content-sha256": "f3153b5307666e672acb658b8063949bd9328cb6b2a427fc70b2ffd7cb0118ef",
+        "dev.rocicorp.zero-benchmark.harness-sha256": "72283c04c0cb264a1f0f12a04209d4a39a4159f7152efbc041f7c8847d1dbad9",
+        "dev.rocicorp.zero-benchmark.config-sha256": "b7b3e8a3a40e10e49d4e56d2415d53332b58210a30effc679ccb9ae69b22b0ca",
+        "dev.rocicorp.zero-benchmark.runner-sha256": "7bb53e6fd9ed6afeb95ba2207f2aaf5e55439d3fc05c87fc49e71bf965e9f4c2",
+        "dev.rocicorp.zero-benchmark.node-image": "node:22-bookworm-slim@sha256:6c74791e557ce11fc957704f6d4fe134a7bc8d6f5ca4403205b2966bd488f6b3",
+        "dev.rocicorp.zero-benchmark.build-inputs-sha256": "b5a29c1e4e1a11002108edc802e88cdecfb2c06aff0958eccc0ed73d328bb903"
+      }
+    },
+    "direct-buffer-cast": {
+      "tag": "zero-copy-pipeline-direct-buffer-cast:local",
+      "reference": "zero-copy-pipeline-direct-buffer-cast:local",
+      "id": "sha256:4f79f775f16a31a69e223519ebed613818ee45bf79d717e01dec43383982184b",
+      "repoDigests": [
+        "zero-copy-pipeline-direct-buffer-cast@sha256:4f79f775f16a31a69e223519ebed613818ee45bf79d717e01dec43383982184b"
+      ],
+      "created": "2026-07-15T21:55:18.800335922Z",
+      "os": "linux",
+      "architecture": "arm64",
+      "variant": null,
+      "labels": {
+        "dev.rocicorp.zero-benchmark.build-inputs-sha256": "ed0e585819120c5589ad3866d17b7b521e9e7b786716de96e5056590b0c85b65",
+        "dev.rocicorp.zero-benchmark.config-sha256": "b7b3e8a3a40e10e49d4e56d2415d53332b58210a30effc679ccb9ae69b22b0ca",
+        "dev.rocicorp.zero-benchmark.harness-sha256": "72283c04c0cb264a1f0f12a04209d4a39a4159f7152efbc041f7c8847d1dbad9",
+        "dev.rocicorp.zero-benchmark.node-image": "node:22-bookworm-slim@sha256:6c74791e557ce11fc957704f6d4fe134a7bc8d6f5ca4403205b2966bd488f6b3",
+        "dev.rocicorp.zero-benchmark.runner-sha256": "7bb53e6fd9ed6afeb95ba2207f2aaf5e55439d3fc05c87fc49e71bf965e9f4c2",
+        "dev.rocicorp.zero-benchmark.source-commit": "27683b82b1e3c31b99e7fe39959a320712646a24",
+        "dev.rocicorp.zero-benchmark.source-content-sha256": "ac8ce4b39a6b4680706cc9989120d97b0c793a682534c317ca182ab473c108ed",
+        "dev.rocicorp.zero-benchmark.source-diff-sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "dev.rocicorp.zero-benchmark.source-tree": "f033e60d315f902555d2ff7a868050eba402a635",
+        "dev.rocicorp.zero-benchmark.worktree": "direct-buffer-cast"
+      },
+      "rootFSLayers": [
+        "sha256:12cdff3b039e28c684ffd2097ff5a66df274a8500966a1431038b05f50bcf096",
+        "sha256:43e4f3df99f20979a78cc4e6fb9e52bdc4ab31172750194f853005d88964db7e",
+        "sha256:2316784a23db74c15d46af9a7f2f891d2b44f77abbb4bed1e861b3268bdd946e",
+        "sha256:888e40d812f105ea5ea1263d750cf66a552432bb12d9b7436cbe345989d0f3c1",
+        "sha256:a491c257493e76fe1e68b7d0251d2497e59c543eed2289846fa87df1e227489f",
+        "sha256:dc422b62237a258cb7e290f4174773b3e90ebbc060493f82077fe962c92e65c5",
+        "sha256:40d44b29c6e9652a7154b3ad551bff65a1762c29bd44d45013bcb509a74b2014",
+        "sha256:ad63fc7a5b4cf07bb895d54f6adc81da2fb1cdbb47d038c757d1c306bdf9d298",
+        "sha256:b7a657372e92fae380a415250c9a5f831fab59a221093bf3e2e2858a7b32fe40",
+        "sha256:4f0d4b532f9e89aef46f45b1753c21c8fa08bf76ebede6e7a0b44f3a46c161fa",
+        "sha256:27e239b19b1e348f7e45bbe1f850c84f93d92a418541fdf5324d4457b0a91ab3",
+        "sha256:59e0688a0e920146f488d3eeae74d6a74083fbadb0cd4ae5d9bb6599852c2dee",
+        "sha256:75d8c44b9ddb79edd7413d67ad8149d187f58f1c1c4aa1bd21e3326cf826c8cc",
+        "sha256:5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef"
+      ],
+      "worktree": "direct-buffer-cast",
+      "addonWorktree": null,
+      "dockerfile": "Dockerfile.linux",
+      "buildInputs": {
+        "platform": "linux/arm64",
+        "dockerfile": {
+          "path": "Dockerfile.linux",
+          "sha256": "2379eb7f04895d51088433f473bae67a525c938194995a4c4775408975ea3ca9"
+        },
+        "mono": {
+          "commit": "27683b82b1e3c31b99e7fe39959a320712646a24",
+          "tree": "f033e60d315f902555d2ff7a868050eba402a635",
+          "diffSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "trackedContentSHA256": "f5651be9c517f4e117f5f5a6fc26a37ce32934f8ba15664f7152475579c2b004",
+          "contentSHA256": "ac8ce4b39a6b4680706cc9989120d97b0c793a682534c317ca182ab473c108ed"
+        },
+        "sha256": "ed0e585819120c5589ad3866d17b7b521e9e7b786716de96e5056590b0c85b65"
+      },
+      "expectedLabels": {
+        "dev.rocicorp.zero-benchmark.worktree": "direct-buffer-cast",
+        "dev.rocicorp.zero-benchmark.source-commit": "27683b82b1e3c31b99e7fe39959a320712646a24",
+        "dev.rocicorp.zero-benchmark.source-tree": "f033e60d315f902555d2ff7a868050eba402a635",
+        "dev.rocicorp.zero-benchmark.source-diff-sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "dev.rocicorp.zero-benchmark.source-content-sha256": "ac8ce4b39a6b4680706cc9989120d97b0c793a682534c317ca182ab473c108ed",
+        "dev.rocicorp.zero-benchmark.harness-sha256": "72283c04c0cb264a1f0f12a04209d4a39a4159f7152efbc041f7c8847d1dbad9",
+        "dev.rocicorp.zero-benchmark.config-sha256": "b7b3e8a3a40e10e49d4e56d2415d53332b58210a30effc679ccb9ae69b22b0ca",
+        "dev.rocicorp.zero-benchmark.runner-sha256": "7bb53e6fd9ed6afeb95ba2207f2aaf5e55439d3fc05c87fc49e71bf965e9f4c2",
+        "dev.rocicorp.zero-benchmark.node-image": "node:22-bookworm-slim@sha256:6c74791e557ce11fc957704f6d4fe134a7bc8d6f5ca4403205b2966bd488f6b3",
+        "dev.rocicorp.zero-benchmark.build-inputs-sha256": "ed0e585819120c5589ad3866d17b7b521e9e7b786716de96e5056590b0c85b65"
+      }
+    }
+  },
+  "postgresIsolation": {
+    "strategy": "fresh-container-per-operation",
+    "reset": "new-empty-data-directory",
+    "scope": "arm-and-repetition"
+  },
+  "postgresConstraints": {
+    "cpus": 2,
+    "memory": "2g",
+    "cpusetCpus": "2-3"
+  },
+  "appResourceInvariant": {
+    "cpus": 1,
+    "memory": "3g",
+    "nodeHeapMB": 2304
+  },
+  "expectedArtifacts": [
+    {
+      "path": "operations/001-email-683m-string-decoding-r1.log",
+      "kind": "operation-log",
+      "runID": "email-683m-string-decoding-r1",
+      "status": "failed",
+      "sha256": "a71d7c0e70d57fc03f1ff584851fed67b8b6329e2b792a67709f64bf7fe278d7"
+    },
+    {
+      "path": "operations/002-email-683m-buffer-cast-r1.log",
+      "kind": "operation-log",
+      "runID": "email-683m-buffer-cast-r1",
+      "status": "pending",
+      "sha256": null
+    },
+    {
+      "path": "operations/003-imports-550m-string-decoding-r1.log",
+      "kind": "operation-log",
+      "runID": "imports-550m-string-decoding-r1",
+      "status": "pending",
+      "sha256": null
+    },
+    {
+      "path": "operations/004-imports-550m-buffer-cast-r1.log",
+      "kind": "operation-log",
+      "runID": "imports-550m-buffer-cast-r1",
+      "status": "pending",
+      "sha256": null
+    },
+    {
+      "path": "operations/005-imports-550m-buffer-cast-r2.log",
+      "kind": "operation-log",
+      "runID": "imports-550m-buffer-cast-r2",
+      "status": "pending",
+      "sha256": null
+    },
+    {
+      "path": "operations/006-imports-550m-string-decoding-r2.log",
+      "kind": "operation-log",
+      "runID": "imports-550m-string-decoding-r2",
+      "status": "pending",
+      "sha256": null
+    },
+    {
+      "path": "operations/007-email-683m-buffer-cast-r2.log",
+      "kind": "operation-log",
+      "runID": "email-683m-buffer-cast-r2",
+      "status": "pending",
+      "sha256": null
+    },
+    {
+      "path": "operations/008-email-683m-string-decoding-r2.log",
+      "kind": "operation-log",
+      "runID": "email-683m-string-decoding-r2",
+      "status": "pending",
+      "sha256": null
+    },
+    {
+      "path": "operations/009-email-683m-string-decoding-r3.log",
+      "kind": "operation-log",
+      "runID": "email-683m-string-decoding-r3",
+      "status": "pending",
+      "sha256": null
+    },
+    {
+      "path": "operations/010-email-683m-buffer-cast-r3.log",
+      "kind": "operation-log",
+      "runID": "email-683m-buffer-cast-r3",
+      "status": "pending",
+      "sha256": null
+    },
+    {
+      "path": "operations/011-imports-550m-string-decoding-r3.log",
+      "kind": "operation-log",
+      "runID": "imports-550m-string-decoding-r3",
+      "status": "pending",
+      "sha256": null
+    },
+    {
+      "path": "operations/012-imports-550m-buffer-cast-r3.log",
+      "kind": "operation-log",
+      "runID": "imports-550m-buffer-cast-r3",
+      "status": "pending",
+      "sha256": null
+    },
+    {
+      "path": "operations/013-imports-550m-buffer-cast-r4.log",
+      "kind": "operation-log",
+      "runID": "imports-550m-buffer-cast-r4",
+      "status": "pending",
+      "sha256": null
+    },
+    {
+      "path": "operations/014-imports-550m-string-decoding-r4.log",
+      "kind": "operation-log",
+      "runID": "imports-550m-string-decoding-r4",
+      "status": "pending",
+      "sha256": null
+    },
+    {
+      "path": "operations/015-email-683m-buffer-cast-r4.log",
+      "kind": "operation-log",
+      "runID": "email-683m-buffer-cast-r4",
+      "status": "pending",
+      "sha256": null
+    },
+    {
+      "path": "operations/016-email-683m-string-decoding-r4.log",
+      "kind": "operation-log",
+      "runID": "email-683m-string-decoding-r4",
+      "status": "pending",
+      "sha256": null
+    },
+    {
+      "path": "operations/017-email-683m-string-decoding-r5.log",
+      "kind": "operation-log",
+      "runID": "email-683m-string-decoding-r5",
+      "status": "pending",
+      "sha256": null
+    },
+    {
+      "path": "operations/018-email-683m-buffer-cast-r5.log",
+      "kind": "operation-log",
+      "runID": "email-683m-buffer-cast-r5",
+      "status": "pending",
+      "sha256": null
+    },
+    {
+      "path": "operations/019-imports-550m-string-decoding-r5.log",
+      "kind": "operation-log",
+      "runID": "imports-550m-string-decoding-r5",
+      "status": "pending",
+      "sha256": null
+    },
+    {
+      "path": "operations/020-imports-550m-buffer-cast-r5.log",
+      "kind": "operation-log",
+      "runID": "imports-550m-buffer-cast-r5",
+      "status": "pending",
+      "sha256": null
+    },
+    {
+      "path": "operations/021-imports-550m-buffer-cast-r6.log",
+      "kind": "operation-log",
+      "runID": "imports-550m-buffer-cast-r6",
+      "status": "pending",
+      "sha256": null
+    },
+    {
+      "path": "operations/022-imports-550m-string-decoding-r6.log",
+      "kind": "operation-log",
+      "runID": "imports-550m-string-decoding-r6",
+      "status": "pending",
+      "sha256": null
+    },
+    {
+      "path": "operations/023-email-683m-buffer-cast-r6.log",
+      "kind": "operation-log",
+      "runID": "email-683m-buffer-cast-r6",
+      "status": "pending",
+      "sha256": null
+    },
+    {
+      "path": "operations/024-email-683m-string-decoding-r6.log",
+      "kind": "operation-log",
+      "runID": "email-683m-string-decoding-r6",
+      "status": "pending",
+      "sha256": null
+    }
+  ],
+  "runs": [
+    {
+      "profile": "email-683m",
+      "worktree": "origin-main",
+      "label": "string-decoding",
+      "repetition": 1,
+      "overlay": null,
+      "imageKey": "origin-main",
+      "workerCount": 5,
+      "canonical": false,
+      "validationMode": "calibration",
+      "fixtureIdentity": {
+        "version": "legacy-email-fixture-v1",
+        "seed": 20250714
+      },
+      "cachePolicy": {
+        "declared": {
+          "sqlite": "default",
+          "mmapGiB": 1,
+          "osPageCache": "uncontrolled",
+          "betweenRuns": "new-replica-file"
+        },
+        "effective": {
+          "mmapGiB": 1
+        }
+      },
+      "cacheSettings": {
+        "mmapGiB": 1
+      },
+      "sourceStrategy": {
+        "clone": "regenerate-isolated-database",
+        "reset": "drop-database-after-run"
+      },
+      "postgresIsolation": {
+        "strategy": "fresh-container-per-operation",
+        "reset": "new-empty-data-directory",
+        "scope": "arm-and-repetition"
+      },
+      "expected": {
+        "rowCount": 1000,
+        "copyBytes": 683438323,
+        "copyDigest": null,
+        "contentDigest": null
+      },
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304,
+        "cpusetCpus": "0",
+        "cpuQuota": 1
+      }
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "direct-buffer-cast",
+      "label": "buffer-cast",
+      "repetition": 1,
+      "overlay": null,
+      "imageKey": "direct-buffer-cast",
+      "workerCount": 5,
+      "canonical": false,
+      "validationMode": "calibration",
+      "fixtureIdentity": {
+        "version": "legacy-email-fixture-v1",
+        "seed": 20250714
+      },
+      "cachePolicy": {
+        "declared": {
+          "sqlite": "default",
+          "mmapGiB": 1,
+          "osPageCache": "uncontrolled",
+          "betweenRuns": "new-replica-file"
+        },
+        "effective": {
+          "mmapGiB": 1
+        }
+      },
+      "cacheSettings": {
+        "mmapGiB": 1
+      },
+      "sourceStrategy": {
+        "clone": "regenerate-isolated-database",
+        "reset": "drop-database-after-run"
+      },
+      "postgresIsolation": {
+        "strategy": "fresh-container-per-operation",
+        "reset": "new-empty-data-directory",
+        "scope": "arm-and-repetition"
+      },
+      "expected": {
+        "rowCount": 1000,
+        "copyBytes": 683438323,
+        "copyDigest": null,
+        "contentDigest": null
+      },
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304,
+        "cpusetCpus": "0",
+        "cpuQuota": 1
+      }
+    },
+    {
+      "profile": "imports-550m",
+      "worktree": "origin-main",
+      "label": "string-decoding",
+      "repetition": 1,
+      "overlay": null,
+      "imageKey": "origin-main",
+      "workerCount": 5,
+      "canonical": false,
+      "validationMode": "calibration",
+      "fixtureIdentity": {
+        "version": "legacy-imports-fixture-v1",
+        "seed": 20250714
+      },
+      "cachePolicy": {
+        "declared": {
+          "sqlite": "default",
+          "mmapGiB": 1,
+          "osPageCache": "uncontrolled",
+          "betweenRuns": "new-replica-file"
+        },
+        "effective": {
+          "mmapGiB": 1
+        }
+      },
+      "cacheSettings": {
+        "mmapGiB": 1
+      },
+      "sourceStrategy": {
+        "clone": "regenerate-isolated-database",
+        "reset": "drop-database-after-run"
+      },
+      "postgresIsolation": {
+        "strategy": "fresh-container-per-operation",
+        "reset": "new-empty-data-directory",
+        "scope": "arm-and-repetition"
+      },
+      "expected": {
+        "rowCount": 2000,
+        "copyBytes": 550174715,
+        "copyDigest": null,
+        "contentDigest": null
+      },
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304,
+        "cpusetCpus": "0",
+        "cpuQuota": 1
+      }
+    },
+    {
+      "profile": "imports-550m",
+      "worktree": "direct-buffer-cast",
+      "label": "buffer-cast",
+      "repetition": 1,
+      "overlay": null,
+      "imageKey": "direct-buffer-cast",
+      "workerCount": 5,
+      "canonical": false,
+      "validationMode": "calibration",
+      "fixtureIdentity": {
+        "version": "legacy-imports-fixture-v1",
+        "seed": 20250714
+      },
+      "cachePolicy": {
+        "declared": {
+          "sqlite": "default",
+          "mmapGiB": 1,
+          "osPageCache": "uncontrolled",
+          "betweenRuns": "new-replica-file"
+        },
+        "effective": {
+          "mmapGiB": 1
+        }
+      },
+      "cacheSettings": {
+        "mmapGiB": 1
+      },
+      "sourceStrategy": {
+        "clone": "regenerate-isolated-database",
+        "reset": "drop-database-after-run"
+      },
+      "postgresIsolation": {
+        "strategy": "fresh-container-per-operation",
+        "reset": "new-empty-data-directory",
+        "scope": "arm-and-repetition"
+      },
+      "expected": {
+        "rowCount": 2000,
+        "copyBytes": 550174715,
+        "copyDigest": null,
+        "contentDigest": null
+      },
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304,
+        "cpusetCpus": "0",
+        "cpuQuota": 1
+      }
+    },
+    {
+      "profile": "imports-550m",
+      "worktree": "direct-buffer-cast",
+      "label": "buffer-cast",
+      "repetition": 2,
+      "overlay": null,
+      "imageKey": "direct-buffer-cast",
+      "workerCount": 5,
+      "canonical": false,
+      "validationMode": "calibration",
+      "fixtureIdentity": {
+        "version": "legacy-imports-fixture-v1",
+        "seed": 20250714
+      },
+      "cachePolicy": {
+        "declared": {
+          "sqlite": "default",
+          "mmapGiB": 1,
+          "osPageCache": "uncontrolled",
+          "betweenRuns": "new-replica-file"
+        },
+        "effective": {
+          "mmapGiB": 1
+        }
+      },
+      "cacheSettings": {
+        "mmapGiB": 1
+      },
+      "sourceStrategy": {
+        "clone": "regenerate-isolated-database",
+        "reset": "drop-database-after-run"
+      },
+      "postgresIsolation": {
+        "strategy": "fresh-container-per-operation",
+        "reset": "new-empty-data-directory",
+        "scope": "arm-and-repetition"
+      },
+      "expected": {
+        "rowCount": 2000,
+        "copyBytes": 550174715,
+        "copyDigest": null,
+        "contentDigest": null
+      },
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304,
+        "cpusetCpus": "0",
+        "cpuQuota": 1
+      }
+    },
+    {
+      "profile": "imports-550m",
+      "worktree": "origin-main",
+      "label": "string-decoding",
+      "repetition": 2,
+      "overlay": null,
+      "imageKey": "origin-main",
+      "workerCount": 5,
+      "canonical": false,
+      "validationMode": "calibration",
+      "fixtureIdentity": {
+        "version": "legacy-imports-fixture-v1",
+        "seed": 20250714
+      },
+      "cachePolicy": {
+        "declared": {
+          "sqlite": "default",
+          "mmapGiB": 1,
+          "osPageCache": "uncontrolled",
+          "betweenRuns": "new-replica-file"
+        },
+        "effective": {
+          "mmapGiB": 1
+        }
+      },
+      "cacheSettings": {
+        "mmapGiB": 1
+      },
+      "sourceStrategy": {
+        "clone": "regenerate-isolated-database",
+        "reset": "drop-database-after-run"
+      },
+      "postgresIsolation": {
+        "strategy": "fresh-container-per-operation",
+        "reset": "new-empty-data-directory",
+        "scope": "arm-and-repetition"
+      },
+      "expected": {
+        "rowCount": 2000,
+        "copyBytes": 550174715,
+        "copyDigest": null,
+        "contentDigest": null
+      },
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304,
+        "cpusetCpus": "0",
+        "cpuQuota": 1
+      }
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "direct-buffer-cast",
+      "label": "buffer-cast",
+      "repetition": 2,
+      "overlay": null,
+      "imageKey": "direct-buffer-cast",
+      "workerCount": 5,
+      "canonical": false,
+      "validationMode": "calibration",
+      "fixtureIdentity": {
+        "version": "legacy-email-fixture-v1",
+        "seed": 20250714
+      },
+      "cachePolicy": {
+        "declared": {
+          "sqlite": "default",
+          "mmapGiB": 1,
+          "osPageCache": "uncontrolled",
+          "betweenRuns": "new-replica-file"
+        },
+        "effective": {
+          "mmapGiB": 1
+        }
+      },
+      "cacheSettings": {
+        "mmapGiB": 1
+      },
+      "sourceStrategy": {
+        "clone": "regenerate-isolated-database",
+        "reset": "drop-database-after-run"
+      },
+      "postgresIsolation": {
+        "strategy": "fresh-container-per-operation",
+        "reset": "new-empty-data-directory",
+        "scope": "arm-and-repetition"
+      },
+      "expected": {
+        "rowCount": 1000,
+        "copyBytes": 683438323,
+        "copyDigest": null,
+        "contentDigest": null
+      },
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304,
+        "cpusetCpus": "0",
+        "cpuQuota": 1
+      }
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "origin-main",
+      "label": "string-decoding",
+      "repetition": 2,
+      "overlay": null,
+      "imageKey": "origin-main",
+      "workerCount": 5,
+      "canonical": false,
+      "validationMode": "calibration",
+      "fixtureIdentity": {
+        "version": "legacy-email-fixture-v1",
+        "seed": 20250714
+      },
+      "cachePolicy": {
+        "declared": {
+          "sqlite": "default",
+          "mmapGiB": 1,
+          "osPageCache": "uncontrolled",
+          "betweenRuns": "new-replica-file"
+        },
+        "effective": {
+          "mmapGiB": 1
+        }
+      },
+      "cacheSettings": {
+        "mmapGiB": 1
+      },
+      "sourceStrategy": {
+        "clone": "regenerate-isolated-database",
+        "reset": "drop-database-after-run"
+      },
+      "postgresIsolation": {
+        "strategy": "fresh-container-per-operation",
+        "reset": "new-empty-data-directory",
+        "scope": "arm-and-repetition"
+      },
+      "expected": {
+        "rowCount": 1000,
+        "copyBytes": 683438323,
+        "copyDigest": null,
+        "contentDigest": null
+      },
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304,
+        "cpusetCpus": "0",
+        "cpuQuota": 1
+      }
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "origin-main",
+      "label": "string-decoding",
+      "repetition": 3,
+      "overlay": null,
+      "imageKey": "origin-main",
+      "workerCount": 5,
+      "canonical": false,
+      "validationMode": "calibration",
+      "fixtureIdentity": {
+        "version": "legacy-email-fixture-v1",
+        "seed": 20250714
+      },
+      "cachePolicy": {
+        "declared": {
+          "sqlite": "default",
+          "mmapGiB": 1,
+          "osPageCache": "uncontrolled",
+          "betweenRuns": "new-replica-file"
+        },
+        "effective": {
+          "mmapGiB": 1
+        }
+      },
+      "cacheSettings": {
+        "mmapGiB": 1
+      },
+      "sourceStrategy": {
+        "clone": "regenerate-isolated-database",
+        "reset": "drop-database-after-run"
+      },
+      "postgresIsolation": {
+        "strategy": "fresh-container-per-operation",
+        "reset": "new-empty-data-directory",
+        "scope": "arm-and-repetition"
+      },
+      "expected": {
+        "rowCount": 1000,
+        "copyBytes": 683438323,
+        "copyDigest": null,
+        "contentDigest": null
+      },
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304,
+        "cpusetCpus": "0",
+        "cpuQuota": 1
+      }
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "direct-buffer-cast",
+      "label": "buffer-cast",
+      "repetition": 3,
+      "overlay": null,
+      "imageKey": "direct-buffer-cast",
+      "workerCount": 5,
+      "canonical": false,
+      "validationMode": "calibration",
+      "fixtureIdentity": {
+        "version": "legacy-email-fixture-v1",
+        "seed": 20250714
+      },
+      "cachePolicy": {
+        "declared": {
+          "sqlite": "default",
+          "mmapGiB": 1,
+          "osPageCache": "uncontrolled",
+          "betweenRuns": "new-replica-file"
+        },
+        "effective": {
+          "mmapGiB": 1
+        }
+      },
+      "cacheSettings": {
+        "mmapGiB": 1
+      },
+      "sourceStrategy": {
+        "clone": "regenerate-isolated-database",
+        "reset": "drop-database-after-run"
+      },
+      "postgresIsolation": {
+        "strategy": "fresh-container-per-operation",
+        "reset": "new-empty-data-directory",
+        "scope": "arm-and-repetition"
+      },
+      "expected": {
+        "rowCount": 1000,
+        "copyBytes": 683438323,
+        "copyDigest": null,
+        "contentDigest": null
+      },
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304,
+        "cpusetCpus": "0",
+        "cpuQuota": 1
+      }
+    },
+    {
+      "profile": "imports-550m",
+      "worktree": "origin-main",
+      "label": "string-decoding",
+      "repetition": 3,
+      "overlay": null,
+      "imageKey": "origin-main",
+      "workerCount": 5,
+      "canonical": false,
+      "validationMode": "calibration",
+      "fixtureIdentity": {
+        "version": "legacy-imports-fixture-v1",
+        "seed": 20250714
+      },
+      "cachePolicy": {
+        "declared": {
+          "sqlite": "default",
+          "mmapGiB": 1,
+          "osPageCache": "uncontrolled",
+          "betweenRuns": "new-replica-file"
+        },
+        "effective": {
+          "mmapGiB": 1
+        }
+      },
+      "cacheSettings": {
+        "mmapGiB": 1
+      },
+      "sourceStrategy": {
+        "clone": "regenerate-isolated-database",
+        "reset": "drop-database-after-run"
+      },
+      "postgresIsolation": {
+        "strategy": "fresh-container-per-operation",
+        "reset": "new-empty-data-directory",
+        "scope": "arm-and-repetition"
+      },
+      "expected": {
+        "rowCount": 2000,
+        "copyBytes": 550174715,
+        "copyDigest": null,
+        "contentDigest": null
+      },
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304,
+        "cpusetCpus": "0",
+        "cpuQuota": 1
+      }
+    },
+    {
+      "profile": "imports-550m",
+      "worktree": "direct-buffer-cast",
+      "label": "buffer-cast",
+      "repetition": 3,
+      "overlay": null,
+      "imageKey": "direct-buffer-cast",
+      "workerCount": 5,
+      "canonical": false,
+      "validationMode": "calibration",
+      "fixtureIdentity": {
+        "version": "legacy-imports-fixture-v1",
+        "seed": 20250714
+      },
+      "cachePolicy": {
+        "declared": {
+          "sqlite": "default",
+          "mmapGiB": 1,
+          "osPageCache": "uncontrolled",
+          "betweenRuns": "new-replica-file"
+        },
+        "effective": {
+          "mmapGiB": 1
+        }
+      },
+      "cacheSettings": {
+        "mmapGiB": 1
+      },
+      "sourceStrategy": {
+        "clone": "regenerate-isolated-database",
+        "reset": "drop-database-after-run"
+      },
+      "postgresIsolation": {
+        "strategy": "fresh-container-per-operation",
+        "reset": "new-empty-data-directory",
+        "scope": "arm-and-repetition"
+      },
+      "expected": {
+        "rowCount": 2000,
+        "copyBytes": 550174715,
+        "copyDigest": null,
+        "contentDigest": null
+      },
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304,
+        "cpusetCpus": "0",
+        "cpuQuota": 1
+      }
+    },
+    {
+      "profile": "imports-550m",
+      "worktree": "direct-buffer-cast",
+      "label": "buffer-cast",
+      "repetition": 4,
+      "overlay": null,
+      "imageKey": "direct-buffer-cast",
+      "workerCount": 5,
+      "canonical": false,
+      "validationMode": "calibration",
+      "fixtureIdentity": {
+        "version": "legacy-imports-fixture-v1",
+        "seed": 20250714
+      },
+      "cachePolicy": {
+        "declared": {
+          "sqlite": "default",
+          "mmapGiB": 1,
+          "osPageCache": "uncontrolled",
+          "betweenRuns": "new-replica-file"
+        },
+        "effective": {
+          "mmapGiB": 1
+        }
+      },
+      "cacheSettings": {
+        "mmapGiB": 1
+      },
+      "sourceStrategy": {
+        "clone": "regenerate-isolated-database",
+        "reset": "drop-database-after-run"
+      },
+      "postgresIsolation": {
+        "strategy": "fresh-container-per-operation",
+        "reset": "new-empty-data-directory",
+        "scope": "arm-and-repetition"
+      },
+      "expected": {
+        "rowCount": 2000,
+        "copyBytes": 550174715,
+        "copyDigest": null,
+        "contentDigest": null
+      },
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304,
+        "cpusetCpus": "0",
+        "cpuQuota": 1
+      }
+    },
+    {
+      "profile": "imports-550m",
+      "worktree": "origin-main",
+      "label": "string-decoding",
+      "repetition": 4,
+      "overlay": null,
+      "imageKey": "origin-main",
+      "workerCount": 5,
+      "canonical": false,
+      "validationMode": "calibration",
+      "fixtureIdentity": {
+        "version": "legacy-imports-fixture-v1",
+        "seed": 20250714
+      },
+      "cachePolicy": {
+        "declared": {
+          "sqlite": "default",
+          "mmapGiB": 1,
+          "osPageCache": "uncontrolled",
+          "betweenRuns": "new-replica-file"
+        },
+        "effective": {
+          "mmapGiB": 1
+        }
+      },
+      "cacheSettings": {
+        "mmapGiB": 1
+      },
+      "sourceStrategy": {
+        "clone": "regenerate-isolated-database",
+        "reset": "drop-database-after-run"
+      },
+      "postgresIsolation": {
+        "strategy": "fresh-container-per-operation",
+        "reset": "new-empty-data-directory",
+        "scope": "arm-and-repetition"
+      },
+      "expected": {
+        "rowCount": 2000,
+        "copyBytes": 550174715,
+        "copyDigest": null,
+        "contentDigest": null
+      },
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304,
+        "cpusetCpus": "0",
+        "cpuQuota": 1
+      }
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "direct-buffer-cast",
+      "label": "buffer-cast",
+      "repetition": 4,
+      "overlay": null,
+      "imageKey": "direct-buffer-cast",
+      "workerCount": 5,
+      "canonical": false,
+      "validationMode": "calibration",
+      "fixtureIdentity": {
+        "version": "legacy-email-fixture-v1",
+        "seed": 20250714
+      },
+      "cachePolicy": {
+        "declared": {
+          "sqlite": "default",
+          "mmapGiB": 1,
+          "osPageCache": "uncontrolled",
+          "betweenRuns": "new-replica-file"
+        },
+        "effective": {
+          "mmapGiB": 1
+        }
+      },
+      "cacheSettings": {
+        "mmapGiB": 1
+      },
+      "sourceStrategy": {
+        "clone": "regenerate-isolated-database",
+        "reset": "drop-database-after-run"
+      },
+      "postgresIsolation": {
+        "strategy": "fresh-container-per-operation",
+        "reset": "new-empty-data-directory",
+        "scope": "arm-and-repetition"
+      },
+      "expected": {
+        "rowCount": 1000,
+        "copyBytes": 683438323,
+        "copyDigest": null,
+        "contentDigest": null
+      },
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304,
+        "cpusetCpus": "0",
+        "cpuQuota": 1
+      }
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "origin-main",
+      "label": "string-decoding",
+      "repetition": 4,
+      "overlay": null,
+      "imageKey": "origin-main",
+      "workerCount": 5,
+      "canonical": false,
+      "validationMode": "calibration",
+      "fixtureIdentity": {
+        "version": "legacy-email-fixture-v1",
+        "seed": 20250714
+      },
+      "cachePolicy": {
+        "declared": {
+          "sqlite": "default",
+          "mmapGiB": 1,
+          "osPageCache": "uncontrolled",
+          "betweenRuns": "new-replica-file"
+        },
+        "effective": {
+          "mmapGiB": 1
+        }
+      },
+      "cacheSettings": {
+        "mmapGiB": 1
+      },
+      "sourceStrategy": {
+        "clone": "regenerate-isolated-database",
+        "reset": "drop-database-after-run"
+      },
+      "postgresIsolation": {
+        "strategy": "fresh-container-per-operation",
+        "reset": "new-empty-data-directory",
+        "scope": "arm-and-repetition"
+      },
+      "expected": {
+        "rowCount": 1000,
+        "copyBytes": 683438323,
+        "copyDigest": null,
+        "contentDigest": null
+      },
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304,
+        "cpusetCpus": "0",
+        "cpuQuota": 1
+      }
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "origin-main",
+      "label": "string-decoding",
+      "repetition": 5,
+      "overlay": null,
+      "imageKey": "origin-main",
+      "workerCount": 5,
+      "canonical": false,
+      "validationMode": "calibration",
+      "fixtureIdentity": {
+        "version": "legacy-email-fixture-v1",
+        "seed": 20250714
+      },
+      "cachePolicy": {
+        "declared": {
+          "sqlite": "default",
+          "mmapGiB": 1,
+          "osPageCache": "uncontrolled",
+          "betweenRuns": "new-replica-file"
+        },
+        "effective": {
+          "mmapGiB": 1
+        }
+      },
+      "cacheSettings": {
+        "mmapGiB": 1
+      },
+      "sourceStrategy": {
+        "clone": "regenerate-isolated-database",
+        "reset": "drop-database-after-run"
+      },
+      "postgresIsolation": {
+        "strategy": "fresh-container-per-operation",
+        "reset": "new-empty-data-directory",
+        "scope": "arm-and-repetition"
+      },
+      "expected": {
+        "rowCount": 1000,
+        "copyBytes": 683438323,
+        "copyDigest": null,
+        "contentDigest": null
+      },
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304,
+        "cpusetCpus": "0",
+        "cpuQuota": 1
+      }
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "direct-buffer-cast",
+      "label": "buffer-cast",
+      "repetition": 5,
+      "overlay": null,
+      "imageKey": "direct-buffer-cast",
+      "workerCount": 5,
+      "canonical": false,
+      "validationMode": "calibration",
+      "fixtureIdentity": {
+        "version": "legacy-email-fixture-v1",
+        "seed": 20250714
+      },
+      "cachePolicy": {
+        "declared": {
+          "sqlite": "default",
+          "mmapGiB": 1,
+          "osPageCache": "uncontrolled",
+          "betweenRuns": "new-replica-file"
+        },
+        "effective": {
+          "mmapGiB": 1
+        }
+      },
+      "cacheSettings": {
+        "mmapGiB": 1
+      },
+      "sourceStrategy": {
+        "clone": "regenerate-isolated-database",
+        "reset": "drop-database-after-run"
+      },
+      "postgresIsolation": {
+        "strategy": "fresh-container-per-operation",
+        "reset": "new-empty-data-directory",
+        "scope": "arm-and-repetition"
+      },
+      "expected": {
+        "rowCount": 1000,
+        "copyBytes": 683438323,
+        "copyDigest": null,
+        "contentDigest": null
+      },
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304,
+        "cpusetCpus": "0",
+        "cpuQuota": 1
+      }
+    },
+    {
+      "profile": "imports-550m",
+      "worktree": "origin-main",
+      "label": "string-decoding",
+      "repetition": 5,
+      "overlay": null,
+      "imageKey": "origin-main",
+      "workerCount": 5,
+      "canonical": false,
+      "validationMode": "calibration",
+      "fixtureIdentity": {
+        "version": "legacy-imports-fixture-v1",
+        "seed": 20250714
+      },
+      "cachePolicy": {
+        "declared": {
+          "sqlite": "default",
+          "mmapGiB": 1,
+          "osPageCache": "uncontrolled",
+          "betweenRuns": "new-replica-file"
+        },
+        "effective": {
+          "mmapGiB": 1
+        }
+      },
+      "cacheSettings": {
+        "mmapGiB": 1
+      },
+      "sourceStrategy": {
+        "clone": "regenerate-isolated-database",
+        "reset": "drop-database-after-run"
+      },
+      "postgresIsolation": {
+        "strategy": "fresh-container-per-operation",
+        "reset": "new-empty-data-directory",
+        "scope": "arm-and-repetition"
+      },
+      "expected": {
+        "rowCount": 2000,
+        "copyBytes": 550174715,
+        "copyDigest": null,
+        "contentDigest": null
+      },
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304,
+        "cpusetCpus": "0",
+        "cpuQuota": 1
+      }
+    },
+    {
+      "profile": "imports-550m",
+      "worktree": "direct-buffer-cast",
+      "label": "buffer-cast",
+      "repetition": 5,
+      "overlay": null,
+      "imageKey": "direct-buffer-cast",
+      "workerCount": 5,
+      "canonical": false,
+      "validationMode": "calibration",
+      "fixtureIdentity": {
+        "version": "legacy-imports-fixture-v1",
+        "seed": 20250714
+      },
+      "cachePolicy": {
+        "declared": {
+          "sqlite": "default",
+          "mmapGiB": 1,
+          "osPageCache": "uncontrolled",
+          "betweenRuns": "new-replica-file"
+        },
+        "effective": {
+          "mmapGiB": 1
+        }
+      },
+      "cacheSettings": {
+        "mmapGiB": 1
+      },
+      "sourceStrategy": {
+        "clone": "regenerate-isolated-database",
+        "reset": "drop-database-after-run"
+      },
+      "postgresIsolation": {
+        "strategy": "fresh-container-per-operation",
+        "reset": "new-empty-data-directory",
+        "scope": "arm-and-repetition"
+      },
+      "expected": {
+        "rowCount": 2000,
+        "copyBytes": 550174715,
+        "copyDigest": null,
+        "contentDigest": null
+      },
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304,
+        "cpusetCpus": "0",
+        "cpuQuota": 1
+      }
+    },
+    {
+      "profile": "imports-550m",
+      "worktree": "direct-buffer-cast",
+      "label": "buffer-cast",
+      "repetition": 6,
+      "overlay": null,
+      "imageKey": "direct-buffer-cast",
+      "workerCount": 5,
+      "canonical": false,
+      "validationMode": "calibration",
+      "fixtureIdentity": {
+        "version": "legacy-imports-fixture-v1",
+        "seed": 20250714
+      },
+      "cachePolicy": {
+        "declared": {
+          "sqlite": "default",
+          "mmapGiB": 1,
+          "osPageCache": "uncontrolled",
+          "betweenRuns": "new-replica-file"
+        },
+        "effective": {
+          "mmapGiB": 1
+        }
+      },
+      "cacheSettings": {
+        "mmapGiB": 1
+      },
+      "sourceStrategy": {
+        "clone": "regenerate-isolated-database",
+        "reset": "drop-database-after-run"
+      },
+      "postgresIsolation": {
+        "strategy": "fresh-container-per-operation",
+        "reset": "new-empty-data-directory",
+        "scope": "arm-and-repetition"
+      },
+      "expected": {
+        "rowCount": 2000,
+        "copyBytes": 550174715,
+        "copyDigest": null,
+        "contentDigest": null
+      },
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304,
+        "cpusetCpus": "0",
+        "cpuQuota": 1
+      }
+    },
+    {
+      "profile": "imports-550m",
+      "worktree": "origin-main",
+      "label": "string-decoding",
+      "repetition": 6,
+      "overlay": null,
+      "imageKey": "origin-main",
+      "workerCount": 5,
+      "canonical": false,
+      "validationMode": "calibration",
+      "fixtureIdentity": {
+        "version": "legacy-imports-fixture-v1",
+        "seed": 20250714
+      },
+      "cachePolicy": {
+        "declared": {
+          "sqlite": "default",
+          "mmapGiB": 1,
+          "osPageCache": "uncontrolled",
+          "betweenRuns": "new-replica-file"
+        },
+        "effective": {
+          "mmapGiB": 1
+        }
+      },
+      "cacheSettings": {
+        "mmapGiB": 1
+      },
+      "sourceStrategy": {
+        "clone": "regenerate-isolated-database",
+        "reset": "drop-database-after-run"
+      },
+      "postgresIsolation": {
+        "strategy": "fresh-container-per-operation",
+        "reset": "new-empty-data-directory",
+        "scope": "arm-and-repetition"
+      },
+      "expected": {
+        "rowCount": 2000,
+        "copyBytes": 550174715,
+        "copyDigest": null,
+        "contentDigest": null
+      },
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304,
+        "cpusetCpus": "0",
+        "cpuQuota": 1
+      }
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "direct-buffer-cast",
+      "label": "buffer-cast",
+      "repetition": 6,
+      "overlay": null,
+      "imageKey": "direct-buffer-cast",
+      "workerCount": 5,
+      "canonical": false,
+      "validationMode": "calibration",
+      "fixtureIdentity": {
+        "version": "legacy-email-fixture-v1",
+        "seed": 20250714
+      },
+      "cachePolicy": {
+        "declared": {
+          "sqlite": "default",
+          "mmapGiB": 1,
+          "osPageCache": "uncontrolled",
+          "betweenRuns": "new-replica-file"
+        },
+        "effective": {
+          "mmapGiB": 1
+        }
+      },
+      "cacheSettings": {
+        "mmapGiB": 1
+      },
+      "sourceStrategy": {
+        "clone": "regenerate-isolated-database",
+        "reset": "drop-database-after-run"
+      },
+      "postgresIsolation": {
+        "strategy": "fresh-container-per-operation",
+        "reset": "new-empty-data-directory",
+        "scope": "arm-and-repetition"
+      },
+      "expected": {
+        "rowCount": 1000,
+        "copyBytes": 683438323,
+        "copyDigest": null,
+        "contentDigest": null
+      },
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304,
+        "cpusetCpus": "0",
+        "cpuQuota": 1
+      }
+    },
+    {
+      "profile": "email-683m",
+      "worktree": "origin-main",
+      "label": "string-decoding",
+      "repetition": 6,
+      "overlay": null,
+      "imageKey": "origin-main",
+      "workerCount": 5,
+      "canonical": false,
+      "validationMode": "calibration",
+      "fixtureIdentity": {
+        "version": "legacy-email-fixture-v1",
+        "seed": 20250714
+      },
+      "cachePolicy": {
+        "declared": {
+          "sqlite": "default",
+          "mmapGiB": 1,
+          "osPageCache": "uncontrolled",
+          "betweenRuns": "new-replica-file"
+        },
+        "effective": {
+          "mmapGiB": 1
+        }
+      },
+      "cacheSettings": {
+        "mmapGiB": 1
+      },
+      "sourceStrategy": {
+        "clone": "regenerate-isolated-database",
+        "reset": "drop-database-after-run"
+      },
+      "postgresIsolation": {
+        "strategy": "fresh-container-per-operation",
+        "reset": "new-empty-data-directory",
+        "scope": "arm-and-repetition"
+      },
+      "expected": {
+        "rowCount": 1000,
+        "copyBytes": 683438323,
+        "copyDigest": null,
+        "contentDigest": null
+      },
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304,
+        "cpusetCpus": "0",
+        "cpuQuota": 1
+      }
+    }
+  ],
+  "operations": [
+    {
+      "index": 1,
+      "id": "email-683m-string-decoding-r1",
+      "artifact": "operations/001-email-683m-string-decoding-r1.log",
+      "startedAt": "2026-07-15T21:55:40.073Z",
+      "completedAt": "2026-07-15T21:55:41.474Z",
+      "status": 1,
+      "signal": null,
+      "productContainer": {
+        "id": "4c4647f5f0eaae5870bd66479846ee6911f61c089abbc770d8b1042b441419b0",
+        "imageID": "sha256:5b7582538302013cffb8024d206f08135cffcb917f0d731b2f6e5415309206f4",
+        "created": "2026-07-15T21:55:40.100572335Z",
+        "state": {
+          "status": "exited",
+          "exitCode": 1,
+          "oomKilled": false
+        },
+        "constraints": {
+          "cpusetCpus": "0",
+          "nanoCpus": 1000000000,
+          "memory": 3221225472,
+          "memorySwap": 3221225472,
+          "pidsLimit": 1024
+        }
+      },
+      "postgres": {
+        "container": {
+          "id": "e284b9b9a69749f66f6fb7e4ddd3aa7630f756f694072fa7f0ae94169d770f5d",
+          "imageID": "sha256:742f40ea20b9ff2ff31db5458d127452988a2164df9e17441e191f3b72252193",
+          "created": "2026-07-15T21:55:37.43237275Z",
+          "state": {
+            "status": "running",
+            "exitCode": 0,
+            "oomKilled": false
+          },
+          "constraints": {
+            "cpusetCpus": "2-3",
+            "nanoCpus": 2000000000,
+            "memory": 2147483648,
+            "memorySwap": 4294967296,
+            "pidsLimit": null
+          }
+        },
+        "systemIdentifier": "7662876803511185447",
+        "image": {
+          "reference": "postgres:17-alpine@sha256:742f40ea20b9ff2ff31db5458d127452988a2164df9e17441e191f3b72252193",
+          "id": "sha256:742f40ea20b9ff2ff31db5458d127452988a2164df9e17441e191f3b72252193",
+          "repoDigests": [
+            "postgres@sha256:742f40ea20b9ff2ff31db5458d127452988a2164df9e17441e191f3b72252193"
+          ],
+          "created": "2026-07-07T17:46:49.401690597Z",
+          "os": "linux",
+          "architecture": "arm64",
+          "variant": "v8",
+          "labels": {},
+          "rootFSLayers": [
+            "sha256:b2848c02ac6ff53d265469b5b30f649f335e546a83330cd8916d54e65e640409",
+            "sha256:3276ea79c0c0c02b7d702de4aa0bf6b60d4b3f1b295b30366973c4ec4bf91249",
+            "sha256:d7d195016259883bbb161fb50292c1be3f96f0c9b50c573cbb0ed57e64dfa2c9",
+            "sha256:1ebee87cc825164b634bd6837685531c240dcfe5a1cf507cb6e8df057f661cbf",
+            "sha256:df8da200347edec60626a356f574551d1ecb9e7727402137d7d1bc6cb3cf11db",
+            "sha256:40252c7d7df3e6b969af3fa01b51346fbff89b508a6f2c5a9f457d23e797cf64",
+            "sha256:11b7e3ae2bd33cf903077779b2178d1242006f750906c41d9941cd45be4c6175",
+            "sha256:60d0936c2e0dac1f79128a468e3259644a610850f2ce98c238027943b5e87108",
+            "sha256:60d2d3ed3afa870cf11fe567074bfc1c37e1f0488fe4f9259b4b4ccd6084c209",
+            "sha256:66c221f9d5b6c9542d87a9f5143ffa653ce6628a4db739870abede8c87da99af"
+          ]
+        },
+        "sourceStrategy": {
+          "clone": "regenerate-isolated-database",
+          "reset": "drop-database-after-run"
+        },
+        "runnerIsolation": {
+          "strategy": "fresh-container-per-operation",
+          "reset": "new-empty-data-directory",
+          "scope": "arm-and-repetition"
+        },
+        "cgroup": {
+          "before": {
+            "capturedAt": "2026-07-15T21:55:39.194Z",
+            "cpu": {
+              "cpusetCpus": "2-3",
+              "cpusetCpusEffective": "2-3",
+              "max": "200000 100000",
+              "stat": {
+                "usage_usec": 507009,
+                "user_usec": 285192,
+                "system_usec": 221816,
+                "nice_usec": 0,
+                "nr_periods": 12,
+                "nr_throttled": 0,
+                "throttled_usec": 0,
+                "nr_bursts": 0,
+                "burst_usec": 0
+              },
+              "pressure": {
+                "some": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 10046
+                },
+                "full": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 3084
+                }
+              }
+            },
+            "memory": {
+              "current": 107556864,
+              "max": 2147483648,
+              "peak": 116342784,
+              "events": {
+                "low": 0,
+                "high": 0,
+                "max": 0,
+                "oom": 0,
+                "oom_kill": 0,
+                "oom_group_kill": 0
+              },
+              "eventsLocal": {
+                "low": 0,
+                "high": 0,
+                "max": 0,
+                "oom": 0,
+                "oom_kill": 0,
+                "oom_group_kill": 0
+              },
+              "pressure": {
+                "some": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 0
+                },
+                "full": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 0
+                }
+              }
+            },
+            "io": {
+              "stat": {
+                "254:0": {
+                  "rbytes": 39522304,
+                  "wbytes": 40288256,
+                  "rios": 905,
+                  "wios": 1815,
+                  "dbytes": 0,
+                  "dios": 0
+                }
+              },
+              "pressure": {
+                "some": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 67361
+                },
+                "full": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 67292
+                }
+              }
+            }
+          },
+          "after": {
+            "capturedAt": "2026-07-15T21:55:41.509Z",
+            "cpu": {
+              "cpusetCpus": "2-3",
+              "cpusetCpusEffective": "2-3",
+              "max": "200000 100000",
+              "stat": {
+                "usage_usec": 593905,
+                "user_usec": 350354,
+                "system_usec": 243551,
+                "nice_usec": 0,
+                "nr_periods": 22,
+                "nr_throttled": 0,
+                "throttled_usec": 0,
+                "nr_bursts": 0,
+                "burst_usec": 0
+              },
+              "pressure": {
+                "some": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 23160
+                },
+                "full": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 4192
+                }
+              }
+            },
+            "memory": {
+              "current": 107524096,
+              "max": 2147483648,
+              "peak": 116342784,
+              "events": {
+                "low": 0,
+                "high": 0,
+                "max": 0,
+                "oom": 0,
+                "oom_kill": 0,
+                "oom_group_kill": 0
+              },
+              "eventsLocal": {
+                "low": 0,
+                "high": 0,
+                "max": 0,
+                "oom": 0,
+                "oom_kill": 0,
+                "oom_group_kill": 0
+              },
+              "pressure": {
+                "some": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 0
+                },
+                "full": {
+                  "avg10": "0.00",
+                  "avg60": "0.00",
+                  "avg300": "0.00",
+                  "total": 0
+                }
+              }
+            },
+            "io": {
+              "stat": {
+                "254:0": {
+                  "rbytes": 39522304,
+                  "wbytes": 40497152,
+                  "rios": 905,
+                  "wios": 1819,
+                  "dbytes": 0,
+                  "dios": 0
+                }
+              },
+              "pressure": {
+                "some": {
+                  "avg10": "0.44",
+                  "avg60": "0.09",
+                  "avg300": "0.02",
+                  "total": 67361
+                },
+                "full": {
+                  "avg10": "0.44",
+                  "avg60": "0.09",
+                  "avg300": "0.02",
+                  "total": 67292
+                }
+              }
+            }
+          },
+          "delta": {
+            "cpu": {
+              "stat": {
+                "usage_usec": 86896,
+                "user_usec": 65162,
+                "system_usec": 21735,
+                "nice_usec": 0,
+                "nr_periods": 10,
+                "nr_throttled": 0,
+                "throttled_usec": 0,
+                "nr_bursts": 0,
+                "burst_usec": 0
+              },
+              "pressure": {
+                "some": {
+                  "total": 13114
+                },
+                "full": {
+                  "total": 1108
+                }
+              }
+            },
+            "memory": {
+              "current": -32768,
+              "max": 0,
+              "peak": 0,
+              "events": {
+                "low": 0,
+                "high": 0,
+                "max": 0,
+                "oom": 0,
+                "oom_kill": 0,
+                "oom_group_kill": 0
+              },
+              "eventsLocal": {
+                "low": 0,
+                "high": 0,
+                "max": 0,
+                "oom": 0,
+                "oom_kill": 0,
+                "oom_group_kill": 0
+              },
+              "pressure": {
+                "some": {
+                  "total": 0
+                },
+                "full": {
+                  "total": 0
+                }
+              }
+            },
+            "io": {
+              "stat": {
+                "254:0": {
+                  "rbytes": 0,
+                  "wbytes": 208896,
+                  "rios": 0,
+                  "wios": 4,
+                  "dbytes": 0,
+                  "dios": 0
+                }
+              },
+              "pressure": {
+                "some": {
+                  "total": 0
+                },
+                "full": {
+                  "total": 0
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "failedAt": "2026-07-15T21:55:42.648Z",
+  "failure": "Docker run failed: /Users/chase/.worktree/zero-docs/benchmarking/.releases/1.8/benchmarks/initial-sync-copy-pipeline/raw/e1-direct-buffer-cast-screening-docker/2026-07-15T21-51-39-149Z-30869-becc5820-c53b-4874-a80b-395399fcfc45/operations/001-email-683m-string-decoding-r1.log"
+}

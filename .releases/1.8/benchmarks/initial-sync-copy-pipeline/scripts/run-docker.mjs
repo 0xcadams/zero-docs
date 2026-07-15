@@ -64,6 +64,8 @@ if (!stage) {
 if (stage.status === 'definition-only-do-not-execute') {
   throw new Error(`${stageName} is definition-only and cannot be run`);
 }
+const sqliteStorage = stage.sqliteStorage ?? {mode: 'overlay', path: '/tmp'};
+const sqliteStorageArgs = sqliteStorageDockerArgs(sqliteStorage);
 validateRunnerIsolation(runnerConfig.postgresIsolation);
 
 const blocks = runBlocks(stage);
@@ -217,6 +219,7 @@ const manifest = {
     memory: '2g',
     cpusetCpus: postgresCpuset ?? null,
   },
+  sqliteStorage,
   appResourceInvariant: {cpus: 1, memory: '3g', nodeHeapMB: 2304},
   expectedArtifacts,
   runs,
@@ -297,8 +300,8 @@ try {
       ]);
     }
     const provenance = inspectDockerImage(image, root);
+    assertImageLabels(spec.key, provenance.labels, expectedLabels);
     if (canonical) {
-      assertImageLabels(spec.key, provenance.labels, expectedLabels);
       assertLinuxARM64(`${spec.key} image`, provenance);
     }
     manifest.images[spec.key] = {
@@ -429,6 +432,7 @@ async function executeOperation(index, runConfig) {
         : []),
       '--pids-limit',
       '1024',
+      ...sqliteStorageArgs,
       ...Object.entries(env).flatMap(([name, value]) => [
         '--env',
         `${name}=${value}`,
@@ -656,6 +660,22 @@ function linuxCommand() {
     `node --input-type=commonjs -e ${shellQuote(cgroupScript)} after`,
     'exit $status',
   ].join('; ');
+}
+
+function sqliteStorageDockerArgs(storage) {
+  if (storage.mode === 'overlay' && storage.path === '/tmp') {
+    return [];
+  }
+  if (
+    storage.mode === 'tmpfs' &&
+    storage.path === '/tmp' &&
+    /^\d+m$/.test(storage.size)
+  ) {
+    return ['--tmpfs', `${storage.path}:rw,size=${storage.size}`];
+  }
+  throw new Error(
+    `Invalid SQLite storage configuration ${JSON.stringify(storage)}`,
+  );
 }
 
 function runBlocks(stageConfig) {
@@ -1500,6 +1520,18 @@ function selfTest() {
   );
   assert.deepEqual([...parseCpuset('0-2,4')], [0, 1, 2, 4]);
   assert.throws(() => parseCpuset('2-1'), /Invalid CPU set/);
+  assert.deepEqual(
+    sqliteStorageDockerArgs({mode: 'overlay', path: '/tmp'}),
+    [],
+  );
+  assert.deepEqual(
+    sqliteStorageDockerArgs({mode: 'tmpfs', path: '/tmp', size: '1536m'}),
+    ['--tmpfs', '/tmp:rw,size=1536m'],
+  );
+  assert.throws(
+    () => sqliteStorageDockerArgs({mode: 'volume', path: '/tmp'}),
+    /Invalid SQLite storage configuration/,
+  );
   const isolatedRun = {
     profile: 'p1',
     label: 'a',

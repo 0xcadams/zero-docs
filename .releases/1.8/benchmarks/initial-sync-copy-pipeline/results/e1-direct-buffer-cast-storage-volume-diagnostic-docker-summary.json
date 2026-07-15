@@ -1,0 +1,2319 @@
+{
+  "schemaVersion": 2,
+  "stage": "e1-direct-buffer-cast-storage-volume-diagnostic-docker",
+  "generatedAt": "2026-07-15T23:13:12.082Z",
+  "primaryMetric": {
+    "name": "outerMs",
+    "description": "Whole awaited initReplica wall time through readiness",
+    "role": "primary"
+  },
+  "attributionMetrics": [
+    "setupMs",
+    "callbackMs",
+    "callbackOverheadMs",
+    "finalizationMs",
+    "wrapperMs",
+    "copyMs",
+    "flushMs",
+    "indexMs",
+    "copyOtherMs",
+    "totalMs",
+    "insertStatementCount",
+    "rawCopyMs",
+    "rawCopyMBps",
+    "rawChunkBytes",
+    "callbackMinusRawMs",
+    "callbackToRawRatio",
+    "dominantElapsedMs",
+    "dominantFlushMs",
+    "dominantCopyBytes",
+    "dominantInsertStatements",
+    "dominantSourceWaitMs",
+    "dominantProcessingMs",
+    "dominantParameterArrayMs",
+    "dominantStatementMs",
+    "dominantFlushCount",
+    "dominantMaxFlushMs",
+    "dominantAllocatedFieldBuffers",
+    "dominantReusedFieldBuffers",
+    "dominantPooledFieldBufferBytes",
+    "peakRssBytes",
+    "gcCount",
+    "gcMs",
+    "eventLoopUtilization",
+    "userCPUTime",
+    "systemCPUTime",
+    "minorPageFaults",
+    "scopedMemoryPressureFullUs",
+    "scopedIOPressureFullUs",
+    "scopedIOReadBytes",
+    "scopedIOWriteBytes",
+    "scopedMemoryMaxEvents",
+    "finalizationMemoryPressureFullUs",
+    "finalizationIOPressureFullUs",
+    "finalizationIOReadBytes",
+    "finalizationIOWriteBytes",
+    "finalizationMemoryMaxEvents",
+    "cgroupMemoryMaxEvents",
+    "sqliteFileBytes"
+  ],
+  "artifactSource": {
+    "kind": "nested-immutable",
+    "canonical": false,
+    "manifestPath": "raw/e1-direct-buffer-cast-storage-volume-diagnostic-docker/2026-07-15T23-09-48-900Z-1143-bf544216-23c4-45c6-b8cf-6c9b34738ee2/manifest.json",
+    "runToken": "2026-07-15T23-09-48-900Z-1143-bf544216-23c4-45c6-b8cf-6c9b34738ee2"
+  },
+  "artifactReconciliation": {
+    "status": "complete",
+    "expectedRunCount": 12,
+    "actualRunCount": 12,
+    "plannedSampleCount": 12,
+    "plannedSampleCountReached": true,
+    "canonicalArtifact": false,
+    "explicitlyPlanned": false,
+    "classification": "exploratory-noncanonical",
+    "classificationReason": "The artifact set is explicitly noncanonical.",
+    "minimumPairedBlocks": 5,
+    "bootstrapResamples": 20000,
+    "conditions": [
+      {
+        "key": "{\"constraints\":{\"cpuQuota\":1,\"cpus\":1,\"cpusetCpus\":\"0\",\"memory\":\"3g\",\"nodeHeapMB\":2304},\"environment\":{\"dockerInfo\":{\"architecture\":\"aarch64\",\"cgroupDriver\":\"cgroupfs\",\"cgroupVersion\":\"2\",\"driver\":\"overlayfs\",\"id\":\"6e6f630a-e4c8-45f6-9e6c-7f6a95d8dba5\",\"kernelVersion\":\"6.12.76-linuxkit\",\"memoryBytes\":25161015296,\"nCPU\":14,\"operatingSystem\":\"Docker Desktop\"},\"dockerServer\":{\"ApiVersion\":\"1.55\",\"Arch\":\"arm64\",\"BuildTime\":\"2026-06-26T11:39:58.000000000+00:00\",\"Components\":[{\"Details\":{\"ApiVersion\":\"1.55\",\"Arch\":\"arm64\",\"BuildTime\":\"Fri Jun 26 11:39:58 2026\",\"Experimental\":\"false\",\"GitCommit\":\"8ec5ab3\",\"GoVersion\":\"go1.26.4\",\"KernelVersion\":\"6.12.76-linuxkit\",\"MinAPIVersion\":\"1.40\",\"Module\":\"github.com/moby/moby/v2\",\"ModuleVersion\":\"v2.0.0+unknown\",\"Os\":\"linux\"},\"Name\":\"Engine\",\"Version\":\"29.6.1\"},{\"Details\":{\"GitCommit\":\"e53c7c1516c3b2bff98eb76f1f4117477e6f4e66\"},\"Name\":\"containerd\",\"Version\":\"v2.2.5\"},{\"Details\":{\"GitCommit\":\"v1.3.6-0-g491b69ba\"},\"Name\":\"runc\",\"Version\":\"1.3.6\"},{\"Details\":{\"GitCommit\":\"de40ad0\"},\"Name\":\"docker-init\",\"Version\":\"0.19.0\"}],\"GitCommit\":\"8ec5ab3\",\"GoVersion\":\"go1.26.4\",\"KernelVersion\":\"6.12.76-linuxkit\",\"MinAPIVersion\":\"1.40\",\"Os\":\"linux\",\"Platform\":{\"Name\":\"Docker Desktop 4.82.0 (233772)\"},\"Version\":\"29.6.1\"}},\"platform\":\"linux/arm64\",\"profile\":\"email-683m\",\"sqliteStorage\":{\"mode\":\"volume\",\"path\":\"/tmp\"}}",
+        "condition": {
+          "profile": "email-683m",
+          "constraints": {
+            "cpus": 1,
+            "memory": "3g",
+            "nodeHeapMB": 2304,
+            "cpusetCpus": "0",
+            "cpuQuota": 1
+          },
+          "platform": "linux/arm64",
+          "environment": {
+            "dockerServer": {
+              "Platform": {
+                "Name": "Docker Desktop 4.82.0 (233772)"
+              },
+              "Version": "29.6.1",
+              "ApiVersion": "1.55",
+              "MinAPIVersion": "1.40",
+              "Os": "linux",
+              "Arch": "arm64",
+              "Components": [
+                {
+                  "Name": "Engine",
+                  "Version": "29.6.1",
+                  "Details": {
+                    "ApiVersion": "1.55",
+                    "Arch": "arm64",
+                    "BuildTime": "Fri Jun 26 11:39:58 2026",
+                    "Experimental": "false",
+                    "GitCommit": "8ec5ab3",
+                    "GoVersion": "go1.26.4",
+                    "KernelVersion": "6.12.76-linuxkit",
+                    "MinAPIVersion": "1.40",
+                    "Module": "github.com/moby/moby/v2",
+                    "ModuleVersion": "v2.0.0+unknown",
+                    "Os": "linux"
+                  }
+                },
+                {
+                  "Name": "containerd",
+                  "Version": "v2.2.5",
+                  "Details": {
+                    "GitCommit": "e53c7c1516c3b2bff98eb76f1f4117477e6f4e66"
+                  }
+                },
+                {
+                  "Name": "runc",
+                  "Version": "1.3.6",
+                  "Details": {
+                    "GitCommit": "v1.3.6-0-g491b69ba"
+                  }
+                },
+                {
+                  "Name": "docker-init",
+                  "Version": "0.19.0",
+                  "Details": {
+                    "GitCommit": "de40ad0"
+                  }
+                }
+              ],
+              "GitCommit": "8ec5ab3",
+              "GoVersion": "go1.26.4",
+              "KernelVersion": "6.12.76-linuxkit",
+              "BuildTime": "2026-06-26T11:39:58.000000000+00:00"
+            },
+            "dockerInfo": {
+              "id": "6e6f630a-e4c8-45f6-9e6c-7f6a95d8dba5",
+              "driver": "overlayfs",
+              "cgroupDriver": "cgroupfs",
+              "cgroupVersion": "2",
+              "kernelVersion": "6.12.76-linuxkit",
+              "operatingSystem": "Docker Desktop",
+              "architecture": "aarch64",
+              "nCPU": 14,
+              "memoryBytes": 25161015296
+            }
+          },
+          "sqliteStorage": {
+            "mode": "volume",
+            "path": "/tmp"
+          }
+        },
+        "arms": [
+          "buffer-cast",
+          "string-decoding"
+        ],
+        "blockCount": 6,
+        "blocks": [
+          {
+            "repetition": 1,
+            "runs": [
+              {
+                "id": "email-683m-string-decoding-r1",
+                "arm": "string-decoding",
+                "manifestIndex": 0,
+                "position": 1,
+                "repetition": 1
+              },
+              {
+                "id": "email-683m-buffer-cast-r1",
+                "arm": "buffer-cast",
+                "manifestIndex": 1,
+                "position": 2,
+                "repetition": 1
+              }
+            ]
+          },
+          {
+            "repetition": 2,
+            "runs": [
+              {
+                "id": "email-683m-buffer-cast-r2",
+                "arm": "buffer-cast",
+                "manifestIndex": 2,
+                "position": 1,
+                "repetition": 2
+              },
+              {
+                "id": "email-683m-string-decoding-r2",
+                "arm": "string-decoding",
+                "manifestIndex": 3,
+                "position": 2,
+                "repetition": 2
+              }
+            ]
+          },
+          {
+            "repetition": 3,
+            "runs": [
+              {
+                "id": "email-683m-string-decoding-r3",
+                "arm": "string-decoding",
+                "manifestIndex": 4,
+                "position": 1,
+                "repetition": 3
+              },
+              {
+                "id": "email-683m-buffer-cast-r3",
+                "arm": "buffer-cast",
+                "manifestIndex": 5,
+                "position": 2,
+                "repetition": 3
+              }
+            ]
+          },
+          {
+            "repetition": 4,
+            "runs": [
+              {
+                "id": "email-683m-buffer-cast-r4",
+                "arm": "buffer-cast",
+                "manifestIndex": 6,
+                "position": 1,
+                "repetition": 4
+              },
+              {
+                "id": "email-683m-string-decoding-r4",
+                "arm": "string-decoding",
+                "manifestIndex": 7,
+                "position": 2,
+                "repetition": 4
+              }
+            ]
+          },
+          {
+            "repetition": 5,
+            "runs": [
+              {
+                "id": "email-683m-string-decoding-r5",
+                "arm": "string-decoding",
+                "manifestIndex": 8,
+                "position": 1,
+                "repetition": 5
+              },
+              {
+                "id": "email-683m-buffer-cast-r5",
+                "arm": "buffer-cast",
+                "manifestIndex": 9,
+                "position": 2,
+                "repetition": 5
+              }
+            ]
+          },
+          {
+            "repetition": 6,
+            "runs": [
+              {
+                "id": "email-683m-buffer-cast-r6",
+                "arm": "buffer-cast",
+                "manifestIndex": 10,
+                "position": 1,
+                "repetition": 6
+              },
+              {
+                "id": "email-683m-string-decoding-r6",
+                "arm": "string-decoding",
+                "manifestIndex": 11,
+                "position": 2,
+                "repetition": 6
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "analysis": {
+    "classification": "exploratory-noncanonical",
+    "classificationReason": "The artifact set is explicitly noncanonical.",
+    "experimentalUnit": "independent pair or complete multi-arm block; in-process measurements are not independent evidence",
+    "plannedSampleCount": 12,
+    "observedSampleCount": 12,
+    "minimumPairedBlocks": 5,
+    "bootstrapResamples": 20000,
+    "fixedSamplePolicy": "Gate status remains inconclusive without a predeclared analysis plan and until its fixed sample count is reached.",
+    "runs": [
+      {
+        "id": "email-683m-string-decoding-r1",
+        "file": "operations/001-email-683m-string-decoding-r1.log",
+        "profile": "email-683m",
+        "label": "string-decoding",
+        "repetition": 1,
+        "block": 1,
+        "order": 1,
+        "blockSize": 2,
+        "conditionKey": "{\"constraints\":{\"cpuQuota\":1,\"cpus\":1,\"cpusetCpus\":\"0\",\"memory\":\"3g\",\"nodeHeapMB\":2304},\"environment\":{\"dockerInfo\":{\"architecture\":\"aarch64\",\"cgroupDriver\":\"cgroupfs\",\"cgroupVersion\":\"2\",\"driver\":\"overlayfs\",\"id\":\"6e6f630a-e4c8-45f6-9e6c-7f6a95d8dba5\",\"kernelVersion\":\"6.12.76-linuxkit\",\"memoryBytes\":25161015296,\"nCPU\":14,\"operatingSystem\":\"Docker Desktop\"},\"dockerServer\":{\"ApiVersion\":\"1.55\",\"Arch\":\"arm64\",\"BuildTime\":\"2026-06-26T11:39:58.000000000+00:00\",\"Components\":[{\"Details\":{\"ApiVersion\":\"1.55\",\"Arch\":\"arm64\",\"BuildTime\":\"Fri Jun 26 11:39:58 2026\",\"Experimental\":\"false\",\"GitCommit\":\"8ec5ab3\",\"GoVersion\":\"go1.26.4\",\"KernelVersion\":\"6.12.76-linuxkit\",\"MinAPIVersion\":\"1.40\",\"Module\":\"github.com/moby/moby/v2\",\"ModuleVersion\":\"v2.0.0+unknown\",\"Os\":\"linux\"},\"Name\":\"Engine\",\"Version\":\"29.6.1\"},{\"Details\":{\"GitCommit\":\"e53c7c1516c3b2bff98eb76f1f4117477e6f4e66\"},\"Name\":\"containerd\",\"Version\":\"v2.2.5\"},{\"Details\":{\"GitCommit\":\"v1.3.6-0-g491b69ba\"},\"Name\":\"runc\",\"Version\":\"1.3.6\"},{\"Details\":{\"GitCommit\":\"de40ad0\"},\"Name\":\"docker-init\",\"Version\":\"0.19.0\"}],\"GitCommit\":\"8ec5ab3\",\"GoVersion\":\"go1.26.4\",\"KernelVersion\":\"6.12.76-linuxkit\",\"MinAPIVersion\":\"1.40\",\"Os\":\"linux\",\"Platform\":{\"Name\":\"Docker Desktop 4.82.0 (233772)\"},\"Version\":\"29.6.1\"}},\"platform\":\"linux/arm64\",\"profile\":\"email-683m\",\"sqliteStorage\":{\"mode\":\"volume\",\"path\":\"/tmp\"}}",
+        "condition": {
+          "profile": "email-683m",
+          "constraints": {
+            "cpus": 1,
+            "memory": "3g",
+            "nodeHeapMB": 2304,
+            "cpusetCpus": "0",
+            "cpuQuota": 1
+          },
+          "platform": "linux/arm64",
+          "environment": {
+            "dockerServer": {
+              "Platform": {
+                "Name": "Docker Desktop 4.82.0 (233772)"
+              },
+              "Version": "29.6.1",
+              "ApiVersion": "1.55",
+              "MinAPIVersion": "1.40",
+              "Os": "linux",
+              "Arch": "arm64",
+              "Components": [
+                {
+                  "Name": "Engine",
+                  "Version": "29.6.1",
+                  "Details": {
+                    "ApiVersion": "1.55",
+                    "Arch": "arm64",
+                    "BuildTime": "Fri Jun 26 11:39:58 2026",
+                    "Experimental": "false",
+                    "GitCommit": "8ec5ab3",
+                    "GoVersion": "go1.26.4",
+                    "KernelVersion": "6.12.76-linuxkit",
+                    "MinAPIVersion": "1.40",
+                    "Module": "github.com/moby/moby/v2",
+                    "ModuleVersion": "v2.0.0+unknown",
+                    "Os": "linux"
+                  }
+                },
+                {
+                  "Name": "containerd",
+                  "Version": "v2.2.5",
+                  "Details": {
+                    "GitCommit": "e53c7c1516c3b2bff98eb76f1f4117477e6f4e66"
+                  }
+                },
+                {
+                  "Name": "runc",
+                  "Version": "1.3.6",
+                  "Details": {
+                    "GitCommit": "v1.3.6-0-g491b69ba"
+                  }
+                },
+                {
+                  "Name": "docker-init",
+                  "Version": "0.19.0",
+                  "Details": {
+                    "GitCommit": "de40ad0"
+                  }
+                }
+              ],
+              "GitCommit": "8ec5ab3",
+              "GoVersion": "go1.26.4",
+              "KernelVersion": "6.12.76-linuxkit",
+              "BuildTime": "2026-06-26T11:39:58.000000000+00:00"
+            },
+            "dockerInfo": {
+              "id": "6e6f630a-e4c8-45f6-9e6c-7f6a95d8dba5",
+              "driver": "overlayfs",
+              "cgroupDriver": "cgroupfs",
+              "cgroupVersion": "2",
+              "kernelVersion": "6.12.76-linuxkit",
+              "operatingSystem": "Docker Desktop",
+              "architecture": "aarch64",
+              "nCPU": 14,
+              "memoryBytes": 25161015296
+            }
+          },
+          "sqliteStorage": {
+            "mode": "volume",
+            "path": "/tmp"
+          }
+        },
+        "outerMs": 1294.6855,
+        "setupMs": 3.301042000000052,
+        "callbackMs": 885.1690009999998,
+        "callbackOverheadMs": 0.7369570000000749,
+        "finalizationMs": 405.47850000000017,
+        "wrapperMs": 409.5164990000003,
+        "copyMs": 746.7828340000001,
+        "flushMs": 361.39754700000094,
+        "indexMs": 48.13754199999994,
+        "copyOtherMs": 464.5513689999991,
+        "totalMs": 874.086458,
+        "rawCopyMs": 260.4865,
+        "rawCopyMBps": 2623.699589038204,
+        "rawChunkBytes": 682755.5674325675,
+        "callbackMinusRawMs": 624.6825009999998,
+        "callbackToRawRatio": 3.398137719229211,
+        "dominantElapsedMs": 738.3387920000002,
+        "dominantFlushMs": 361.3833800000009,
+        "dominantCopyBytes": 683438323,
+        "dominantSourceWaitMs": 250.02731299999164,
+        "dominantProcessingMs": 482.95477100000835,
+        "peakRssBytes": 985665536,
+        "gcCount": 44,
+        "gcMs": 31.450086000026204,
+        "eventLoopUtilization": 0.9720109324819071,
+        "userCPUTime": 438960,
+        "systemCPUTime": 431917,
+        "minorPageFaults": 259602,
+        "scopedMemoryPressureFullUs": 0,
+        "scopedIOPressureFullUs": 0,
+        "scopedIOReadBytes": 0,
+        "scopedIOWriteBytes": 0,
+        "scopedMemoryMaxEvents": 0,
+        "finalizationMemoryPressureFullUs": 0,
+        "finalizationIOPressureFullUs": 361681,
+        "finalizationIOReadBytes": 0,
+        "finalizationIOWriteBytes": 672968704,
+        "finalizationMemoryMaxEvents": 0,
+        "sqliteFileBytes": 684822528
+      },
+      {
+        "id": "email-683m-buffer-cast-r1",
+        "file": "operations/002-email-683m-buffer-cast-r1.log",
+        "profile": "email-683m",
+        "label": "buffer-cast",
+        "repetition": 1,
+        "block": 1,
+        "order": 2,
+        "blockSize": 2,
+        "conditionKey": "{\"constraints\":{\"cpuQuota\":1,\"cpus\":1,\"cpusetCpus\":\"0\",\"memory\":\"3g\",\"nodeHeapMB\":2304},\"environment\":{\"dockerInfo\":{\"architecture\":\"aarch64\",\"cgroupDriver\":\"cgroupfs\",\"cgroupVersion\":\"2\",\"driver\":\"overlayfs\",\"id\":\"6e6f630a-e4c8-45f6-9e6c-7f6a95d8dba5\",\"kernelVersion\":\"6.12.76-linuxkit\",\"memoryBytes\":25161015296,\"nCPU\":14,\"operatingSystem\":\"Docker Desktop\"},\"dockerServer\":{\"ApiVersion\":\"1.55\",\"Arch\":\"arm64\",\"BuildTime\":\"2026-06-26T11:39:58.000000000+00:00\",\"Components\":[{\"Details\":{\"ApiVersion\":\"1.55\",\"Arch\":\"arm64\",\"BuildTime\":\"Fri Jun 26 11:39:58 2026\",\"Experimental\":\"false\",\"GitCommit\":\"8ec5ab3\",\"GoVersion\":\"go1.26.4\",\"KernelVersion\":\"6.12.76-linuxkit\",\"MinAPIVersion\":\"1.40\",\"Module\":\"github.com/moby/moby/v2\",\"ModuleVersion\":\"v2.0.0+unknown\",\"Os\":\"linux\"},\"Name\":\"Engine\",\"Version\":\"29.6.1\"},{\"Details\":{\"GitCommit\":\"e53c7c1516c3b2bff98eb76f1f4117477e6f4e66\"},\"Name\":\"containerd\",\"Version\":\"v2.2.5\"},{\"Details\":{\"GitCommit\":\"v1.3.6-0-g491b69ba\"},\"Name\":\"runc\",\"Version\":\"1.3.6\"},{\"Details\":{\"GitCommit\":\"de40ad0\"},\"Name\":\"docker-init\",\"Version\":\"0.19.0\"}],\"GitCommit\":\"8ec5ab3\",\"GoVersion\":\"go1.26.4\",\"KernelVersion\":\"6.12.76-linuxkit\",\"MinAPIVersion\":\"1.40\",\"Os\":\"linux\",\"Platform\":{\"Name\":\"Docker Desktop 4.82.0 (233772)\"},\"Version\":\"29.6.1\"}},\"platform\":\"linux/arm64\",\"profile\":\"email-683m\",\"sqliteStorage\":{\"mode\":\"volume\",\"path\":\"/tmp\"}}",
+        "condition": {
+          "profile": "email-683m",
+          "constraints": {
+            "cpus": 1,
+            "memory": "3g",
+            "nodeHeapMB": 2304,
+            "cpusetCpus": "0",
+            "cpuQuota": 1
+          },
+          "platform": "linux/arm64",
+          "environment": {
+            "dockerServer": {
+              "Platform": {
+                "Name": "Docker Desktop 4.82.0 (233772)"
+              },
+              "Version": "29.6.1",
+              "ApiVersion": "1.55",
+              "MinAPIVersion": "1.40",
+              "Os": "linux",
+              "Arch": "arm64",
+              "Components": [
+                {
+                  "Name": "Engine",
+                  "Version": "29.6.1",
+                  "Details": {
+                    "ApiVersion": "1.55",
+                    "Arch": "arm64",
+                    "BuildTime": "Fri Jun 26 11:39:58 2026",
+                    "Experimental": "false",
+                    "GitCommit": "8ec5ab3",
+                    "GoVersion": "go1.26.4",
+                    "KernelVersion": "6.12.76-linuxkit",
+                    "MinAPIVersion": "1.40",
+                    "Module": "github.com/moby/moby/v2",
+                    "ModuleVersion": "v2.0.0+unknown",
+                    "Os": "linux"
+                  }
+                },
+                {
+                  "Name": "containerd",
+                  "Version": "v2.2.5",
+                  "Details": {
+                    "GitCommit": "e53c7c1516c3b2bff98eb76f1f4117477e6f4e66"
+                  }
+                },
+                {
+                  "Name": "runc",
+                  "Version": "1.3.6",
+                  "Details": {
+                    "GitCommit": "v1.3.6-0-g491b69ba"
+                  }
+                },
+                {
+                  "Name": "docker-init",
+                  "Version": "0.19.0",
+                  "Details": {
+                    "GitCommit": "de40ad0"
+                  }
+                }
+              ],
+              "GitCommit": "8ec5ab3",
+              "GoVersion": "go1.26.4",
+              "KernelVersion": "6.12.76-linuxkit",
+              "BuildTime": "2026-06-26T11:39:58.000000000+00:00"
+            },
+            "dockerInfo": {
+              "id": "6e6f630a-e4c8-45f6-9e6c-7f6a95d8dba5",
+              "driver": "overlayfs",
+              "cgroupDriver": "cgroupfs",
+              "cgroupVersion": "2",
+              "kernelVersion": "6.12.76-linuxkit",
+              "operatingSystem": "Docker Desktop",
+              "architecture": "aarch64",
+              "nCPU": 14,
+              "memoryBytes": 25161015296
+            }
+          },
+          "sqliteStorage": {
+            "mode": "volume",
+            "path": "/tmp"
+          }
+        },
+        "outerMs": 1350.9857920000002,
+        "setupMs": 3.677417000000105,
+        "callbackMs": 614.51225,
+        "callbackOverheadMs": 0.6590409999998883,
+        "finalizationMs": 732.1370840000002,
+        "wrapperMs": 736.4735420000002,
+        "copyMs": 476.531334,
+        "flushMs": 224.98512300000039,
+        "indexMs": 44.052000000000135,
+        "copyOtherMs": 334.5132519999995,
+        "totalMs": 603.550375,
+        "rawCopyMs": 260.90325000000007,
+        "rawCopyMBps": 2619.5086607775092,
+        "rawChunkBytes": 682755.5674325675,
+        "callbackMinusRawMs": 353.6089999999999,
+        "callbackToRawRatio": 2.3553261601762334,
+        "dominantElapsedMs": 468.4632909999998,
+        "dominantFlushMs": 224.96958100000052,
+        "dominantCopyBytes": 683438323,
+        "dominantSourceWaitMs": 229.38696300000083,
+        "dominantProcessingMs": 233.6616619999993,
+        "peakRssBytes": 859607040,
+        "gcCount": 47,
+        "gcMs": 14.005372999992687,
+        "eventLoopUtilization": 0.9708301930801057,
+        "userCPUTime": 264058,
+        "systemCPUTime": 338453,
+        "minorPageFaults": 57095,
+        "scopedMemoryPressureFullUs": 0,
+        "scopedIOPressureFullUs": 0,
+        "scopedIOReadBytes": 0,
+        "scopedIOWriteBytes": 0,
+        "scopedMemoryMaxEvents": 0,
+        "finalizationMemoryPressureFullUs": 0,
+        "finalizationIOPressureFullUs": 685550,
+        "finalizationIOReadBytes": 0,
+        "finalizationIOWriteBytes": 673648640,
+        "finalizationMemoryMaxEvents": 0,
+        "sqliteFileBytes": 684822528
+      },
+      {
+        "id": "email-683m-buffer-cast-r2",
+        "file": "operations/003-email-683m-buffer-cast-r2.log",
+        "profile": "email-683m",
+        "label": "buffer-cast",
+        "repetition": 2,
+        "block": 2,
+        "order": 1,
+        "blockSize": 2,
+        "conditionKey": "{\"constraints\":{\"cpuQuota\":1,\"cpus\":1,\"cpusetCpus\":\"0\",\"memory\":\"3g\",\"nodeHeapMB\":2304},\"environment\":{\"dockerInfo\":{\"architecture\":\"aarch64\",\"cgroupDriver\":\"cgroupfs\",\"cgroupVersion\":\"2\",\"driver\":\"overlayfs\",\"id\":\"6e6f630a-e4c8-45f6-9e6c-7f6a95d8dba5\",\"kernelVersion\":\"6.12.76-linuxkit\",\"memoryBytes\":25161015296,\"nCPU\":14,\"operatingSystem\":\"Docker Desktop\"},\"dockerServer\":{\"ApiVersion\":\"1.55\",\"Arch\":\"arm64\",\"BuildTime\":\"2026-06-26T11:39:58.000000000+00:00\",\"Components\":[{\"Details\":{\"ApiVersion\":\"1.55\",\"Arch\":\"arm64\",\"BuildTime\":\"Fri Jun 26 11:39:58 2026\",\"Experimental\":\"false\",\"GitCommit\":\"8ec5ab3\",\"GoVersion\":\"go1.26.4\",\"KernelVersion\":\"6.12.76-linuxkit\",\"MinAPIVersion\":\"1.40\",\"Module\":\"github.com/moby/moby/v2\",\"ModuleVersion\":\"v2.0.0+unknown\",\"Os\":\"linux\"},\"Name\":\"Engine\",\"Version\":\"29.6.1\"},{\"Details\":{\"GitCommit\":\"e53c7c1516c3b2bff98eb76f1f4117477e6f4e66\"},\"Name\":\"containerd\",\"Version\":\"v2.2.5\"},{\"Details\":{\"GitCommit\":\"v1.3.6-0-g491b69ba\"},\"Name\":\"runc\",\"Version\":\"1.3.6\"},{\"Details\":{\"GitCommit\":\"de40ad0\"},\"Name\":\"docker-init\",\"Version\":\"0.19.0\"}],\"GitCommit\":\"8ec5ab3\",\"GoVersion\":\"go1.26.4\",\"KernelVersion\":\"6.12.76-linuxkit\",\"MinAPIVersion\":\"1.40\",\"Os\":\"linux\",\"Platform\":{\"Name\":\"Docker Desktop 4.82.0 (233772)\"},\"Version\":\"29.6.1\"}},\"platform\":\"linux/arm64\",\"profile\":\"email-683m\",\"sqliteStorage\":{\"mode\":\"volume\",\"path\":\"/tmp\"}}",
+        "condition": {
+          "profile": "email-683m",
+          "constraints": {
+            "cpus": 1,
+            "memory": "3g",
+            "nodeHeapMB": 2304,
+            "cpusetCpus": "0",
+            "cpuQuota": 1
+          },
+          "platform": "linux/arm64",
+          "environment": {
+            "dockerServer": {
+              "Platform": {
+                "Name": "Docker Desktop 4.82.0 (233772)"
+              },
+              "Version": "29.6.1",
+              "ApiVersion": "1.55",
+              "MinAPIVersion": "1.40",
+              "Os": "linux",
+              "Arch": "arm64",
+              "Components": [
+                {
+                  "Name": "Engine",
+                  "Version": "29.6.1",
+                  "Details": {
+                    "ApiVersion": "1.55",
+                    "Arch": "arm64",
+                    "BuildTime": "Fri Jun 26 11:39:58 2026",
+                    "Experimental": "false",
+                    "GitCommit": "8ec5ab3",
+                    "GoVersion": "go1.26.4",
+                    "KernelVersion": "6.12.76-linuxkit",
+                    "MinAPIVersion": "1.40",
+                    "Module": "github.com/moby/moby/v2",
+                    "ModuleVersion": "v2.0.0+unknown",
+                    "Os": "linux"
+                  }
+                },
+                {
+                  "Name": "containerd",
+                  "Version": "v2.2.5",
+                  "Details": {
+                    "GitCommit": "e53c7c1516c3b2bff98eb76f1f4117477e6f4e66"
+                  }
+                },
+                {
+                  "Name": "runc",
+                  "Version": "1.3.6",
+                  "Details": {
+                    "GitCommit": "v1.3.6-0-g491b69ba"
+                  }
+                },
+                {
+                  "Name": "docker-init",
+                  "Version": "0.19.0",
+                  "Details": {
+                    "GitCommit": "de40ad0"
+                  }
+                }
+              ],
+              "GitCommit": "8ec5ab3",
+              "GoVersion": "go1.26.4",
+              "KernelVersion": "6.12.76-linuxkit",
+              "BuildTime": "2026-06-26T11:39:58.000000000+00:00"
+            },
+            "dockerInfo": {
+              "id": "6e6f630a-e4c8-45f6-9e6c-7f6a95d8dba5",
+              "driver": "overlayfs",
+              "cgroupDriver": "cgroupfs",
+              "cgroupVersion": "2",
+              "kernelVersion": "6.12.76-linuxkit",
+              "operatingSystem": "Docker Desktop",
+              "architecture": "aarch64",
+              "nCPU": 14,
+              "memoryBytes": 25161015296
+            }
+          },
+          "sqliteStorage": {
+            "mode": "volume",
+            "path": "/tmp"
+          }
+        },
+        "outerMs": 883.56,
+        "setupMs": 4.470792000000074,
+        "callbackMs": 636.799041,
+        "callbackOverheadMs": 0.7006249999999454,
+        "finalizationMs": 241.58954199999994,
+        "wrapperMs": 246.76095899999996,
+        "copyMs": 488.6460830000001,
+        "flushMs": 232.2261279999998,
+        "indexMs": 51.956458999999995,
+        "copyOtherMs": 341.853705,
+        "totalMs": 626.0362919999998,
+        "rawCopyMs": 260.75862499999994,
+        "rawCopyMBps": 2620.961523324493,
+        "rawChunkBytes": 682755.5674325675,
+        "callbackMinusRawMs": 376.04041600000005,
+        "callbackToRawRatio": 2.4421015450591526,
+        "dominantElapsedMs": 479.611541,
+        "dominantFlushMs": 232.2112119999997,
+        "dominantCopyBytes": 683438323,
+        "dominantSourceWaitMs": 232.96313799999643,
+        "dominantProcessingMs": 241.04144500000348,
+        "peakRssBytes": 862822400,
+        "gcCount": 47,
+        "gcMs": 13.427540000004228,
+        "eventLoopUtilization": 0.9608473325803847,
+        "userCPUTime": 266755,
+        "systemCPUTime": 348017,
+        "minorPageFaults": 96325,
+        "scopedMemoryPressureFullUs": 0,
+        "scopedIOPressureFullUs": 0,
+        "scopedIOReadBytes": 0,
+        "scopedIOWriteBytes": 0,
+        "scopedMemoryMaxEvents": 0,
+        "finalizationMemoryPressureFullUs": 0,
+        "finalizationIOPressureFullUs": 202258,
+        "finalizationIOReadBytes": 0,
+        "finalizationIOWriteBytes": 672649216,
+        "finalizationMemoryMaxEvents": 0,
+        "sqliteFileBytes": 684822528
+      },
+      {
+        "id": "email-683m-string-decoding-r2",
+        "file": "operations/004-email-683m-string-decoding-r2.log",
+        "profile": "email-683m",
+        "label": "string-decoding",
+        "repetition": 2,
+        "block": 2,
+        "order": 2,
+        "blockSize": 2,
+        "conditionKey": "{\"constraints\":{\"cpuQuota\":1,\"cpus\":1,\"cpusetCpus\":\"0\",\"memory\":\"3g\",\"nodeHeapMB\":2304},\"environment\":{\"dockerInfo\":{\"architecture\":\"aarch64\",\"cgroupDriver\":\"cgroupfs\",\"cgroupVersion\":\"2\",\"driver\":\"overlayfs\",\"id\":\"6e6f630a-e4c8-45f6-9e6c-7f6a95d8dba5\",\"kernelVersion\":\"6.12.76-linuxkit\",\"memoryBytes\":25161015296,\"nCPU\":14,\"operatingSystem\":\"Docker Desktop\"},\"dockerServer\":{\"ApiVersion\":\"1.55\",\"Arch\":\"arm64\",\"BuildTime\":\"2026-06-26T11:39:58.000000000+00:00\",\"Components\":[{\"Details\":{\"ApiVersion\":\"1.55\",\"Arch\":\"arm64\",\"BuildTime\":\"Fri Jun 26 11:39:58 2026\",\"Experimental\":\"false\",\"GitCommit\":\"8ec5ab3\",\"GoVersion\":\"go1.26.4\",\"KernelVersion\":\"6.12.76-linuxkit\",\"MinAPIVersion\":\"1.40\",\"Module\":\"github.com/moby/moby/v2\",\"ModuleVersion\":\"v2.0.0+unknown\",\"Os\":\"linux\"},\"Name\":\"Engine\",\"Version\":\"29.6.1\"},{\"Details\":{\"GitCommit\":\"e53c7c1516c3b2bff98eb76f1f4117477e6f4e66\"},\"Name\":\"containerd\",\"Version\":\"v2.2.5\"},{\"Details\":{\"GitCommit\":\"v1.3.6-0-g491b69ba\"},\"Name\":\"runc\",\"Version\":\"1.3.6\"},{\"Details\":{\"GitCommit\":\"de40ad0\"},\"Name\":\"docker-init\",\"Version\":\"0.19.0\"}],\"GitCommit\":\"8ec5ab3\",\"GoVersion\":\"go1.26.4\",\"KernelVersion\":\"6.12.76-linuxkit\",\"MinAPIVersion\":\"1.40\",\"Os\":\"linux\",\"Platform\":{\"Name\":\"Docker Desktop 4.82.0 (233772)\"},\"Version\":\"29.6.1\"}},\"platform\":\"linux/arm64\",\"profile\":\"email-683m\",\"sqliteStorage\":{\"mode\":\"volume\",\"path\":\"/tmp\"}}",
+        "condition": {
+          "profile": "email-683m",
+          "constraints": {
+            "cpus": 1,
+            "memory": "3g",
+            "nodeHeapMB": 2304,
+            "cpusetCpus": "0",
+            "cpuQuota": 1
+          },
+          "platform": "linux/arm64",
+          "environment": {
+            "dockerServer": {
+              "Platform": {
+                "Name": "Docker Desktop 4.82.0 (233772)"
+              },
+              "Version": "29.6.1",
+              "ApiVersion": "1.55",
+              "MinAPIVersion": "1.40",
+              "Os": "linux",
+              "Arch": "arm64",
+              "Components": [
+                {
+                  "Name": "Engine",
+                  "Version": "29.6.1",
+                  "Details": {
+                    "ApiVersion": "1.55",
+                    "Arch": "arm64",
+                    "BuildTime": "Fri Jun 26 11:39:58 2026",
+                    "Experimental": "false",
+                    "GitCommit": "8ec5ab3",
+                    "GoVersion": "go1.26.4",
+                    "KernelVersion": "6.12.76-linuxkit",
+                    "MinAPIVersion": "1.40",
+                    "Module": "github.com/moby/moby/v2",
+                    "ModuleVersion": "v2.0.0+unknown",
+                    "Os": "linux"
+                  }
+                },
+                {
+                  "Name": "containerd",
+                  "Version": "v2.2.5",
+                  "Details": {
+                    "GitCommit": "e53c7c1516c3b2bff98eb76f1f4117477e6f4e66"
+                  }
+                },
+                {
+                  "Name": "runc",
+                  "Version": "1.3.6",
+                  "Details": {
+                    "GitCommit": "v1.3.6-0-g491b69ba"
+                  }
+                },
+                {
+                  "Name": "docker-init",
+                  "Version": "0.19.0",
+                  "Details": {
+                    "GitCommit": "de40ad0"
+                  }
+                }
+              ],
+              "GitCommit": "8ec5ab3",
+              "GoVersion": "go1.26.4",
+              "KernelVersion": "6.12.76-linuxkit",
+              "BuildTime": "2026-06-26T11:39:58.000000000+00:00"
+            },
+            "dockerInfo": {
+              "id": "6e6f630a-e4c8-45f6-9e6c-7f6a95d8dba5",
+              "driver": "overlayfs",
+              "cgroupDriver": "cgroupfs",
+              "cgroupVersion": "2",
+              "kernelVersion": "6.12.76-linuxkit",
+              "operatingSystem": "Docker Desktop",
+              "architecture": "aarch64",
+              "nCPU": 14,
+              "memoryBytes": 25161015296
+            }
+          },
+          "sqliteStorage": {
+            "mode": "volume",
+            "path": "/tmp"
+          }
+        },
+        "outerMs": 3057.04246,
+        "setupMs": 4.52841699999999,
+        "callbackMs": 886.2217079999998,
+        "callbackOverheadMs": 0.7092920000002323,
+        "finalizationMs": 2165.583043,
+        "wrapperMs": 2170.8207520000005,
+        "copyMs": 744.396792,
+        "flushMs": 351.0273299999999,
+        "indexMs": 48.06245800000033,
+        "copyOtherMs": 477.0028789999999,
+        "totalMs": 876.0926670000001,
+        "rawCopyMs": 262.468625,
+        "rawCopyMBps": 2603.885790158729,
+        "rawChunkBytes": 682755.5674325675,
+        "callbackMinusRawMs": 623.7530829999998,
+        "callbackToRawRatio": 3.3764862676443705,
+        "dominantElapsedMs": 735.9997500000002,
+        "dominantFlushMs": 351.01082999999994,
+        "dominantCopyBytes": 683438323,
+        "dominantSourceWaitMs": 256.43287499999906,
+        "dominantProcessingMs": 474.2237080000011,
+        "peakRssBytes": 1023778816,
+        "gcCount": 44,
+        "gcMs": 28.89845600008266,
+        "eventLoopUtilization": 0.9839169837029329,
+        "userCPUTime": 482594,
+        "systemCPUTime": 431373,
+        "minorPageFaults": 244824,
+        "scopedMemoryPressureFullUs": 0,
+        "scopedIOPressureFullUs": 0,
+        "scopedIOReadBytes": 0,
+        "scopedIOWriteBytes": 0,
+        "scopedMemoryMaxEvents": 0,
+        "finalizationMemoryPressureFullUs": 0,
+        "finalizationIOPressureFullUs": 2076364,
+        "finalizationIOReadBytes": 0,
+        "finalizationIOWriteBytes": 676560896,
+        "finalizationMemoryMaxEvents": 0,
+        "sqliteFileBytes": 684822528
+      },
+      {
+        "id": "email-683m-string-decoding-r3",
+        "file": "operations/005-email-683m-string-decoding-r3.log",
+        "profile": "email-683m",
+        "label": "string-decoding",
+        "repetition": 3,
+        "block": 3,
+        "order": 1,
+        "blockSize": 2,
+        "conditionKey": "{\"constraints\":{\"cpuQuota\":1,\"cpus\":1,\"cpusetCpus\":\"0\",\"memory\":\"3g\",\"nodeHeapMB\":2304},\"environment\":{\"dockerInfo\":{\"architecture\":\"aarch64\",\"cgroupDriver\":\"cgroupfs\",\"cgroupVersion\":\"2\",\"driver\":\"overlayfs\",\"id\":\"6e6f630a-e4c8-45f6-9e6c-7f6a95d8dba5\",\"kernelVersion\":\"6.12.76-linuxkit\",\"memoryBytes\":25161015296,\"nCPU\":14,\"operatingSystem\":\"Docker Desktop\"},\"dockerServer\":{\"ApiVersion\":\"1.55\",\"Arch\":\"arm64\",\"BuildTime\":\"2026-06-26T11:39:58.000000000+00:00\",\"Components\":[{\"Details\":{\"ApiVersion\":\"1.55\",\"Arch\":\"arm64\",\"BuildTime\":\"Fri Jun 26 11:39:58 2026\",\"Experimental\":\"false\",\"GitCommit\":\"8ec5ab3\",\"GoVersion\":\"go1.26.4\",\"KernelVersion\":\"6.12.76-linuxkit\",\"MinAPIVersion\":\"1.40\",\"Module\":\"github.com/moby/moby/v2\",\"ModuleVersion\":\"v2.0.0+unknown\",\"Os\":\"linux\"},\"Name\":\"Engine\",\"Version\":\"29.6.1\"},{\"Details\":{\"GitCommit\":\"e53c7c1516c3b2bff98eb76f1f4117477e6f4e66\"},\"Name\":\"containerd\",\"Version\":\"v2.2.5\"},{\"Details\":{\"GitCommit\":\"v1.3.6-0-g491b69ba\"},\"Name\":\"runc\",\"Version\":\"1.3.6\"},{\"Details\":{\"GitCommit\":\"de40ad0\"},\"Name\":\"docker-init\",\"Version\":\"0.19.0\"}],\"GitCommit\":\"8ec5ab3\",\"GoVersion\":\"go1.26.4\",\"KernelVersion\":\"6.12.76-linuxkit\",\"MinAPIVersion\":\"1.40\",\"Os\":\"linux\",\"Platform\":{\"Name\":\"Docker Desktop 4.82.0 (233772)\"},\"Version\":\"29.6.1\"}},\"platform\":\"linux/arm64\",\"profile\":\"email-683m\",\"sqliteStorage\":{\"mode\":\"volume\",\"path\":\"/tmp\"}}",
+        "condition": {
+          "profile": "email-683m",
+          "constraints": {
+            "cpus": 1,
+            "memory": "3g",
+            "nodeHeapMB": 2304,
+            "cpusetCpus": "0",
+            "cpuQuota": 1
+          },
+          "platform": "linux/arm64",
+          "environment": {
+            "dockerServer": {
+              "Platform": {
+                "Name": "Docker Desktop 4.82.0 (233772)"
+              },
+              "Version": "29.6.1",
+              "ApiVersion": "1.55",
+              "MinAPIVersion": "1.40",
+              "Os": "linux",
+              "Arch": "arm64",
+              "Components": [
+                {
+                  "Name": "Engine",
+                  "Version": "29.6.1",
+                  "Details": {
+                    "ApiVersion": "1.55",
+                    "Arch": "arm64",
+                    "BuildTime": "Fri Jun 26 11:39:58 2026",
+                    "Experimental": "false",
+                    "GitCommit": "8ec5ab3",
+                    "GoVersion": "go1.26.4",
+                    "KernelVersion": "6.12.76-linuxkit",
+                    "MinAPIVersion": "1.40",
+                    "Module": "github.com/moby/moby/v2",
+                    "ModuleVersion": "v2.0.0+unknown",
+                    "Os": "linux"
+                  }
+                },
+                {
+                  "Name": "containerd",
+                  "Version": "v2.2.5",
+                  "Details": {
+                    "GitCommit": "e53c7c1516c3b2bff98eb76f1f4117477e6f4e66"
+                  }
+                },
+                {
+                  "Name": "runc",
+                  "Version": "1.3.6",
+                  "Details": {
+                    "GitCommit": "v1.3.6-0-g491b69ba"
+                  }
+                },
+                {
+                  "Name": "docker-init",
+                  "Version": "0.19.0",
+                  "Details": {
+                    "GitCommit": "de40ad0"
+                  }
+                }
+              ],
+              "GitCommit": "8ec5ab3",
+              "GoVersion": "go1.26.4",
+              "KernelVersion": "6.12.76-linuxkit",
+              "BuildTime": "2026-06-26T11:39:58.000000000+00:00"
+            },
+            "dockerInfo": {
+              "id": "6e6f630a-e4c8-45f6-9e6c-7f6a95d8dba5",
+              "driver": "overlayfs",
+              "cgroupDriver": "cgroupfs",
+              "cgroupVersion": "2",
+              "kernelVersion": "6.12.76-linuxkit",
+              "operatingSystem": "Docker Desktop",
+              "architecture": "aarch64",
+              "nCPU": 14,
+              "memoryBytes": 25161015296
+            }
+          },
+          "sqliteStorage": {
+            "mode": "volume",
+            "path": "/tmp"
+          }
+        },
+        "outerMs": 1144.9765429999998,
+        "setupMs": 4.085624999999936,
+        "callbackMs": 901.082917,
+        "callbackOverheadMs": 0.7170420000002196,
+        "finalizationMs": 239.09095899999966,
+        "wrapperMs": 243.8936259999998,
+        "copyMs": 763.5954170000002,
+        "flushMs": 367.78666699999826,
+        "indexMs": 48.11041699999987,
+        "copyOtherMs": 474.991916000002,
+        "totalMs": 890.8890000000001,
+        "rawCopyMs": 262.4895,
+        "rawCopyMBps": 2603.678710957962,
+        "rawChunkBytes": 682755.5674325675,
+        "callbackMinusRawMs": 638.5934169999999,
+        "callbackToRawRatio": 3.4328341400322677,
+        "dominantElapsedMs": 757.7955419999998,
+        "dominantFlushMs": 367.77199999999857,
+        "dominantCopyBytes": 683438323,
+        "dominantSourceWaitMs": 260.2273450000014,
+        "dominantProcessingMs": 492.29565599999887,
+        "peakRssBytes": 989483008,
+        "gcCount": 44,
+        "gcMs": 28.514583000098355,
+        "eventLoopUtilization": 0.9697086152111578,
+        "userCPUTime": 487843,
+        "systemCPUTime": 394997,
+        "minorPageFaults": 285818,
+        "scopedMemoryPressureFullUs": 0,
+        "scopedIOPressureFullUs": 0,
+        "scopedIOReadBytes": 0,
+        "scopedIOWriteBytes": 0,
+        "scopedMemoryMaxEvents": 0,
+        "finalizationMemoryPressureFullUs": 0,
+        "finalizationIOPressureFullUs": 202328,
+        "finalizationIOReadBytes": 0,
+        "finalizationIOWriteBytes": 672645120,
+        "finalizationMemoryMaxEvents": 0,
+        "sqliteFileBytes": 684822528
+      },
+      {
+        "id": "email-683m-buffer-cast-r3",
+        "file": "operations/006-email-683m-buffer-cast-r3.log",
+        "profile": "email-683m",
+        "label": "buffer-cast",
+        "repetition": 3,
+        "block": 3,
+        "order": 2,
+        "blockSize": 2,
+        "conditionKey": "{\"constraints\":{\"cpuQuota\":1,\"cpus\":1,\"cpusetCpus\":\"0\",\"memory\":\"3g\",\"nodeHeapMB\":2304},\"environment\":{\"dockerInfo\":{\"architecture\":\"aarch64\",\"cgroupDriver\":\"cgroupfs\",\"cgroupVersion\":\"2\",\"driver\":\"overlayfs\",\"id\":\"6e6f630a-e4c8-45f6-9e6c-7f6a95d8dba5\",\"kernelVersion\":\"6.12.76-linuxkit\",\"memoryBytes\":25161015296,\"nCPU\":14,\"operatingSystem\":\"Docker Desktop\"},\"dockerServer\":{\"ApiVersion\":\"1.55\",\"Arch\":\"arm64\",\"BuildTime\":\"2026-06-26T11:39:58.000000000+00:00\",\"Components\":[{\"Details\":{\"ApiVersion\":\"1.55\",\"Arch\":\"arm64\",\"BuildTime\":\"Fri Jun 26 11:39:58 2026\",\"Experimental\":\"false\",\"GitCommit\":\"8ec5ab3\",\"GoVersion\":\"go1.26.4\",\"KernelVersion\":\"6.12.76-linuxkit\",\"MinAPIVersion\":\"1.40\",\"Module\":\"github.com/moby/moby/v2\",\"ModuleVersion\":\"v2.0.0+unknown\",\"Os\":\"linux\"},\"Name\":\"Engine\",\"Version\":\"29.6.1\"},{\"Details\":{\"GitCommit\":\"e53c7c1516c3b2bff98eb76f1f4117477e6f4e66\"},\"Name\":\"containerd\",\"Version\":\"v2.2.5\"},{\"Details\":{\"GitCommit\":\"v1.3.6-0-g491b69ba\"},\"Name\":\"runc\",\"Version\":\"1.3.6\"},{\"Details\":{\"GitCommit\":\"de40ad0\"},\"Name\":\"docker-init\",\"Version\":\"0.19.0\"}],\"GitCommit\":\"8ec5ab3\",\"GoVersion\":\"go1.26.4\",\"KernelVersion\":\"6.12.76-linuxkit\",\"MinAPIVersion\":\"1.40\",\"Os\":\"linux\",\"Platform\":{\"Name\":\"Docker Desktop 4.82.0 (233772)\"},\"Version\":\"29.6.1\"}},\"platform\":\"linux/arm64\",\"profile\":\"email-683m\",\"sqliteStorage\":{\"mode\":\"volume\",\"path\":\"/tmp\"}}",
+        "condition": {
+          "profile": "email-683m",
+          "constraints": {
+            "cpus": 1,
+            "memory": "3g",
+            "nodeHeapMB": 2304,
+            "cpusetCpus": "0",
+            "cpuQuota": 1
+          },
+          "platform": "linux/arm64",
+          "environment": {
+            "dockerServer": {
+              "Platform": {
+                "Name": "Docker Desktop 4.82.0 (233772)"
+              },
+              "Version": "29.6.1",
+              "ApiVersion": "1.55",
+              "MinAPIVersion": "1.40",
+              "Os": "linux",
+              "Arch": "arm64",
+              "Components": [
+                {
+                  "Name": "Engine",
+                  "Version": "29.6.1",
+                  "Details": {
+                    "ApiVersion": "1.55",
+                    "Arch": "arm64",
+                    "BuildTime": "Fri Jun 26 11:39:58 2026",
+                    "Experimental": "false",
+                    "GitCommit": "8ec5ab3",
+                    "GoVersion": "go1.26.4",
+                    "KernelVersion": "6.12.76-linuxkit",
+                    "MinAPIVersion": "1.40",
+                    "Module": "github.com/moby/moby/v2",
+                    "ModuleVersion": "v2.0.0+unknown",
+                    "Os": "linux"
+                  }
+                },
+                {
+                  "Name": "containerd",
+                  "Version": "v2.2.5",
+                  "Details": {
+                    "GitCommit": "e53c7c1516c3b2bff98eb76f1f4117477e6f4e66"
+                  }
+                },
+                {
+                  "Name": "runc",
+                  "Version": "1.3.6",
+                  "Details": {
+                    "GitCommit": "v1.3.6-0-g491b69ba"
+                  }
+                },
+                {
+                  "Name": "docker-init",
+                  "Version": "0.19.0",
+                  "Details": {
+                    "GitCommit": "de40ad0"
+                  }
+                }
+              ],
+              "GitCommit": "8ec5ab3",
+              "GoVersion": "go1.26.4",
+              "KernelVersion": "6.12.76-linuxkit",
+              "BuildTime": "2026-06-26T11:39:58.000000000+00:00"
+            },
+            "dockerInfo": {
+              "id": "6e6f630a-e4c8-45f6-9e6c-7f6a95d8dba5",
+              "driver": "overlayfs",
+              "cgroupDriver": "cgroupfs",
+              "cgroupVersion": "2",
+              "kernelVersion": "6.12.76-linuxkit",
+              "operatingSystem": "Docker Desktop",
+              "architecture": "aarch64",
+              "nCPU": 14,
+              "memoryBytes": 25161015296
+            }
+          },
+          "sqliteStorage": {
+            "mode": "volume",
+            "path": "/tmp"
+          }
+        },
+        "outerMs": 2725.0777930000004,
+        "setupMs": 4.948208000000022,
+        "callbackMs": 621.769875,
+        "callbackOverheadMs": 0.7352920000000722,
+        "finalizationMs": 2097.6244180000003,
+        "wrapperMs": 2103.3079180000004,
+        "copyMs": 477.08404199999995,
+        "flushMs": 228.56179500000007,
+        "indexMs": 46.98541599999999,
+        "copyOtherMs": 335.4205810000001,
+        "totalMs": 610.9677920000001,
+        "rawCopyMs": 262.3391670000001,
+        "rawCopyMBps": 2605.1707444813214,
+        "rawChunkBytes": 682755.5674325675,
+        "callbackMinusRawMs": 359.43070799999987,
+        "callbackToRawRatio": 2.3700992959240423,
+        "dominantElapsedMs": 469.09779100000014,
+        "dominantFlushMs": 228.5452540000001,
+        "dominantCopyBytes": 683438323,
+        "dominantSourceWaitMs": 226.24924499999634,
+        "dominantProcessingMs": 237.47683800000368,
+        "peakRssBytes": 853037056,
+        "gcCount": 47,
+        "gcMs": 12.91620799980592,
+        "eventLoopUtilization": 0.9815108384276364,
+        "userCPUTime": 285734,
+        "systemCPUTime": 356992,
+        "minorPageFaults": 71303,
+        "scopedMemoryPressureFullUs": 0,
+        "scopedIOPressureFullUs": 0,
+        "scopedIOReadBytes": 0,
+        "scopedIOWriteBytes": 0,
+        "scopedMemoryMaxEvents": 0,
+        "finalizationMemoryPressureFullUs": 0,
+        "finalizationIOPressureFullUs": 2015130,
+        "finalizationIOReadBytes": 0,
+        "finalizationIOWriteBytes": 676433920,
+        "finalizationMemoryMaxEvents": 0,
+        "sqliteFileBytes": 684822528
+      },
+      {
+        "id": "email-683m-buffer-cast-r4",
+        "file": "operations/007-email-683m-buffer-cast-r4.log",
+        "profile": "email-683m",
+        "label": "buffer-cast",
+        "repetition": 4,
+        "block": 4,
+        "order": 1,
+        "blockSize": 2,
+        "conditionKey": "{\"constraints\":{\"cpuQuota\":1,\"cpus\":1,\"cpusetCpus\":\"0\",\"memory\":\"3g\",\"nodeHeapMB\":2304},\"environment\":{\"dockerInfo\":{\"architecture\":\"aarch64\",\"cgroupDriver\":\"cgroupfs\",\"cgroupVersion\":\"2\",\"driver\":\"overlayfs\",\"id\":\"6e6f630a-e4c8-45f6-9e6c-7f6a95d8dba5\",\"kernelVersion\":\"6.12.76-linuxkit\",\"memoryBytes\":25161015296,\"nCPU\":14,\"operatingSystem\":\"Docker Desktop\"},\"dockerServer\":{\"ApiVersion\":\"1.55\",\"Arch\":\"arm64\",\"BuildTime\":\"2026-06-26T11:39:58.000000000+00:00\",\"Components\":[{\"Details\":{\"ApiVersion\":\"1.55\",\"Arch\":\"arm64\",\"BuildTime\":\"Fri Jun 26 11:39:58 2026\",\"Experimental\":\"false\",\"GitCommit\":\"8ec5ab3\",\"GoVersion\":\"go1.26.4\",\"KernelVersion\":\"6.12.76-linuxkit\",\"MinAPIVersion\":\"1.40\",\"Module\":\"github.com/moby/moby/v2\",\"ModuleVersion\":\"v2.0.0+unknown\",\"Os\":\"linux\"},\"Name\":\"Engine\",\"Version\":\"29.6.1\"},{\"Details\":{\"GitCommit\":\"e53c7c1516c3b2bff98eb76f1f4117477e6f4e66\"},\"Name\":\"containerd\",\"Version\":\"v2.2.5\"},{\"Details\":{\"GitCommit\":\"v1.3.6-0-g491b69ba\"},\"Name\":\"runc\",\"Version\":\"1.3.6\"},{\"Details\":{\"GitCommit\":\"de40ad0\"},\"Name\":\"docker-init\",\"Version\":\"0.19.0\"}],\"GitCommit\":\"8ec5ab3\",\"GoVersion\":\"go1.26.4\",\"KernelVersion\":\"6.12.76-linuxkit\",\"MinAPIVersion\":\"1.40\",\"Os\":\"linux\",\"Platform\":{\"Name\":\"Docker Desktop 4.82.0 (233772)\"},\"Version\":\"29.6.1\"}},\"platform\":\"linux/arm64\",\"profile\":\"email-683m\",\"sqliteStorage\":{\"mode\":\"volume\",\"path\":\"/tmp\"}}",
+        "condition": {
+          "profile": "email-683m",
+          "constraints": {
+            "cpus": 1,
+            "memory": "3g",
+            "nodeHeapMB": 2304,
+            "cpusetCpus": "0",
+            "cpuQuota": 1
+          },
+          "platform": "linux/arm64",
+          "environment": {
+            "dockerServer": {
+              "Platform": {
+                "Name": "Docker Desktop 4.82.0 (233772)"
+              },
+              "Version": "29.6.1",
+              "ApiVersion": "1.55",
+              "MinAPIVersion": "1.40",
+              "Os": "linux",
+              "Arch": "arm64",
+              "Components": [
+                {
+                  "Name": "Engine",
+                  "Version": "29.6.1",
+                  "Details": {
+                    "ApiVersion": "1.55",
+                    "Arch": "arm64",
+                    "BuildTime": "Fri Jun 26 11:39:58 2026",
+                    "Experimental": "false",
+                    "GitCommit": "8ec5ab3",
+                    "GoVersion": "go1.26.4",
+                    "KernelVersion": "6.12.76-linuxkit",
+                    "MinAPIVersion": "1.40",
+                    "Module": "github.com/moby/moby/v2",
+                    "ModuleVersion": "v2.0.0+unknown",
+                    "Os": "linux"
+                  }
+                },
+                {
+                  "Name": "containerd",
+                  "Version": "v2.2.5",
+                  "Details": {
+                    "GitCommit": "e53c7c1516c3b2bff98eb76f1f4117477e6f4e66"
+                  }
+                },
+                {
+                  "Name": "runc",
+                  "Version": "1.3.6",
+                  "Details": {
+                    "GitCommit": "v1.3.6-0-g491b69ba"
+                  }
+                },
+                {
+                  "Name": "docker-init",
+                  "Version": "0.19.0",
+                  "Details": {
+                    "GitCommit": "de40ad0"
+                  }
+                }
+              ],
+              "GitCommit": "8ec5ab3",
+              "GoVersion": "go1.26.4",
+              "KernelVersion": "6.12.76-linuxkit",
+              "BuildTime": "2026-06-26T11:39:58.000000000+00:00"
+            },
+            "dockerInfo": {
+              "id": "6e6f630a-e4c8-45f6-9e6c-7f6a95d8dba5",
+              "driver": "overlayfs",
+              "cgroupDriver": "cgroupfs",
+              "cgroupVersion": "2",
+              "kernelVersion": "6.12.76-linuxkit",
+              "operatingSystem": "Docker Desktop",
+              "architecture": "aarch64",
+              "nCPU": 14,
+              "memoryBytes": 25161015296
+            }
+          },
+          "sqliteStorage": {
+            "mode": "volume",
+            "path": "/tmp"
+          }
+        },
+        "outerMs": 2454.907042,
+        "setupMs": 4.528915999999981,
+        "callbackMs": 617.524958,
+        "callbackOverheadMs": 0.708084000000099,
+        "finalizationMs": 1832.1450839999995,
+        "wrapperMs": 1837.3820839999998,
+        "copyMs": 479.6607510000001,
+        "flushMs": 230.72433600000022,
+        "indexMs": 41.43466699999999,
+        "copyOtherMs": 334.23137199999974,
+        "totalMs": 606.390375,
+        "rawCopyMs": 259.152833,
+        "rawCopyMBps": 2637.2018205951854,
+        "rawChunkBytes": 682755.5674325675,
+        "callbackMinusRawMs": 358.372125,
+        "callbackToRawRatio": 2.382860148011579,
+        "dominantElapsedMs": 470.4739169999998,
+        "dominantFlushMs": 230.7103360000001,
+        "dominantCopyBytes": 683438323,
+        "dominantSourceWaitMs": 227.85841999999775,
+        "dominantProcessingMs": 237.01666400000227,
+        "peakRssBytes": 866062336,
+        "gcCount": 47,
+        "gcMs": 12.788874999969266,
+        "eventLoopUtilization": 0.9799783009093668,
+        "userCPUTime": 257531,
+        "systemCPUTime": 377165,
+        "minorPageFaults": 79634,
+        "scopedMemoryPressureFullUs": 0,
+        "scopedIOPressureFullUs": 0,
+        "scopedIOReadBytes": 0,
+        "scopedIOWriteBytes": 0,
+        "scopedMemoryMaxEvents": 0,
+        "finalizationMemoryPressureFullUs": 0,
+        "finalizationIOPressureFullUs": 1753164,
+        "finalizationIOReadBytes": 0,
+        "finalizationIOWriteBytes": 675368960,
+        "finalizationMemoryMaxEvents": 0,
+        "sqliteFileBytes": 684822528
+      },
+      {
+        "id": "email-683m-string-decoding-r4",
+        "file": "operations/008-email-683m-string-decoding-r4.log",
+        "profile": "email-683m",
+        "label": "string-decoding",
+        "repetition": 4,
+        "block": 4,
+        "order": 2,
+        "blockSize": 2,
+        "conditionKey": "{\"constraints\":{\"cpuQuota\":1,\"cpus\":1,\"cpusetCpus\":\"0\",\"memory\":\"3g\",\"nodeHeapMB\":2304},\"environment\":{\"dockerInfo\":{\"architecture\":\"aarch64\",\"cgroupDriver\":\"cgroupfs\",\"cgroupVersion\":\"2\",\"driver\":\"overlayfs\",\"id\":\"6e6f630a-e4c8-45f6-9e6c-7f6a95d8dba5\",\"kernelVersion\":\"6.12.76-linuxkit\",\"memoryBytes\":25161015296,\"nCPU\":14,\"operatingSystem\":\"Docker Desktop\"},\"dockerServer\":{\"ApiVersion\":\"1.55\",\"Arch\":\"arm64\",\"BuildTime\":\"2026-06-26T11:39:58.000000000+00:00\",\"Components\":[{\"Details\":{\"ApiVersion\":\"1.55\",\"Arch\":\"arm64\",\"BuildTime\":\"Fri Jun 26 11:39:58 2026\",\"Experimental\":\"false\",\"GitCommit\":\"8ec5ab3\",\"GoVersion\":\"go1.26.4\",\"KernelVersion\":\"6.12.76-linuxkit\",\"MinAPIVersion\":\"1.40\",\"Module\":\"github.com/moby/moby/v2\",\"ModuleVersion\":\"v2.0.0+unknown\",\"Os\":\"linux\"},\"Name\":\"Engine\",\"Version\":\"29.6.1\"},{\"Details\":{\"GitCommit\":\"e53c7c1516c3b2bff98eb76f1f4117477e6f4e66\"},\"Name\":\"containerd\",\"Version\":\"v2.2.5\"},{\"Details\":{\"GitCommit\":\"v1.3.6-0-g491b69ba\"},\"Name\":\"runc\",\"Version\":\"1.3.6\"},{\"Details\":{\"GitCommit\":\"de40ad0\"},\"Name\":\"docker-init\",\"Version\":\"0.19.0\"}],\"GitCommit\":\"8ec5ab3\",\"GoVersion\":\"go1.26.4\",\"KernelVersion\":\"6.12.76-linuxkit\",\"MinAPIVersion\":\"1.40\",\"Os\":\"linux\",\"Platform\":{\"Name\":\"Docker Desktop 4.82.0 (233772)\"},\"Version\":\"29.6.1\"}},\"platform\":\"linux/arm64\",\"profile\":\"email-683m\",\"sqliteStorage\":{\"mode\":\"volume\",\"path\":\"/tmp\"}}",
+        "condition": {
+          "profile": "email-683m",
+          "constraints": {
+            "cpus": 1,
+            "memory": "3g",
+            "nodeHeapMB": 2304,
+            "cpusetCpus": "0",
+            "cpuQuota": 1
+          },
+          "platform": "linux/arm64",
+          "environment": {
+            "dockerServer": {
+              "Platform": {
+                "Name": "Docker Desktop 4.82.0 (233772)"
+              },
+              "Version": "29.6.1",
+              "ApiVersion": "1.55",
+              "MinAPIVersion": "1.40",
+              "Os": "linux",
+              "Arch": "arm64",
+              "Components": [
+                {
+                  "Name": "Engine",
+                  "Version": "29.6.1",
+                  "Details": {
+                    "ApiVersion": "1.55",
+                    "Arch": "arm64",
+                    "BuildTime": "Fri Jun 26 11:39:58 2026",
+                    "Experimental": "false",
+                    "GitCommit": "8ec5ab3",
+                    "GoVersion": "go1.26.4",
+                    "KernelVersion": "6.12.76-linuxkit",
+                    "MinAPIVersion": "1.40",
+                    "Module": "github.com/moby/moby/v2",
+                    "ModuleVersion": "v2.0.0+unknown",
+                    "Os": "linux"
+                  }
+                },
+                {
+                  "Name": "containerd",
+                  "Version": "v2.2.5",
+                  "Details": {
+                    "GitCommit": "e53c7c1516c3b2bff98eb76f1f4117477e6f4e66"
+                  }
+                },
+                {
+                  "Name": "runc",
+                  "Version": "1.3.6",
+                  "Details": {
+                    "GitCommit": "v1.3.6-0-g491b69ba"
+                  }
+                },
+                {
+                  "Name": "docker-init",
+                  "Version": "0.19.0",
+                  "Details": {
+                    "GitCommit": "de40ad0"
+                  }
+                }
+              ],
+              "GitCommit": "8ec5ab3",
+              "GoVersion": "go1.26.4",
+              "KernelVersion": "6.12.76-linuxkit",
+              "BuildTime": "2026-06-26T11:39:58.000000000+00:00"
+            },
+            "dockerInfo": {
+              "id": "6e6f630a-e4c8-45f6-9e6c-7f6a95d8dba5",
+              "driver": "overlayfs",
+              "cgroupDriver": "cgroupfs",
+              "cgroupVersion": "2",
+              "kernelVersion": "6.12.76-linuxkit",
+              "operatingSystem": "Docker Desktop",
+              "architecture": "aarch64",
+              "nCPU": 14,
+              "memoryBytes": 25161015296
+            }
+          },
+          "sqliteStorage": {
+            "mode": "volume",
+            "path": "/tmp"
+          }
+        },
+        "outerMs": 4171.49046,
+        "setupMs": 4.490125000000035,
+        "callbackMs": 879.1997500000002,
+        "callbackOverheadMs": 0.722999999999729,
+        "finalizationMs": 3287.077585,
+        "wrapperMs": 3292.2907099999998,
+        "copyMs": 739.9884169999998,
+        "flushMs": 355.0208279999997,
+        "indexMs": 46.65391600000021,
+        "copyOtherMs": 466.71284000000037,
+        "totalMs": 868.3875840000003,
+        "rawCopyMs": 262.97116600000004,
+        "rawCopyMBps": 2598.9097337006137,
+        "rawChunkBytes": 682755.5674325675,
+        "callbackMinusRawMs": 616.2285840000002,
+        "callbackToRawRatio": 3.343331374969072,
+        "dominantElapsedMs": 731.538458,
+        "dominantFlushMs": 355.0058269999997,
+        "dominantCopyBytes": 683438323,
+        "dominantSourceWaitMs": 246.0475750000012,
+        "dominantProcessingMs": 479.79367499999876,
+        "peakRssBytes": 1019342848,
+        "gcCount": 44,
+        "gcMs": 28.443453999585472,
+        "eventLoopUtilization": 0.9877841604830908,
+        "userCPUTime": 508532,
+        "systemCPUTime": 420274,
+        "minorPageFaults": 229238,
+        "scopedMemoryPressureFullUs": 0,
+        "scopedIOPressureFullUs": 0,
+        "scopedIOReadBytes": 0,
+        "scopedIOWriteBytes": 0,
+        "scopedMemoryMaxEvents": 0,
+        "finalizationMemoryPressureFullUs": 0,
+        "finalizationIOPressureFullUs": 3177590,
+        "finalizationIOReadBytes": 0,
+        "finalizationIOWriteBytes": 678891520,
+        "finalizationMemoryMaxEvents": 0,
+        "sqliteFileBytes": 684822528
+      },
+      {
+        "id": "email-683m-string-decoding-r5",
+        "file": "operations/009-email-683m-string-decoding-r5.log",
+        "profile": "email-683m",
+        "label": "string-decoding",
+        "repetition": 5,
+        "block": 5,
+        "order": 1,
+        "blockSize": 2,
+        "conditionKey": "{\"constraints\":{\"cpuQuota\":1,\"cpus\":1,\"cpusetCpus\":\"0\",\"memory\":\"3g\",\"nodeHeapMB\":2304},\"environment\":{\"dockerInfo\":{\"architecture\":\"aarch64\",\"cgroupDriver\":\"cgroupfs\",\"cgroupVersion\":\"2\",\"driver\":\"overlayfs\",\"id\":\"6e6f630a-e4c8-45f6-9e6c-7f6a95d8dba5\",\"kernelVersion\":\"6.12.76-linuxkit\",\"memoryBytes\":25161015296,\"nCPU\":14,\"operatingSystem\":\"Docker Desktop\"},\"dockerServer\":{\"ApiVersion\":\"1.55\",\"Arch\":\"arm64\",\"BuildTime\":\"2026-06-26T11:39:58.000000000+00:00\",\"Components\":[{\"Details\":{\"ApiVersion\":\"1.55\",\"Arch\":\"arm64\",\"BuildTime\":\"Fri Jun 26 11:39:58 2026\",\"Experimental\":\"false\",\"GitCommit\":\"8ec5ab3\",\"GoVersion\":\"go1.26.4\",\"KernelVersion\":\"6.12.76-linuxkit\",\"MinAPIVersion\":\"1.40\",\"Module\":\"github.com/moby/moby/v2\",\"ModuleVersion\":\"v2.0.0+unknown\",\"Os\":\"linux\"},\"Name\":\"Engine\",\"Version\":\"29.6.1\"},{\"Details\":{\"GitCommit\":\"e53c7c1516c3b2bff98eb76f1f4117477e6f4e66\"},\"Name\":\"containerd\",\"Version\":\"v2.2.5\"},{\"Details\":{\"GitCommit\":\"v1.3.6-0-g491b69ba\"},\"Name\":\"runc\",\"Version\":\"1.3.6\"},{\"Details\":{\"GitCommit\":\"de40ad0\"},\"Name\":\"docker-init\",\"Version\":\"0.19.0\"}],\"GitCommit\":\"8ec5ab3\",\"GoVersion\":\"go1.26.4\",\"KernelVersion\":\"6.12.76-linuxkit\",\"MinAPIVersion\":\"1.40\",\"Os\":\"linux\",\"Platform\":{\"Name\":\"Docker Desktop 4.82.0 (233772)\"},\"Version\":\"29.6.1\"}},\"platform\":\"linux/arm64\",\"profile\":\"email-683m\",\"sqliteStorage\":{\"mode\":\"volume\",\"path\":\"/tmp\"}}",
+        "condition": {
+          "profile": "email-683m",
+          "constraints": {
+            "cpus": 1,
+            "memory": "3g",
+            "nodeHeapMB": 2304,
+            "cpusetCpus": "0",
+            "cpuQuota": 1
+          },
+          "platform": "linux/arm64",
+          "environment": {
+            "dockerServer": {
+              "Platform": {
+                "Name": "Docker Desktop 4.82.0 (233772)"
+              },
+              "Version": "29.6.1",
+              "ApiVersion": "1.55",
+              "MinAPIVersion": "1.40",
+              "Os": "linux",
+              "Arch": "arm64",
+              "Components": [
+                {
+                  "Name": "Engine",
+                  "Version": "29.6.1",
+                  "Details": {
+                    "ApiVersion": "1.55",
+                    "Arch": "arm64",
+                    "BuildTime": "Fri Jun 26 11:39:58 2026",
+                    "Experimental": "false",
+                    "GitCommit": "8ec5ab3",
+                    "GoVersion": "go1.26.4",
+                    "KernelVersion": "6.12.76-linuxkit",
+                    "MinAPIVersion": "1.40",
+                    "Module": "github.com/moby/moby/v2",
+                    "ModuleVersion": "v2.0.0+unknown",
+                    "Os": "linux"
+                  }
+                },
+                {
+                  "Name": "containerd",
+                  "Version": "v2.2.5",
+                  "Details": {
+                    "GitCommit": "e53c7c1516c3b2bff98eb76f1f4117477e6f4e66"
+                  }
+                },
+                {
+                  "Name": "runc",
+                  "Version": "1.3.6",
+                  "Details": {
+                    "GitCommit": "v1.3.6-0-g491b69ba"
+                  }
+                },
+                {
+                  "Name": "docker-init",
+                  "Version": "0.19.0",
+                  "Details": {
+                    "GitCommit": "de40ad0"
+                  }
+                }
+              ],
+              "GitCommit": "8ec5ab3",
+              "GoVersion": "go1.26.4",
+              "KernelVersion": "6.12.76-linuxkit",
+              "BuildTime": "2026-06-26T11:39:58.000000000+00:00"
+            },
+            "dockerInfo": {
+              "id": "6e6f630a-e4c8-45f6-9e6c-7f6a95d8dba5",
+              "driver": "overlayfs",
+              "cgroupDriver": "cgroupfs",
+              "cgroupVersion": "2",
+              "kernelVersion": "6.12.76-linuxkit",
+              "operatingSystem": "Docker Desktop",
+              "architecture": "aarch64",
+              "nCPU": 14,
+              "memoryBytes": 25161015296
+            }
+          },
+          "sqliteStorage": {
+            "mode": "volume",
+            "path": "/tmp"
+          }
+        },
+        "outerMs": 1151.751334,
+        "setupMs": 3.5344579999998587,
+        "callbackMs": 905.9223340000001,
+        "callbackOverheadMs": 0.7442919999998594,
+        "finalizationMs": 241.55025000000023,
+        "wrapperMs": 245.82899999999995,
+        "copyMs": 754.1052090000001,
+        "flushMs": 359.4892480000003,
+        "indexMs": 53.86025000000018,
+        "copyOtherMs": 482.21983599999953,
+        "totalMs": 895.569334,
+        "rawCopyMs": 269.5269579999999,
+        "rawCopyMBps": 2535.6956056321465,
+        "rawChunkBytes": 682755.5674325675,
+        "callbackMinusRawMs": 636.3953760000002,
+        "callbackToRawRatio": 3.36115667509593,
+        "dominantElapsedMs": 747.403875,
+        "dominantFlushMs": 359.47495700000036,
+        "dominantCopyBytes": 683438323,
+        "dominantSourceWaitMs": 254.5342340000036,
+        "dominantProcessingMs": 484.6854749999966,
+        "peakRssBytes": 1022509056,
+        "gcCount": 44,
+        "gcMs": 28.333998999907635,
+        "eventLoopUtilization": 0.9660183927958088,
+        "userCPUTime": 464431,
+        "systemCPUTime": 415918,
+        "minorPageFaults": 256012,
+        "scopedMemoryPressureFullUs": 0,
+        "scopedIOPressureFullUs": 0,
+        "scopedIOReadBytes": 0,
+        "scopedIOWriteBytes": 0,
+        "scopedMemoryMaxEvents": 0,
+        "finalizationMemoryPressureFullUs": 0,
+        "finalizationIOPressureFullUs": 202661,
+        "finalizationIOReadBytes": 0,
+        "finalizationIOWriteBytes": 672645120,
+        "finalizationMemoryMaxEvents": 0,
+        "sqliteFileBytes": 684822528
+      },
+      {
+        "id": "email-683m-buffer-cast-r5",
+        "file": "operations/010-email-683m-buffer-cast-r5.log",
+        "profile": "email-683m",
+        "label": "buffer-cast",
+        "repetition": 5,
+        "block": 5,
+        "order": 2,
+        "blockSize": 2,
+        "conditionKey": "{\"constraints\":{\"cpuQuota\":1,\"cpus\":1,\"cpusetCpus\":\"0\",\"memory\":\"3g\",\"nodeHeapMB\":2304},\"environment\":{\"dockerInfo\":{\"architecture\":\"aarch64\",\"cgroupDriver\":\"cgroupfs\",\"cgroupVersion\":\"2\",\"driver\":\"overlayfs\",\"id\":\"6e6f630a-e4c8-45f6-9e6c-7f6a95d8dba5\",\"kernelVersion\":\"6.12.76-linuxkit\",\"memoryBytes\":25161015296,\"nCPU\":14,\"operatingSystem\":\"Docker Desktop\"},\"dockerServer\":{\"ApiVersion\":\"1.55\",\"Arch\":\"arm64\",\"BuildTime\":\"2026-06-26T11:39:58.000000000+00:00\",\"Components\":[{\"Details\":{\"ApiVersion\":\"1.55\",\"Arch\":\"arm64\",\"BuildTime\":\"Fri Jun 26 11:39:58 2026\",\"Experimental\":\"false\",\"GitCommit\":\"8ec5ab3\",\"GoVersion\":\"go1.26.4\",\"KernelVersion\":\"6.12.76-linuxkit\",\"MinAPIVersion\":\"1.40\",\"Module\":\"github.com/moby/moby/v2\",\"ModuleVersion\":\"v2.0.0+unknown\",\"Os\":\"linux\"},\"Name\":\"Engine\",\"Version\":\"29.6.1\"},{\"Details\":{\"GitCommit\":\"e53c7c1516c3b2bff98eb76f1f4117477e6f4e66\"},\"Name\":\"containerd\",\"Version\":\"v2.2.5\"},{\"Details\":{\"GitCommit\":\"v1.3.6-0-g491b69ba\"},\"Name\":\"runc\",\"Version\":\"1.3.6\"},{\"Details\":{\"GitCommit\":\"de40ad0\"},\"Name\":\"docker-init\",\"Version\":\"0.19.0\"}],\"GitCommit\":\"8ec5ab3\",\"GoVersion\":\"go1.26.4\",\"KernelVersion\":\"6.12.76-linuxkit\",\"MinAPIVersion\":\"1.40\",\"Os\":\"linux\",\"Platform\":{\"Name\":\"Docker Desktop 4.82.0 (233772)\"},\"Version\":\"29.6.1\"}},\"platform\":\"linux/arm64\",\"profile\":\"email-683m\",\"sqliteStorage\":{\"mode\":\"volume\",\"path\":\"/tmp\"}}",
+        "condition": {
+          "profile": "email-683m",
+          "constraints": {
+            "cpus": 1,
+            "memory": "3g",
+            "nodeHeapMB": 2304,
+            "cpusetCpus": "0",
+            "cpuQuota": 1
+          },
+          "platform": "linux/arm64",
+          "environment": {
+            "dockerServer": {
+              "Platform": {
+                "Name": "Docker Desktop 4.82.0 (233772)"
+              },
+              "Version": "29.6.1",
+              "ApiVersion": "1.55",
+              "MinAPIVersion": "1.40",
+              "Os": "linux",
+              "Arch": "arm64",
+              "Components": [
+                {
+                  "Name": "Engine",
+                  "Version": "29.6.1",
+                  "Details": {
+                    "ApiVersion": "1.55",
+                    "Arch": "arm64",
+                    "BuildTime": "Fri Jun 26 11:39:58 2026",
+                    "Experimental": "false",
+                    "GitCommit": "8ec5ab3",
+                    "GoVersion": "go1.26.4",
+                    "KernelVersion": "6.12.76-linuxkit",
+                    "MinAPIVersion": "1.40",
+                    "Module": "github.com/moby/moby/v2",
+                    "ModuleVersion": "v2.0.0+unknown",
+                    "Os": "linux"
+                  }
+                },
+                {
+                  "Name": "containerd",
+                  "Version": "v2.2.5",
+                  "Details": {
+                    "GitCommit": "e53c7c1516c3b2bff98eb76f1f4117477e6f4e66"
+                  }
+                },
+                {
+                  "Name": "runc",
+                  "Version": "1.3.6",
+                  "Details": {
+                    "GitCommit": "v1.3.6-0-g491b69ba"
+                  }
+                },
+                {
+                  "Name": "docker-init",
+                  "Version": "0.19.0",
+                  "Details": {
+                    "GitCommit": "de40ad0"
+                  }
+                }
+              ],
+              "GitCommit": "8ec5ab3",
+              "GoVersion": "go1.26.4",
+              "KernelVersion": "6.12.76-linuxkit",
+              "BuildTime": "2026-06-26T11:39:58.000000000+00:00"
+            },
+            "dockerInfo": {
+              "id": "6e6f630a-e4c8-45f6-9e6c-7f6a95d8dba5",
+              "driver": "overlayfs",
+              "cgroupDriver": "cgroupfs",
+              "cgroupVersion": "2",
+              "kernelVersion": "6.12.76-linuxkit",
+              "operatingSystem": "Docker Desktop",
+              "architecture": "aarch64",
+              "nCPU": 14,
+              "memoryBytes": 25161015296
+            }
+          },
+          "sqliteStorage": {
+            "mode": "volume",
+            "path": "/tmp"
+          }
+        },
+        "outerMs": 3495.282126,
+        "setupMs": 4.17795799999999,
+        "callbackMs": 606.4891250000001,
+        "callbackOverheadMs": 0.728125000000091,
+        "finalizationMs": 2883.8869179999997,
+        "wrapperMs": 2888.793001,
+        "copyMs": 464.1173749999998,
+        "flushMs": 218.20637400000032,
+        "indexMs": 44.19987500000002,
+        "copyOtherMs": 333.74266799999964,
+        "totalMs": 596.148917,
+        "rawCopyMs": 268.67441699999995,
+        "rawCopyMBps": 2543.741717693948,
+        "rawChunkBytes": 682755.5674325675,
+        "callbackMinusRawMs": 337.8147080000001,
+        "callbackToRawRatio": 2.257338572730578,
+        "dominantElapsedMs": 455.96775,
+        "dominantFlushMs": 218.19033200000013,
+        "dominantCopyBytes": 683438323,
+        "dominantSourceWaitMs": 226.2068180000042,
+        "dominantProcessingMs": 224.27118199999586,
+        "peakRssBytes": 876675072,
+        "gcCount": 47,
+        "gcMs": 12.237250000122003,
+        "eventLoopUtilization": 0.9847541055514053,
+        "userCPUTime": 312161,
+        "systemCPUTime": 333940,
+        "minorPageFaults": 17685,
+        "scopedMemoryPressureFullUs": 0,
+        "scopedIOPressureFullUs": 0,
+        "scopedIOReadBytes": 0,
+        "scopedIOWriteBytes": 0,
+        "scopedMemoryMaxEvents": 0,
+        "finalizationMemoryPressureFullUs": 0,
+        "finalizationIOPressureFullUs": 2777422,
+        "finalizationIOReadBytes": 0,
+        "finalizationIOWriteBytes": 678055936,
+        "finalizationMemoryMaxEvents": 0,
+        "sqliteFileBytes": 684822528
+      },
+      {
+        "id": "email-683m-buffer-cast-r6",
+        "file": "operations/011-email-683m-buffer-cast-r6.log",
+        "profile": "email-683m",
+        "label": "buffer-cast",
+        "repetition": 6,
+        "block": 6,
+        "order": 1,
+        "blockSize": 2,
+        "conditionKey": "{\"constraints\":{\"cpuQuota\":1,\"cpus\":1,\"cpusetCpus\":\"0\",\"memory\":\"3g\",\"nodeHeapMB\":2304},\"environment\":{\"dockerInfo\":{\"architecture\":\"aarch64\",\"cgroupDriver\":\"cgroupfs\",\"cgroupVersion\":\"2\",\"driver\":\"overlayfs\",\"id\":\"6e6f630a-e4c8-45f6-9e6c-7f6a95d8dba5\",\"kernelVersion\":\"6.12.76-linuxkit\",\"memoryBytes\":25161015296,\"nCPU\":14,\"operatingSystem\":\"Docker Desktop\"},\"dockerServer\":{\"ApiVersion\":\"1.55\",\"Arch\":\"arm64\",\"BuildTime\":\"2026-06-26T11:39:58.000000000+00:00\",\"Components\":[{\"Details\":{\"ApiVersion\":\"1.55\",\"Arch\":\"arm64\",\"BuildTime\":\"Fri Jun 26 11:39:58 2026\",\"Experimental\":\"false\",\"GitCommit\":\"8ec5ab3\",\"GoVersion\":\"go1.26.4\",\"KernelVersion\":\"6.12.76-linuxkit\",\"MinAPIVersion\":\"1.40\",\"Module\":\"github.com/moby/moby/v2\",\"ModuleVersion\":\"v2.0.0+unknown\",\"Os\":\"linux\"},\"Name\":\"Engine\",\"Version\":\"29.6.1\"},{\"Details\":{\"GitCommit\":\"e53c7c1516c3b2bff98eb76f1f4117477e6f4e66\"},\"Name\":\"containerd\",\"Version\":\"v2.2.5\"},{\"Details\":{\"GitCommit\":\"v1.3.6-0-g491b69ba\"},\"Name\":\"runc\",\"Version\":\"1.3.6\"},{\"Details\":{\"GitCommit\":\"de40ad0\"},\"Name\":\"docker-init\",\"Version\":\"0.19.0\"}],\"GitCommit\":\"8ec5ab3\",\"GoVersion\":\"go1.26.4\",\"KernelVersion\":\"6.12.76-linuxkit\",\"MinAPIVersion\":\"1.40\",\"Os\":\"linux\",\"Platform\":{\"Name\":\"Docker Desktop 4.82.0 (233772)\"},\"Version\":\"29.6.1\"}},\"platform\":\"linux/arm64\",\"profile\":\"email-683m\",\"sqliteStorage\":{\"mode\":\"volume\",\"path\":\"/tmp\"}}",
+        "condition": {
+          "profile": "email-683m",
+          "constraints": {
+            "cpus": 1,
+            "memory": "3g",
+            "nodeHeapMB": 2304,
+            "cpusetCpus": "0",
+            "cpuQuota": 1
+          },
+          "platform": "linux/arm64",
+          "environment": {
+            "dockerServer": {
+              "Platform": {
+                "Name": "Docker Desktop 4.82.0 (233772)"
+              },
+              "Version": "29.6.1",
+              "ApiVersion": "1.55",
+              "MinAPIVersion": "1.40",
+              "Os": "linux",
+              "Arch": "arm64",
+              "Components": [
+                {
+                  "Name": "Engine",
+                  "Version": "29.6.1",
+                  "Details": {
+                    "ApiVersion": "1.55",
+                    "Arch": "arm64",
+                    "BuildTime": "Fri Jun 26 11:39:58 2026",
+                    "Experimental": "false",
+                    "GitCommit": "8ec5ab3",
+                    "GoVersion": "go1.26.4",
+                    "KernelVersion": "6.12.76-linuxkit",
+                    "MinAPIVersion": "1.40",
+                    "Module": "github.com/moby/moby/v2",
+                    "ModuleVersion": "v2.0.0+unknown",
+                    "Os": "linux"
+                  }
+                },
+                {
+                  "Name": "containerd",
+                  "Version": "v2.2.5",
+                  "Details": {
+                    "GitCommit": "e53c7c1516c3b2bff98eb76f1f4117477e6f4e66"
+                  }
+                },
+                {
+                  "Name": "runc",
+                  "Version": "1.3.6",
+                  "Details": {
+                    "GitCommit": "v1.3.6-0-g491b69ba"
+                  }
+                },
+                {
+                  "Name": "docker-init",
+                  "Version": "0.19.0",
+                  "Details": {
+                    "GitCommit": "de40ad0"
+                  }
+                }
+              ],
+              "GitCommit": "8ec5ab3",
+              "GoVersion": "go1.26.4",
+              "KernelVersion": "6.12.76-linuxkit",
+              "BuildTime": "2026-06-26T11:39:58.000000000+00:00"
+            },
+            "dockerInfo": {
+              "id": "6e6f630a-e4c8-45f6-9e6c-7f6a95d8dba5",
+              "driver": "overlayfs",
+              "cgroupDriver": "cgroupfs",
+              "cgroupVersion": "2",
+              "kernelVersion": "6.12.76-linuxkit",
+              "operatingSystem": "Docker Desktop",
+              "architecture": "aarch64",
+              "nCPU": 14,
+              "memoryBytes": 25161015296
+            }
+          },
+          "sqliteStorage": {
+            "mode": "volume",
+            "path": "/tmp"
+          }
+        },
+        "outerMs": 2348.5322509999996,
+        "setupMs": 4.27800000000002,
+        "callbackMs": 630.7505829999998,
+        "callbackOverheadMs": 0.7156670000001668,
+        "finalizationMs": 1712.7880009999994,
+        "wrapperMs": 1717.7816679999999,
+        "copyMs": 484.74370899999985,
+        "flushMs": 220.38342000000102,
+        "indexMs": 48.15454099999988,
+        "copyOtherMs": 352.12903899999924,
+        "totalMs": 620.6670000000001,
+        "rawCopyMs": 267.2150419999999,
+        "rawCopyMBps": 2557.6341731540706,
+        "rawChunkBytes": 682755.5674325675,
+        "callbackMinusRawMs": 363.53554099999985,
+        "callbackToRawRatio": 2.3604606173330613,
+        "dominantElapsedMs": 475.44445900000005,
+        "dominantFlushMs": 220.36862800000085,
+        "dominantCopyBytes": 683438323,
+        "dominantSourceWaitMs": 240.85962299999915,
+        "dominantProcessingMs": 229.02746000000093,
+        "peakRssBytes": 864612352,
+        "gcCount": 48,
+        "gcMs": 13.527086000307463,
+        "eventLoopUtilization": 0.9787135955359405,
+        "userCPUTime": 287204,
+        "systemCPUTime": 346875,
+        "minorPageFaults": 71047,
+        "scopedMemoryPressureFullUs": 0,
+        "scopedIOPressureFullUs": 0,
+        "scopedIOReadBytes": 0,
+        "scopedIOWriteBytes": 0,
+        "scopedMemoryMaxEvents": 0,
+        "finalizationMemoryPressureFullUs": 0,
+        "finalizationIOPressureFullUs": 1640191,
+        "finalizationIOReadBytes": 0,
+        "finalizationIOWriteBytes": 675647488,
+        "finalizationMemoryMaxEvents": 0,
+        "sqliteFileBytes": 684822528
+      },
+      {
+        "id": "email-683m-string-decoding-r6",
+        "file": "operations/012-email-683m-string-decoding-r6.log",
+        "profile": "email-683m",
+        "label": "string-decoding",
+        "repetition": 6,
+        "block": 6,
+        "order": 2,
+        "blockSize": 2,
+        "conditionKey": "{\"constraints\":{\"cpuQuota\":1,\"cpus\":1,\"cpusetCpus\":\"0\",\"memory\":\"3g\",\"nodeHeapMB\":2304},\"environment\":{\"dockerInfo\":{\"architecture\":\"aarch64\",\"cgroupDriver\":\"cgroupfs\",\"cgroupVersion\":\"2\",\"driver\":\"overlayfs\",\"id\":\"6e6f630a-e4c8-45f6-9e6c-7f6a95d8dba5\",\"kernelVersion\":\"6.12.76-linuxkit\",\"memoryBytes\":25161015296,\"nCPU\":14,\"operatingSystem\":\"Docker Desktop\"},\"dockerServer\":{\"ApiVersion\":\"1.55\",\"Arch\":\"arm64\",\"BuildTime\":\"2026-06-26T11:39:58.000000000+00:00\",\"Components\":[{\"Details\":{\"ApiVersion\":\"1.55\",\"Arch\":\"arm64\",\"BuildTime\":\"Fri Jun 26 11:39:58 2026\",\"Experimental\":\"false\",\"GitCommit\":\"8ec5ab3\",\"GoVersion\":\"go1.26.4\",\"KernelVersion\":\"6.12.76-linuxkit\",\"MinAPIVersion\":\"1.40\",\"Module\":\"github.com/moby/moby/v2\",\"ModuleVersion\":\"v2.0.0+unknown\",\"Os\":\"linux\"},\"Name\":\"Engine\",\"Version\":\"29.6.1\"},{\"Details\":{\"GitCommit\":\"e53c7c1516c3b2bff98eb76f1f4117477e6f4e66\"},\"Name\":\"containerd\",\"Version\":\"v2.2.5\"},{\"Details\":{\"GitCommit\":\"v1.3.6-0-g491b69ba\"},\"Name\":\"runc\",\"Version\":\"1.3.6\"},{\"Details\":{\"GitCommit\":\"de40ad0\"},\"Name\":\"docker-init\",\"Version\":\"0.19.0\"}],\"GitCommit\":\"8ec5ab3\",\"GoVersion\":\"go1.26.4\",\"KernelVersion\":\"6.12.76-linuxkit\",\"MinAPIVersion\":\"1.40\",\"Os\":\"linux\",\"Platform\":{\"Name\":\"Docker Desktop 4.82.0 (233772)\"},\"Version\":\"29.6.1\"}},\"platform\":\"linux/arm64\",\"profile\":\"email-683m\",\"sqliteStorage\":{\"mode\":\"volume\",\"path\":\"/tmp\"}}",
+        "condition": {
+          "profile": "email-683m",
+          "constraints": {
+            "cpus": 1,
+            "memory": "3g",
+            "nodeHeapMB": 2304,
+            "cpusetCpus": "0",
+            "cpuQuota": 1
+          },
+          "platform": "linux/arm64",
+          "environment": {
+            "dockerServer": {
+              "Platform": {
+                "Name": "Docker Desktop 4.82.0 (233772)"
+              },
+              "Version": "29.6.1",
+              "ApiVersion": "1.55",
+              "MinAPIVersion": "1.40",
+              "Os": "linux",
+              "Arch": "arm64",
+              "Components": [
+                {
+                  "Name": "Engine",
+                  "Version": "29.6.1",
+                  "Details": {
+                    "ApiVersion": "1.55",
+                    "Arch": "arm64",
+                    "BuildTime": "Fri Jun 26 11:39:58 2026",
+                    "Experimental": "false",
+                    "GitCommit": "8ec5ab3",
+                    "GoVersion": "go1.26.4",
+                    "KernelVersion": "6.12.76-linuxkit",
+                    "MinAPIVersion": "1.40",
+                    "Module": "github.com/moby/moby/v2",
+                    "ModuleVersion": "v2.0.0+unknown",
+                    "Os": "linux"
+                  }
+                },
+                {
+                  "Name": "containerd",
+                  "Version": "v2.2.5",
+                  "Details": {
+                    "GitCommit": "e53c7c1516c3b2bff98eb76f1f4117477e6f4e66"
+                  }
+                },
+                {
+                  "Name": "runc",
+                  "Version": "1.3.6",
+                  "Details": {
+                    "GitCommit": "v1.3.6-0-g491b69ba"
+                  }
+                },
+                {
+                  "Name": "docker-init",
+                  "Version": "0.19.0",
+                  "Details": {
+                    "GitCommit": "de40ad0"
+                  }
+                }
+              ],
+              "GitCommit": "8ec5ab3",
+              "GoVersion": "go1.26.4",
+              "KernelVersion": "6.12.76-linuxkit",
+              "BuildTime": "2026-06-26T11:39:58.000000000+00:00"
+            },
+            "dockerInfo": {
+              "id": "6e6f630a-e4c8-45f6-9e6c-7f6a95d8dba5",
+              "driver": "overlayfs",
+              "cgroupDriver": "cgroupfs",
+              "cgroupVersion": "2",
+              "kernelVersion": "6.12.76-linuxkit",
+              "operatingSystem": "Docker Desktop",
+              "architecture": "aarch64",
+              "nCPU": 14,
+              "memoryBytes": 25161015296
+            }
+          },
+          "sqliteStorage": {
+            "mode": "volume",
+            "path": "/tmp"
+          }
+        },
+        "outerMs": 2877.341252,
+        "setupMs": 3.366749999999911,
+        "callbackMs": 879.2761670000002,
+        "callbackOverheadMs": 0.7278749999998126,
+        "finalizationMs": 1993.97046,
+        "wrapperMs": 1998.065085,
+        "copyMs": 735.509875,
+        "flushMs": 349.92929599999866,
+        "indexMs": 44.777709000000414,
+        "copyOtherMs": 473.79903700000114,
+        "totalMs": 868.5060420000002,
+        "rawCopyMs": 266.30266700000004,
+        "rawCopyMBps": 2566.3968397282324,
+        "rawChunkBytes": 682755.5674325675,
+        "callbackMinusRawMs": 612.9735000000002,
+        "callbackToRawRatio": 3.3017925689794163,
+        "dominantElapsedMs": 727.181501,
+        "dominantFlushMs": 349.9132129999982,
+        "dominantCopyBytes": 683438323,
+        "dominantSourceWaitMs": 249.45985800000426,
+        "dominantProcessingMs": 472.3891419999959,
+        "peakRssBytes": 1010216960,
+        "gcCount": 44,
+        "gcMs": 28.978502999758348,
+        "eventLoopUtilization": 0.9821456687355397,
+        "userCPUTime": 499423,
+        "systemCPUTime": 399736,
+        "minorPageFaults": 223508,
+        "scopedMemoryPressureFullUs": 0,
+        "scopedIOPressureFullUs": 0,
+        "scopedIOReadBytes": 0,
+        "scopedIOWriteBytes": 0,
+        "scopedMemoryMaxEvents": 0,
+        "finalizationMemoryPressureFullUs": 0,
+        "finalizationIOPressureFullUs": 1911314,
+        "finalizationIOReadBytes": 0,
+        "finalizationIOWriteBytes": 676216832,
+        "finalizationMemoryMaxEvents": 0,
+        "sqliteFileBytes": 684822528
+      }
+    ],
+    "primaryComparisons": [
+      {
+        "id": "{\"constraints\":{\"cpuQuota\":1,\"cpus\":1,\"cpusetCpus\":\"0\",\"memory\":\"3g\",\"nodeHeapMB\":2304},\"environment\":{\"dockerInfo\":{\"architecture\":\"aarch64\",\"cgroupDriver\":\"cgroupfs\",\"cgroupVersion\":\"2\",\"driver\":\"overlayfs\",\"id\":\"6e6f630a-e4c8-45f6-9e6c-7f6a95d8dba5\",\"kernelVersion\":\"6.12.76-linuxkit\",\"memoryBytes\":25161015296,\"nCPU\":14,\"operatingSystem\":\"Docker Desktop\"},\"dockerServer\":{\"ApiVersion\":\"1.55\",\"Arch\":\"arm64\",\"BuildTime\":\"2026-06-26T11:39:58.000000000+00:00\",\"Components\":[{\"Details\":{\"ApiVersion\":\"1.55\",\"Arch\":\"arm64\",\"BuildTime\":\"Fri Jun 26 11:39:58 2026\",\"Experimental\":\"false\",\"GitCommit\":\"8ec5ab3\",\"GoVersion\":\"go1.26.4\",\"KernelVersion\":\"6.12.76-linuxkit\",\"MinAPIVersion\":\"1.40\",\"Module\":\"github.com/moby/moby/v2\",\"ModuleVersion\":\"v2.0.0+unknown\",\"Os\":\"linux\"},\"Name\":\"Engine\",\"Version\":\"29.6.1\"},{\"Details\":{\"GitCommit\":\"e53c7c1516c3b2bff98eb76f1f4117477e6f4e66\"},\"Name\":\"containerd\",\"Version\":\"v2.2.5\"},{\"Details\":{\"GitCommit\":\"v1.3.6-0-g491b69ba\"},\"Name\":\"runc\",\"Version\":\"1.3.6\"},{\"Details\":{\"GitCommit\":\"de40ad0\"},\"Name\":\"docker-init\",\"Version\":\"0.19.0\"}],\"GitCommit\":\"8ec5ab3\",\"GoVersion\":\"go1.26.4\",\"KernelVersion\":\"6.12.76-linuxkit\",\"MinAPIVersion\":\"1.40\",\"Os\":\"linux\",\"Platform\":{\"Name\":\"Docker Desktop 4.82.0 (233772)\"},\"Version\":\"29.6.1\"}},\"platform\":\"linux/arm64\",\"profile\":\"email-683m\",\"sqliteStorage\":{\"mode\":\"volume\",\"path\":\"/tmp\"}}/buffer-cast-vs-string-decoding",
+        "condition": {
+          "profile": "email-683m",
+          "constraints": {
+            "cpus": 1,
+            "memory": "3g",
+            "nodeHeapMB": 2304,
+            "cpusetCpus": "0",
+            "cpuQuota": 1
+          },
+          "platform": "linux/arm64",
+          "environment": {
+            "dockerServer": {
+              "Platform": {
+                "Name": "Docker Desktop 4.82.0 (233772)"
+              },
+              "Version": "29.6.1",
+              "ApiVersion": "1.55",
+              "MinAPIVersion": "1.40",
+              "Os": "linux",
+              "Arch": "arm64",
+              "Components": [
+                {
+                  "Name": "Engine",
+                  "Version": "29.6.1",
+                  "Details": {
+                    "ApiVersion": "1.55",
+                    "Arch": "arm64",
+                    "BuildTime": "Fri Jun 26 11:39:58 2026",
+                    "Experimental": "false",
+                    "GitCommit": "8ec5ab3",
+                    "GoVersion": "go1.26.4",
+                    "KernelVersion": "6.12.76-linuxkit",
+                    "MinAPIVersion": "1.40",
+                    "Module": "github.com/moby/moby/v2",
+                    "ModuleVersion": "v2.0.0+unknown",
+                    "Os": "linux"
+                  }
+                },
+                {
+                  "Name": "containerd",
+                  "Version": "v2.2.5",
+                  "Details": {
+                    "GitCommit": "e53c7c1516c3b2bff98eb76f1f4117477e6f4e66"
+                  }
+                },
+                {
+                  "Name": "runc",
+                  "Version": "1.3.6",
+                  "Details": {
+                    "GitCommit": "v1.3.6-0-g491b69ba"
+                  }
+                },
+                {
+                  "Name": "docker-init",
+                  "Version": "0.19.0",
+                  "Details": {
+                    "GitCommit": "de40ad0"
+                  }
+                }
+              ],
+              "GitCommit": "8ec5ab3",
+              "GoVersion": "go1.26.4",
+              "KernelVersion": "6.12.76-linuxkit",
+              "BuildTime": "2026-06-26T11:39:58.000000000+00:00"
+            },
+            "dockerInfo": {
+              "id": "6e6f630a-e4c8-45f6-9e6c-7f6a95d8dba5",
+              "driver": "overlayfs",
+              "cgroupDriver": "cgroupfs",
+              "cgroupVersion": "2",
+              "kernelVersion": "6.12.76-linuxkit",
+              "operatingSystem": "Docker Desktop",
+              "architecture": "aarch64",
+              "nCPU": 14,
+              "memoryBytes": 25161015296
+            }
+          },
+          "sqliteStorage": {
+            "mode": "volume",
+            "path": "/tmp"
+          }
+        },
+        "baseline": "string-decoding",
+        "candidate": "buffer-cast",
+        "primaryMetric": "outerMs",
+        "plannedBlocks": 6,
+        "observedCompleteBlocks": 6,
+        "experimentalUnit": "independent complete block",
+        "pairedRatios": [
+          {
+            "block": 1,
+            "baselineRunID": "email-683m-string-decoding-r1",
+            "candidateRunID": "email-683m-buffer-cast-r1",
+            "baselineOrder": 1,
+            "candidateOrder": 2,
+            "blockSize": 2,
+            "baselineValue": 1294.6855,
+            "candidateValue": 1350.9857920000002,
+            "order": "candidate-after-baseline",
+            "ratio": 1.0434856897679012,
+            "logRatio": 0.04256673375435875
+          },
+          {
+            "block": 2,
+            "baselineRunID": "email-683m-string-decoding-r2",
+            "candidateRunID": "email-683m-buffer-cast-r2",
+            "baselineOrder": 2,
+            "candidateOrder": 1,
+            "blockSize": 2,
+            "baselineValue": 3057.04246,
+            "candidateValue": 883.56,
+            "order": "candidate-before-baseline",
+            "ratio": 0.28902444488782136,
+            "logRatio": -1.2412440100598374
+          },
+          {
+            "block": 3,
+            "baselineRunID": "email-683m-string-decoding-r3",
+            "candidateRunID": "email-683m-buffer-cast-r3",
+            "baselineOrder": 1,
+            "candidateOrder": 2,
+            "blockSize": 2,
+            "baselineValue": 1144.9765429999998,
+            "candidateValue": 2725.0777930000004,
+            "order": "candidate-after-baseline",
+            "ratio": 2.380029363623392,
+            "logRatio": 0.8671128252641623
+          },
+          {
+            "block": 4,
+            "baselineRunID": "email-683m-string-decoding-r4",
+            "candidateRunID": "email-683m-buffer-cast-r4",
+            "baselineOrder": 2,
+            "candidateOrder": 1,
+            "blockSize": 2,
+            "baselineValue": 4171.49046,
+            "candidateValue": 2454.907042,
+            "order": "candidate-before-baseline",
+            "ratio": 0.5884963816985452,
+            "logRatio": -0.5301845006464243
+          },
+          {
+            "block": 5,
+            "baselineRunID": "email-683m-string-decoding-r5",
+            "candidateRunID": "email-683m-buffer-cast-r5",
+            "baselineOrder": 1,
+            "candidateOrder": 2,
+            "blockSize": 2,
+            "baselineValue": 1151.751334,
+            "candidateValue": 3495.282126,
+            "order": "candidate-after-baseline",
+            "ratio": 3.0347541373023494,
+            "logRatio": 1.110130412103966
+          },
+          {
+            "block": 6,
+            "baselineRunID": "email-683m-string-decoding-r6",
+            "candidateRunID": "email-683m-buffer-cast-r6",
+            "baselineOrder": 2,
+            "candidateOrder": 1,
+            "blockSize": 2,
+            "baselineValue": 2877.341252,
+            "candidateValue": 2348.5322509999996,
+            "order": "candidate-before-baseline",
+            "ratio": 0.8162160985832206,
+            "logRatio": -0.20307613238330613
+          }
+        ],
+        "estimates": {
+          "n": 6,
+          "medianRatio": 0.929850894175561,
+          "medianChangePercent": -7.014910582443901,
+          "madRatio": 0.49109048088237767,
+          "geometricMeanRatio": 1.0075794678494356,
+          "geometricMeanChangePercent": 0.7579467849435639
+        },
+        "bootstrap95CI": {
+          "method": "deterministic paired percentile bootstrap on mean log ratios",
+          "resamples": 20000,
+          "seed": 1489197799,
+          "logRatio": {
+            "lower": -0.6353798157301709,
+            "upper": 0.6327670592341951
+          },
+          "ratio": {
+            "lower": 0.5297342487025346,
+            "upper": 1.8828132336628063
+          }
+        },
+        "orderEffect": {
+          "assessable": true,
+          "candidateAfterBaseline": {
+            "n": 3,
+            "medianRatio": 2.380029363623392,
+            "geometricMeanRatio": 1.9606381174316467
+          },
+          "candidateBeforeBaseline": {
+            "n": 3,
+            "medianRatio": 0.5884963816985452,
+            "geometricMeanRatio": 0.5177989630037605
+          },
+          "relativeOrderCountDifference": 0,
+          "relativeOrderCountsBalanced": true,
+          "logRatioDifferenceAfterMinusBefore": 1.3314382047373514,
+          "ratioOfGeometricMeansAfterOverBefore": 3.786485214373454,
+          "effectPercent": 278.6485214373454
+        },
+        "gates": {
+          "prerequisites": {
+            "artifactReconciliationComplete": true,
+            "analysisPlanDeclared": false,
+            "plannedSampleCountReached": true,
+            "completePairedBlocks": true,
+            "minimumPairedBlocksReached": true,
+            "orderCoverageAdequate": true
+          },
+          "prerequisitesMet": false,
+          "performanceGain": {
+            "pointGainAtLeastPercent": 5,
+            "ciUpperBelowRatio": 1,
+            "pass": null
+          },
+          "noRegression": {
+            "medianSlowdownAtMostPercent": 2,
+            "ciUpperBelowRatio": 1.03,
+            "pass": null
+          }
+        },
+        "status": "inconclusive",
+        "statusReason": "Prerequisites not met: analysisPlanDeclared"
+      }
+    ]
+  },
+  "compatibility": {
+    "summary": "Noncanonical exploratory medians retained at the historical path.",
+    "comparisons": "Noncanonical exploratory ratio-of-medians and paired-median views retained at the historical path.",
+    "p95": "No across-run p95 is reported because fixed-N benchmark groups are too small for a useful tail-percentile claim."
+  },
+  "summary": {
+    "email-683m/string-decoding": {
+      "outerMs": 2086.013376,
+      "setupMs": 3.8100414999998975,
+      "callbackMs": 885.6953544999998,
+      "callbackOverheadMs": 0.7254374999997708,
+      "finalizationMs": 1199.72448,
+      "wrapperMs": 1203.7907920000002,
+      "copyMs": 745.589813,
+      "flushMs": 357.255038,
+      "indexMs": 48.0864375000001,
+      "copyOtherMs": 474.39547650000156,
+      "totalMs": 875.0895625,
+      "rawCopyMs": 262.73033300000003,
+      "rawCopyMBps": 2601.2942223292875,
+      "rawChunkBytes": 682755.5674325675,
+      "callbackMinusRawMs": 624.2177919999998,
+      "callbackToRawRatio": 3.3688214713701505,
+      "dominantElapsedMs": 737.1692710000002,
+      "dominantFlushMs": 357.24039200000004,
+      "dominantCopyBytes": 683438323,
+      "dominantSourceWaitMs": 252.28077349999762,
+      "dominantProcessingMs": 481.37422300000355,
+      "peakRssBytes": 1014779904,
+      "gcCount": 44,
+      "gcMs": 28.706519500090508,
+      "eventLoopUtilization": 0.9770783006087234,
+      "userCPUTime": 485218.5,
+      "systemCPUTime": 418096,
+      "minorPageFaults": 250418,
+      "scopedMemoryPressureFullUs": 0,
+      "scopedIOPressureFullUs": 0,
+      "scopedIOReadBytes": 0,
+      "scopedIOWriteBytes": 0,
+      "scopedMemoryMaxEvents": 0,
+      "finalizationMemoryPressureFullUs": 0,
+      "finalizationIOPressureFullUs": 1136497.5,
+      "finalizationIOReadBytes": 0,
+      "finalizationIOWriteBytes": 674592768,
+      "finalizationMemoryMaxEvents": 0,
+      "sqliteFileBytes": 684822528
+    },
+    "email-683m/buffer-cast": {
+      "outerMs": 2401.7196464999997,
+      "setupMs": 4.374396000000047,
+      "callbackMs": 619.6474165,
+      "callbackOverheadMs": 0.7118755000001329,
+      "finalizationMs": 1772.4665424999994,
+      "wrapperMs": 1777.5818759999997,
+      "copyMs": 478.37239650000004,
+      "flushMs": 226.77345900000023,
+      "indexMs": 45.5926455,
+      "copyOtherMs": 334.9669164999998,
+      "totalMs": 608.6790835,
+      "rawCopyMs": 261.6212085000001,
+      "rawCopyMBps": 2612.339702629415,
+      "rawChunkBytes": 682755.5674325675,
+      "callbackMinusRawMs": 358.9014164999999,
+      "callbackToRawRatio": 2.3652799566285516,
+      "dominantElapsedMs": 469.785854,
+      "dominantFlushMs": 226.75741750000032,
+      "dominantCopyBytes": 683438323,
+      "dominantSourceWaitMs": 228.6226914999993,
+      "dominantProcessingMs": 235.33916300000078,
+      "peakRssBytes": 863717376,
+      "gcCount": 47,
+      "gcMs": 13.171873999905074,
+      "eventLoopUtilization": 0.9793459482226536,
+      "userCPUTime": 276244.5,
+      "systemCPUTime": 347446,
+      "minorPageFaults": 71175,
+      "scopedMemoryPressureFullUs": 0,
+      "scopedIOPressureFullUs": 0,
+      "scopedIOReadBytes": 0,
+      "scopedIOWriteBytes": 0,
+      "scopedMemoryMaxEvents": 0,
+      "finalizationMemoryPressureFullUs": 0,
+      "finalizationIOPressureFullUs": 1696677.5,
+      "finalizationIOReadBytes": 0,
+      "finalizationIOWriteBytes": 675508224,
+      "finalizationMemoryMaxEvents": 0,
+      "sqliteFileBytes": 684822528
+    }
+  },
+  "comparisons": {
+    "email-683m/buffer-cast vs string-decoding": {
+      "outerMs": {
+        "ratio": 1.1513443174105513,
+        "changePercent": 15.134431741055131,
+        "pairedRatio": 0.929850894175561,
+        "pairedChangePercent": -7.014910582443901
+      },
+      "setupMs": {
+        "ratio": 1.1481229272699955,
+        "changePercent": 14.812292726999555,
+        "pairedRatio": 1.1480408592688258,
+        "pairedChangePercent": 14.804085926882582
+      },
+      "callbackMs": {
+        "ratio": 0.699616875432082,
+        "changePercent": -30.038312456791804,
+        "pairedRatio": 0.6983015893769224,
+        "pairedChangePercent": -30.169841062307757
+      },
+      "callbackOverheadMs": {
+        "ratio": 0.9813050745244873,
+        "changePercent": -1.8694925475512658,
+        "pairedRatio": 0.9812985920054413,
+        "pairedChangePercent": -1.870140799455866
+      },
+      "finalizationMs": {
+        "ratio": 1.4773946618977045,
+        "changePercent": 47.739466189770454,
+        "pairedRatio": 1.332298113593883,
+        "pairedChangePercent": 33.22981135938829
+      },
+      "copyMs": {
+        "ratio": 0.6416026455286347,
+        "changePercent": -35.83973544713653,
+        "pairedRatio": 0.6431563399316214,
+        "pairedChangePercent": -35.68436600683786
+      },
+      "flushMs": {
+        "ratio": 0.6347663010423389,
+        "changePercent": -36.52336989576611,
+        "pairedRatio": 0.6261680302366575,
+        "pairedChangePercent": -37.383196976334254
+      },
+      "indexMs": {
+        "ratio": 0.9481393896147933,
+        "changePercent": -5.186061038520673,
+        "pairedRatio": 0.9458720048099339,
+        "pairedChangePercent": -5.412799519006606
+      },
+      "copyOtherMs": {
+        "ratio": 0.70609213850714,
+        "changePercent": -29.390786149285997,
+        "pairedRatio": 0.7164046671979608,
+        "pairedChangePercent": -28.35953328020392
+      },
+      "rawCopyMs": {
+        "ratio": 0.995778468030945,
+        "changePercent": -0.4221531969054948,
+        "pairedRatio": 0.9981320894563185,
+        "pairedChangePercent": -0.1867910543681517
+      },
+      "callbackMinusRawMs": {
+        "ratio": 0.5749618500140413,
+        "changePercent": -42.50381499859587,
+        "pairedRatio": 0.5738095428768669,
+        "pairedChangePercent": -42.61904571231331
+      },
+      "callbackToRawRatio": {
+        "ratio": 0.7021090243961656,
+        "changePercent": -29.78909756038344,
+        "pairedRatio": 0.7029214671612016,
+        "pairedChangePercent": -29.707853283879835
+      },
+      "dominantElapsedMs": {
+        "ratio": 0.6372835554617141,
+        "changePercent": -36.271644453828586,
+        "pairedRatio": 0.6388061369665934,
+        "pairedChangePercent": -36.11938630334066
+      },
+      "dominantFlushMs": {
+        "ratio": 0.6347474210027187,
+        "changePercent": -36.525257899728125,
+        "pairedRatio": 0.6261520661330501,
+        "pairedChangePercent": -37.384793386694994
+      },
+      "peakRssBytes": {
+        "ratio": 0.8511376433406391,
+        "changePercent": -14.886235665936088,
+        "pairedRatio": 0.8566221615014235,
+        "pairedChangePercent": -14.337783849857654
+      },
+      "gcCount": {
+        "ratio": 1.0681818181818181,
+        "changePercent": 6.818181818181812,
+        "pairedRatio": 1.0681818181818181,
+        "pairedChangePercent": 6.818181818181812
+      },
+      "gcMs": {
+        "ratio": 0.45884608198021165,
+        "changePercent": -54.11539180197884,
+        "pairedRatio": 0.45129652332669956,
+        "pairedChangePercent": -54.870347667330044
+      },
+      "finalizationIOPressureFullUs": {
+        "ratio": 1.492900336340379,
+        "changePercent": 49.2900336340379,
+        "pairedRatio": 1.3768016039134525,
+        "pairedChangePercent": 37.680160391345254
+      }
+    }
+  }
+}

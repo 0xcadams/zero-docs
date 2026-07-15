@@ -219,6 +219,16 @@ describe('initial sync COPY pipeline fixture configuration', () => {
       'e1-direct-buffer-cast-confirmatory',
       'e2-adaptive-index-confirmatory',
     ]);
+    expect(stages['e1-direct-buffer-cast-screening'].sqliteStorage).toEqual({
+      mode: 'tmpfs',
+      path: '/tmp',
+      size: '1536m',
+    });
+    expect(stages['e1-direct-buffer-cast-confirmatory'].sqliteStorage).toEqual({
+      mode: 'tmpfs',
+      path: '/tmp',
+      size: '1536m',
+    });
     const futureStages = Object.values(stages).filter(
       stage => stage.status === 'definition-only-do-not-execute',
     );
