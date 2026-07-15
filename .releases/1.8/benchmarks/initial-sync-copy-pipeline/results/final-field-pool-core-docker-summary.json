@@ -1,0 +1,177 @@
+{
+  "stage": "final-field-pool-core-docker",
+  "generatedAt": "2026-07-14T16:31:05.166Z",
+  "summary": {
+    "email-high-6.83g/field-pool-off": {
+      "callbackMs": 7818.413419999999,
+      "outerMs": 8218.550713,
+      "wrapperMs": 400.1372930000016,
+      "copyMs": 7405.438004,
+      "flushMs": 5385.966185999999,
+      "indexMs": 86.89808300000095,
+      "copyOtherMs": 2617.6293219999934,
+      "totalMs": 7804.314129,
+      "insertStatementCount": 10001,
+      "rawCopyMs": 5896.482211,
+      "rawCopyMBps": 1159.0847377187145,
+      "rawChunkBytes": 683383.9153084692,
+      "callbackMinusRawMs": 1371.5334169999987,
+      "callbackToRawRatio": 1.2204431699085525,
+      "dominantElapsedMs": 7397.872671,
+      "dominantFlushMs": 5385.928393999999,
+      "dominantCopyBytes": 6834522537,
+      "dominantInsertStatements": 10000,
+      "peakRssBytes": 217341952,
+      "gcCount": 771,
+      "gcMs": 246.15491598844528,
+      "eventLoopUtilization": 0.9630571113863404,
+      "userCPUTime": 2415761,
+      "systemCPUTime": 3800401,
+      "minorPageFaults": 232875,
+      "scopedMemoryPressureFullUs": 132622,
+      "scopedIOPressureFullUs": 288424,
+      "scopedIOReadBytes": 3125248,
+      "scopedIOWriteBytes": 6623838208,
+      "scopedMemoryMaxEvents": 5571,
+      "cgroupMemoryMaxEvents": 5772,
+      "sqliteFileBytes": 6846832640
+    },
+    "email-high-6.83g/field-pool-on": {
+      "callbackMs": 7420.626045,
+      "outerMs": 7681.010628000001,
+      "wrapperMs": 314.22574899999836,
+      "copyMs": 7091.263128,
+      "flushMs": 4928.252763000002,
+      "indexMs": 115.57883299999958,
+      "copyOtherMs": 2757.0876269999862,
+      "totalMs": 7410.850837000001,
+      "insertStatementCount": 10001,
+      "rawCopyMs": 5614.318378,
+      "rawCopyMBps": 1217.337898716509,
+      "rawChunkBytes": 683383.9153084692,
+      "callbackMinusRawMs": 2249.7533349999994,
+      "callbackToRawRatio": 1.4350819409360396,
+      "dominantElapsedMs": 7085.462377999999,
+      "dominantFlushMs": 4928.214097000002,
+      "dominantCopyBytes": 6834522537,
+      "dominantInsertStatements": 10000,
+      "dominantAllocatedFieldBuffers": 13,
+      "dominantReusedFieldBuffers": 9987,
+      "dominantPooledFieldBufferBytes": 8879000,
+      "peakRssBytes": 223916032,
+      "gcCount": 479,
+      "gcMs": 202.7792882323265,
+      "eventLoopUtilization": 0.9555798983687379,
+      "userCPUTime": 2384704,
+      "systemCPUTime": 3368238,
+      "minorPageFaults": 421234,
+      "scopedMemoryPressureFullUs": 135956,
+      "scopedIOPressureFullUs": 478098,
+      "scopedIOReadBytes": 3153920,
+      "scopedIOWriteBytes": 6611435520,
+      "scopedMemoryMaxEvents": 6616,
+      "cgroupMemoryMaxEvents": 6868,
+      "sqliteFileBytes": 6846832640
+    }
+  },
+  "comparisons": {
+    "email-high-6.83g/field-pool-on vs field-pool-off": {
+      "callbackMs": {
+        "ratio": 0.9491217266686828,
+        "changePercent": -5.087827333131722,
+        "pairedRatio": 1.0093639815467816,
+        "pairedChangePercent": 0.9363981546781641
+      },
+      "copyMs": {
+        "ratio": 0.9575751122580055,
+        "changePercent": -4.242488774199449,
+        "pairedRatio": 0.9705101461017644,
+        "pairedChangePercent": -2.948985389823555
+      },
+      "flushMs": {
+        "ratio": 0.9150173975860166,
+        "changePercent": -8.498260241398336,
+        "pairedRatio": 0.9123684572412036,
+        "pairedChangePercent": -8.763154275879636
+      },
+      "indexMs": {
+        "ratio": 1.3300504339088621,
+        "changePercent": 33.005043390886215,
+        "pairedRatio": 1.2695011267731566,
+        "pairedChangePercent": 26.950112677315662
+      },
+      "copyOtherMs": {
+        "ratio": 1.0532765673993292,
+        "changePercent": 5.327656739932918,
+        "pairedRatio": 0.9367660917232411,
+        "pairedChangePercent": -6.32339082767589
+      },
+      "rawCopyMs": {
+        "ratio": 0.9521470899253087,
+        "changePercent": -4.785291007469128,
+        "pairedRatio": 0.912005083430122,
+        "pairedChangePercent": -8.7994916569878
+      },
+      "callbackMinusRawMs": {
+        "ratio": 1.6403197378310772,
+        "changePercent": 64.03197378310772,
+        "pairedRatio": 1.1308339863775072,
+        "pairedChangePercent": 13.08339863775072
+      },
+      "callbackToRawRatio": {
+        "ratio": 1.1758695335593299,
+        "changePercent": 17.586953355932987,
+        "pairedRatio": 1.0272517749205787,
+        "pairedChangePercent": 2.725177492057873
+      },
+      "dominantElapsedMs": {
+        "ratio": 0.9577702527613562,
+        "changePercent": -4.222974723864381,
+        "pairedRatio": 0.9707077779171276,
+        "pairedChangePercent": -2.929222208287241
+      },
+      "dominantFlushMs": {
+        "ratio": 0.9150166390050976,
+        "changePercent": -8.498336099490245,
+        "pairedRatio": 0.9123653410344589,
+        "pairedChangePercent": -8.763465896554113
+      },
+      "peakRssBytes": {
+        "ratio": 1.03024763484226,
+        "changePercent": 3.0247634842260007,
+        "pairedRatio": 0.995722296086479,
+        "pairedChangePercent": -0.42777039135210027
+      },
+      "gcCount": {
+        "ratio": 0.6212710765239948,
+        "changePercent": -37.87289234760052,
+        "pairedRatio": 0.6207792207792208,
+        "pairedChangePercent": -37.922077922077925
+      },
+      "gcMs": {
+        "ratio": 0.8237872780970384,
+        "changePercent": -17.621272190296157,
+        "pairedRatio": 0.7504790979689672,
+        "pairedChangePercent": -24.952090203103282
+      },
+      "scopedMemoryPressureFullUs": {
+        "ratio": 1.0251391171902098,
+        "changePercent": 2.513911719020978,
+        "pairedRatio": 0.9803364507545986,
+        "pairedChangePercent": -1.9663549245401368
+      },
+      "scopedIOPressureFullUs": {
+        "ratio": 1.6576221118908274,
+        "changePercent": 65.76221118908275,
+        "pairedRatio": 2.1545942486829475,
+        "pairedChangePercent": 115.45942486829475
+      },
+      "scopedMemoryMaxEvents": {
+        "ratio": 1.1875785316819243,
+        "changePercent": 18.75785316819243,
+        "pairedRatio": 1.176289592760181,
+        "pairedChangePercent": 17.628959276018108
+      }
+    }
+  }
+}

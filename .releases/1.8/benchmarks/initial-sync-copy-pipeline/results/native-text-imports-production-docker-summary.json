@@ -1,0 +1,47 @@
+{
+  "stage": "native-text-imports-production-docker",
+  "generatedAt": "2026-07-14T15:56:35.406Z",
+  "summary": {
+    "imports-production-2.75g/cast-text": {
+      "callbackMs": 4761.078834999998,
+      "outerMs": 4809.172127,
+      "wrapperMs": 49.16883400000188,
+      "copyMs": 4449.786377,
+      "flushMs": 1387.0593260000041,
+      "indexMs": 7.544958999998926,
+      "copyOtherMs": 3335.9570880000247,
+      "totalMs": 4749.9257099999995,
+      "insertStatementCount": 10001,
+      "rawCopyMs": 4040.219419,
+      "rawCopyMBps": 680.8733959010755,
+      "rawChunkBytes": 275060.28557144286,
+      "dominantElapsedMs": 4442.837001,
+      "dominantFlushMs": 1387.0210770000049,
+      "dominantCopyBytes": 2750877916,
+      "dominantInsertStatements": 10000,
+      "peakRssBytes": 219676672,
+      "sqliteFileBytes": 2756104192
+    },
+    "imports-production-2.75g/native-transient": {
+      "callbackMs": 4673.480169,
+      "outerMs": 4718.7463769999995,
+      "wrapperMs": 45.2662079999991,
+      "copyMs": 4382.059042999999,
+      "flushMs": 1372.5746229999913,
+      "indexMs": 5.2740000000012515,
+      "copyOtherMs": 3261.809384999997,
+      "totalMs": 4662.145794,
+      "insertStatementCount": 10001,
+      "rawCopyMs": 4036.6485439999997,
+      "rawCopyMBps": 681.4757059018315,
+      "rawChunkBytes": 275060.28557144286,
+      "dominantElapsedMs": 4375.9091690000005,
+      "dominantFlushMs": 1372.5430809999925,
+      "dominantCopyBytes": 2750877916,
+      "dominantInsertStatements": 10000,
+      "peakRssBytes": 218873856,
+      "sqliteFileBytes": 2756104192
+    }
+  },
+  "comparisons": {}
+}

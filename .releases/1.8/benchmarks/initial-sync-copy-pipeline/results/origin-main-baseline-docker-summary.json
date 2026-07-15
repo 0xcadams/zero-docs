@@ -1,0 +1,43 @@
+{
+  "stage": "origin-main-baseline-docker",
+  "generatedAt": "2026-07-14T12:18:24.467Z",
+  "summary": {
+    "email-high-6.83g/origin-main-mmap-off": {
+      "callbackMs": 23981.285344,
+      "outerMs": 24358.603928,
+      "wrapperMs": 337.8380010000001,
+      "copyMs": 11970.354006,
+      "flushMs": 4754.350559000008,
+      "indexMs": 12008.254713999999,
+      "copyOtherMs": 7416.455745999996,
+      "totalMs": 23911.574178000003,
+      "rawCopyMs": 4808.432669,
+      "rawCopyMBps": 1421.3618048688122,
+      "rawChunkBytes": 683383.9153084692,
+      "dominantElapsedMs": 11964.941713999999,
+      "dominantFlushMs": 4754.334058000009,
+      "dominantCopyBytes": 6834522537,
+      "peakRssBytes": 434065408,
+      "sqliteFileBytes": 6846730240
+    },
+    "imports-production-2.75g/origin-main-mmap-off": {
+      "callbackMs": 7756.655504,
+      "outerMs": 7798.643462000002,
+      "wrapperMs": 41.10116700000253,
+      "copyMs": 5967.523168999998,
+      "flushMs": 1802.5054249999976,
+      "indexMs": 1638.9901260000006,
+      "copyOtherMs": 4317.368369,
+      "totalMs": 7746.673921,
+      "rawCopyMs": 4053.66371,
+      "rawCopyMBps": 678.6152263232512,
+      "rawChunkBytes": 275060.28557144286,
+      "dominantElapsedMs": 5960.821003000001,
+      "dominantFlushMs": 1802.4720489999982,
+      "dominantCopyBytes": 2750877916,
+      "peakRssBytes": 372441088,
+      "sqliteFileBytes": 2756018176
+    }
+  },
+  "comparisons": {}
+}

@@ -1,0 +1,47 @@
+{
+  "stage": "batched-metrics-scaled-docker",
+  "generatedAt": "2026-07-14T11:59:35.045Z",
+  "summary": {
+    "email-683m/direct-text-eager-secondary-batched-metrics": {
+      "callbackMs": 584.073709,
+      "outerMs": 607.906333,
+      "wrapperMs": 23.72999999999979,
+      "copyMs": 449.11474999999996,
+      "flushMs": 235.95682699999952,
+      "indexMs": 0.6458319999999276,
+      "copyOtherMs": 347.84220600000015,
+      "totalMs": 574.583834,
+      "insertStatementCount": 1001,
+      "rawCopyMs": 244.30724999999995,
+      "rawCopyMBps": 2797.45411976108,
+      "rawChunkBytes": 682755.5674325675,
+      "dominantElapsedMs": 443.28200100000004,
+      "dominantFlushMs": 235.93474399999923,
+      "dominantCopyBytes": 683438323,
+      "dominantInsertStatements": 1000,
+      "peakRssBytes": 206401536,
+      "sqliteFileBytes": 684826624
+    },
+    "imports-550m/direct-text-eager-secondary-batched-metrics": {
+      "callbackMs": 974.5767510000001,
+      "outerMs": 995.3068330000001,
+      "wrapperMs": 19.204874999999447,
+      "copyMs": 836.6232920000002,
+      "flushMs": 191.63433499999928,
+      "indexMs": 1.3395000000000437,
+      "copyOtherMs": 777.205878000002,
+      "totalMs": 965.5895420000002,
+      "insertStatementCount": 2001,
+      "rawCopyMs": 803.9861260000002,
+      "rawCopyMBps": 684.308717785013,
+      "rawChunkBytes": 274949.88255872065,
+      "dominantElapsedMs": 830.4195420000001,
+      "dominantFlushMs": 191.615710999999,
+      "dominantCopyBytes": 550174715,
+      "dominantInsertStatements": 2000,
+      "peakRssBytes": 251523072,
+      "sqliteFileBytes": 551374848
+    }
+  },
+  "comparisons": {}
+}

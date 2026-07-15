@@ -1,0 +1,47 @@
+{
+  "stage": "batched-metrics-production-smoke-docker",
+  "generatedAt": "2026-07-14T12:00:19.861Z",
+  "summary": {
+    "email-high-6.83g/direct-text-eager-secondary-batched-metrics": {
+      "callbackMs": 7574.270253000001,
+      "outerMs": 7965.682378,
+      "wrapperMs": 391.41212499999983,
+      "copyMs": 7069.269837,
+      "flushMs": 4297.1601569999975,
+      "indexMs": 135.48154200000045,
+      "copyOtherMs": 3128.7966780000024,
+      "totalMs": 7561.438377,
+      "insertStatementCount": 10001,
+      "rawCopyMs": 5360.036628,
+      "rawCopyMBps": 1275.0887748224545,
+      "rawChunkBytes": 683383.9153084692,
+      "dominantElapsedMs": 7061.24992,
+      "dominantFlushMs": 4297.120990999997,
+      "dominantCopyBytes": 6834522537,
+      "dominantInsertStatements": 10000,
+      "peakRssBytes": 254685184,
+      "sqliteFileBytes": 6846832640
+    },
+    "imports-production-2.75g/direct-text-eager-secondary-batched-metrics": {
+      "callbackMs": 4799.949836000002,
+      "outerMs": 4836.690585999999,
+      "wrapperMs": 36.740749999997206,
+      "copyMs": 4546.429419,
+      "flushMs": 1683.3304649999882,
+      "indexMs": 8.229083999998693,
+      "copyOtherMs": 3095.961245000013,
+      "totalMs": 4787.520794,
+      "insertStatementCount": 10001,
+      "rawCopyMs": 4050.7924189999994,
+      "rawCopyMBps": 679.0962437613864,
+      "rawChunkBytes": 275060.28557144286,
+      "dominantElapsedMs": 4540.230127000001,
+      "dominantFlushMs": 1683.3005479999883,
+      "dominantCopyBytes": 2750877916,
+      "dominantInsertStatements": 10000,
+      "peakRssBytes": 349970432,
+      "sqliteFileBytes": 2756104192
+    }
+  },
+  "comparisons": {}
+}

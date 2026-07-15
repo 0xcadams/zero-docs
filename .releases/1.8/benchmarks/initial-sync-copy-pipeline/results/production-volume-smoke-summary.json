@@ -1,0 +1,152 @@
+{
+  "stage": "production-volume-smoke",
+  "generatedAt": "2026-07-14T07:17:24.790Z",
+  "summary": {
+    "email-high-6.83g/baseline": {
+      "callbackMs": 38485.070917,
+      "outerMs": 38757.404833,
+      "wrapperMs": 272.3339160000032,
+      "copyMs": 26505.946957999997,
+      "flushMs": 10958.681462000077,
+      "indexMs": 11815.571417,
+      "copyOtherMs": 15683.310162999918,
+      "totalMs": 38457.563041999994,
+      "rawCopyMs": 21866.916458,
+      "rawCopyMBps": 312.5508139260117,
+      "rawChunkBytes": 683383.9153084692,
+      "dominantElapsedMs": 26499.998958999997,
+      "dominantFlushMs": 10958.668003000075,
+      "dominantCopyBytes": 6834522537,
+      "peakRssBytes": 406028288,
+      "sqliteFileBytes": 6846730240
+    },
+    "email-high-6.83g/parser-partial-8m": {
+      "callbackMs": 37527.712084,
+      "outerMs": 37829.830083,
+      "wrapperMs": 302.1179990000019,
+      "copyMs": 25358.490042,
+      "flushMs": 8856.685005000127,
+      "indexMs": 12031.149291000002,
+      "copyOtherMs": 16621.49995399987,
+      "totalMs": 37509.33425,
+      "insertStatementCount": 771,
+      "rawCopyMs": 23415.04075,
+      "rawCopyMBps": 291.8859979776033,
+      "rawChunkBytes": 683383.9153084692,
+      "dominantElapsedMs": 25352.524,
+      "dominantFlushMs": 8856.64058900013,
+      "dominantCopyBytes": 6834522537,
+      "dominantInsertStatements": 770,
+      "peakRssBytes": 362889216,
+      "sqliteFileBytes": 6846730240
+    },
+    "imports-production-2.75g/baseline": {
+      "callbackMs": 12033.618833000002,
+      "outerMs": 12211.876375000002,
+      "wrapperMs": 178.25754199999938,
+      "copyMs": 10793.440332999999,
+      "flushMs": 3507.67407499999,
+      "indexMs": 1123.2064170000012,
+      "copyOtherMs": 7389.378508000009,
+      "totalMs": 12020.259,
+      "rawCopyMs": 9305.991750000001,
+      "rawCopyMBps": 295.60287499717583,
+      "rawChunkBytes": 275060.28557144286,
+      "dominantElapsedMs": 10788.464958,
+      "dominantFlushMs": 3507.662866999992,
+      "dominantCopyBytes": 2750877916,
+      "peakRssBytes": 1499070464,
+      "sqliteFileBytes": 2756018176
+    },
+    "imports-production-2.75g/parser-partial-8m": {
+      "callbackMs": 11343.728500000001,
+      "outerMs": 11514.980958000002,
+      "wrapperMs": 171.25245800000084,
+      "copyMs": 10103.204959000002,
+      "flushMs": 3458.1702940000196,
+      "indexMs": 1126.0779580000017,
+      "copyOtherMs": 6744.341372999981,
+      "totalMs": 11328.589625000002,
+      "insertStatementCount": 324,
+      "rawCopyMs": 8869.99925,
+      "rawCopyMBps": 310.1328239683898,
+      "rawChunkBytes": 275060.28557144286,
+      "dominantElapsedMs": 10097.492792000001,
+      "dominantFlushMs": 3458.100335000019,
+      "dominantCopyBytes": 2750877916,
+      "dominantInsertStatements": 323,
+      "peakRssBytes": 1362067456,
+      "sqliteFileBytes": 2756018176
+    }
+  },
+  "comparisons": {
+    "email-high-6.83g/parser-partial-8m vs baseline": {
+      "callbackMs": {
+        "ratio": 0.9751238906363271,
+        "changePercent": -2.4876109363672905
+      },
+      "copyMs": {
+        "ratio": 0.9567094540022207,
+        "changePercent": -4.329054599777926
+      },
+      "flushMs": {
+        "ratio": 0.8081889263513355,
+        "changePercent": -19.181107364866445
+      },
+      "indexMs": {
+        "ratio": 1.0182452347323494,
+        "changePercent": 1.8245234732349402
+      },
+      "copyOtherMs": {
+        "ratio": 1.05982090395772,
+        "changePercent": 5.9820903957719995
+      },
+      "dominantElapsedMs": {
+        "ratio": 0.9566990564499518,
+        "changePercent": -4.330094355004821
+      },
+      "dominantFlushMs": {
+        "ratio": 0.808185865889496,
+        "changePercent": -19.181413411050396
+      },
+      "peakRssBytes": {
+        "ratio": 0.8937535307884755,
+        "changePercent": -10.624646921152447
+      }
+    },
+    "imports-production-2.75g/parser-partial-8m vs baseline": {
+      "callbackMs": {
+        "ratio": 0.9426697535816821,
+        "changePercent": -5.733024641831785
+      },
+      "copyMs": {
+        "ratio": 0.9360504757792877,
+        "changePercent": -6.394952422071231
+      },
+      "flushMs": {
+        "ratio": 0.9858870066199151,
+        "changePercent": -1.411299338008487
+      },
+      "indexMs": {
+        "ratio": 1.0025565567971648,
+        "changePercent": 0.2556556797164822
+      },
+      "copyOtherMs": {
+        "ratio": 0.912707525497349,
+        "changePercent": -8.729247450265099
+      },
+      "dominantElapsedMs": {
+        "ratio": 0.9359526894057694,
+        "changePercent": -6.404731059423064
+      },
+      "dominantFlushMs": {
+        "ratio": 0.9858702121956315,
+        "changePercent": -1.4129787804368465
+      },
+      "peakRssBytes": {
+        "ratio": 0.908608026580397,
+        "changePercent": -9.139197341960303
+      }
+    }
+  }
+}

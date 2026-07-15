@@ -1,0 +1,27 @@
+{
+  "stage": "native-binding-production-warmup-docker",
+  "generatedAt": "2026-07-14T14:31:07.824Z",
+  "summary": {
+    "email-high-6.83g/native-static-warmup": {
+      "callbackMs": 14285.046172999999,
+      "outerMs": 14589.687256000001,
+      "wrapperMs": 304.64108300000225,
+      "copyMs": 13659.885089000001,
+      "flushMs": 8880.07123000003,
+      "indexMs": 97.86954200000127,
+      "copyOtherMs": 5288.079316999966,
+      "totalMs": 14266.020088999998,
+      "insertStatementCount": 10001,
+      "rawCopyMs": 6277.591544,
+      "rawCopyMBps": 1088.7173032995918,
+      "rawChunkBytes": 683383.9153084692,
+      "dominantElapsedMs": 13652.500798000001,
+      "dominantFlushMs": 8880.03881300003,
+      "dominantCopyBytes": 6834522537,
+      "dominantInsertStatements": 10000,
+      "peakRssBytes": 220590080,
+      "sqliteFileBytes": 6846832640
+    }
+  },
+  "comparisons": {}
+}

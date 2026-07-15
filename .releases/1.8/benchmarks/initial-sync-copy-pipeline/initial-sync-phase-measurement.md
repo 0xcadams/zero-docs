@@ -43,10 +43,10 @@ The experiment separates four possible constraints:
 
 Two synthetic fixtures provide different row shapes:
 
-| Fixture | Shape | Full COPY payload | Full SQLite file | Application limits |
-| ------- | ----- | ----------------: | ---------------: | ------------------ |
-| Email | 25-column wide rows, three substantial secondary indexes | 6.835 GB | 6.847 GB | 1 CPU, 3 GiB |
-| imports | 7-column rows, more but smaller application indexes | 2.751 GB | 2.756 GB | 2 CPU/6 GiB, 1 CPU/6 GiB, and 1 CPU/3 GiB |
+| Fixture | Shape                                                    | Full COPY payload | Full SQLite file | Application limits                        |
+| ------- | -------------------------------------------------------- | ----------------: | ---------------: | ----------------------------------------- |
+| Email   | 25-column wide rows, three substantial secondary indexes |          6.835 GB |         6.847 GB | 1 CPU, 3 GiB                              |
+| imports | 7-column rows, more but smaller application indexes      |          2.751 GB |         2.756 GB | 2 CPU/6 GiB, 1 CPU/6 GiB, and 1 CPU/3 GiB |
 
 Scaled wide fixtures and 250,000-row narrow fixtures distinguish fixed per-row
 work from effects that appear only when files approach the cgroup limit. A raw
@@ -67,18 +67,18 @@ successfully, and recorded no cgroup OOM or OOM-kill event.
 The full-volume phase medians show how the bottleneck moves as fixture shape and
 memory capacity change:
 
-| Exclusive stage | Email, 1 CPU/3 GiB | imports, 2 CPU/6 GiB | imports, 1 CPU/6 GiB | imports, 1 CPU/3 GiB |
-| --------------- | -----------------: | -------------------: | -------------------: | -------------------: |
-| Migration wall | 22.094 s | 5.941 s | 6.237 s | 7.967 s |
-| Setup | 0.076 s | 0.076 s | 0.076 s | 0.077 s |
-| COPY SQLite flush | 8.024 s | 1.593 s | 1.500 s | 3.145 s |
-| COPY non-flush processing | 1.547 s | 0.683 s | 0.564 s | 0.599 s |
-| COPY source/event-loop residual | 2.016 s | 2.043 s | 2.159 s | 2.204 s |
-| Deferred indexes | 9.858 s | 1.517 s | 1.624 s | 1.484 s |
-| Replica registration | 0.022 s | 0.002 s | 0.013 s | 0.122 s |
-| Transaction commit | 0.023 s | 0.009 s | 0.009 s | 0.014 s |
-| `ANALYZE` | 0.240 s | 0.027 s | 0.027 s | 0.038 s |
-| Migration other | 0.068 s | 0.011 s | 0.012 s | 0.013 s |
+| Exclusive stage                 | Email, 1 CPU/3 GiB | imports, 2 CPU/6 GiB | imports, 1 CPU/6 GiB | imports, 1 CPU/3 GiB |
+| ------------------------------- | -----------------: | -------------------: | -------------------: | -------------------: |
+| Migration wall                  |           22.094 s |              5.941 s |              6.237 s |              7.967 s |
+| Setup                           |            0.076 s |              0.076 s |              0.076 s |              0.077 s |
+| COPY SQLite flush               |            8.024 s |              1.593 s |              1.500 s |              3.145 s |
+| COPY non-flush processing       |            1.547 s |              0.683 s |              0.564 s |              0.599 s |
+| COPY source/event-loop residual |            2.016 s |              2.043 s |              2.159 s |              2.204 s |
+| Deferred indexes                |            9.858 s |              1.517 s |              1.624 s |              1.484 s |
+| Replica registration            |            0.022 s |              0.002 s |              0.013 s |              0.122 s |
+| Transaction commit              |            0.023 s |              0.009 s |              0.009 s |              0.014 s |
+| `ANALYZE`                       |            0.240 s |              0.027 s |              0.027 s |              0.038 s |
+| Migration other                 |            0.068 s |              0.011 s |              0.012 s |              0.013 s |
 
 Stage medians are calculated independently, so the displayed values do not
 necessarily add to the displayed migration median. Every individual run does
@@ -104,11 +104,11 @@ fixture, image, PostgreSQL container, and source topology fixed.
 This comparison changes only the application CPU quota. Both configurations use
 6 GiB memory and a 4,608 MiB Node heap.
 
-| imports profile | Migration, 2 to 1 CPU | Change | Dominant COPY, 2 to 1 CPU | Change | Indexes, 2 to 1 CPU | Change | Average cores, 2 to 1 CPU |
-| --------------- | ---------------------: | -----: | ------------------------: | -----: | -------------------: | -----: | ------------------------: |
-| 550 MB | 1.239 to 1.305 s | +5.3% | 0.806 to 0.821 s | +1.8% | 0.305 to 0.348 s | +14.0% | 0.806 to 0.805 |
-| 2.75 GB | 5.941 to 6.237 s | +5.0% | 4.174 to 4.269 s | +2.3% | 1.517 to 1.624 s | +7.1% | 0.801 to 0.784 |
-| 250k narrow rows | 0.759 to 0.804 s | +5.9% | 0.377 to 0.397 s | +5.1% | 0.238 to 0.245 s | +2.9% | 0.986 to 0.943 |
+| imports profile  | Migration, 2 to 1 CPU | Change | Dominant COPY, 2 to 1 CPU | Change | Indexes, 2 to 1 CPU | Change | Average cores, 2 to 1 CPU |
+| ---------------- | --------------------: | -----: | ------------------------: | -----: | ------------------: | -----: | ------------------------: |
+| 550 MB           |      1.239 to 1.305 s |  +5.3% |          0.806 to 0.821 s |  +1.8% |    0.305 to 0.348 s | +14.0% |            0.806 to 0.805 |
+| 2.75 GB          |      5.941 to 6.237 s |  +5.0% |          4.174 to 4.269 s |  +2.3% |    1.517 to 1.624 s |  +7.1% |            0.801 to 0.784 |
+| 250k narrow rows |      0.759 to 0.804 s |  +5.9% |          0.377 to 0.397 s |  +5.1% |    0.238 to 0.245 s |  +2.9% |            0.986 to 0.943 |
 
 No profile averages more than one CPU core across initial sync in the two-CPU
 configuration. Individual subphases can briefly use more, but the second
@@ -125,25 +125,25 @@ This comparison holds the application at one CPU and changes the cgroup limit
 from 6 GiB to 3 GiB. The Node heap cap changes from 4,608 MiB to 2,304 MiB, but
 median full-volume heap use is only 163 MB, so neither heap cap is approached.
 
-| Full imports metric | 1 CPU/6 GiB | 1 CPU/3 GiB | Change |
-| ------------------- | ----------: | ----------: | -----: |
-| Migration wall | 6.237 s | 7.967 s | +27.7% |
-| Migration range | 5.659-6.273 s | 6.103-9.717 s | - |
-| Dominant-table COPY | 4.269 s | 5.934 s | +39.0% |
-| SQLite flush | 1.500 s | 3.145 s | +109.6% |
-| Non-flush processing | 0.564 s | 0.599 s | +6.2% |
-| Source/event-loop residual | 2.159 s | 2.204 s | +2.1% |
-| Deferred indexes | 1.624 s | 1.484 s | -8.6% |
-| Raw COPY | 4.014 s | 4.016 s | +0.0% |
-| Pipeline throughput | 644 MB/s | 463 MB/s | -28.0% |
-| Initial-sync CPU | 4.847 s | 4.843 s | -0.1% |
-| Average cores during initial sync | 0.784 | 0.623 | - |
-| Cgroup peak | 3.237 GB | 3.221 GB | - |
-| Full I/O pressure | 2.7 ms | 1.487 s | - |
-| Median block reads | 0 | 0 | - |
-| Maximum block reads | 40.5 MB | 847.3 MB | - |
-| Memory-limit events | 0-0 | 0-974 | - |
-| OOM events | 0 | 0 | - |
+| Full imports metric               |   1 CPU/6 GiB |   1 CPU/3 GiB |  Change |
+| --------------------------------- | ------------: | ------------: | ------: |
+| Migration wall                    |       6.237 s |       7.967 s |  +27.7% |
+| Migration range                   | 5.659-6.273 s | 6.103-9.717 s |       - |
+| Dominant-table COPY               |       4.269 s |       5.934 s |  +39.0% |
+| SQLite flush                      |       1.500 s |       3.145 s | +109.6% |
+| Non-flush processing              |       0.564 s |       0.599 s |   +6.2% |
+| Source/event-loop residual        |       2.159 s |       2.204 s |   +2.1% |
+| Deferred indexes                  |       1.624 s |       1.484 s |   -8.6% |
+| Raw COPY                          |       4.014 s |       4.016 s |   +0.0% |
+| Pipeline throughput               |      644 MB/s |      463 MB/s |  -28.0% |
+| Initial-sync CPU                  |       4.847 s |       4.843 s |   -0.1% |
+| Average cores during initial sync |         0.784 |         0.623 |       - |
+| Cgroup peak                       |      3.237 GB |      3.221 GB |       - |
+| Full I/O pressure                 |        2.7 ms |       1.487 s |       - |
+| Median block reads                |             0 |             0 |       - |
+| Maximum block reads               |       40.5 MB |      847.3 MB |       - |
+| Memory-limit events               |           0-0 |         0-974 |       - |
+| OOM events                        |             0 |             0 |       - |
 
 Raw COPY, non-flush processing, source residual, and total process CPU remain
 nearly flat. Those controls make source throughput and additional compute work
@@ -170,22 +170,22 @@ The scaled and full Email profiles keep row width, schema, CPU, memory, source
 topology, and SQLite settings fixed. The full profile has ten times as many rows
 and almost exactly ten times as many COPY bytes.
 
-| Metric | Email 683 MB | Email 6.83 GB | Scale factor |
-| ------ | -----------: | ------------: | -----------: |
-| COPY bytes | 0.683 GB | 6.835 GB | 10.00x |
-| SQLite file | 0.685 GB | 6.847 GB | 10.00x |
-| Initial-sync wall | 0.981 s | 21.775 s | 22.21x |
-| SQLite flush wall | 0.356 s | 8.024 s | 22.55x |
-| Non-flush processing wall | 0.140 s | 1.547 s | 11.03x |
-| Source/event-loop residual | 0.183 s | 2.016 s | 11.02x |
-| Index wall | 0.227 s | 9.858 s | 43.39x |
-| Index CPU | 0.217 s | 5.347 s | 24.66x |
-| Cgroup peak | 1.172 GB | 3.222 GB | - |
-| Memory-limit events | 0 | 29,645 | - |
-| Reclaim page scans | 0 | 5,765,951 | - |
-| Block reads | 0 | 19.47 GB | - |
-| Full I/O pressure | 0 | 5.642 s | - |
-| Full memory pressure | 0 | 0.482 s | - |
+| Metric                     | Email 683 MB | Email 6.83 GB | Scale factor |
+| -------------------------- | -----------: | ------------: | -----------: |
+| COPY bytes                 |     0.683 GB |      6.835 GB |       10.00x |
+| SQLite file                |     0.685 GB |      6.847 GB |       10.00x |
+| Initial-sync wall          |      0.981 s |      21.775 s |       22.21x |
+| SQLite flush wall          |      0.356 s |       8.024 s |       22.55x |
+| Non-flush processing wall  |      0.140 s |       1.547 s |       11.03x |
+| Source/event-loop residual |      0.183 s |       2.016 s |       11.02x |
+| Index wall                 |      0.227 s |       9.858 s |       43.39x |
+| Index CPU                  |      0.217 s |       5.347 s |       24.66x |
+| Cgroup peak                |     1.172 GB |      3.222 GB |            - |
+| Memory-limit events        |            0 |        29,645 |            - |
+| Reclaim page scans         |            0 |     5,765,951 |            - |
+| Block reads                |            0 |      19.47 GB |            - |
+| Full I/O pressure          |            0 |       5.642 s |            - |
+| Full memory pressure       |            0 |       0.482 s |            - |
 
 The 683 MB file fits comfortably and shows no reclaim, block reads, or pressure.
 At full volume, the SQLite file is larger than the cgroup, and every run reaches
@@ -203,12 +203,12 @@ SQLite working set rather than a multi-gigabyte JavaScript heap.
 
 Three secondary indexes account for nearly all full Email index time:
 
-| Index | Median wall | Median CPU | CPU/wall |
-| ----- | ----------: | ---------: | -------: |
-| `Email_threadId_createdAt_id_idx` | 3.165 s | 1.824 s | 0.570 |
-| `Email_threadId_id_idx` | 3.155 s | 1.763 s | 0.559 |
-| `Email_workspaceId_id_idx` | 2.697 s | 1.626 s | 0.593 |
-| `Email_pkey` | 0.090 s | 0.008 s | 0.089 |
+| Index                             | Median wall | Median CPU | CPU/wall |
+| --------------------------------- | ----------: | ---------: | -------: |
+| `Email_threadId_createdAt_id_idx` |     3.165 s |    1.824 s |    0.570 |
+| `Email_threadId_id_idx`           |     3.155 s |    1.763 s |    0.559 |
+| `Email_workspaceId_id_idx`        |     2.697 s |    1.626 s |    0.593 |
+| `Email_pkey`                      |     0.090 s |    0.008 s |    0.089 |
 
 The operation reads 2.84 final-file equivalents from the block layer. That is
 consistent with repeated wide-table scans for the three secondary indexes, but
@@ -228,12 +228,12 @@ The raw COPY control and full pipeline copy the same deterministic payload
 through the same PostgreSQL container. The raw control discards the stream
 instead of parsing and inserting it into SQLite.
 
-| Profile | Raw COPY | Pipeline COPY | Median per-run pipeline/raw |
-| ------- | -------: | ------------: | --------------------------: |
-| Email 6.83 GB, 1 CPU/3 GiB | 1,178 MB/s | 586 MB/s | 45.5% |
-| imports 2.75 GB, 2 CPU/6 GiB | 683 MB/s | 658 MB/s | 96.4% |
-| imports 2.75 GB, 1 CPU/6 GiB | 685 MB/s | 644 MB/s | 93.9% |
-| imports 2.75 GB, 1 CPU/3 GiB | 685 MB/s | 463 MB/s | 68.6% |
+| Profile                      |   Raw COPY | Pipeline COPY | Median per-run pipeline/raw |
+| ---------------------------- | ---------: | ------------: | --------------------------: |
+| Email 6.83 GB, 1 CPU/3 GiB   | 1,178 MB/s |      586 MB/s |                       45.5% |
+| imports 2.75 GB, 2 CPU/6 GiB |   683 MB/s |      658 MB/s |                       96.4% |
+| imports 2.75 GB, 1 CPU/6 GiB |   685 MB/s |      644 MB/s |                       93.9% |
+| imports 2.75 GB, 1 CPU/3 GiB |   685 MB/s |      463 MB/s |                       68.6% |
 
 Email remains well below the raw route ceiling in every full run, so the local
 source route does not set its throughput. With 6 GiB, imports remains close to
@@ -253,16 +253,16 @@ The narrow comparison is fully resource-aligned: both fixtures use one CPU, 3
 GiB memory, and a 2,304 MiB Node heap. Neither approaches its memory limit or
 records block reads, reclaim, or pressure.
 
-| Metric | Email, 250k rows | imports, 250k rows |
-| ------ | ---------------: | -----------------: |
-| COPY bytes | 150.9 MB | 54.4 MB |
-| SQLite file | 176.5 MB | 86.8 MB |
-| Migration wall | 1.692 s | 0.816 s |
-| COPY SQLite flush | 0.561 s | 0.144 s |
-| COPY non-flush processing | 0.650 s | 0.174 s |
-| COPY source/event-loop residual | 0.120 s | 0.074 s |
-| Deferred indexes | 0.211 s | 0.250 s |
-| Initial-sync CPU/wall | 0.985 | 0.952 |
+| Metric                          | Email, 250k rows | imports, 250k rows |
+| ------------------------------- | ---------------: | -----------------: |
+| COPY bytes                      |         150.9 MB |            54.4 MB |
+| SQLite file                     |         176.5 MB |            86.8 MB |
+| Migration wall                  |          1.692 s |            0.816 s |
+| COPY SQLite flush               |          0.561 s |            0.144 s |
+| COPY non-flush processing       |          0.650 s |            0.174 s |
+| COPY source/event-loop residual |          0.120 s |            0.074 s |
+| Deferred indexes                |          0.211 s |            0.250 s |
+| Initial-sync CPU/wall           |            0.985 |              0.952 |
 
 Median dominant-table destination processing is approximately 4.88
 microseconds per Email row and 1.29 microseconds per imports row, a 3.8x ratio.
@@ -311,10 +311,10 @@ The measured terms have specific boundaries:
 The same image ran ten AB/BA pairs with measurement disabled and enabled for
 each scaled wide fixture:
 
-| Profile | Paired callback change | Paired COPY change | Paired index change |
-| ------- | ---------------------: | -----------------: | ------------------: |
-| Email 683 MB | -0.85% | -0.92% | -2.70% |
-| imports 550 MB | +0.50% | +0.33% | +1.11% |
+| Profile        | Paired callback change | Paired COPY change | Paired index change |
+| -------------- | ---------------------: | -----------------: | ------------------: |
+| Email 683 MB   |                 -0.85% |             -0.92% |              -2.70% |
+| imports 550 MB |                 +0.50% |             +0.33% |              +1.11% |
 
 The scaled profiles show no detectable measurement slowdown beyond ordinary run
 variation. This validates the timer path at those sizes, not at full volume.
@@ -357,9 +357,13 @@ commit time ranges from 9 ms to 1.85 seconds.
 - Initial sync: binary COPY, five table workers, native row-aligned COPY
   messages, and an 8 MiB destination buffer.
 - Consolidated analysis:
-  `/var/folders/97/c3gvpw6d46g3nm0y2684_cfm0000gn/T/opencode/initial-sync-phase-measurement/analysis.json`.
-- Raw result files: `results-overhead.json`, `results-full.json`,
-  `results-narrow.json`, `results-imports1cpu.json`, and
-  `results-imports1cpu3g.json` in the same temporary directory.
-- Measurement runner and aggregator: `run-measurements.mjs` and `analyze.mjs` in
-  the same temporary directory.
+  [`initial-sync-phase-analysis.json`](results/initial-sync-phase-analysis.json).
+- Raw result files:
+  [`overhead`](results/initial-sync-phase-overhead.json),
+  [`full`](results/initial-sync-phase-full.json),
+  [`narrow`](results/initial-sync-phase-narrow.json),
+  [`imports 1 CPU/6 GiB`](results/initial-sync-phase-imports-1cpu.json), and
+  [`imports 1 CPU/3 GiB`](results/initial-sync-phase-imports-1cpu-3g.json).
+- Measurement
+  [`runner`](results/initial-sync-phase-run-measurements.mjs) and
+  [`analyzer`](results/initial-sync-phase-analyze.mjs).

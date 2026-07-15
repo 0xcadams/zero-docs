@@ -1,0 +1,34 @@
+{
+  "stage": "flush-diagnostics-core-docker",
+  "generatedAt": "2026-07-14T13:41:11.295Z",
+  "summary": {
+    "email-high-6.83g/adaptive-mmap-off-instrumented": {
+      "callbackMs": 7119.115129000001,
+      "outerMs": 7523.028462,
+      "wrapperMs": 425.63095799999974,
+      "copyMs": 6571.014503,
+      "flushMs": 3958.596705000021,
+      "indexMs": 128.94366700000091,
+      "copyOtherMs": 3022.8150909999786,
+      "totalMs": 7105.768587,
+      "insertStatementCount": 10001,
+      "rawCopyMs": 5582.211335,
+      "rawCopyMBps": 1224.3396257945508,
+      "rawChunkBytes": 683383.9153084692,
+      "dominantElapsedMs": 6565.518836,
+      "dominantFlushMs": 3958.5523710000207,
+      "dominantCopyBytes": 6834522537,
+      "dominantInsertStatements": 10000,
+      "dominantSourceWaitMs": 2034.7214360001221,
+      "dominantProcessingMs": 4724.849116999864,
+      "dominantParameterArrayMs": 3.170206000010694,
+      "dominantStatementMs": 3950.2437060000675,
+      "dominantFlushCount": 770,
+      "dominantMaxFlushMs": 156.2401660000005,
+      "dominantP95FlushMs": 7.441000000000713,
+      "peakRssBytes": 226873344,
+      "sqliteFileBytes": 6846832640
+    }
+  },
+  "comparisons": {}
+}

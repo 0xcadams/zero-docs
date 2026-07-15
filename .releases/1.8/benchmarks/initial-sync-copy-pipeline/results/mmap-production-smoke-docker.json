@@ -1,0 +1,1776 @@
+{
+  "stage": "mmap-production-smoke-docker",
+  "generatedAt": "2026-07-14T11:44:25.412Z",
+  "runs": [
+    {
+      "file": "001-email-high-6.83g-direct-text-mmap-1g-r1.log",
+      "meta": {
+        "startedAt": "2026-07-14T11:42:55.377Z",
+        "id": "email-high-6.83g-direct-text-mmap-1g-r1",
+        "runConfig": {
+          "profile": "email-high-6.83g",
+          "worktree": "linear-parser",
+          "label": "direct-text-mmap-1g",
+          "partialInsertBatches": false,
+          "directTextBuffers": true,
+          "bufferMB": 8,
+          "mmapGiB": 1,
+          "repetition": 1
+        },
+        "fixture": {
+          "fixture": "email",
+          "rows": 10000,
+          "payloadBytes": 683000,
+          "copyChunkBytes": 31744,
+          "expectedCopyBytes": 6830000000,
+          "docker": {
+            "cpus": 1,
+            "memory": "3g",
+            "nodeHeapMB": 2304
+          }
+        },
+        "constraints": {
+          "cpus": 1,
+          "memory": "3g",
+          "nodeHeapMB": 2304
+        },
+        "image": "zero-copy-pipeline-linear-parser:local"
+      },
+      "result": {
+        "kind": "initial-sync",
+        "profile": "email-high-6.83g",
+        "runLabel": "email-high-6.83g-direct-text-mmap-1g-r1",
+        "fixture": "email",
+        "rows": 10000,
+        "payloadBytes": 683000,
+        "workers": 5,
+        "treatment": {
+          "partialInsertBatches": false,
+          "directTextBuffers": true,
+          "bufferMB": 8
+        },
+        "sqliteTuning": {
+          "mmapGiB": 1,
+          "mmapBytes": 1073741824,
+          "effectiveMmapBytes": 1073741824
+        },
+        "source": {
+          "rows": 10000,
+          "tableBytes": 87433216,
+          "indexBytes": 2007040,
+          "totalBytes": 89440256
+        },
+        "rawCopy": {
+          "bytes": 6834522537,
+          "chunks": 10001,
+          "averageChunkBytes": 683383.9153084692,
+          "ms": 5833.973878,
+          "throughputMBps": 1171.5037948272418
+        },
+        "timing": {
+          "outerMs": 17838.450008,
+          "callbackMs": 17582.497384,
+          "wrapperMs": 255.95262400000138
+        },
+        "phases": {
+          "summary": {
+            "syncMode": "initial",
+            "copyFormat": "binary",
+            "publications": [
+              "_copy_pipeline_app_32_1784029383028_128407_metadata_0",
+              "zero_copy_pipeline"
+            ],
+            "lsn": "0/70DC558",
+            "tables": 4,
+            "rows": 10001,
+            "copyMs": 7186.835295,
+            "flushMs": 4530.377871999997,
+            "copyBytes": 6834522615,
+            "insertStatementCount": 10001,
+            "insertStatementsByRowCount": {
+              "1": 10001
+            },
+            "indexes": 7,
+            "indexMs": 10272.760796999999,
+            "copyOtherMs": 2761.4069650000056,
+            "totalMs": 17564.545634000002
+          },
+          "tableCopies": [
+            {
+              "level": "info",
+              "message": "Finished copying 1 rows into copy_pipeline_app_32_1784029383028_128407.permissions (flush: 0.034 ms) (total: 2.716 ms) ",
+              "data": {
+                "schema": "copy_pipeline_app_32_1784029383028_128407",
+                "table": "permissions",
+                "replicaTable": "copy_pipeline_app_32_1784029383028_128407.permissions",
+                "syncMode": "initial",
+                "copyFormat": "binary",
+                "columnCount": 3,
+                "rows": 1,
+                "estimatedRows": 0,
+                "estimatedBytes": 16384,
+                "flushMs": 0.03387499999917054,
+                "elapsedMs": 2.7155830000001515,
+                "copyBytes": 36,
+                "insertStatementCount": 1,
+                "insertStatementsByRowCount": {
+                  "1": 1
+                }
+              }
+            },
+            {
+              "level": "info",
+              "message": "Finished copying 0 rows into copy_pipeline_app_32_1784029383028_128407_0.clients (flush: 0.001 ms) (total: 2.158 ms) ",
+              "data": {
+                "schema": "copy_pipeline_app_32_1784029383028_128407_0",
+                "table": "clients",
+                "replicaTable": "copy_pipeline_app_32_1784029383028_128407_0.clients",
+                "syncMode": "initial",
+                "copyFormat": "binary",
+                "columnCount": 4,
+                "rows": 0,
+                "estimatedRows": 0,
+                "estimatedBytes": 8192,
+                "flushMs": 0.0007919999998193816,
+                "elapsedMs": 2.1580000000003565,
+                "copyBytes": 21,
+                "insertStatementCount": 0,
+                "insertStatementsByRowCount": {}
+              }
+            },
+            {
+              "level": "info",
+              "message": "Finished copying 0 rows into copy_pipeline_app_32_1784029383028_128407_0.mutations (flush: 0.001 ms) (total: 6.179 ms) ",
+              "data": {
+                "schema": "copy_pipeline_app_32_1784029383028_128407_0",
+                "table": "mutations",
+                "replicaTable": "copy_pipeline_app_32_1784029383028_128407_0.mutations",
+                "syncMode": "initial",
+                "copyFormat": "binary",
+                "columnCount": 4,
+                "rows": 0,
+                "estimatedRows": 0,
+                "estimatedBytes": 8192,
+                "flushMs": 0.0006669999993391684,
+                "elapsedMs": 6.17870799999946,
+                "copyBytes": 21,
+                "insertStatementCount": 0,
+                "insertStatementsByRowCount": {}
+              }
+            },
+            {
+              "level": "info",
+              "message": "Finished copying 10000 rows into Email (flush: 4530.343 ms) (total: 7180.595 ms) ",
+              "data": {
+                "schema": "public",
+                "table": "Email",
+                "replicaTable": "Email",
+                "syncMode": "initial",
+                "copyFormat": "binary",
+                "columnCount": 25,
+                "rows": 10000,
+                "estimatedRows": 10000,
+                "estimatedBytes": 87433216,
+                "flushMs": 4530.342537999999,
+                "elapsedMs": 7180.594502999999,
+                "copyBytes": 6834522537,
+                "insertStatementCount": 10000,
+                "insertStatementsByRowCount": {
+                  "1": 10000
+                }
+              }
+            }
+          ],
+          "records": [
+            {
+              "level": "info",
+              "message": "Finished copying 1 rows into copy_pipeline_app_32_1784029383028_128407.permissions (flush: 0.034 ms) (total: 2.716 ms) ",
+              "data": {
+                "schema": "copy_pipeline_app_32_1784029383028_128407",
+                "table": "permissions",
+                "replicaTable": "copy_pipeline_app_32_1784029383028_128407.permissions",
+                "syncMode": "initial",
+                "copyFormat": "binary",
+                "columnCount": 3,
+                "rows": 1,
+                "estimatedRows": 0,
+                "estimatedBytes": 16384,
+                "flushMs": 0.03387499999917054,
+                "elapsedMs": 2.7155830000001515,
+                "copyBytes": 36,
+                "insertStatementCount": 1,
+                "insertStatementsByRowCount": {
+                  "1": 1
+                }
+              }
+            },
+            {
+              "level": "info",
+              "message": "Finished copying 0 rows into copy_pipeline_app_32_1784029383028_128407_0.clients (flush: 0.001 ms) (total: 2.158 ms) ",
+              "data": {
+                "schema": "copy_pipeline_app_32_1784029383028_128407_0",
+                "table": "clients",
+                "replicaTable": "copy_pipeline_app_32_1784029383028_128407_0.clients",
+                "syncMode": "initial",
+                "copyFormat": "binary",
+                "columnCount": 4,
+                "rows": 0,
+                "estimatedRows": 0,
+                "estimatedBytes": 8192,
+                "flushMs": 0.0007919999998193816,
+                "elapsedMs": 2.1580000000003565,
+                "copyBytes": 21,
+                "insertStatementCount": 0,
+                "insertStatementsByRowCount": {}
+              }
+            },
+            {
+              "level": "info",
+              "message": "Finished copying 0 rows into copy_pipeline_app_32_1784029383028_128407_0.mutations (flush: 0.001 ms) (total: 6.179 ms) ",
+              "data": {
+                "schema": "copy_pipeline_app_32_1784029383028_128407_0",
+                "table": "mutations",
+                "replicaTable": "copy_pipeline_app_32_1784029383028_128407_0.mutations",
+                "syncMode": "initial",
+                "copyFormat": "binary",
+                "columnCount": 4,
+                "rows": 0,
+                "estimatedRows": 0,
+                "estimatedBytes": 8192,
+                "flushMs": 0.0006669999993391684,
+                "elapsedMs": 6.17870799999946,
+                "copyBytes": 21,
+                "insertStatementCount": 0,
+                "insertStatementsByRowCount": {}
+              }
+            },
+            {
+              "level": "info",
+              "message": "Finished copying 10000 rows into Email (flush: 4530.343 ms) (total: 7180.595 ms) ",
+              "data": {
+                "schema": "public",
+                "table": "Email",
+                "replicaTable": "Email",
+                "syncMode": "initial",
+                "copyFormat": "binary",
+                "columnCount": 25,
+                "rows": 10000,
+                "estimatedRows": 10000,
+                "estimatedBytes": 87433216,
+                "flushMs": 4530.342537999999,
+                "elapsedMs": 7180.594502999999,
+                "copyBytes": 6834522537,
+                "insertStatementCount": 10000,
+                "insertStatementsByRowCount": {
+                  "1": 10000
+                }
+              }
+            },
+            {
+              "level": "info",
+              "message": "Created index 1/7 (0.185 ms): CREATE UNIQUE INDEX \"copy_pipeline_app_32_1784029383028_128407.permissions_pkey\" ON \"copy_pipeline_app_32_1784029383028_128407.permissions\" (\"lock\" ASC);"
+            },
+            {
+              "level": "info",
+              "message": "Created index 2/7 (0.059 ms): CREATE UNIQUE INDEX \"copy_pipeline_app_32_1784029383028_128407_0.clients_pkey\" ON \"copy_pipeline_app_32_1784029383028_128407_0.clients\" (\"clientGroupID\" ASC,\"clientID\" ASC);"
+            },
+            {
+              "level": "info",
+              "message": "Created index 3/7 (0.023 ms): CREATE UNIQUE INDEX \"copy_pipeline_app_32_1784029383028_128407_0.mutations_pkey\" ON \"copy_pipeline_app_32_1784029383028_128407_0.mutations\" (\"clientGroupID\" ASC,\"clientID\" ASC,\"mutationID\" ASC);"
+            },
+            {
+              "level": "info",
+              "message": "Created index 4/7 (234.637 ms): CREATE UNIQUE INDEX \"Email_pkey\" ON \"Email\" (\"id\" ASC);"
+            },
+            {
+              "level": "info",
+              "message": "Created index 5/7 (3957.023 ms): CREATE  INDEX \"Email_threadId_createdAt_id_idx\" ON \"Email\" (\"threadId\" ASC,\"createdAt\" ASC,\"id\" ASC);"
+            },
+            {
+              "level": "info",
+              "message": "Created index 6/7 (3187.660 ms): CREATE  INDEX \"Email_threadId_id_idx\" ON \"Email\" (\"threadId\" ASC,\"id\" ASC);"
+            },
+            {
+              "level": "info",
+              "message": "Created index 7/7 (2891.721 ms): CREATE  INDEX \"Email_workspaceId_id_idx\" ON \"Email\" (\"workspaceId\" ASC,\"id\" ASC);"
+            },
+            {
+              "level": "info",
+              "message": "Created indexes (10272.761 ms)"
+            },
+            {
+              "level": "info",
+              "message": "Synced 10,001 rows of 4 tables in _copy_pipeline_app_32_1784029383028_128407_metadata_0,zero_copy_pipeline up to 0/70DC558 (flush: 4530.378, index: 10272.761, total: 17564.546 ms)",
+              "data": {
+                "syncMode": "initial",
+                "copyFormat": "binary",
+                "publications": [
+                  "_copy_pipeline_app_32_1784029383028_128407_metadata_0",
+                  "zero_copy_pipeline"
+                ],
+                "lsn": "0/70DC558",
+                "tables": 4,
+                "rows": 10001,
+                "copyMs": 7186.835295,
+                "flushMs": 4530.377871999997,
+                "copyBytes": 6834522615,
+                "insertStatementCount": 10001,
+                "insertStatementsByRowCount": {
+                  "1": 10001
+                },
+                "indexes": 7,
+                "indexMs": 10272.760796999999,
+                "copyOtherMs": 2761.4069650000056,
+                "totalMs": 17564.545634000002
+              }
+            }
+          ]
+        },
+        "peakRssBytes": 1296744448,
+        "resourceUsage": {
+          "userCPUTime": 3883747,
+          "systemCPUTime": 9467027,
+          "maxRSS": 1067516,
+          "sharedMemorySize": 0,
+          "unsharedDataSize": 0,
+          "unsharedStackSize": 0,
+          "minorPageFault": 1109430,
+          "majorPageFault": 174,
+          "swappedOut": 0,
+          "fsRead": 31645056,
+          "fsWrite": 13372560,
+          "ipcSent": 0,
+          "ipcReceived": 0,
+          "signalsCount": 0,
+          "voluntaryContextSwitches": 69361,
+          "involuntaryContextSwitches": 7814
+        },
+        "sqlite": {
+          "rows": 10000,
+          "fileBytes": 6846730240,
+          "pageCount": 1671565,
+          "pageSize": 4096
+        }
+      },
+      "exit": {
+        "status": 0,
+        "signal": null
+      },
+      "cgroup": {
+        "memoryPeakBytes": 3221921792,
+        "memoryCurrentBytes": 16773120,
+        "memoryMax": "3221225472",
+        "memoryEvents": {
+          "low": 0,
+          "high": 0,
+          "max": 24975,
+          "oom": 0,
+          "oom_kill": 0,
+          "oom_group_kill": 0
+        },
+        "memoryStat": {
+          "anon": 6868992,
+          "file": 151552,
+          "kernel": 7667712,
+          "kernel_stack": 147456,
+          "pagetables": 536576,
+          "sec_pagetables": 0,
+          "percpu": 37876,
+          "sock": 0,
+          "vmalloc": 8192,
+          "shmem": 0,
+          "zswap": 0,
+          "zswapped": 0,
+          "file_mapped": 0,
+          "file_dirty": 12288,
+          "file_writeback": 0,
+          "swapcached": 0,
+          "anon_thp": 0,
+          "file_thp": 0,
+          "shmem_thp": 0,
+          "inactive_anon": 0,
+          "active_anon": 6754304,
+          "inactive_file": 4096,
+          "active_file": 147456,
+          "unevictable": 0,
+          "slab_reclaimable": 2632704,
+          "slab_unreclaimable": 572456,
+          "slab": 3205160,
+          "workingset_refault_anon": 0,
+          "workingset_refault_file": 3955956,
+          "workingset_activate_anon": 0,
+          "workingset_activate_file": 3955956,
+          "workingset_restore_anon": 0,
+          "workingset_restore_file": 143963,
+          "workingset_nodereclaim": 0,
+          "pgdemote_kswapd": 0,
+          "pgdemote_direct": 0,
+          "pgdemote_khugepaged": 0,
+          "pgscan": 4929013,
+          "pgsteal": 4929013,
+          "pgscan_kswapd": 276416,
+          "pgscan_direct": 4652469,
+          "pgscan_khugepaged": 128,
+          "pgsteal_kswapd": 276416,
+          "pgsteal_direct": 4652469,
+          "pgsteal_khugepaged": 128,
+          "pgfault": 1385951,
+          "pgmajfault": 175,
+          "pgrefill": 99197,
+          "pgactivate": 0,
+          "pgdeactivate": 0,
+          "pglazyfree": 0,
+          "pglazyfreed": 0,
+          "swpin_zero": 0,
+          "swpout_zero": 0,
+          "zswpin": 0,
+          "zswpout": 0,
+          "zswpwb": 0,
+          "thp_fault_alloc": 50,
+          "thp_collapse_alloc": 0,
+          "thp_swpout": 0,
+          "thp_swpout_fallback": 0
+        }
+      }
+    },
+    {
+      "file": "002-email-high-6.83g-direct-text-mmap-2g-r1.log",
+      "meta": {
+        "startedAt": "2026-07-14T11:43:22.887Z",
+        "id": "email-high-6.83g-direct-text-mmap-2g-r1",
+        "runConfig": {
+          "profile": "email-high-6.83g",
+          "worktree": "linear-parser",
+          "label": "direct-text-mmap-2g",
+          "partialInsertBatches": false,
+          "directTextBuffers": true,
+          "bufferMB": 8,
+          "mmapGiB": 2,
+          "repetition": 1
+        },
+        "fixture": {
+          "fixture": "email",
+          "rows": 10000,
+          "payloadBytes": 683000,
+          "copyChunkBytes": 31744,
+          "expectedCopyBytes": 6830000000,
+          "docker": {
+            "cpus": 1,
+            "memory": "3g",
+            "nodeHeapMB": 2304
+          }
+        },
+        "constraints": {
+          "cpus": 1,
+          "memory": "3g",
+          "nodeHeapMB": 2304
+        },
+        "image": "zero-copy-pipeline-linear-parser:local"
+      },
+      "result": {
+        "kind": "initial-sync",
+        "profile": "email-high-6.83g",
+        "runLabel": "email-high-6.83g-direct-text-mmap-2g-r1",
+        "fixture": "email",
+        "rows": 10000,
+        "payloadBytes": 683000,
+        "workers": 5,
+        "treatment": {
+          "partialInsertBatches": false,
+          "directTextBuffers": true,
+          "bufferMB": 8
+        },
+        "sqliteTuning": {
+          "mmapGiB": 2,
+          "mmapBytes": 2147483648,
+          "effectiveMmapBytes": 2147418112
+        },
+        "source": {
+          "rows": 10000,
+          "tableBytes": 87433216,
+          "indexBytes": 2007040,
+          "totalBytes": 89440256
+        },
+        "rawCopy": {
+          "bytes": 6834522537,
+          "chunks": 10001,
+          "averageChunkBytes": 683383.9153084692,
+          "ms": 5856.845003,
+          "throughputMBps": 1166.9290434524412
+        },
+        "timing": {
+          "outerMs": 16097.224092,
+          "callbackMs": 15797.182132,
+          "wrapperMs": 300.0419600000005
+        },
+        "phases": {
+          "summary": {
+            "syncMode": "initial",
+            "copyFormat": "binary",
+            "publications": [
+              "_copy_pipeline_app_31_1784029410646_293911_metadata_0",
+              "zero_copy_pipeline"
+            ],
+            "lsn": "0/CCC7778",
+            "tables": 4,
+            "rows": 10001,
+            "copyMs": 5590.276919999999,
+            "flushMs": 3331.7040000000206,
+            "copyBytes": 6834522615,
+            "insertStatementCount": 10001,
+            "insertStatementsByRowCount": {
+              "1": 10001
+            },
+            "indexes": 7,
+            "indexMs": 9960.914838,
+            "copyOtherMs": 2396.191252999979,
+            "totalMs": 15688.810091
+          },
+          "tableCopies": [
+            {
+              "level": "info",
+              "message": "Finished copying 1 rows into copy_pipeline_app_31_1784029410646_293911.permissions (flush: 0.029 ms) (total: 2.139 ms) ",
+              "data": {
+                "schema": "copy_pipeline_app_31_1784029410646_293911",
+                "table": "permissions",
+                "replicaTable": "copy_pipeline_app_31_1784029410646_293911.permissions",
+                "syncMode": "initial",
+                "copyFormat": "binary",
+                "columnCount": 3,
+                "rows": 1,
+                "estimatedRows": 0,
+                "estimatedBytes": 16384,
+                "flushMs": 0.028957999999875028,
+                "elapsedMs": 2.1390419999997903,
+                "copyBytes": 36,
+                "insertStatementCount": 1,
+                "insertStatementsByRowCount": {
+                  "1": 1
+                }
+              }
+            },
+            {
+              "level": "info",
+              "message": "Finished copying 0 rows into copy_pipeline_app_31_1784029410646_293911_0.clients (flush: 0.001 ms) (total: 2.193 ms) ",
+              "data": {
+                "schema": "copy_pipeline_app_31_1784029410646_293911_0",
+                "table": "clients",
+                "replicaTable": "copy_pipeline_app_31_1784029410646_293911_0.clients",
+                "syncMode": "initial",
+                "copyFormat": "binary",
+                "columnCount": 4,
+                "rows": 0,
+                "estimatedRows": 0,
+                "estimatedBytes": 8192,
+                "flushMs": 0.0006249999996725819,
+                "elapsedMs": 2.1926250000005894,
+                "copyBytes": 21,
+                "insertStatementCount": 0,
+                "insertStatementsByRowCount": {}
+              }
+            },
+            {
+              "level": "info",
+              "message": "Finished copying 0 rows into copy_pipeline_app_31_1784029410646_293911_0.mutations (flush: 0.001 ms) (total: 1.589 ms) ",
+              "data": {
+                "schema": "copy_pipeline_app_31_1784029410646_293911_0",
+                "table": "mutations",
+                "replicaTable": "copy_pipeline_app_31_1784029410646_293911_0.mutations",
+                "syncMode": "initial",
+                "copyFormat": "binary",
+                "columnCount": 4,
+                "rows": 0,
+                "estimatedRows": 0,
+                "estimatedBytes": 8192,
+                "flushMs": 0.0007500000001527951,
+                "elapsedMs": 1.589375000000473,
+                "copyBytes": 21,
+                "insertStatementCount": 0,
+                "insertStatementsByRowCount": {}
+              }
+            },
+            {
+              "level": "info",
+              "message": "Finished copying 10000 rows into Email (flush: 3331.674 ms) (total: 5584.077 ms) ",
+              "data": {
+                "schema": "public",
+                "table": "Email",
+                "replicaTable": "Email",
+                "syncMode": "initial",
+                "copyFormat": "binary",
+                "columnCount": 25,
+                "rows": 10000,
+                "estimatedRows": 10000,
+                "estimatedBytes": 87433216,
+                "flushMs": 3331.673667000021,
+                "elapsedMs": 5584.0765440000005,
+                "copyBytes": 6834522537,
+                "insertStatementCount": 10000,
+                "insertStatementsByRowCount": {
+                  "1": 10000
+                }
+              }
+            }
+          ],
+          "records": [
+            {
+              "level": "info",
+              "message": "Finished copying 1 rows into copy_pipeline_app_31_1784029410646_293911.permissions (flush: 0.029 ms) (total: 2.139 ms) ",
+              "data": {
+                "schema": "copy_pipeline_app_31_1784029410646_293911",
+                "table": "permissions",
+                "replicaTable": "copy_pipeline_app_31_1784029410646_293911.permissions",
+                "syncMode": "initial",
+                "copyFormat": "binary",
+                "columnCount": 3,
+                "rows": 1,
+                "estimatedRows": 0,
+                "estimatedBytes": 16384,
+                "flushMs": 0.028957999999875028,
+                "elapsedMs": 2.1390419999997903,
+                "copyBytes": 36,
+                "insertStatementCount": 1,
+                "insertStatementsByRowCount": {
+                  "1": 1
+                }
+              }
+            },
+            {
+              "level": "info",
+              "message": "Finished copying 0 rows into copy_pipeline_app_31_1784029410646_293911_0.clients (flush: 0.001 ms) (total: 2.193 ms) ",
+              "data": {
+                "schema": "copy_pipeline_app_31_1784029410646_293911_0",
+                "table": "clients",
+                "replicaTable": "copy_pipeline_app_31_1784029410646_293911_0.clients",
+                "syncMode": "initial",
+                "copyFormat": "binary",
+                "columnCount": 4,
+                "rows": 0,
+                "estimatedRows": 0,
+                "estimatedBytes": 8192,
+                "flushMs": 0.0006249999996725819,
+                "elapsedMs": 2.1926250000005894,
+                "copyBytes": 21,
+                "insertStatementCount": 0,
+                "insertStatementsByRowCount": {}
+              }
+            },
+            {
+              "level": "info",
+              "message": "Finished copying 0 rows into copy_pipeline_app_31_1784029410646_293911_0.mutations (flush: 0.001 ms) (total: 1.589 ms) ",
+              "data": {
+                "schema": "copy_pipeline_app_31_1784029410646_293911_0",
+                "table": "mutations",
+                "replicaTable": "copy_pipeline_app_31_1784029410646_293911_0.mutations",
+                "syncMode": "initial",
+                "copyFormat": "binary",
+                "columnCount": 4,
+                "rows": 0,
+                "estimatedRows": 0,
+                "estimatedBytes": 8192,
+                "flushMs": 0.0007500000001527951,
+                "elapsedMs": 1.589375000000473,
+                "copyBytes": 21,
+                "insertStatementCount": 0,
+                "insertStatementsByRowCount": {}
+              }
+            },
+            {
+              "level": "info",
+              "message": "Finished copying 10000 rows into Email (flush: 3331.674 ms) (total: 5584.077 ms) ",
+              "data": {
+                "schema": "public",
+                "table": "Email",
+                "replicaTable": "Email",
+                "syncMode": "initial",
+                "copyFormat": "binary",
+                "columnCount": 25,
+                "rows": 10000,
+                "estimatedRows": 10000,
+                "estimatedBytes": 87433216,
+                "flushMs": 3331.673667000021,
+                "elapsedMs": 5584.0765440000005,
+                "copyBytes": 6834522537,
+                "insertStatementCount": 10000,
+                "insertStatementsByRowCount": {
+                  "1": 10000
+                }
+              }
+            },
+            {
+              "level": "info",
+              "message": "Created index 1/7 (0.047 ms): CREATE UNIQUE INDEX \"copy_pipeline_app_31_1784029410646_293911.permissions_pkey\" ON \"copy_pipeline_app_31_1784029410646_293911.permissions\" (\"lock\" ASC);"
+            },
+            {
+              "level": "info",
+              "message": "Created index 2/7 (0.020 ms): CREATE UNIQUE INDEX \"copy_pipeline_app_31_1784029410646_293911_0.clients_pkey\" ON \"copy_pipeline_app_31_1784029410646_293911_0.clients\" (\"clientGroupID\" ASC,\"clientID\" ASC);"
+            },
+            {
+              "level": "info",
+              "message": "Created index 3/7 (0.022 ms): CREATE UNIQUE INDEX \"copy_pipeline_app_31_1784029410646_293911_0.mutations_pkey\" ON \"copy_pipeline_app_31_1784029410646_293911_0.mutations\" (\"clientGroupID\" ASC,\"clientID\" ASC,\"mutationID\" ASC);"
+            },
+            {
+              "level": "info",
+              "message": "Created index 4/7 (92.612 ms): CREATE UNIQUE INDEX \"Email_pkey\" ON \"Email\" (\"id\" ASC);"
+            },
+            {
+              "level": "info",
+              "message": "Created index 5/7 (3349.435 ms): CREATE  INDEX \"Email_threadId_createdAt_id_idx\" ON \"Email\" (\"threadId\" ASC,\"createdAt\" ASC,\"id\" ASC);"
+            },
+            {
+              "level": "info",
+              "message": "Created index 6/7 (3884.338 ms): CREATE  INDEX \"Email_threadId_id_idx\" ON \"Email\" (\"threadId\" ASC,\"id\" ASC);"
+            },
+            {
+              "level": "info",
+              "message": "Created index 7/7 (2633.049 ms): CREATE  INDEX \"Email_workspaceId_id_idx\" ON \"Email\" (\"workspaceId\" ASC,\"id\" ASC);"
+            },
+            {
+              "level": "info",
+              "message": "Created indexes (9960.915 ms)"
+            },
+            {
+              "level": "info",
+              "message": "Synced 10,001 rows of 4 tables in _copy_pipeline_app_31_1784029410646_293911_metadata_0,zero_copy_pipeline up to 0/CCC7778 (flush: 3331.704, index: 9960.915, total: 15688.810 ms)",
+              "data": {
+                "syncMode": "initial",
+                "copyFormat": "binary",
+                "publications": [
+                  "_copy_pipeline_app_31_1784029410646_293911_metadata_0",
+                  "zero_copy_pipeline"
+                ],
+                "lsn": "0/CCC7778",
+                "tables": 4,
+                "rows": 10001,
+                "copyMs": 5590.276919999999,
+                "flushMs": 3331.7040000000206,
+                "copyBytes": 6834522615,
+                "insertStatementCount": 10001,
+                "insertStatementsByRowCount": {
+                  "1": 10001
+                },
+                "indexes": 7,
+                "indexMs": 9960.914838,
+                "copyOtherMs": 2396.191252999979,
+                "totalMs": 15688.810091
+              }
+            }
+          ]
+        },
+        "peakRssBytes": 2364207104,
+        "resourceUsage": {
+          "userCPUTime": 4116216,
+          "systemCPUTime": 7125839,
+          "maxRSS": 2119148,
+          "sharedMemorySize": 0,
+          "unsharedDataSize": 0,
+          "unsharedStackSize": 0,
+          "minorPageFault": 1223830,
+          "majorPageFault": 3029,
+          "swappedOut": 0,
+          "fsRead": 31135504,
+          "fsWrite": 13372560,
+          "ipcSent": 0,
+          "ipcReceived": 0,
+          "signalsCount": 0,
+          "voluntaryContextSwitches": 73695,
+          "involuntaryContextSwitches": 8035
+        },
+        "sqlite": {
+          "rows": 10000,
+          "fileBytes": 6846730240,
+          "pageCount": 1671565,
+          "pageSize": 4096
+        }
+      },
+      "exit": {
+        "status": 0,
+        "signal": null
+      },
+      "cgroup": {
+        "memoryPeakBytes": 3221790720,
+        "memoryCurrentBytes": 16105472,
+        "memoryMax": "3221225472",
+        "memoryEvents": {
+          "low": 0,
+          "high": 0,
+          "max": 24810,
+          "oom": 0,
+          "oom_kill": 0,
+          "oom_group_kill": 0
+        },
+        "memoryStat": {
+          "anon": 6868992,
+          "file": 16384,
+          "kernel": 7639040,
+          "kernel_stack": 147456,
+          "pagetables": 544768,
+          "sec_pagetables": 0,
+          "percpu": 37876,
+          "sock": 0,
+          "vmalloc": 8192,
+          "shmem": 0,
+          "zswap": 0,
+          "zswapped": 0,
+          "file_mapped": 0,
+          "file_dirty": 12288,
+          "file_writeback": 0,
+          "swapcached": 0,
+          "anon_thp": 0,
+          "file_thp": 0,
+          "shmem_thp": 0,
+          "inactive_anon": 0,
+          "active_anon": 6754304,
+          "inactive_file": 12288,
+          "active_file": 4096,
+          "unevictable": 0,
+          "slab_reclaimable": 2641376,
+          "slab_unreclaimable": 582688,
+          "slab": 3224064,
+          "workingset_refault_anon": 0,
+          "workingset_refault_file": 3892270,
+          "workingset_activate_anon": 0,
+          "workingset_activate_file": 2470002,
+          "workingset_restore_anon": 0,
+          "workingset_restore_file": 439687,
+          "workingset_nodereclaim": 0,
+          "pgdemote_kswapd": 0,
+          "pgdemote_direct": 0,
+          "pgdemote_khugepaged": 0,
+          "pgscan": 5290902,
+          "pgsteal": 4851123,
+          "pgscan_kswapd": 896,
+          "pgscan_direct": 5289238,
+          "pgscan_khugepaged": 768,
+          "pgsteal_kswapd": 896,
+          "pgsteal_direct": 4849459,
+          "pgsteal_khugepaged": 768,
+          "pgfault": 1447498,
+          "pgmajfault": 3031,
+          "pgrefill": 498743,
+          "pgactivate": 67172,
+          "pgdeactivate": 0,
+          "pglazyfree": 0,
+          "pglazyfreed": 0,
+          "swpin_zero": 0,
+          "swpout_zero": 0,
+          "zswpin": 0,
+          "zswpout": 0,
+          "zswpwb": 0,
+          "thp_fault_alloc": 56,
+          "thp_collapse_alloc": 5,
+          "thp_swpout": 0,
+          "thp_swpout_fallback": 0
+        }
+      }
+    },
+    {
+      "file": "003-imports-production-2.75g-direct-text-mmap-1g-r1.log",
+      "meta": {
+        "startedAt": "2026-07-14T11:43:48.629Z",
+        "id": "imports-production-2.75g-direct-text-mmap-1g-r1",
+        "runConfig": {
+          "profile": "imports-production-2.75g",
+          "worktree": "linear-parser",
+          "label": "direct-text-mmap-1g",
+          "partialInsertBatches": false,
+          "directTextBuffers": true,
+          "bufferMB": 8,
+          "mmapGiB": 1,
+          "repetition": 1
+        },
+        "fixture": {
+          "fixture": "imports",
+          "rows": 10000,
+          "payloadBytes": 275000,
+          "copyChunkBytes": 5632,
+          "expectedCopyBytes": 2750000000,
+          "docker": {
+            "cpus": 2,
+            "memory": "6g",
+            "nodeHeapMB": 4608
+          }
+        },
+        "constraints": {
+          "cpus": 2,
+          "memory": "6g",
+          "nodeHeapMB": 4608
+        },
+        "image": "zero-copy-pipeline-linear-parser:local"
+      },
+      "result": {
+        "kind": "initial-sync",
+        "profile": "imports-production-2.75g",
+        "runLabel": "imports-production-2.75g-direct-text-mmap-1g-r1",
+        "fixture": "imports",
+        "rows": 10000,
+        "payloadBytes": 275000,
+        "workers": 5,
+        "treatment": {
+          "partialInsertBatches": false,
+          "directTextBuffers": true,
+          "bufferMB": 8
+        },
+        "sqliteTuning": {
+          "mmapGiB": 1,
+          "mmapBytes": 1073741824,
+          "effectiveMmapBytes": 1073741824
+        },
+        "source": {
+          "rows": 10000,
+          "tableBytes": 42442752,
+          "indexBytes": 1671168,
+          "totalBytes": 44113920
+        },
+        "rawCopy": {
+          "bytes": 2750877916,
+          "chunks": 10001,
+          "averageChunkBytes": 275060.28557144286,
+          "ms": 4243.492585999999,
+          "throughputMBps": 648.2579762424027
+        },
+        "timing": {
+          "outerMs": 5865.822961000002,
+          "callbackMs": 5821.485628,
+          "wrapperMs": 44.33733300000131
+        },
+        "phases": {
+          "summary": {
+            "syncMode": "initial",
+            "copyFormat": "binary",
+            "publications": [
+              "_copy_pipeline_app_35_1784029439847_248619_metadata_0",
+              "zero_copy_pipeline"
+            ],
+            "lsn": "0/F620600",
+            "tables": 4,
+            "rows": 10001,
+            "copyMs": 4606.299336,
+            "flushMs": 1945.9724970000188,
+            "copyBytes": 2750877994,
+            "insertStatementCount": 10001,
+            "insertStatementsByRowCount": {
+              "1": 10001
+            },
+            "indexes": 9,
+            "indexMs": 1093.9169589999983,
+            "copyOtherMs": 2770.2003389999827,
+            "totalMs": 5810.089795
+          },
+          "tableCopies": [
+            {
+              "level": "info",
+              "message": "Finished copying 1 rows into copy_pipeline_app_35_1784029439847_248619.permissions (flush: 0.041 ms) (total: 2.381 ms) ",
+              "data": {
+                "schema": "copy_pipeline_app_35_1784029439847_248619",
+                "table": "permissions",
+                "replicaTable": "copy_pipeline_app_35_1784029439847_248619.permissions",
+                "syncMode": "initial",
+                "copyFormat": "binary",
+                "columnCount": 3,
+                "rows": 1,
+                "estimatedRows": 0,
+                "estimatedBytes": 16384,
+                "flushMs": 0.041459000000031665,
+                "elapsedMs": 2.3814579999998386,
+                "copyBytes": 36,
+                "insertStatementCount": 1,
+                "insertStatementsByRowCount": {
+                  "1": 1
+                }
+              }
+            },
+            {
+              "level": "info",
+              "message": "Finished copying 0 rows into copy_pipeline_app_35_1784029439847_248619_0.clients (flush: 0.001 ms) (total: 1.847 ms) ",
+              "data": {
+                "schema": "copy_pipeline_app_35_1784029439847_248619_0",
+                "table": "clients",
+                "replicaTable": "copy_pipeline_app_35_1784029439847_248619_0.clients",
+                "syncMode": "initial",
+                "copyFormat": "binary",
+                "columnCount": 4,
+                "rows": 0,
+                "estimatedRows": 0,
+                "estimatedBytes": 8192,
+                "flushMs": 0.0007080000013957033,
+                "elapsedMs": 1.8470419999994192,
+                "copyBytes": 21,
+                "insertStatementCount": 0,
+                "insertStatementsByRowCount": {}
+              }
+            },
+            {
+              "level": "info",
+              "message": "Finished copying 0 rows into copy_pipeline_app_35_1784029439847_248619_0.mutations (flush: 0.001 ms) (total: 3.284 ms) ",
+              "data": {
+                "schema": "copy_pipeline_app_35_1784029439847_248619_0",
+                "table": "mutations",
+                "replicaTable": "copy_pipeline_app_35_1784029439847_248619_0.mutations",
+                "syncMode": "initial",
+                "copyFormat": "binary",
+                "columnCount": 4,
+                "rows": 0,
+                "estimatedRows": 0,
+                "estimatedBytes": 8192,
+                "flushMs": 0.0009579999987181509,
+                "elapsedMs": 3.283957999999984,
+                "copyBytes": 21,
+                "insertStatementCount": 0,
+                "insertStatementsByRowCount": {}
+              }
+            },
+            {
+              "level": "info",
+              "message": "Finished copying 10000 rows into userspace.imports (flush: 1945.929 ms) (total: 4600.852 ms) ",
+              "data": {
+                "schema": "userspace",
+                "table": "imports",
+                "replicaTable": "userspace.imports",
+                "syncMode": "initial",
+                "copyFormat": "binary",
+                "columnCount": 7,
+                "rows": 10000,
+                "estimatedRows": 10000,
+                "estimatedBytes": 42442752,
+                "flushMs": 1945.9293720000187,
+                "elapsedMs": 4600.852210999999,
+                "copyBytes": 2750877916,
+                "insertStatementCount": 10000,
+                "insertStatementsByRowCount": {
+                  "1": 10000
+                }
+              }
+            }
+          ],
+          "records": [
+            {
+              "level": "info",
+              "message": "Finished copying 1 rows into copy_pipeline_app_35_1784029439847_248619.permissions (flush: 0.041 ms) (total: 2.381 ms) ",
+              "data": {
+                "schema": "copy_pipeline_app_35_1784029439847_248619",
+                "table": "permissions",
+                "replicaTable": "copy_pipeline_app_35_1784029439847_248619.permissions",
+                "syncMode": "initial",
+                "copyFormat": "binary",
+                "columnCount": 3,
+                "rows": 1,
+                "estimatedRows": 0,
+                "estimatedBytes": 16384,
+                "flushMs": 0.041459000000031665,
+                "elapsedMs": 2.3814579999998386,
+                "copyBytes": 36,
+                "insertStatementCount": 1,
+                "insertStatementsByRowCount": {
+                  "1": 1
+                }
+              }
+            },
+            {
+              "level": "info",
+              "message": "Finished copying 0 rows into copy_pipeline_app_35_1784029439847_248619_0.clients (flush: 0.001 ms) (total: 1.847 ms) ",
+              "data": {
+                "schema": "copy_pipeline_app_35_1784029439847_248619_0",
+                "table": "clients",
+                "replicaTable": "copy_pipeline_app_35_1784029439847_248619_0.clients",
+                "syncMode": "initial",
+                "copyFormat": "binary",
+                "columnCount": 4,
+                "rows": 0,
+                "estimatedRows": 0,
+                "estimatedBytes": 8192,
+                "flushMs": 0.0007080000013957033,
+                "elapsedMs": 1.8470419999994192,
+                "copyBytes": 21,
+                "insertStatementCount": 0,
+                "insertStatementsByRowCount": {}
+              }
+            },
+            {
+              "level": "info",
+              "message": "Finished copying 0 rows into copy_pipeline_app_35_1784029439847_248619_0.mutations (flush: 0.001 ms) (total: 3.284 ms) ",
+              "data": {
+                "schema": "copy_pipeline_app_35_1784029439847_248619_0",
+                "table": "mutations",
+                "replicaTable": "copy_pipeline_app_35_1784029439847_248619_0.mutations",
+                "syncMode": "initial",
+                "copyFormat": "binary",
+                "columnCount": 4,
+                "rows": 0,
+                "estimatedRows": 0,
+                "estimatedBytes": 8192,
+                "flushMs": 0.0009579999987181509,
+                "elapsedMs": 3.283957999999984,
+                "copyBytes": 21,
+                "insertStatementCount": 0,
+                "insertStatementsByRowCount": {}
+              }
+            },
+            {
+              "level": "info",
+              "message": "Finished copying 10000 rows into userspace.imports (flush: 1945.929 ms) (total: 4600.852 ms) ",
+              "data": {
+                "schema": "userspace",
+                "table": "imports",
+                "replicaTable": "userspace.imports",
+                "syncMode": "initial",
+                "copyFormat": "binary",
+                "columnCount": 7,
+                "rows": 10000,
+                "estimatedRows": 10000,
+                "estimatedBytes": 42442752,
+                "flushMs": 1945.9293720000187,
+                "elapsedMs": 4600.852210999999,
+                "copyBytes": 2750877916,
+                "insertStatementCount": 10000,
+                "insertStatementsByRowCount": {
+                  "1": 10000
+                }
+              }
+            },
+            {
+              "level": "info",
+              "message": "Created index 1/9 (0.064 ms): CREATE UNIQUE INDEX \"copy_pipeline_app_35_1784029439847_248619.permissions_pkey\" ON \"copy_pipeline_app_35_1784029439847_248619.permissions\" (\"lock\" ASC);"
+            },
+            {
+              "level": "info",
+              "message": "Created index 2/9 (0.023 ms): CREATE UNIQUE INDEX \"copy_pipeline_app_35_1784029439847_248619_0.clients_pkey\" ON \"copy_pipeline_app_35_1784029439847_248619_0.clients\" (\"clientGroupID\" ASC,\"clientID\" ASC);"
+            },
+            {
+              "level": "info",
+              "message": "Created index 3/9 (0.014 ms): CREATE UNIQUE INDEX \"copy_pipeline_app_35_1784029439847_248619_0.mutations_pkey\" ON \"copy_pipeline_app_35_1784029439847_248619_0.mutations\" (\"clientGroupID\" ASC,\"clientID\" ASC,\"mutationID\" ASC);"
+            },
+            {
+              "level": "info",
+              "message": "Created index 4/9 (318.424 ms): CREATE  INDEX \"userspace.idx_imports_schema\" ON \"userspace.imports\" (\"schema\" ASC);"
+            },
+            {
+              "level": "info",
+              "message": "Created index 5/9 (192.809 ms): CREATE  INDEX \"userspace.idx_imports_user_id\" ON \"userspace.imports\" (\"user_id\" ASC);"
+            },
+            {
+              "level": "info",
+              "message": "Created index 6/9 (196.849 ms): CREATE  INDEX \"userspace.idx_imports_user_id_import_id\" ON \"userspace.imports\" (\"user_id\" ASC,\"import_id\" ASC);"
+            },
+            {
+              "level": "info",
+              "message": "Created index 7/9 (191.229 ms): CREATE  INDEX \"userspace.idx_imports_user_source\" ON \"userspace.imports\" (\"user_id\" ASC,\"source\" ASC);"
+            },
+            {
+              "level": "info",
+              "message": "Created index 8/9 (189.559 ms): CREATE  INDEX \"userspace.idx_imports_user_source_created_at\" ON \"userspace.imports\" (\"user_id\" ASC,\"source\" ASC,\"created_at\" DESC);"
+            },
+            {
+              "level": "info",
+              "message": "Created index 9/9 (3.003 ms): CREATE UNIQUE INDEX \"userspace.imports_pkey\" ON \"userspace.imports\" (\"import_id\" ASC);"
+            },
+            {
+              "level": "info",
+              "message": "Created indexes (1093.917 ms)"
+            },
+            {
+              "level": "info",
+              "message": "Synced 10,001 rows of 4 tables in _copy_pipeline_app_35_1784029439847_248619_metadata_0,zero_copy_pipeline up to 0/F620600 (flush: 1945.972, index: 1093.917, total: 5810.090 ms)",
+              "data": {
+                "syncMode": "initial",
+                "copyFormat": "binary",
+                "publications": [
+                  "_copy_pipeline_app_35_1784029439847_248619_metadata_0",
+                  "zero_copy_pipeline"
+                ],
+                "lsn": "0/F620600",
+                "tables": 4,
+                "rows": 10001,
+                "copyMs": 4606.299336,
+                "flushMs": 1945.9724970000188,
+                "copyBytes": 2750877994,
+                "insertStatementCount": 10001,
+                "insertStatementsByRowCount": {
+                  "1": 10001
+                },
+                "indexes": 9,
+                "indexMs": 1093.9169589999983,
+                "copyOtherMs": 2770.2003389999827,
+                "totalMs": 5810.089795
+              }
+            }
+          ]
+        },
+        "peakRssBytes": 1287942144,
+        "resourceUsage": {
+          "userCPUTime": 5194191,
+          "systemCPUTime": 2729534,
+          "maxRSS": 1093980,
+          "sharedMemorySize": 0,
+          "unsharedDataSize": 0,
+          "unsharedStackSize": 0,
+          "minorPageFault": 128666,
+          "majorPageFault": 0,
+          "swappedOut": 0,
+          "fsRead": 0,
+          "fsWrite": 5382880,
+          "ipcSent": 0,
+          "ipcReceived": 0,
+          "signalsCount": 0,
+          "voluntaryContextSwitches": 13811,
+          "involuntaryContextSwitches": 23
+        },
+        "sqlite": {
+          "rows": 10000,
+          "fileBytes": 2756018176,
+          "pageCount": 672856,
+          "pageSize": 4096
+        }
+      },
+      "exit": {
+        "status": 0,
+        "signal": null
+      },
+      "cgroup": {
+        "memoryPeakBytes": 3158265856,
+        "memoryCurrentBytes": 17362944,
+        "memoryMax": "6442450944",
+        "memoryEvents": {
+          "low": 0,
+          "high": 0,
+          "max": 0,
+          "oom": 0,
+          "oom_kill": 0,
+          "oom_group_kill": 0
+        },
+        "memoryStat": {
+          "anon": 6873088,
+          "file": 897024,
+          "kernel": 7684096,
+          "kernel_stack": 147456,
+          "pagetables": 544768,
+          "sec_pagetables": 0,
+          "percpu": 38148,
+          "sock": 0,
+          "vmalloc": 8192,
+          "shmem": 0,
+          "zswap": 0,
+          "zswapped": 0,
+          "file_mapped": 0,
+          "file_dirty": 8192,
+          "file_writeback": 0,
+          "swapcached": 0,
+          "anon_thp": 0,
+          "file_thp": 0,
+          "shmem_thp": 0,
+          "inactive_anon": 0,
+          "active_anon": 6787072,
+          "inactive_file": 12288,
+          "active_file": 884736,
+          "unevictable": 0,
+          "slab_reclaimable": 2629088,
+          "slab_unreclaimable": 587600,
+          "slab": 3216688,
+          "workingset_refault_anon": 0,
+          "workingset_refault_file": 201,
+          "workingset_activate_anon": 0,
+          "workingset_activate_file": 0,
+          "workingset_restore_anon": 0,
+          "workingset_restore_file": 0,
+          "workingset_nodereclaim": 0,
+          "pgdemote_kswapd": 0,
+          "pgdemote_direct": 0,
+          "pgdemote_khugepaged": 0,
+          "pgscan": 0,
+          "pgsteal": 0,
+          "pgscan_kswapd": 0,
+          "pgscan_direct": 0,
+          "pgscan_khugepaged": 0,
+          "pgsteal_kswapd": 0,
+          "pgsteal_direct": 0,
+          "pgsteal_khugepaged": 0,
+          "pgfault": 416875,
+          "pgmajfault": 3,
+          "pgrefill": 0,
+          "pgactivate": 0,
+          "pgdeactivate": 0,
+          "pglazyfree": 0,
+          "pglazyfreed": 0,
+          "swpin_zero": 0,
+          "swpout_zero": 0,
+          "zswpin": 0,
+          "zswpout": 0,
+          "zswpwb": 0,
+          "thp_fault_alloc": 59,
+          "thp_collapse_alloc": 2,
+          "thp_swpout": 0,
+          "thp_swpout_fallback": 0
+        }
+      }
+    },
+    {
+      "file": "004-imports-production-2.75g-direct-text-mmap-2g-r1.log",
+      "meta": {
+        "startedAt": "2026-07-14T11:44:06.959Z",
+        "id": "imports-production-2.75g-direct-text-mmap-2g-r1",
+        "runConfig": {
+          "profile": "imports-production-2.75g",
+          "worktree": "linear-parser",
+          "label": "direct-text-mmap-2g",
+          "partialInsertBatches": false,
+          "directTextBuffers": true,
+          "bufferMB": 8,
+          "mmapGiB": 2,
+          "repetition": 1
+        },
+        "fixture": {
+          "fixture": "imports",
+          "rows": 10000,
+          "payloadBytes": 275000,
+          "copyChunkBytes": 5632,
+          "expectedCopyBytes": 2750000000,
+          "docker": {
+            "cpus": 2,
+            "memory": "6g",
+            "nodeHeapMB": 4608
+          }
+        },
+        "constraints": {
+          "cpus": 2,
+          "memory": "6g",
+          "nodeHeapMB": 4608
+        },
+        "image": "zero-copy-pipeline-linear-parser:local"
+      },
+      "result": {
+        "kind": "initial-sync",
+        "profile": "imports-production-2.75g",
+        "runLabel": "imports-production-2.75g-direct-text-mmap-2g-r1",
+        "fixture": "imports",
+        "rows": 10000,
+        "payloadBytes": 275000,
+        "workers": 5,
+        "treatment": {
+          "partialInsertBatches": false,
+          "directTextBuffers": true,
+          "bufferMB": 8
+        },
+        "sqliteTuning": {
+          "mmapGiB": 2,
+          "mmapBytes": 2147483648,
+          "effectiveMmapBytes": 2147418112
+        },
+        "source": {
+          "rows": 10000,
+          "tableBytes": 42442752,
+          "indexBytes": 1671168,
+          "totalBytes": 44113920
+        },
+        "rawCopy": {
+          "bytes": 2750877916,
+          "chunks": 10001,
+          "averageChunkBytes": 275060.28557144286,
+          "ms": 4052.756667999999,
+          "throughputMBps": 678.7671062811513
+        },
+        "timing": {
+          "outerMs": 5886.9587520000005,
+          "callbackMs": 5837.390044,
+          "wrapperMs": 49.5687080000007
+        },
+        "phases": {
+          "summary": {
+            "syncMode": "initial",
+            "copyFormat": "binary",
+            "publications": [
+              "_copy_pipeline_app_35_1784029457747_128536_metadata_0",
+              "zero_copy_pipeline"
+            ],
+            "lsn": "0/11F3B058",
+            "tables": 4,
+            "rows": 10001,
+            "copyMs": 4865.327168,
+            "flushMs": 1948.352072999991,
+            "copyBytes": 2750877994,
+            "insertStatementCount": 10001,
+            "insertStatementsByRowCount": {
+              "1": 10001
+            },
+            "indexes": 9,
+            "indexMs": 872.6692920000005,
+            "copyOtherMs": 3003.24301200001,
+            "totalMs": 5824.264377000001
+          },
+          "tableCopies": [
+            {
+              "level": "info",
+              "message": "Finished copying 1 rows into copy_pipeline_app_35_1784029457747_128536.permissions (flush: 0.040 ms) (total: 4.047 ms) ",
+              "data": {
+                "schema": "copy_pipeline_app_35_1784029457747_128536",
+                "table": "permissions",
+                "replicaTable": "copy_pipeline_app_35_1784029457747_128536.permissions",
+                "syncMode": "initial",
+                "copyFormat": "binary",
+                "columnCount": 3,
+                "rows": 1,
+                "estimatedRows": 0,
+                "estimatedBytes": 16384,
+                "flushMs": 0.03954200000043784,
+                "elapsedMs": 4.047332999998616,
+                "copyBytes": 36,
+                "insertStatementCount": 1,
+                "insertStatementsByRowCount": {
+                  "1": 1
+                }
+              }
+            },
+            {
+              "level": "info",
+              "message": "Finished copying 0 rows into copy_pipeline_app_35_1784029457747_128536_0.clients (flush: 0.001 ms) (total: 5.195 ms) ",
+              "data": {
+                "schema": "copy_pipeline_app_35_1784029457747_128536_0",
+                "table": "clients",
+                "replicaTable": "copy_pipeline_app_35_1784029457747_128536_0.clients",
+                "syncMode": "initial",
+                "copyFormat": "binary",
+                "columnCount": 4,
+                "rows": 0,
+                "estimatedRows": 0,
+                "estimatedBytes": 8192,
+                "flushMs": 0.0009169999993901001,
+                "elapsedMs": 5.194792000000234,
+                "copyBytes": 21,
+                "insertStatementCount": 0,
+                "insertStatementsByRowCount": {}
+              }
+            },
+            {
+              "level": "info",
+              "message": "Finished copying 0 rows into copy_pipeline_app_35_1784029457747_128536_0.mutations (flush: 0.001 ms) (total: 3.260 ms) ",
+              "data": {
+                "schema": "copy_pipeline_app_35_1784029457747_128536_0",
+                "table": "mutations",
+                "replicaTable": "copy_pipeline_app_35_1784029457747_128536_0.mutations",
+                "syncMode": "initial",
+                "copyFormat": "binary",
+                "columnCount": 4,
+                "rows": 0,
+                "estimatedRows": 0,
+                "estimatedBytes": 8192,
+                "flushMs": 0.0006670000002486631,
+                "elapsedMs": 3.2599169999994047,
+                "copyBytes": 21,
+                "insertStatementCount": 0,
+                "insertStatementsByRowCount": {}
+              }
+            },
+            {
+              "level": "info",
+              "message": "Finished copying 10000 rows into userspace.imports (flush: 1948.311 ms) (total: 4860.072 ms) ",
+              "data": {
+                "schema": "userspace",
+                "table": "imports",
+                "replicaTable": "userspace.imports",
+                "syncMode": "initial",
+                "copyFormat": "binary",
+                "columnCount": 7,
+                "rows": 10000,
+                "estimatedRows": 10000,
+                "estimatedBytes": 42442752,
+                "flushMs": 1948.3109469999908,
+                "elapsedMs": 4860.071835000001,
+                "copyBytes": 2750877916,
+                "insertStatementCount": 10000,
+                "insertStatementsByRowCount": {
+                  "1": 10000
+                }
+              }
+            }
+          ],
+          "records": [
+            {
+              "level": "info",
+              "message": "Finished copying 1 rows into copy_pipeline_app_35_1784029457747_128536.permissions (flush: 0.040 ms) (total: 4.047 ms) ",
+              "data": {
+                "schema": "copy_pipeline_app_35_1784029457747_128536",
+                "table": "permissions",
+                "replicaTable": "copy_pipeline_app_35_1784029457747_128536.permissions",
+                "syncMode": "initial",
+                "copyFormat": "binary",
+                "columnCount": 3,
+                "rows": 1,
+                "estimatedRows": 0,
+                "estimatedBytes": 16384,
+                "flushMs": 0.03954200000043784,
+                "elapsedMs": 4.047332999998616,
+                "copyBytes": 36,
+                "insertStatementCount": 1,
+                "insertStatementsByRowCount": {
+                  "1": 1
+                }
+              }
+            },
+            {
+              "level": "info",
+              "message": "Finished copying 0 rows into copy_pipeline_app_35_1784029457747_128536_0.clients (flush: 0.001 ms) (total: 5.195 ms) ",
+              "data": {
+                "schema": "copy_pipeline_app_35_1784029457747_128536_0",
+                "table": "clients",
+                "replicaTable": "copy_pipeline_app_35_1784029457747_128536_0.clients",
+                "syncMode": "initial",
+                "copyFormat": "binary",
+                "columnCount": 4,
+                "rows": 0,
+                "estimatedRows": 0,
+                "estimatedBytes": 8192,
+                "flushMs": 0.0009169999993901001,
+                "elapsedMs": 5.194792000000234,
+                "copyBytes": 21,
+                "insertStatementCount": 0,
+                "insertStatementsByRowCount": {}
+              }
+            },
+            {
+              "level": "info",
+              "message": "Finished copying 0 rows into copy_pipeline_app_35_1784029457747_128536_0.mutations (flush: 0.001 ms) (total: 3.260 ms) ",
+              "data": {
+                "schema": "copy_pipeline_app_35_1784029457747_128536_0",
+                "table": "mutations",
+                "replicaTable": "copy_pipeline_app_35_1784029457747_128536_0.mutations",
+                "syncMode": "initial",
+                "copyFormat": "binary",
+                "columnCount": 4,
+                "rows": 0,
+                "estimatedRows": 0,
+                "estimatedBytes": 8192,
+                "flushMs": 0.0006670000002486631,
+                "elapsedMs": 3.2599169999994047,
+                "copyBytes": 21,
+                "insertStatementCount": 0,
+                "insertStatementsByRowCount": {}
+              }
+            },
+            {
+              "level": "info",
+              "message": "Finished copying 10000 rows into userspace.imports (flush: 1948.311 ms) (total: 4860.072 ms) ",
+              "data": {
+                "schema": "userspace",
+                "table": "imports",
+                "replicaTable": "userspace.imports",
+                "syncMode": "initial",
+                "copyFormat": "binary",
+                "columnCount": 7,
+                "rows": 10000,
+                "estimatedRows": 10000,
+                "estimatedBytes": 42442752,
+                "flushMs": 1948.3109469999908,
+                "elapsedMs": 4860.071835000001,
+                "copyBytes": 2750877916,
+                "insertStatementCount": 10000,
+                "insertStatementsByRowCount": {
+                  "1": 10000
+                }
+              }
+            },
+            {
+              "level": "info",
+              "message": "Created index 1/9 (0.091 ms): CREATE UNIQUE INDEX \"copy_pipeline_app_35_1784029457747_128536.permissions_pkey\" ON \"copy_pipeline_app_35_1784029457747_128536.permissions\" (\"lock\" ASC);"
+            },
+            {
+              "level": "info",
+              "message": "Created index 2/9 (0.033 ms): CREATE UNIQUE INDEX \"copy_pipeline_app_35_1784029457747_128536_0.clients_pkey\" ON \"copy_pipeline_app_35_1784029457747_128536_0.clients\" (\"clientGroupID\" ASC,\"clientID\" ASC);"
+            },
+            {
+              "level": "info",
+              "message": "Created index 3/9 (0.015 ms): CREATE UNIQUE INDEX \"copy_pipeline_app_35_1784029457747_128536_0.mutations_pkey\" ON \"copy_pipeline_app_35_1784029457747_128536_0.mutations\" (\"clientGroupID\" ASC,\"clientID\" ASC,\"mutationID\" ASC);"
+            },
+            {
+              "level": "info",
+              "message": "Created index 4/9 (353.084 ms): CREATE  INDEX \"userspace.idx_imports_schema\" ON \"userspace.imports\" (\"schema\" ASC);"
+            },
+            {
+              "level": "info",
+              "message": "Created index 5/9 (127.539 ms): CREATE  INDEX \"userspace.idx_imports_user_id\" ON \"userspace.imports\" (\"user_id\" ASC);"
+            },
+            {
+              "level": "info",
+              "message": "Created index 6/9 (132.589 ms): CREATE  INDEX \"userspace.idx_imports_user_id_import_id\" ON \"userspace.imports\" (\"user_id\" ASC,\"import_id\" ASC);"
+            },
+            {
+              "level": "info",
+              "message": "Created index 7/9 (125.611 ms): CREATE  INDEX \"userspace.idx_imports_user_source\" ON \"userspace.imports\" (\"user_id\" ASC,\"source\" ASC);"
+            },
+            {
+              "level": "info",
+              "message": "Created index 8/9 (130.682 ms): CREATE  INDEX \"userspace.idx_imports_user_source_created_at\" ON \"userspace.imports\" (\"user_id\" ASC,\"source\" ASC,\"created_at\" DESC);"
+            },
+            {
+              "level": "info",
+              "message": "Created index 9/9 (2.760 ms): CREATE UNIQUE INDEX \"userspace.imports_pkey\" ON \"userspace.imports\" (\"import_id\" ASC);"
+            },
+            {
+              "level": "info",
+              "message": "Created indexes (872.669 ms)"
+            },
+            {
+              "level": "info",
+              "message": "Synced 10,001 rows of 4 tables in _copy_pipeline_app_35_1784029457747_128536_metadata_0,zero_copy_pipeline up to 0/11F3B058 (flush: 1948.352, index: 872.669, total: 5824.264 ms)",
+              "data": {
+                "syncMode": "initial",
+                "copyFormat": "binary",
+                "publications": [
+                  "_copy_pipeline_app_35_1784029457747_128536_metadata_0",
+                  "zero_copy_pipeline"
+                ],
+                "lsn": "0/11F3B058",
+                "tables": 4,
+                "rows": 10001,
+                "copyMs": 4865.327168,
+                "flushMs": 1948.352072999991,
+                "copyBytes": 2750877994,
+                "insertStatementCount": 10001,
+                "insertStatementsByRowCount": {
+                  "1": 10001
+                },
+                "indexes": 9,
+                "indexMs": 872.6692920000005,
+                "copyOtherMs": 3003.24301200001,
+                "totalMs": 5824.264377000001
+              }
+            }
+          ]
+        },
+        "peakRssBytes": 2362019840,
+        "resourceUsage": {
+          "userCPUTime": 5780310,
+          "systemCPUTime": 2253589,
+          "maxRSS": 2140732,
+          "sharedMemorySize": 0,
+          "unsharedDataSize": 0,
+          "unsharedStackSize": 0,
+          "minorPageFault": 146970,
+          "majorPageFault": 0,
+          "swappedOut": 0,
+          "fsRead": 0,
+          "fsWrite": 5382880,
+          "ipcSent": 0,
+          "ipcReceived": 0,
+          "signalsCount": 0,
+          "voluntaryContextSwitches": 14207,
+          "involuntaryContextSwitches": 10
+        },
+        "sqlite": {
+          "rows": 10000,
+          "fileBytes": 2756018176,
+          "pageCount": 672856,
+          "pageSize": 4096
+        }
+      },
+      "exit": {
+        "status": 0,
+        "signal": null
+      },
+      "cgroup": {
+        "memoryPeakBytes": 3140751360,
+        "memoryCurrentBytes": 15884288,
+        "memoryMax": "6442450944",
+        "memoryEvents": {
+          "low": 0,
+          "high": 0,
+          "max": 0,
+          "oom": 0,
+          "oom_kill": 0,
+          "oom_group_kill": 0
+        },
+        "memoryStat": {
+          "anon": 6868992,
+          "file": 49152,
+          "kernel": 7385088,
+          "kernel_stack": 147456,
+          "pagetables": 540672,
+          "sec_pagetables": 0,
+          "percpu": 37876,
+          "sock": 0,
+          "vmalloc": 8192,
+          "shmem": 0,
+          "zswap": 0,
+          "zswapped": 0,
+          "file_mapped": 0,
+          "file_dirty": 24576,
+          "file_writeback": 0,
+          "swapcached": 0,
+          "anon_thp": 0,
+          "file_thp": 0,
+          "shmem_thp": 0,
+          "inactive_anon": 0,
+          "active_anon": 6754304,
+          "inactive_file": 49152,
+          "active_file": 0,
+          "unevictable": 0,
+          "slab_reclaimable": 2623512,
+          "slab_unreclaimable": 571168,
+          "slab": 3194680,
+          "workingset_refault_anon": 0,
+          "workingset_refault_file": 0,
+          "workingset_activate_anon": 0,
+          "workingset_activate_file": 0,
+          "workingset_restore_anon": 0,
+          "workingset_restore_file": 0,
+          "workingset_nodereclaim": 0,
+          "pgdemote_kswapd": 0,
+          "pgdemote_direct": 0,
+          "pgdemote_khugepaged": 0,
+          "pgscan": 0,
+          "pgsteal": 0,
+          "pgscan_kswapd": 0,
+          "pgscan_direct": 0,
+          "pgscan_khugepaged": 0,
+          "pgsteal_kswapd": 0,
+          "pgsteal_direct": 0,
+          "pgsteal_khugepaged": 0,
+          "pgfault": 766162,
+          "pgmajfault": 0,
+          "pgrefill": 0,
+          "pgactivate": 0,
+          "pgdeactivate": 0,
+          "pglazyfree": 0,
+          "pglazyfreed": 0,
+          "swpin_zero": 0,
+          "swpout_zero": 0,
+          "zswpin": 0,
+          "zswpout": 0,
+          "zswpwb": 0,
+          "thp_fault_alloc": 56,
+          "thp_collapse_alloc": 4,
+          "thp_swpout": 0,
+          "thp_swpout_fallback": 0
+        }
+      }
+    }
+  ],
+  "summary": {
+    "email-high-6.83g/direct-text-mmap-1g": {
+      "n": 1,
+      "minMs": 17582.497384,
+      "medianMs": 17582.497384,
+      "p95Ms": 17582.497384,
+      "maxMs": 17582.497384
+    },
+    "email-high-6.83g/direct-text-mmap-2g": {
+      "n": 1,
+      "minMs": 15797.182132,
+      "medianMs": 15797.182132,
+      "p95Ms": 15797.182132,
+      "maxMs": 15797.182132
+    },
+    "imports-production-2.75g/direct-text-mmap-1g": {
+      "n": 1,
+      "minMs": 5821.485628,
+      "medianMs": 5821.485628,
+      "p95Ms": 5821.485628,
+      "maxMs": 5821.485628
+    },
+    "imports-production-2.75g/direct-text-mmap-2g": {
+      "n": 1,
+      "minMs": 5837.390044,
+      "medianMs": 5837.390044,
+      "p95Ms": 5837.390044,
+      "maxMs": 5837.390044
+    }
+  }
+}

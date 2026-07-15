@@ -1,0 +1,170 @@
+{
+  "stage": "rerun-docker-current-pr6-email-full-native-docker",
+  "generatedAt": "2026-07-15T06:17:11.769Z",
+  "summary": {
+    "email-high-6.83g/current-pr6-parent-full-native": {
+      "callbackMs": 21422.820801,
+      "outerMs": 21666.833218,
+      "wrapperMs": 218.4217499999977,
+      "copyMs": 12913.036296999999,
+      "flushMs": 9727.416414000032,
+      "indexMs": 8631.478253999998,
+      "copyOtherMs": 3932.0666420000525,
+      "totalMs": 21401.162676,
+      "rawCopyMs": 5648.015502,
+      "rawCopyMBps": 1210.0750315893874,
+      "rawChunkBytes": 683383.9153084692,
+      "callbackMinusRawMs": 16475.680425000002,
+      "callbackToRawRatio": 3.9814247123084914,
+      "dominantElapsedMs": 12907.957755000001,
+      "dominantFlushMs": 9727.402206000033,
+      "dominantCopyBytes": 6834522537,
+      "peakRssBytes": 396804096,
+      "gcCount": 478,
+      "gcMs": 448.96303199604154,
+      "eventLoopUtilization": 0.9970671828188862,
+      "userCPUTime": 4768934,
+      "systemCPUTime": 7652635,
+      "minorPageFaults": 2008513,
+      "scopedMemoryPressureFullUs": 442752,
+      "scopedIOPressureFullUs": 6052891,
+      "scopedIOReadBytes": 15861116928,
+      "scopedIOWriteBytes": 6833217536,
+      "scopedMemoryMaxEvents": 25296,
+      "cgroupMemoryMaxEvents": 25364,
+      "sqliteFileBytes": 6846730240
+    },
+    "email-high-6.83g/current-pr6-head-full-native": {
+      "callbackMs": 15689.554882,
+      "outerMs": 15949.311631,
+      "wrapperMs": 205.5614179999975,
+      "copyMs": 7437.818754000001,
+      "flushMs": 5838.0795200000075,
+      "indexMs": 8770.646087,
+      "copyOtherMs": 1935.7685400000282,
+      "totalMs": 15660.888880999999,
+      "rawCopyMs": 5756.956752,
+      "rawCopyMBps": 1187.17628626021,
+      "rawChunkBytes": 683383.9153084692,
+      "callbackMinusRawMs": 9968.582421,
+      "callbackToRawRatio": 2.7424629272306507,
+      "dominantElapsedMs": 7432.85542,
+      "dominantFlushMs": 5838.060604000007,
+      "dominantCopyBytes": 6834522537,
+      "peakRssBytes": 210079744,
+      "gcCount": 468,
+      "gcMs": 147.13601398281753,
+      "eventLoopUtilization": 0.9780994373740105,
+      "userCPUTime": 2681887,
+      "systemCPUTime": 6671667,
+      "minorPageFaults": 16540,
+      "scopedMemoryPressureFullUs": 412409,
+      "scopedIOPressureFullUs": 3579983,
+      "scopedIOReadBytes": 16633319424,
+      "scopedIOWriteBytes": 6726139904,
+      "scopedMemoryMaxEvents": 27679,
+      "cgroupMemoryMaxEvents": 27897,
+      "sqliteFileBytes": 6846730240
+    }
+  },
+  "comparisons": {
+    "email-high-6.83g/current-pr6-head-full-native vs current-pr6-parent-full-native": {
+      "callbackMs": {
+        "ratio": 0.7323757701071572,
+        "changePercent": -26.762422989284286,
+        "pairedRatio": 0.7323757701071572,
+        "pairedChangePercent": -26.762422989284286
+      },
+      "copyMs": {
+        "ratio": 0.5759930184450872,
+        "changePercent": -42.40069815549128,
+        "pairedRatio": 0.5845364423689606,
+        "pairedChangePercent": -41.54635576310394
+      },
+      "flushMs": {
+        "ratio": 0.6001675338579772,
+        "changePercent": -39.98324661420229,
+        "pairedRatio": 0.6141494113396765,
+        "pairedChangePercent": -38.58505886603235
+      },
+      "indexMs": {
+        "ratio": 1.0161232906930522,
+        "changePercent": 1.6123290693052184,
+        "pairedRatio": 1.0504684040242198,
+        "pairedChangePercent": 5.0468404024219815
+      },
+      "copyOtherMs": {
+        "ratio": 0.4923030854368725,
+        "changePercent": -50.76969145631275,
+        "pairedRatio": 0.5715817544884787,
+        "pairedChangePercent": -42.84182455115213
+      },
+      "rawCopyMs": {
+        "ratio": 1.0192884120026624,
+        "changePercent": 1.9288412002662403,
+        "pairedRatio": 1.0192884120026624,
+        "pairedChangePercent": 1.9288412002662403
+      },
+      "callbackMinusRawMs": {
+        "ratio": 0.605048299302637,
+        "changePercent": -39.4951700697363,
+        "pairedRatio": 0.599162432228401,
+        "pairedChangePercent": -40.0837567771599
+      },
+      "callbackToRawRatio": {
+        "ratio": 0.6888144635141245,
+        "changePercent": -31.118553648587554,
+        "pairedRatio": 0.714259603461193,
+        "pairedChangePercent": -28.5740396538807
+      },
+      "dominantElapsedMs": {
+        "ratio": 0.5758351213320964,
+        "changePercent": -42.41648786679036,
+        "pairedRatio": 0.5842682509239832,
+        "pairedChangePercent": -41.57317490760168
+      },
+      "dominantFlushMs": {
+        "ratio": 0.6001664658626933,
+        "changePercent": -39.98335341373067,
+        "pairedRatio": 0.6141482767220644,
+        "pairedChangePercent": -38.58517232779356
+      },
+      "peakRssBytes": {
+        "ratio": 0.5294293736322722,
+        "changePercent": -47.057062636772784,
+        "pairedRatio": 0.5294293736322722,
+        "pairedChangePercent": -47.057062636772784
+      },
+      "gcCount": {
+        "ratio": 0.9790794979079498,
+        "changePercent": -2.092050209205021,
+        "pairedRatio": 0.9769874476987448,
+        "pairedChangePercent": -2.3012552301255207
+      },
+      "gcMs": {
+        "ratio": 0.3277241186844863,
+        "changePercent": -67.22758813155136,
+        "pairedRatio": 0.35623288031159006,
+        "pairedChangePercent": -64.376711968841
+      },
+      "scopedMemoryPressureFullUs": {
+        "ratio": 0.93146727739231,
+        "changePercent": -6.853272260769005,
+        "pairedRatio": 0.8929016061789976,
+        "pairedChangePercent": -10.709839382100238
+      },
+      "scopedIOPressureFullUs": {
+        "ratio": 0.5914501021082322,
+        "changePercent": -40.85498978917678,
+        "pairedRatio": 0.5564640103382004,
+        "pairedChangePercent": -44.353598966179966
+      },
+      "scopedMemoryMaxEvents": {
+        "ratio": 1.0942046173308033,
+        "changePercent": 9.420461733080332,
+        "pairedRatio": 1.1246140094262962,
+        "pairedChangePercent": 12.46140094262962
+      }
+    }
+  }
+}

@@ -1,6 +1,4 @@
 raw/**
-results/**
 manifests/**
 !raw/.gitkeep
-!results/.gitkeep
 !manifests/.gitkeep
