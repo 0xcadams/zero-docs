@@ -89,7 +89,7 @@ async function loadNestedArtifactSet(root, stage, runToken) {
   }
   const manifestPath = join(runDirectory, 'manifest.json');
   const manifest = JSON.parse(await readFile(manifestPath, 'utf8'));
-  validateNestedManifest(manifest, stage, runToken);
+  const canonical = validateNestedManifest(manifest, stage, runToken);
   const expectedByPath = new Map();
   const expectedRunIDs = new Set();
   for (const artifact of manifest.expectedArtifacts) {
@@ -174,12 +174,12 @@ async function loadNestedArtifactSet(root, stage, runToken) {
   }
 
   return {
-    canonical: true,
+    canonical,
     manifest,
     files,
     source: {
       kind: 'nested-immutable',
-      canonical: true,
+      canonical,
       manifestPath: relative(root, manifestPath),
       runToken,
     },
@@ -203,26 +203,35 @@ function validateNestedManifest(manifest, stage, runToken) {
       `Manifest run token ${manifest.runToken} does not match directory ${runToken}`,
     );
   }
-  if (manifest.mode !== 'canonical') {
-    throw new Error('Nested aggregation requires manifest mode canonical');
+  if (!['canonical', 'noncanonical'].includes(manifest.mode)) {
+    throw new Error(`Nested manifest has invalid mode ${manifest.mode}`);
   }
   if (manifest.execute !== true || manifest.status !== 'complete') {
-    throw new Error('Canonical manifest execution status is incomplete');
+    throw new Error('Nested manifest execution status is incomplete');
   }
-  if (
-    manifest.evidence?.eligible !== true ||
-    manifest.evidence?.classification !== 'canonical-complete' ||
+  if (manifest.mode === 'canonical') {
+    if (
+      manifest.evidence?.eligible !== true ||
+      manifest.evidence?.classification !== 'canonical-complete' ||
+      !Array.isArray(manifest.evidence?.reasons) ||
+      manifest.evidence.reasons.length !== 0
+    ) {
+      throw new Error('Canonical manifest evidence is incomplete or ineligible');
+    }
+  } else if (
+    manifest.evidence?.eligible !== false ||
+    manifest.evidence?.classification !== 'noncanonical' ||
     !Array.isArray(manifest.evidence?.reasons) ||
-    manifest.evidence.reasons.length !== 0
+    manifest.evidence.reasons.length === 0
   ) {
-    throw new Error('Canonical manifest evidence is incomplete or ineligible');
+    throw new Error('Noncanonical manifest evidence is invalid');
   }
   if (
     !Number.isFinite(Date.parse(manifest.generatedAt)) ||
     !Number.isFinite(Date.parse(manifest.completedAt)) ||
     Date.parse(manifest.completedAt) < Date.parse(manifest.generatedAt)
   ) {
-    throw new Error('Canonical manifest has invalid execution timestamps');
+    throw new Error('Nested manifest has invalid execution timestamps');
   }
   if (
     !Array.isArray(manifest.runs) ||
@@ -233,7 +242,7 @@ function validateNestedManifest(manifest, stage, runToken) {
     manifest.operations.length !== manifest.runs.length
   ) {
     throw new Error(
-      'Canonical manifest has incomplete run or artifact evidence',
+      'Nested manifest has incomplete run or artifact evidence',
     );
   }
   for (const [index, runConfig] of manifest.runs.entries()) {
@@ -244,30 +253,41 @@ function validateNestedManifest(manifest, stage, runToken) {
     }
   }
   if (
-    manifest.selection?.completeStage !== true ||
     manifest.selection?.selectedRunCount !== manifest.runs.length ||
-    manifest.selection?.plannedRunCount !== manifest.runs.length ||
-    manifest.analysisPlan?.plannedSampleCount !== manifest.runs.length ||
+    !Number.isInteger(manifest.selection?.plannedRunCount) ||
+    manifest.selection.plannedRunCount < manifest.runs.length ||
     !Number.isInteger(manifest.selection?.plannedBlocks) ||
     manifest.selection.plannedBlocks < 1 ||
     !Array.isArray(manifest.selection?.selectedBlocks) ||
-    manifest.selection.selectedBlocks.length !==
-      manifest.selection.plannedBlocks ||
-    manifest.analysisPlan?.plannedBlocks !== manifest.selection.plannedBlocks
+    manifest.selection.selectedBlocks.length < 1 ||
+    manifest.selection.selectedBlocks.length > manifest.selection.plannedBlocks
   ) {
-    throw new Error(
-      'Canonical manifest does not contain the complete fixed plan',
-    );
+    throw new Error('Nested manifest has invalid run selection evidence');
   }
-  const expectedBlocks = Array.from(
-    {length: manifest.selection.plannedBlocks},
-    (_, index) => index + 1,
-  );
-  if (
-    JSON.stringify(manifest.selection.selectedBlocks) !==
-    JSON.stringify(expectedBlocks)
-  ) {
-    throw new Error('Canonical manifest selected blocks are incomplete');
+  if (manifest.mode === 'canonical') {
+    if (
+      manifest.selection?.completeStage !== true ||
+      manifest.selection?.selectedRunCount !== manifest.runs.length ||
+      manifest.selection?.plannedRunCount !== manifest.runs.length ||
+      manifest.analysisPlan?.plannedSampleCount !== manifest.runs.length ||
+      manifest.selection.selectedBlocks.length !==
+        manifest.selection.plannedBlocks ||
+      manifest.analysisPlan?.plannedBlocks !== manifest.selection.plannedBlocks
+    ) {
+      throw new Error(
+        'Canonical manifest does not contain the complete fixed plan',
+      );
+    }
+    const expectedBlocks = Array.from(
+      {length: manifest.selection.plannedBlocks},
+      (_, index) => index + 1,
+    );
+    if (
+      JSON.stringify(manifest.selection.selectedBlocks) !==
+      JSON.stringify(expectedBlocks)
+    ) {
+      throw new Error('Canonical manifest selected blocks are incomplete');
+    }
   }
 
   for (const [index, operation] of manifest.operations.entries()) {
@@ -284,10 +304,11 @@ function validateNestedManifest(manifest, stage, runToken) {
       Date.parse(operation.completedAt) > Date.parse(manifest.completedAt)
     ) {
       throw new Error(
-        `Canonical operation ${index + 1} evidence is incomplete`,
+        `Nested operation ${index + 1} evidence is incomplete`,
       );
     }
   }
+  return manifest.mode === 'canonical';
 }
 
 function validateExpectedArtifact(artifact) {

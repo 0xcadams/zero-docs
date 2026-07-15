@@ -241,6 +241,8 @@ await mkdir(dirname(runDirectory), {recursive: true});
 await mkdir(runDirectory);
 await mkdir(join(runDirectory, 'operations'));
 await writeManifest();
+console.log(`RUN TOKEN ${runToken}`);
+console.log(`MANIFEST ${manifestPath}`);
 
 let network;
 try {
@@ -281,6 +283,10 @@ try {
         join(root, spec.dockerfile),
         '--build-arg',
         `NODE_IMAGE=${nodeImage}`,
+        ...Object.entries(spec.buildArgs).flatMap(([name, value]) => [
+          '--build-arg',
+          `${name}=${value}`,
+        ]),
         ...Object.entries(expectedLabels).flatMap(([name, value]) => [
           '--label',
           `${name}=${value}`,
@@ -736,6 +742,7 @@ function resolvedRun(
   cpusetOption,
   postgresIsolation,
 ) {
+  const overlay = worktreeConfig.worktrees[runConfig.worktree]?.overlay ?? null;
   const workerCount =
     runConfig.workerCount ?? stageConfig.workerCount ?? profile.workerCount;
   if (!Number.isSafeInteger(workerCount) || workerCount < 1) {
@@ -763,7 +770,8 @@ function resolvedRun(
   }
   return {
     ...runConfig,
-    imageKey: imageSpecForRun(runConfig).key,
+    overlay,
+    imageKey: imageSpecForRun({...runConfig, overlay}).key,
     workerCount,
     canonical: profile.canonical,
     validationMode: profile.validationMode,
@@ -999,6 +1007,8 @@ async function hashInputs() {
     initialSyncHarness: 'src/initial-sync-copy-pipeline.product.bench.pg.ts',
     parserHarness: 'src/pg-copy-parser.product.bench.ts',
     dockerfile: 'Dockerfile.linux',
+    adaptiveIndexDockerfile: 'Dockerfile.adaptive-index.linux',
+    adaptiveIndexPolicyTransform: 'scripts/force-eager-secondary-indexes.mjs',
     addonDockerfile: 'Dockerfile.addon-experiment.linux',
     addonLinker: 'scripts/link-local-addon.mjs',
     runner: 'scripts/run-docker.mjs',
@@ -1045,6 +1055,9 @@ function provenanceLabels(
     'dev.rocicorp.zero-benchmark.runner-sha256': hashes.runner.sha256,
     'dev.rocicorp.zero-benchmark.node-image': nodeImage,
     'dev.rocicorp.zero-benchmark.build-inputs-sha256': buildInputs.sha256,
+    ...(spec.overlay
+      ? {'dev.rocicorp.zero-benchmark.overlay': spec.overlay}
+      : {}),
     ...(spec.addonWorktree
       ? {
           'dev.rocicorp.zero-benchmark.addon-worktree': spec.addonWorktree,
@@ -1067,8 +1080,22 @@ function provenanceLabels(
 function imageBuildInputs(spec, source, addonSource, hashes, platform) {
   const inputs = {
     platform,
-    dockerfile: hashes[spec.addonWorktree ? 'addonDockerfile' : 'dockerfile'],
+    dockerfile:
+      hashes[
+        spec.addonWorktree
+          ? 'addonDockerfile'
+          : spec.overlay
+            ? 'adaptiveIndexDockerfile'
+            : 'dockerfile'
+      ],
     mono: sourceIdentity(source),
+    ...(spec.overlay
+      ? {
+          overlay: spec.overlay,
+          overlayTransform: hashes.adaptiveIndexPolicyTransform,
+          buildArgs: spec.buildArgs,
+        }
+      : {}),
     ...(spec.addonWorktree
       ? {
           addon: {
@@ -1096,15 +1123,26 @@ function sourceIdentity(source) {
 
 function imageSpecForRun(runConfig) {
   const addonWorktree = runConfig.addonWorktree ?? null;
+  const overlay = runConfig.overlay ?? null;
+  if (overlay !== null && overlay !== 'force-eager-secondary-indexes') {
+    throw new Error(`Unknown benchmark overlay ${overlay}`);
+  }
+  if (addonWorktree && overlay) {
+    throw new Error('Addon and mono overlays cannot be combined');
+  }
   return {
     key: addonWorktree
       ? `${runConfig.worktree}-addon-${addonWorktree}`
       : runConfig.worktree,
     worktree: runConfig.worktree,
     addonWorktree,
+    overlay,
     dockerfile: addonWorktree
       ? 'Dockerfile.addon-experiment.linux'
-      : 'Dockerfile.linux',
+      : overlay
+        ? 'Dockerfile.adaptive-index.linux'
+        : 'Dockerfile.linux',
+    buildArgs: overlay ? {ADAPTIVE_INDEX_POLICY: 'eager-secondary'} : {},
   };
 }
 
@@ -1533,8 +1571,16 @@ function selfTest() {
     worktree: 'mono',
     addonWorktree: 'addon',
   });
+  const eagerSpec = imageSpecForRun({
+    worktree: 'adaptive-index-eager',
+    overlay: 'force-eager-secondary-indexes',
+  });
   assert.equal(genericSpec.dockerfile, 'Dockerfile.linux');
   assert.equal(addonSpec.dockerfile, 'Dockerfile.addon-experiment.linux');
+  assert.equal(eagerSpec.dockerfile, 'Dockerfile.adaptive-index.linux');
+  assert.deepEqual(eagerSpec.buildArgs, {
+    ADAPTIVE_INDEX_POLICY: 'eager-secondary',
+  });
   assert.equal(
     uniqueImageSpecs([
       {worktree: 'mono', addonWorktree: 'addon', label: 'native-disabled'},

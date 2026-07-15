@@ -55,8 +55,9 @@ Canonical execution fails closed unless all of these are true:
 - Every expected artifact exists exactly once and matches its SHA-256.
 
 Current profiles are calibration-only because their COPY and content digests
-have not yet been pinned. Experiment stages are definition-only and cannot be
-executed until implementation, calibration, and preregistration are complete.
+have not yet been pinned. The E1 screening and confirmatory stages and the E2
+stage are runnable with `--noncanonical`; E3-E12 remain definition-only until
+their treatments are implemented.
 
 ## Files
 
@@ -71,7 +72,8 @@ executed until implementation, calibration, and preregistration are complete.
 - `scripts/summarize-integration.mjs`: paired effect estimates, confidence
   intervals, order effects, and decision gates.
 - `config/experiment-families.json`: deterministic generated fixture families.
-- `config/integration-stages.json`: definition-only E1-E12 experiment designs.
+- `config/integration-stages.json`: runnable E1/E2 stages and definition-only
+  E3-E12 experiment designs.
 
 ## Validation Commands
 
@@ -85,12 +87,13 @@ node scripts/build-adaptive-index-images.mjs
 ```
 
 The image builder defaults to a dry run. `run-docker.mjs` also defaults to a
-write-free dry run, but definition-only stages are intentionally rejected even
-in dry-run mode until promoted through the plan's stage gates.
+write-free dry run. Pass `--noncanonical` for the current E1/E2 profiles;
+definition-only stages are rejected even in dry-run mode.
 
 ## Evidence
 
 Each execution writes an immutable nested run directory with a manifest and an
-exact expected-artifact list. Canonical aggregation requires an explicit run
-token when more than one run exists. Legacy flat artifacts can be read only with
-`--legacy` and are always classified as exploratory and noncanonical.
+exact expected-artifact list. Aggregation requires an explicit run token when
+more than one run exists. Noncanonical nested runs retain the same artifact hash
+checks but remain exploratory. Legacy flat artifacts can be read only with
+`--legacy` and are also always exploratory.

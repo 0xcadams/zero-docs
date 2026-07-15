@@ -149,7 +149,7 @@ export function reconcileArtifacts(
         : 'The predeclared fixed sample count has not been reached.'
       : canonicalArtifact
         ? 'Manifest has no explicit analysisPlan.plannedSampleCount.'
-        : 'Legacy flat artifacts are exploratory and noncanonical.',
+        : 'The artifact set is explicitly noncanonical.',
     minimumPairedBlocks:
       analysisPlan?.minimumPairedBlocks ?? DEFAULT_MINIMUM_PAIRED_BLOCKS,
     bootstrapResamples: Math.max(

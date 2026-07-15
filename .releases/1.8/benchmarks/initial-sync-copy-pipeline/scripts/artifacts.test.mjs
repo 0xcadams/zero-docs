@@ -28,6 +28,43 @@ test('nested canonical complete artifacts load and reconcile', async t => {
   assert.equal(reconciliation.classification, 'confirmatory-eligible');
 });
 
+test('nested noncanonical partial artifacts load as exploratory', async t => {
+  const root = await temporaryRoot(t);
+  await writeCanonicalRun(root, {
+    token: 'run-noncanonical',
+    mutateManifest(manifest) {
+      manifest.mode = 'noncanonical';
+      manifest.evidence = {
+        eligible: false,
+        classification: 'noncanonical',
+        reasons: [
+          'runner was explicitly noncanonical',
+          'stage selection is incomplete',
+        ],
+      };
+      manifest.selection.completeStage = false;
+      manifest.selection.plannedBlocks = 2;
+      manifest.selection.plannedRunCount = 4;
+      delete manifest.analysisPlan;
+    },
+  });
+
+  const artifactSet = await loadArtifactSet({
+    root,
+    stage: 'fixture-docker',
+    runToken: 'run-noncanonical',
+  });
+  const reconciliation = reconcileArtifacts(
+    artifactSet.manifest,
+    parseRunArtifacts(artifactSet.files),
+    {canonicalArtifact: artifactSet.canonical},
+  );
+
+  assert.equal(artifactSet.source.kind, 'nested-immutable');
+  assert.equal(artifactSet.canonical, false);
+  assert.equal(reconciliation.classification, 'exploratory-noncanonical');
+});
+
 test('nested canonical artifacts reject a hash mismatch', async t => {
   const root = await temporaryRoot(t);
   const {operationPaths} = await writeCanonicalRun(root, {

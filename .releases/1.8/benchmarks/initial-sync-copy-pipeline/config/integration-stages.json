@@ -1,6 +1,6 @@
 {
   "e1-direct-buffer-cast-screening": {
-    "status": "definition-only-do-not-execute",
+    "status": "runnable-noncanonical",
     "experiment": "E1",
     "profiles": ["email-683m", "imports-550m"],
     "repetitions": 6,
@@ -16,7 +16,7 @@
     }
   },
   "e1-direct-buffer-cast-confirmatory": {
-    "status": "definition-only-do-not-execute",
+    "status": "runnable-noncanonical",
     "experiment": "E1",
     "profiles": [
       "email-683m",
@@ -39,7 +39,7 @@
     }
   },
   "e2-adaptive-index-confirmatory": {
-    "status": "definition-only-do-not-execute",
+    "status": "runnable-noncanonical",
     "experiment": "E2",
     "profiles": [
       "email-683m",

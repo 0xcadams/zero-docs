@@ -195,7 +195,7 @@ describe('initial sync COPY pipeline fixture configuration', () => {
     expect(Math.max(...columns)).toBeLessThanOrEqual(1600);
   });
 
-  test('definition-only stages reference active worktrees and profiles', () => {
+  test('stages reference active worktrees and profiles', () => {
     const stages = readJSON('config/integration-stages.json') as Record<
       string,
       Record<string, unknown>
@@ -211,11 +211,19 @@ describe('initial sync COPY pipeline fixture configuration', () => {
       worktrees: Record<string, unknown>;
       addonWorktrees: Record<string, unknown>;
     };
+    const runnableStages = Object.entries(stages).filter(
+      ([, stage]) => stage.status === 'runnable-noncanonical',
+    );
+    expect(runnableStages.map(([name]) => name)).toEqual([
+      'e1-direct-buffer-cast-screening',
+      'e1-direct-buffer-cast-confirmatory',
+      'e2-adaptive-index-confirmatory',
+    ]);
     const futureStages = Object.values(stages).filter(
       stage => stage.status === 'definition-only-do-not-execute',
     );
-    expect(futureStages).toHaveLength(13);
-    for (const stage of futureStages) {
+    expect(futureStages).toHaveLength(10);
+    for (const stage of Object.values(stages)) {
       expect(stage.repetitions).toBeGreaterThan(0);
       expect(stage.treatments).toBeInstanceOf(Array);
       expect((stage.treatments as unknown[]).length).toBeGreaterThan(0);
