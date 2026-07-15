@@ -1,44 +1,61 @@
 {
   "benchmarkRoot": "/Users/chase/.worktree/mono",
-  "commit": "d87c1c813",
+  "addonRoot": "/Users/chase/.worktree/zero-sqlite3",
   "worktrees": {
-    "baseline": {
-      "path": "initial-sync-copy-pipeline-baseline",
-      "label": "baseline"
+    "origin-main": {
+      "path": "initial-sync-experiment-baseline",
+      "label": "origin-main",
+      "commit": "bc1db665f30ee341011697128a5414d2bbc7ea7c",
+      "tree": "6c3164a01a41cbe27dfedd9bb8f0bd956544dca1"
     },
-    "linear-parser": {
-      "path": "initial-sync-copy-pipeline",
-      "label": "linear-parser"
-    },
-    "current-pr6-parent": {
-      "path": "batch-initial-sync-copy-metrics",
-      "label": "current-pr6-parent",
-      "commit": "c4d5519670d50a8bd388f5ce05d5576dc6f97df6",
-      "defaultInstall": false
-    },
-    "current-pr6-head": {
+    "direct-buffer-cast": {
       "path": "direct-copy-text-buffers",
-      "label": "current-pr6-head",
-      "commit": "99442b64afe8f627b8c7d06862efbb51ac3ce540",
-      "defaultInstall": false
+      "label": "direct-buffer-cast",
+      "commit": "27683b82b1e3c31b99e7fe39959a320712646a24",
+      "tree": "f033e60d315f902555d2ff7a868050eba402a635"
     },
-    "current-pr7-parent": {
-      "path": "initial-sync-statement-batching-baseline",
-      "label": "current-pr7-parent",
-      "commit": "ea459443f18e7a6f94a32e28333f8af01df1b02b",
-      "defaultInstall": false
-    },
-    "current-pr7-head": {
+    "adaptive-index": {
       "path": "adaptive-secondary-index-scheduling",
-      "label": "current-pr7-head",
-      "commit": "ac5228117cfa130d519b15fbde9227b377193e70",
-      "defaultInstall": false
+      "label": "adaptive-index",
+      "commit": "11622fdf4c618f480dcd606b0f7ccb5935533170",
+      "tree": "cdea44ee670896204fd99b8cd1b169b9226025fd"
     },
-    "current-pr7-eager": {
+    "adaptive-index-eager": {
       "path": "adaptive-secondary-index-scheduling",
-      "label": "current-pr7-eager",
-      "commit": "ac5228117cfa130d519b15fbde9227b377193e70",
-      "defaultInstall": false
+      "label": "adaptive-index-eager",
+      "commit": "11622fdf4c618f480dcd606b0f7ccb5935533170",
+      "tree": "cdea44ee670896204fd99b8cd1b169b9226025fd",
+      "overlay": "force-eager-secondary-indexes"
+    },
+    "enhanced-adaptive-index": {
+      "path": "enhanced-adaptive-secondary-index-scheduling",
+      "label": "enhanced-adaptive-index",
+      "commit": "11622fdf4c618f480dcd606b0f7ccb5935533170",
+      "tree": "cdea44ee670896204fd99b8cd1b169b9226025fd",
+      "status": "branch-only-no-treatment"
+    },
+    "schedule-large-tables": {
+      "path": "schedule-large-tables-first",
+      "label": "schedule-large-tables",
+      "commit": "bc1db665f30ee341011697128a5414d2bbc7ea7c",
+      "tree": "6c3164a01a41cbe27dfedd9bb8f0bd956544dca1",
+      "status": "branch-only-no-treatment"
+    }
+  },
+  "addonWorktrees": {
+    "native-utf8-binding": {
+      "path": "sqlite-utf8-buffer-parameters",
+      "label": "native-utf8-binding",
+      "commit": "8559637c1dfe46354c555f6df52cb8d93bad8525",
+      "tree": "cd9b8441d912b80e4177021cde13f95da5238ec2",
+      "status": "branch-only-no-treatment"
+    },
+    "native-initial-sync-ingestor": {
+      "path": "native-initial-sync-ingestor",
+      "label": "native-initial-sync-ingestor",
+      "commit": "8559637c1dfe46354c555f6df52cb8d93bad8525",
+      "tree": "cd9b8441d912b80e4177021cde13f95da5238ec2",
+      "status": "branch-only-no-treatment"
     }
   }
 }

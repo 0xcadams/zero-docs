@@ -1,7 +1,8 @@
-# syntax=docker/dockerfile:1
-FROM node:22-bookworm-slim
+# syntax=docker/dockerfile:1@sha256:87999aa3d42bdc6bea60565083ee17e86d1f3339802f543c0d03998580f9cb89
+ARG NODE_IMAGE=node:22-bookworm-slim@sha256:6c74791e557ce11fc957704f6d4fe134a7bc8d6f5ca4403205b2966bd488f6b3
+FROM ${NODE_IMAGE}
 
-ARG PR7_INDEX_POLICY=adaptive
+ARG ADAPTIVE_INDEX_POLICY=adaptive
 
 RUN apt-get update \
   && apt-get install --yes --no-install-recommends ca-certificates g++ git libncurses-dev libreadline-dev make python3 time \
@@ -12,11 +13,11 @@ RUN npm install --global pnpm@11.5.3
 WORKDIR /workspace
 COPY . .
 COPY --from=benchmark src/initial-sync-copy-pipeline.product.bench.pg.ts packages/zero-cache/src/initial-sync-copy-pipeline.product.bench.pg.ts
-COPY --from=benchmark scripts/force-pr7-eager-secondary-indexes.mjs /tmp/force-pr7-eager-secondary-indexes.mjs
-RUN if [ "$PR7_INDEX_POLICY" = "eager-secondary" ]; then \
-      node /tmp/force-pr7-eager-secondary-indexes.mjs; \
-    elif [ "$PR7_INDEX_POLICY" != "adaptive" ]; then \
-      echo "Unknown PR7_INDEX_POLICY=$PR7_INDEX_POLICY" >&2; exit 1; \
+COPY --from=benchmark scripts/force-eager-secondary-indexes.mjs /tmp/force-eager-secondary-indexes.mjs
+RUN if [ "$ADAPTIVE_INDEX_POLICY" = "eager-secondary" ]; then \
+      node /tmp/force-eager-secondary-indexes.mjs; \
+    elif [ "$ADAPTIVE_INDEX_POLICY" != "adaptive" ]; then \
+      echo "Unknown ADAPTIVE_INDEX_POLICY=$ADAPTIVE_INDEX_POLICY" >&2; exit 1; \
     fi
 RUN pnpm install --frozen-lockfile --filter zero-cache...
 

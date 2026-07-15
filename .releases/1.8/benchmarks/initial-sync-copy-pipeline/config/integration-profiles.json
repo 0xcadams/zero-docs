@@ -1,80 +1,234 @@
 {
   "email-smoke-100m": {
+    "canonical": false,
+    "validationMode": "calibration",
     "fixture": "email",
+    "fixtureVersion": "legacy-email-fixture-v1",
+    "fixtureSeed": 20250714,
     "rows": 400,
     "payloadBytes": 250000,
     "copyChunkBytes": 31744,
-    "expectedCopyBytes": 100000000,
+    "workerCount": 5,
+    "cachePolicy": {
+      "sqlite": "default",
+      "mmapGiB": 1,
+      "osPageCache": "uncontrolled",
+      "betweenRuns": "new-replica-file"
+    },
+    "sourceStrategy": {
+      "clone": "regenerate-isolated-database",
+      "reset": "drop-database-after-run"
+    },
+    "expected": {
+      "rowCount": 400,
+      "copyBytes": 100174429,
+      "copyDigest": null,
+      "contentDigest": null
+    },
+    "expectedCopyBytes": 100174429,
     "docker": {"cpus": 1, "memory": "3g", "nodeHeapMB": 2304}
   },
   "email-683m": {
+    "canonical": false,
+    "validationMode": "calibration",
     "fixture": "email",
+    "fixtureVersion": "legacy-email-fixture-v1",
+    "fixtureSeed": 20250714,
     "rows": 1000,
     "payloadBytes": 683000,
     "copyChunkBytes": 31744,
-    "expectedCopyBytes": 683000000,
+    "workerCount": 5,
+    "cachePolicy": {
+      "sqlite": "default",
+      "mmapGiB": 1,
+      "osPageCache": "uncontrolled",
+      "betweenRuns": "new-replica-file"
+    },
+    "sourceStrategy": {
+      "clone": "regenerate-isolated-database",
+      "reset": "drop-database-after-run"
+    },
+    "expected": {
+      "rowCount": 1000,
+      "copyBytes": 683438323,
+      "copyDigest": null,
+      "contentDigest": null
+    },
+    "expectedCopyBytes": 683438323,
     "docker": {"cpus": 1, "memory": "3g", "nodeHeapMB": 2304}
   },
-  "email-683m-2cpu": {
-    "fixture": "email",
-    "rows": 1000,
-    "payloadBytes": 683000,
-    "copyChunkBytes": 31744,
-    "expectedCopyBytes": 683000000,
-    "docker": {"cpus": 2, "memory": "3g", "nodeHeapMB": 2304}
-  },
-  "email-683m-4cpu": {
-    "fixture": "email",
-    "rows": 1000,
-    "payloadBytes": 683000,
-    "copyChunkBytes": 31744,
-    "expectedCopyBytes": 683000000,
-    "docker": {"cpus": 4, "memory": "3g", "nodeHeapMB": 2304}
-  },
   "email-high-6.83g": {
+    "canonical": false,
+    "validationMode": "calibration",
     "fixture": "email",
+    "fixtureVersion": "legacy-email-fixture-v1",
+    "fixtureSeed": 20250714,
     "rows": 10000,
     "payloadBytes": 683000,
     "copyChunkBytes": 31744,
-    "expectedCopyBytes": 6830000000,
+    "workerCount": 5,
+    "cachePolicy": {
+      "sqlite": "default",
+      "mmapGiB": 1,
+      "osPageCache": "uncontrolled",
+      "betweenRuns": "new-replica-file"
+    },
+    "sourceStrategy": {
+      "clone": "regenerate-isolated-database",
+      "reset": "drop-database-after-run"
+    },
+    "expected": {
+      "rowCount": 10000,
+      "copyBytes": 6834522537,
+      "copyDigest": null,
+      "contentDigest": null
+    },
+    "expectedCopyBytes": 6834522537,
     "docker": {"cpus": 1, "memory": "3g", "nodeHeapMB": 2304}
   },
   "imports-smoke-110m": {
+    "canonical": false,
+    "validationMode": "calibration",
     "fixture": "imports",
+    "fixtureVersion": "legacy-imports-fixture-v1",
+    "fixtureSeed": 20250714,
     "rows": 400,
     "payloadBytes": 275000,
     "copyChunkBytes": 5632,
-    "expectedCopyBytes": 110000000,
-    "docker": {"cpus": 2, "memory": "6g", "nodeHeapMB": 4608}
+    "workerCount": 5,
+    "cachePolicy": {
+      "sqlite": "default",
+      "mmapGiB": 1,
+      "osPageCache": "uncontrolled",
+      "betweenRuns": "new-replica-file"
+    },
+    "sourceStrategy": {
+      "clone": "regenerate-isolated-database",
+      "reset": "drop-database-after-run"
+    },
+    "expected": {
+      "rowCount": 400,
+      "copyBytes": 110034674,
+      "copyDigest": null,
+      "contentDigest": null
+    },
+    "expectedCopyBytes": 110034674,
+    "docker": {"cpus": 1, "memory": "3g", "nodeHeapMB": 2304}
   },
   "imports-550m": {
+    "canonical": false,
+    "validationMode": "calibration",
     "fixture": "imports",
+    "fixtureVersion": "legacy-imports-fixture-v1",
+    "fixtureSeed": 20250714,
     "rows": 2000,
     "payloadBytes": 275000,
     "copyChunkBytes": 5632,
-    "expectedCopyBytes": 550000000,
-    "docker": {"cpus": 2, "memory": "6g", "nodeHeapMB": 4608}
+    "workerCount": 5,
+    "cachePolicy": {
+      "sqlite": "default",
+      "mmapGiB": 1,
+      "osPageCache": "uncontrolled",
+      "betweenRuns": "new-replica-file"
+    },
+    "sourceStrategy": {
+      "clone": "regenerate-isolated-database",
+      "reset": "drop-database-after-run"
+    },
+    "expected": {
+      "rowCount": 2000,
+      "copyBytes": 550174715,
+      "copyDigest": null,
+      "contentDigest": null
+    },
+    "expectedCopyBytes": 550174715,
+    "docker": {"cpus": 1, "memory": "3g", "nodeHeapMB": 2304}
   },
   "imports-production-2.75g": {
+    "canonical": false,
+    "validationMode": "calibration",
     "fixture": "imports",
+    "fixtureVersion": "legacy-imports-fixture-v1",
+    "fixtureSeed": 20250714,
     "rows": 10000,
     "payloadBytes": 275000,
     "copyChunkBytes": 5632,
-    "expectedCopyBytes": 2750000000,
-    "docker": {"cpus": 2, "memory": "6g", "nodeHeapMB": 4608}
+    "workerCount": 5,
+    "cachePolicy": {
+      "sqlite": "default",
+      "mmapGiB": 1,
+      "osPageCache": "uncontrolled",
+      "betweenRuns": "new-replica-file"
+    },
+    "sourceStrategy": {
+      "clone": "regenerate-isolated-database",
+      "reset": "drop-database-after-run"
+    },
+    "expected": {
+      "rowCount": 10000,
+      "copyBytes": 2750877916,
+      "copyDigest": null,
+      "contentDigest": null
+    },
+    "expectedCopyBytes": 2750877916,
+    "docker": {"cpus": 1, "memory": "3g", "nodeHeapMB": 2304}
   },
   "email-narrow-250k": {
+    "canonical": false,
+    "validationMode": "calibration",
     "fixture": "email",
+    "fixtureVersion": "legacy-email-fixture-v1",
+    "fixtureSeed": 20250714,
     "rows": 250000,
     "payloadBytes": 128,
     "copyChunkBytes": 31744,
+    "workerCount": 5,
+    "cachePolicy": {
+      "sqlite": "default",
+      "mmapGiB": 1,
+      "osPageCache": "uncontrolled",
+      "betweenRuns": "new-replica-file"
+    },
+    "sourceStrategy": {
+      "clone": "regenerate-isolated-database",
+      "reset": "drop-database-after-run"
+    },
+    "expected": {
+      "rowCount": 250000,
+      "copyBytes": 150894551,
+      "copyDigest": null,
+      "contentDigest": null
+    },
+    "expectedCopyBytes": 150894551,
     "docker": {"cpus": 1, "memory": "3g", "nodeHeapMB": 2304}
   },
   "imports-narrow-250k": {
+    "canonical": false,
+    "validationMode": "calibration",
     "fixture": "imports",
+    "fixtureVersion": "legacy-imports-fixture-v1",
+    "fixtureSeed": 20250714,
     "rows": 250000,
     "payloadBytes": 128,
     "copyChunkBytes": 5632,
-    "docker": {"cpus": 2, "memory": "6g", "nodeHeapMB": 4608}
+    "workerCount": 5,
+    "cachePolicy": {
+      "sqlite": "default",
+      "mmapGiB": 1,
+      "osPageCache": "uncontrolled",
+      "betweenRuns": "new-replica-file"
+    },
+    "sourceStrategy": {
+      "clone": "regenerate-isolated-database",
+      "reset": "drop-database-after-run"
+    },
+    "expected": {
+      "rowCount": 250000,
+      "copyBytes": 54363917,
+      "copyDigest": null,
+      "contentDigest": null
+    },
+    "expectedCopyBytes": 54363917,
+    "docker": {"cpus": 1, "memory": "3g", "nodeHeapMB": 2304}
   }
 }

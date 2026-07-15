@@ -15,3 +15,4 @@
 
 - Running zero-docs `pnpm lint` with the locked `oxlint@1.65.0` and `oxlint-tsgolint@0.8.6` panics before linting because tsgolint does not recognize `no-useless-default-assignment`. The lint tool versions or default type-aware rules need to be aligned.
 - Verifying nested GitHub SSH through `ssh macbook` timed out because the remote `.zshenv` replaced the forwarded `SSH_AUTH_SOCK` and its `Host *` pinned a local 1Password agent. Preserve an existing agent socket and avoid a catch-all `IdentityAgent` for forwarded sessions.
+- COPY-pipeline Docker manifests store `constraints` inside each expected run config, but raw log metadata stores the same object beside `runConfig`. Exact artifact reconciliation must account for that protocol split without dropping the constraints check.

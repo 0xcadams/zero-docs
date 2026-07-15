@@ -1,1365 +1,298 @@
 {
-  "integration-smoke": {
-    "profiles": ["email-smoke-100m", "imports-smoke-110m"],
-    "repetitions": 1,
-    "treatments": [
-      {
-        "worktree": "baseline",
-        "label": "baseline",
-        "partialInsertBatches": false,
-        "bufferMB": 8
-      },
-      {
-        "worktree": "linear-parser",
-        "label": "linear-parser",
-        "partialInsertBatches": false,
-        "bufferMB": 8
-      },
-      {
-        "worktree": "linear-parser",
-        "label": "parser-partial-32m",
-        "partialInsertBatches": true,
-        "bufferMB": 32
-      }
-    ]
-  },
-  "integration-core": {
+  "e1-direct-buffer-cast-screening": {
+    "status": "definition-only-do-not-execute",
+    "experiment": "E1",
     "profiles": ["email-683m", "imports-550m"],
-    "repetitions": 5,
-    "treatments": [
-      {
-        "worktree": "baseline",
-        "label": "baseline",
-        "partialInsertBatches": false,
-        "bufferMB": 8
-      },
-      {
-        "worktree": "linear-parser",
-        "label": "linear-parser",
-        "partialInsertBatches": false,
-        "bufferMB": 8
-      },
-      {
-        "worktree": "linear-parser",
-        "label": "parser-partial-8m",
-        "partialInsertBatches": true,
-        "bufferMB": 8
-      },
-      {
-        "worktree": "linear-parser",
-        "label": "parser-partial-16m",
-        "partialInsertBatches": true,
-        "bufferMB": 16
-      },
-      {
-        "worktree": "linear-parser",
-        "label": "parser-partial-8m",
-        "partialInsertBatches": true,
-        "bufferMB": 8
-      }
-    ]
-  },
-  "production-volume-smoke": {
-    "profiles": ["email-high-6.83g", "imports-production-2.75g"],
-    "repetitions": 1,
-    "treatments": [
-      {
-        "worktree": "baseline",
-        "label": "baseline",
-        "partialInsertBatches": false,
-        "bufferMB": 8
-      },
-      {
-        "worktree": "linear-parser",
-        "label": "parser-partial-8m",
-        "partialInsertBatches": true,
-        "bufferMB": 8
-      }
-    ]
-  },
-  "production-volume-core": {
-    "profiles": ["email-high-6.83g", "imports-production-2.75g"],
-    "repetitions": 3,
-    "treatments": [
-      {
-        "worktree": "baseline",
-        "label": "baseline",
-        "partialInsertBatches": false,
-        "bufferMB": 8
-      },
-      {
-        "worktree": "linear-parser",
-        "label": "parser-partial-8m",
-        "partialInsertBatches": true,
-        "bufferMB": 8
-      }
-    ]
-  },
-  "docker-core": {
-    "profiles": ["email-683m", "imports-550m"],
-    "repetitions": 3,
-    "treatments": [
-      {
-        "worktree": "baseline",
-        "label": "baseline",
-        "partialInsertBatches": false,
-        "bufferMB": 8
-      },
-      {
-        "worktree": "linear-parser",
-        "label": "linear-parser",
-        "partialInsertBatches": false,
-        "bufferMB": 8
-      },
-      {
-        "worktree": "linear-parser",
-        "label": "parser-partial-8m",
-        "partialInsertBatches": true,
-        "bufferMB": 8
-      }
-    ]
-  },
-  "docker-production-smoke": {
-    "profiles": ["email-high-6.83g", "imports-production-2.75g"],
-    "repetitions": 1,
-    "treatments": [
-      {
-        "worktree": "baseline",
-        "label": "baseline",
-        "partialInsertBatches": false,
-        "bufferMB": 8
-      },
-      {
-        "worktree": "linear-parser",
-        "label": "parser-partial-8m",
-        "partialInsertBatches": true,
-        "bufferMB": 8
-      }
-    ]
-  },
-  "direct-text-core": {
-    "profiles": ["email-683m", "imports-550m"],
-    "repetitions": 5,
-    "treatments": [
-      {
-        "worktree": "linear-parser",
-        "label": "linear-parser",
-        "partialInsertBatches": false,
-        "directTextBuffers": false,
-        "bufferMB": 8
-      },
-      {
-        "worktree": "linear-parser",
-        "label": "parser-direct-text",
-        "partialInsertBatches": false,
-        "directTextBuffers": true,
-        "bufferMB": 8
-      },
-      {
-        "worktree": "linear-parser",
-        "label": "parser-direct-text-partial-8m",
-        "partialInsertBatches": true,
-        "directTextBuffers": true,
-        "bufferMB": 8
-      }
-    ]
-  },
-  "direct-text-production-smoke": {
-    "profiles": ["email-high-6.83g", "imports-production-2.75g"],
-    "repetitions": 1,
-    "treatments": [
-      {
-        "worktree": "linear-parser",
-        "label": "parser-partial-8m",
-        "partialInsertBatches": true,
-        "directTextBuffers": false,
-        "bufferMB": 8
-      },
-      {
-        "worktree": "linear-parser",
-        "label": "parser-direct-text",
-        "partialInsertBatches": false,
-        "directTextBuffers": true,
-        "bufferMB": 8
-      },
-      {
-        "worktree": "linear-parser",
-        "label": "parser-direct-text-partial-8m",
-        "partialInsertBatches": true,
-        "directTextBuffers": true,
-        "bufferMB": 8
-      }
-    ]
-  },
-  "docker-direct-text-core": {
-    "profiles": ["email-683m", "imports-550m"],
-    "repetitions": 3,
-    "treatments": [
-      {
-        "worktree": "linear-parser",
-        "label": "linear-parser",
-        "partialInsertBatches": false,
-        "directTextBuffers": false,
-        "bufferMB": 8
-      },
-      {
-        "worktree": "linear-parser",
-        "label": "parser-direct-text",
-        "partialInsertBatches": false,
-        "directTextBuffers": true,
-        "bufferMB": 8
-      },
-      {
-        "worktree": "linear-parser",
-        "label": "parser-direct-text-partial-8m",
-        "partialInsertBatches": true,
-        "directTextBuffers": true,
-        "bufferMB": 8
-      }
-    ]
-  },
-  "rerun-docker-direct-text-core-clean-host": {
-    "profiles": ["email-683m", "imports-550m"],
-    "repetitions": 3,
-    "treatments": [
-      {
-        "worktree": "linear-parser",
-        "label": "string-mmap-1g",
-        "partialInsertBatches": false,
-        "directTextBuffers": false,
-        "bufferMB": 8,
-        "mmapGiB": 1
-      },
-      {
-        "worktree": "linear-parser",
-        "label": "buffer-cast-mmap-1g",
-        "partialInsertBatches": false,
-        "directTextBuffers": true,
-        "bufferMB": 8,
-        "mmapGiB": 1
-      },
-      {
-        "worktree": "linear-parser",
-        "label": "buffer-cast-partial-mmap-1g",
-        "partialInsertBatches": true,
-        "directTextBuffers": true,
-        "bufferMB": 8,
-        "mmapGiB": 1
-      }
-    ]
-  },
-  "rerun-docker-direct-text-email-balanced-mmap-1g": {
-    "profiles": ["email-683m"],
     "repetitions": 6,
     "ordering": "paired-ab-ba",
     "treatments": [
-      {
-        "worktree": "linear-parser",
-        "label": "string-mmap-1g",
-        "partialInsertBatches": false,
-        "directTextBuffers": false,
-        "bufferMB": 8,
-        "mmapGiB": 1
-      },
-      {
-        "worktree": "linear-parser",
-        "label": "buffer-cast-mmap-1g",
-        "partialInsertBatches": false,
-        "directTextBuffers": true,
-        "bufferMB": 8,
-        "mmapGiB": 1
-      }
-    ]
+      {"worktree": "origin-main", "label": "string-decoding"},
+      {"worktree": "direct-buffer-cast", "label": "buffer-cast"}
+    ],
+    "preregistration": {
+      "primaryMetric": "outerMs",
+      "minimumUsefulGainPercent": 5,
+      "purpose": "screening-only-not-vetting"
+    }
   },
-  "rerun-docker-direct-text-email-mmap-factorial": {
-    "profiles": ["email-683m"],
-    "repetitions": 4,
-    "ordering": "forward-reverse",
-    "treatments": [
-      {
-        "worktree": "linear-parser",
-        "label": "string-mmap-off",
-        "partialInsertBatches": false,
-        "directTextBuffers": false,
-        "bufferMB": 8,
-        "mmapGiB": 0
-      },
-      {
-        "worktree": "linear-parser",
-        "label": "buffer-cast-mmap-off",
-        "partialInsertBatches": false,
-        "directTextBuffers": true,
-        "bufferMB": 8,
-        "mmapGiB": 0
-      },
-      {
-        "worktree": "linear-parser",
-        "label": "string-mmap-1g",
-        "partialInsertBatches": false,
-        "directTextBuffers": false,
-        "bufferMB": 8,
-        "mmapGiB": 1
-      },
-      {
-        "worktree": "linear-parser",
-        "label": "buffer-cast-mmap-1g",
-        "partialInsertBatches": false,
-        "directTextBuffers": true,
-        "bufferMB": 8,
-        "mmapGiB": 1
-      },
-      {
-        "worktree": "linear-parser",
-        "label": "string-mmap-2g",
-        "partialInsertBatches": false,
-        "directTextBuffers": false,
-        "bufferMB": 8,
-        "mmapGiB": 2
-      },
-      {
-        "worktree": "linear-parser",
-        "label": "buffer-cast-mmap-2g",
-        "partialInsertBatches": false,
-        "directTextBuffers": true,
-        "bufferMB": 8,
-        "mmapGiB": 2
-      }
-    ]
-  },
-  "rerun-docker-direct-text-email-cpu-sweep": {
-    "profiles": ["email-683m-2cpu", "email-683m-4cpu"],
-    "repetitions": 4,
-    "ordering": "paired-ab-ba",
-    "treatments": [
-      {
-        "worktree": "linear-parser",
-        "label": "string-mmap-1g",
-        "partialInsertBatches": false,
-        "directTextBuffers": false,
-        "bufferMB": 8,
-        "mmapGiB": 1
-      },
-      {
-        "worktree": "linear-parser",
-        "label": "buffer-cast-mmap-1g",
-        "partialInsertBatches": false,
-        "directTextBuffers": true,
-        "bufferMB": 8,
-        "mmapGiB": 1
-      }
-    ]
-  },
-  "rerun-docker-direct-text-email-chunking-factorial": {
-    "profiles": ["email-683m"],
-    "repetitions": 4,
-    "ordering": "forward-reverse",
-    "treatments": [
-      {
-        "worktree": "linear-parser",
-        "label": "string-native-chunks",
-        "partialInsertBatches": false,
-        "directTextBuffers": false,
-        "copyChunkBytes": "native",
-        "bufferMB": 8,
-        "mmapGiB": 1
-      },
-      {
-        "worktree": "linear-parser",
-        "label": "buffer-cast-native-chunks",
-        "partialInsertBatches": false,
-        "directTextBuffers": true,
-        "copyChunkBytes": "native",
-        "bufferMB": 8,
-        "mmapGiB": 1
-      },
-      {
-        "worktree": "linear-parser",
-        "label": "string-31k-chunks",
-        "partialInsertBatches": false,
-        "directTextBuffers": false,
-        "copyChunkBytes": 31744,
-        "bufferMB": 8,
-        "mmapGiB": 1
-      },
-      {
-        "worktree": "linear-parser",
-        "label": "buffer-cast-31k-chunks",
-        "partialInsertBatches": false,
-        "directTextBuffers": true,
-        "copyChunkBytes": 31744,
-        "bufferMB": 8,
-        "mmapGiB": 1
-      }
-    ]
-  },
-  "rerun-docker-current-pr6-email-native": {
-    "profiles": ["email-683m"],
-    "repetitions": 10,
-    "ordering": "paired-ab-ba",
-    "treatments": [
-      {
-        "worktree": "current-pr6-parent",
-        "label": "current-pr6-parent",
-        "copyChunkBytes": "native",
-        "bufferMB": 8,
-        "mmapGiB": 0
-      },
-      {
-        "worktree": "current-pr6-head",
-        "label": "current-pr6-head",
-        "copyChunkBytes": "native",
-        "bufferMB": 8,
-        "mmapGiB": 0
-      }
-    ]
-  },
-  "rerun-host-current-pr6-email-native": {
-    "profiles": ["email-683m"],
-    "repetitions": 10,
-    "ordering": "paired-ab-ba",
-    "treatments": [
-      {
-        "worktree": "current-pr6-parent",
-        "label": "current-pr6-parent",
-        "copyChunkBytes": "native",
-        "bufferMB": 8,
-        "mmapGiB": 0
-      },
-      {
-        "worktree": "current-pr6-head",
-        "label": "current-pr6-head",
-        "copyChunkBytes": "native",
-        "bufferMB": 8,
-        "mmapGiB": 0
-      }
-    ]
-  },
-  "rerun-docker-current-pr6-email-host-port": {
-    "profiles": ["email-683m"],
-    "repetitions": 10,
-    "ordering": "paired-ab-ba",
-    "treatments": [
-      {
-        "worktree": "current-pr6-parent",
-        "label": "current-pr6-parent-host-port",
-        "copyChunkBytes": "native",
-        "postgresTopology": "host-port",
-        "bufferMB": 8,
-        "mmapGiB": 0
-      },
-      {
-        "worktree": "current-pr6-head",
-        "label": "current-pr6-head-host-port",
-        "copyChunkBytes": "native",
-        "postgresTopology": "host-port",
-        "bufferMB": 8,
-        "mmapGiB": 0
-      }
-    ]
-  },
-  "rerun-docker-current-pr6-email-full-native": {
-    "profiles": ["email-high-6.83g"],
-    "repetitions": 5,
-    "ordering": "paired-ab-ba",
-    "treatments": [
-      {
-        "worktree": "current-pr6-parent",
-        "label": "current-pr6-parent-full-native",
-        "copyChunkBytes": "native",
-        "bufferMB": 8,
-        "mmapGiB": 0
-      },
-      {
-        "worktree": "current-pr6-head",
-        "label": "current-pr6-head-full-native",
-        "copyChunkBytes": "native",
-        "bufferMB": 8,
-        "mmapGiB": 0
-      }
-    ]
-  },
-  "rerun-docker-current-pr6-email-full-native-confirmation": {
-    "profiles": ["email-high-6.83g"],
-    "repetitions": 5,
-    "ordering": "paired-ab-ba",
-    "treatments": [
-      {
-        "worktree": "current-pr6-head",
-        "label": "current-pr6-head-full-native",
-        "copyChunkBytes": "native",
-        "bufferMB": 8,
-        "mmapGiB": 0
-      },
-      {
-        "worktree": "current-pr6-parent",
-        "label": "current-pr6-parent-full-native",
-        "copyChunkBytes": "native",
-        "bufferMB": 8,
-        "mmapGiB": 0
-      }
-    ]
-  },
-  "pr7-current-parent-head-scaled": {
-    "profiles": ["email-683m", "imports-550m"],
-    "repetitions": 10,
-    "ordering": "paired-ab-ba",
-    "treatments": [
-      {
-        "worktree": "current-pr7-parent",
-        "label": "pr7-deferred-parent",
-        "copyChunkBytes": "native",
-        "secondaryIndexMinAverageRowBytes": 0,
-        "bufferMB": 8,
-        "mmapGiB": 0
-      },
-      {
-        "worktree": "current-pr7-head",
-        "label": "pr7-adaptive-2k",
-        "copyChunkBytes": "native",
-        "secondaryIndexMinAverageRowBytes": 2048,
-        "bufferMB": 8,
-        "mmapGiB": 0
-      }
-    ]
-  },
-  "pr7-current-parent-head-full": {
-    "profiles": ["email-high-6.83g", "imports-production-2.75g"],
-    "repetitions": 10,
-    "ordering": "paired-ab-ba",
-    "treatments": [
-      {
-        "worktree": "current-pr7-parent",
-        "label": "pr7-deferred-parent",
-        "copyChunkBytes": "native",
-        "secondaryIndexMinAverageRowBytes": 0,
-        "bufferMB": 8,
-        "mmapGiB": 0
-      },
-      {
-        "worktree": "current-pr7-head",
-        "label": "pr7-adaptive-2k",
-        "copyChunkBytes": "native",
-        "secondaryIndexMinAverageRowBytes": 2048,
-        "bufferMB": 8,
-        "mmapGiB": 0
-      }
-    ]
-  },
-  "pr7-current-parent-head-narrow": {
-    "profiles": ["email-narrow-250k", "imports-narrow-250k"],
-    "repetitions": 10,
-    "ordering": "paired-ab-ba",
-    "treatments": [
-      {
-        "worktree": "current-pr7-parent",
-        "label": "pr7-deferred-parent",
-        "copyChunkBytes": "native",
-        "secondaryIndexMinAverageRowBytes": 0,
-        "bufferMB": 8,
-        "mmapGiB": 0
-      },
-      {
-        "worktree": "current-pr7-head",
-        "label": "pr7-adaptive-2k",
-        "copyChunkBytes": "native",
-        "secondaryIndexMinAverageRowBytes": 2048,
-        "bufferMB": 8,
-        "mmapGiB": 0
-      }
-    ]
-  },
-  "pr7-current-strategy-scaled": {
-    "profiles": ["email-683m", "imports-550m"],
-    "repetitions": 10,
-    "treatments": [
-      {
-        "worktree": "current-pr7-parent",
-        "label": "pr7-deferred-parent",
-        "copyChunkBytes": "native",
-        "secondaryIndexMinAverageRowBytes": 0,
-        "bufferMB": 8,
-        "mmapGiB": 0
-      },
-      {
-        "worktree": "current-pr7-head",
-        "label": "pr7-adaptive-2k",
-        "copyChunkBytes": "native",
-        "secondaryIndexMinAverageRowBytes": 2048,
-        "bufferMB": 8,
-        "mmapGiB": 0
-      },
-      {
-        "worktree": "current-pr7-eager",
-        "label": "pr7-forced-eager-secondary",
-        "copyChunkBytes": "native",
-        "secondaryIndexMinAverageRowBytes": 2048,
-        "bufferMB": 8,
-        "mmapGiB": 0
-      }
-    ]
-  },
-  "pr7-current-strategy-full": {
-    "profiles": ["email-high-6.83g", "imports-production-2.75g"],
-    "repetitions": 10,
-    "treatments": [
-      {
-        "worktree": "current-pr7-parent",
-        "label": "pr7-deferred-parent",
-        "copyChunkBytes": "native",
-        "secondaryIndexMinAverageRowBytes": 0,
-        "bufferMB": 8,
-        "mmapGiB": 0
-      },
-      {
-        "worktree": "current-pr7-head",
-        "label": "pr7-adaptive-2k",
-        "copyChunkBytes": "native",
-        "secondaryIndexMinAverageRowBytes": 2048,
-        "bufferMB": 8,
-        "mmapGiB": 0
-      },
-      {
-        "worktree": "current-pr7-eager",
-        "label": "pr7-forced-eager-secondary",
-        "copyChunkBytes": "native",
-        "secondaryIndexMinAverageRowBytes": 2048,
-        "bufferMB": 8,
-        "mmapGiB": 0
-      }
-    ]
-  },
-  "pr7-current-strategy-narrow": {
-    "profiles": ["email-narrow-250k", "imports-narrow-250k"],
-    "repetitions": 10,
-    "treatments": [
-      {
-        "worktree": "current-pr7-parent",
-        "label": "pr7-deferred-parent",
-        "copyChunkBytes": "native",
-        "secondaryIndexMinAverageRowBytes": 0,
-        "bufferMB": 8,
-        "mmapGiB": 0
-      },
-      {
-        "worktree": "current-pr7-head",
-        "label": "pr7-adaptive-2k",
-        "copyChunkBytes": "native",
-        "secondaryIndexMinAverageRowBytes": 2048,
-        "bufferMB": 8,
-        "mmapGiB": 0
-      },
-      {
-        "worktree": "current-pr7-eager",
-        "label": "pr7-forced-eager-secondary",
-        "copyChunkBytes": "native",
-        "secondaryIndexMinAverageRowBytes": 2048,
-        "bufferMB": 8,
-        "mmapGiB": 0
-      }
-    ]
-  },
-  "cache-production-smoke": {
-    "profiles": ["email-high-6.83g"],
-    "repetitions": 1,
-    "treatments": [
-      {
-        "worktree": "linear-parser",
-        "label": "direct-text-cache-default",
-        "partialInsertBatches": false,
-        "directTextBuffers": true,
-        "bufferMB": 8
-      },
-      {
-        "worktree": "linear-parser",
-        "label": "direct-text-cache-128m",
-        "partialInsertBatches": false,
-        "directTextBuffers": true,
-        "bufferMB": 8,
-        "cacheMB": 128
-      },
-      {
-        "worktree": "linear-parser",
-        "label": "direct-text-cache-256m",
-        "partialInsertBatches": false,
-        "directTextBuffers": true,
-        "bufferMB": 8,
-        "cacheMB": 256
-      },
-      {
-        "worktree": "linear-parser",
-        "label": "direct-text-cache-512m",
-        "partialInsertBatches": false,
-        "directTextBuffers": true,
-        "bufferMB": 8,
-        "cacheMB": 512
-      }
-    ]
-  },
-  "mmap-email-scaled": {
-    "profiles": ["email-683m"],
-    "repetitions": 5,
-    "treatments": [
-      {
-        "worktree": "linear-parser",
-        "label": "direct-text-mmap-1g",
-        "partialInsertBatches": false,
-        "directTextBuffers": true,
-        "bufferMB": 8,
-        "mmapGiB": 1
-      },
-      {
-        "worktree": "linear-parser",
-        "label": "direct-text-mmap-2g",
-        "partialInsertBatches": false,
-        "directTextBuffers": true,
-        "bufferMB": 8,
-        "mmapGiB": 2
-      }
-    ]
-  },
-  "mmap-production-smoke": {
-    "profiles": ["email-high-6.83g", "imports-production-2.75g"],
-    "repetitions": 1,
-    "treatments": [
-      {
-        "worktree": "linear-parser",
-        "label": "direct-text-mmap-1g",
-        "partialInsertBatches": false,
-        "directTextBuffers": true,
-        "bufferMB": 8,
-        "mmapGiB": 1
-      },
-      {
-        "worktree": "linear-parser",
-        "label": "direct-text-mmap-2g",
-        "partialInsertBatches": false,
-        "directTextBuffers": true,
-        "bufferMB": 8,
-        "mmapGiB": 2
-      }
-    ]
-  },
-  "eager-index-scaled": {
-    "profiles": ["email-683m", "imports-550m"],
-    "repetitions": 5,
-    "treatments": [
-      {
-        "worktree": "linear-parser",
-        "label": "direct-text-deferred-indexes",
-        "partialInsertBatches": false,
-        "directTextBuffers": true,
-        "eagerIndexes": false,
-        "bufferMB": 8,
-        "mmapGiB": 2
-      },
-      {
-        "worktree": "linear-parser",
-        "label": "direct-text-eager-indexes",
-        "partialInsertBatches": false,
-        "directTextBuffers": true,
-        "eagerIndexes": true,
-        "bufferMB": 8,
-        "mmapGiB": 2
-      }
-    ]
-  },
-  "eager-index-production-smoke": {
-    "profiles": ["email-high-6.83g", "imports-production-2.75g"],
-    "repetitions": 1,
-    "treatments": [
-      {
-        "worktree": "linear-parser",
-        "label": "direct-text-deferred-indexes",
-        "partialInsertBatches": false,
-        "directTextBuffers": true,
-        "eagerIndexes": false,
-        "bufferMB": 8,
-        "mmapGiB": 2
-      },
-      {
-        "worktree": "linear-parser",
-        "label": "direct-text-eager-indexes",
-        "partialInsertBatches": false,
-        "directTextBuffers": true,
-        "eagerIndexes": true,
-        "bufferMB": 8,
-        "mmapGiB": 2
-      }
-    ]
-  },
-  "secondary-index-scaled": {
-    "profiles": ["email-683m", "imports-550m"],
-    "repetitions": 5,
-    "treatments": [
-      {
-        "worktree": "linear-parser",
-        "label": "direct-text-eager-all",
-        "partialInsertBatches": false,
-        "directTextBuffers": true,
-        "eagerIndexes": true,
-        "eagerSecondaryIndexes": false,
-        "bufferMB": 8,
-        "mmapGiB": 2
-      },
-      {
-        "worktree": "linear-parser",
-        "label": "direct-text-eager-secondary",
-        "partialInsertBatches": false,
-        "directTextBuffers": true,
-        "eagerIndexes": false,
-        "eagerSecondaryIndexes": true,
-        "bufferMB": 8,
-        "mmapGiB": 2
-      }
-    ]
-  },
-  "secondary-index-production-smoke": {
-    "profiles": ["email-high-6.83g", "imports-production-2.75g"],
-    "repetitions": 1,
-    "treatments": [
-      {
-        "worktree": "linear-parser",
-        "label": "direct-text-eager-secondary",
-        "partialInsertBatches": false,
-        "directTextBuffers": true,
-        "eagerIndexes": false,
-        "eagerSecondaryIndexes": true,
-        "bufferMB": 8,
-        "mmapGiB": 2
-      }
-    ]
-  },
-  "batched-metrics-scaled": {
-    "profiles": ["email-683m", "imports-550m"],
-    "repetitions": 5,
-    "treatments": [
-      {
-        "worktree": "linear-parser",
-        "label": "direct-text-eager-secondary-batched-metrics",
-        "partialInsertBatches": false,
-        "directTextBuffers": true,
-        "eagerIndexes": false,
-        "eagerSecondaryIndexes": true,
-        "bufferMB": 8,
-        "mmapGiB": 2
-      }
-    ]
-  },
-  "batched-metrics-production-smoke": {
-    "profiles": ["email-high-6.83g", "imports-production-2.75g"],
-    "repetitions": 1,
-    "treatments": [
-      {
-        "worktree": "linear-parser",
-        "label": "direct-text-eager-secondary-batched-metrics",
-        "partialInsertBatches": false,
-        "directTextBuffers": true,
-        "eagerIndexes": false,
-        "eagerSecondaryIndexes": true,
-        "bufferMB": 8,
-        "mmapGiB": 2
-      }
-    ]
-  },
-  "final-mmap-scaled": {
-    "profiles": ["email-683m", "imports-550m"],
-    "repetitions": 5,
-    "treatments": [
-      {
-        "worktree": "linear-parser",
-        "label": "final-mmap-off",
-        "partialInsertBatches": false,
-        "directTextBuffers": true,
-        "eagerIndexes": false,
-        "eagerSecondaryIndexes": true,
-        "bufferMB": 8,
-        "mmapGiB": 0
-      },
-      {
-        "worktree": "linear-parser",
-        "label": "final-mmap-1g",
-        "partialInsertBatches": false,
-        "directTextBuffers": true,
-        "eagerIndexes": false,
-        "eagerSecondaryIndexes": true,
-        "bufferMB": 8,
-        "mmapGiB": 1
-      },
-      {
-        "worktree": "linear-parser",
-        "label": "final-mmap-2g",
-        "partialInsertBatches": false,
-        "directTextBuffers": true,
-        "eagerIndexes": false,
-        "eagerSecondaryIndexes": true,
-        "bufferMB": 8,
-        "mmapGiB": 2
-      }
-    ]
-  },
-  "final-mmap-production-smoke": {
-    "profiles": ["email-high-6.83g", "imports-production-2.75g"],
-    "repetitions": 1,
-    "treatments": [
-      {
-        "worktree": "linear-parser",
-        "label": "final-mmap-off",
-        "partialInsertBatches": false,
-        "directTextBuffers": true,
-        "eagerIndexes": false,
-        "eagerSecondaryIndexes": true,
-        "bufferMB": 8,
-        "mmapGiB": 0
-      },
-      {
-        "worktree": "linear-parser",
-        "label": "final-mmap-1g",
-        "partialInsertBatches": false,
-        "directTextBuffers": true,
-        "eagerIndexes": false,
-        "eagerSecondaryIndexes": true,
-        "bufferMB": 8,
-        "mmapGiB": 1
-      },
-      {
-        "worktree": "linear-parser",
-        "label": "final-mmap-2g",
-        "partialInsertBatches": false,
-        "directTextBuffers": true,
-        "eagerIndexes": false,
-        "eagerSecondaryIndexes": true,
-        "bufferMB": 8,
-        "mmapGiB": 2
-      }
-    ]
-  },
-  "origin-main-baseline": {
-    "profiles": ["email-high-6.83g", "imports-production-2.75g"],
-    "repetitions": 3,
-    "treatments": [
-      {
-        "worktree": "baseline",
-        "label": "origin-main-mmap-off",
-        "partialInsertBatches": false,
-        "directTextBuffers": false,
-        "eagerIndexes": false,
-        "eagerSecondaryIndexes": false,
-        "bufferMB": 8,
-        "mmapGiB": 0
-      }
-    ]
-  },
-  "final-candidate-core": {
-    "profiles": ["email-high-6.83g", "imports-production-2.75g"],
-    "repetitions": 3,
-    "treatments": [
-      {
-        "worktree": "linear-parser",
-        "label": "final-candidate-mmap-off",
-        "partialInsertBatches": false,
-        "directTextBuffers": true,
-        "eagerIndexes": false,
-        "eagerSecondaryIndexes": true,
-        "bufferMB": 8,
-        "mmapGiB": 0
-      }
-    ]
-  },
-  "adaptive-index-narrow": {
-    "profiles": ["email-narrow-250k", "imports-narrow-250k"],
-    "repetitions": 3,
-    "treatments": [
-      {
-        "worktree": "linear-parser",
-        "label": "narrow-deferred-indexes",
-        "partialInsertBatches": false,
-        "directTextBuffers": true,
-        "eagerIndexes": false,
-        "eagerSecondaryIndexes": false,
-        "bufferMB": 8,
-        "mmapGiB": 0
-      },
-      {
-        "worktree": "linear-parser",
-        "label": "narrow-eager-secondary",
-        "partialInsertBatches": false,
-        "directTextBuffers": true,
-        "eagerIndexes": false,
-        "eagerSecondaryIndexes": true,
-        "bufferMB": 8,
-        "mmapGiB": 0
-      }
-    ]
-  },
-  "adaptive-index-validation": {
+  "e1-direct-buffer-cast-confirmatory": {
+    "status": "definition-only-do-not-execute",
+    "experiment": "E1",
     "profiles": [
       "email-683m",
       "imports-550m",
       "email-narrow-250k",
       "imports-narrow-250k"
     ],
-    "repetitions": 3,
+    "repetitions": 12,
+    "ordering": "paired-ab-ba",
     "treatments": [
-      {
-        "worktree": "linear-parser",
-        "label": "adaptive-secondary-indexes",
-        "partialInsertBatches": false,
-        "directTextBuffers": true,
-        "eagerIndexes": false,
-        "eagerSecondaryIndexes": false,
-        "adaptiveSecondaryIndexes": true,
-        "bufferMB": 8,
-        "mmapGiB": 0
-      }
-    ]
+      {"worktree": "origin-main", "label": "string-decoding"},
+      {"worktree": "direct-buffer-cast", "label": "buffer-cast"}
+    ],
+    "preregistration": {
+      "primaryMetric": "outerMs",
+      "minimumUsefulGainPercent": 5,
+      "noRegressionMedianPercent": 2,
+      "noRegressionUpperBoundPercent": 3,
+      "bootstrapResamples": 10000
+    }
   },
-  "flush-diagnostics-core": {
-    "profiles": ["email-high-6.83g"],
+  "e2-adaptive-index-confirmatory": {
+    "status": "definition-only-do-not-execute",
+    "experiment": "E2",
+    "profiles": [
+      "email-683m",
+      "imports-550m",
+      "email-narrow-250k",
+      "imports-narrow-250k"
+    ],
+    "repetitions": 12,
+    "ordering": "balanced-williams",
+    "treatments": [
+      {"worktree": "origin-main", "label": "deferred"},
+      {"worktree": "adaptive-index", "label": "adaptive"},
+      {"worktree": "adaptive-index-eager", "label": "forced-eager"}
+    ],
+    "preregistration": {
+      "primaryMetric": "outerMs",
+      "minimumUsefulGainPercent": 5,
+      "maximumOracleRegretPercent": 3,
+      "maximumNarrowRegressionPercent": 3,
+      "bootstrapResamples": 10000
+    }
+  },
+  "e3-record-send-estimator-discovery": {
+    "status": "definition-only-do-not-execute",
+    "experiment": "E3",
+    "profileFamilies": ["estimator"],
     "repetitions": 5,
+    "ordering": "balanced-williams",
     "treatments": [
-      {
-        "worktree": "linear-parser",
-        "label": "adaptive-mmap-off-instrumented",
-        "partialInsertBatches": false,
-        "directTextBuffers": true,
-        "eagerIndexes": false,
-        "eagerSecondaryIndexes": false,
-        "adaptiveSecondaryIndexes": true,
-        "instrumentCopyPhases": true,
-        "bufferMB": 8,
-        "mmapGiB": 0
-      }
-    ]
+      {"worktree": "adaptive-index", "label": "catalog"},
+      {"worktree": "enhanced-adaptive-index", "label": "record-prefix-8"},
+      {"worktree": "enhanced-adaptive-index", "label": "record-prefix-32"},
+      {"worktree": "enhanced-adaptive-index", "label": "record-prefix-128"},
+      {"worktree": "enhanced-adaptive-index", "label": "record-system-8"},
+      {"worktree": "enhanced-adaptive-index", "label": "record-system-32"},
+      {"worktree": "enhanced-adaptive-index", "label": "record-system-128"},
+      {"worktree": "enhanced-adaptive-index", "label": "exact-copy-control"}
+    ],
+    "preregistration": {
+      "primaryMetric": "estimatorWallMs",
+      "maximumIntegrationOverheadPercent": 2,
+      "purpose": "estimator-selection-only-not-vetting"
+    }
   },
-  "field-buffer-pool-core": {
-    "profiles": ["email-high-6.83g"],
-    "repetitions": 5,
+  "e4-large-table-scheduling-factorial": {
+    "status": "definition-only-do-not-execute",
+    "experiment": "E4",
+    "profileFamilies": ["many-table-publications"],
+    "repetitions": 12,
+    "ordering": "balanced-williams",
     "treatments": [
       {
-        "worktree": "linear-parser",
-        "label": "field-pool-off",
-        "partialInsertBatches": false,
-        "directTextBuffers": true,
-        "eagerIndexes": false,
-        "eagerSecondaryIndexes": false,
-        "adaptiveSecondaryIndexes": true,
-        "instrumentCopyPhases": true,
-        "reuseFragmentedFieldBuffers": false,
-        "bufferMB": 8,
-        "mmapGiB": 0
+        "worktree": "origin-main",
+        "label": "per-table-publication-order",
+        "estimateMode": "per-table",
+        "copyOrder": "publication"
       },
       {
-        "worktree": "linear-parser",
-        "label": "field-pool-on",
-        "partialInsertBatches": false,
-        "directTextBuffers": true,
-        "eagerIndexes": false,
-        "eagerSecondaryIndexes": false,
-        "adaptiveSecondaryIndexes": true,
-        "instrumentCopyPhases": true,
-        "reuseFragmentedFieldBuffers": true,
-        "bufferMB": 8,
-        "mmapGiB": 0
+        "worktree": "schedule-large-tables",
+        "label": "bulk-publication-order",
+        "estimateMode": "bulk-oid",
+        "copyOrder": "publication"
+      },
+      {
+        "worktree": "schedule-large-tables",
+        "label": "per-table-largest-first",
+        "estimateMode": "per-table",
+        "copyOrder": "estimated-bytes-desc"
+      },
+      {
+        "worktree": "schedule-large-tables",
+        "label": "bulk-largest-first",
+        "estimateMode": "bulk-oid",
+        "copyOrder": "estimated-bytes-desc"
       }
-    ]
+    ],
+    "preregistration": {
+      "primaryMetric": "outerMs",
+      "minimumUsefulGainPercent": 5,
+      "bootstrapResamples": 10000
+    }
   },
-  "native-text-scaled": {
-    "profiles": ["email-683m", "imports-550m"],
-    "repetitions": 5,
+  "e5-native-utf8-binding": {
+    "status": "definition-only-do-not-execute",
+    "experiment": "E5",
+    "profiles": [
+      "email-683m",
+      "imports-550m",
+      "email-narrow-250k",
+      "imports-narrow-250k"
+    ],
+    "repetitions": 12,
+    "ordering": "balanced-williams",
     "treatments": [
+      {"worktree": "direct-buffer-cast", "label": "buffer-cast"},
       {
-        "worktree": "linear-parser",
-        "label": "cast-text",
-        "partialInsertBatches": false,
-        "directTextBuffers": true,
-        "nativeTextBuffers": false,
-        "eagerIndexes": false,
-        "eagerSecondaryIndexes": false,
-        "adaptiveSecondaryIndexes": true,
-        "instrumentCopyPhases": true,
-        "reuseFragmentedFieldBuffers": false,
-        "bufferMB": 8,
-        "mmapGiB": 0
+        "worktree": "direct-buffer-cast",
+        "addonWorktree": "native-utf8-binding",
+        "label": "new-addon-native-disabled"
       },
       {
-        "worktree": "linear-parser",
-        "label": "native-text",
-        "partialInsertBatches": false,
-        "directTextBuffers": true,
-        "nativeTextBuffers": true,
-        "eagerIndexes": false,
-        "eagerSecondaryIndexes": false,
-        "adaptiveSecondaryIndexes": true,
-        "instrumentCopyPhases": true,
-        "reuseFragmentedFieldBuffers": false,
-        "bufferMB": 8,
-        "mmapGiB": 0
+        "worktree": "direct-buffer-cast",
+        "addonWorktree": "native-utf8-binding",
+        "label": "native-transient-binding"
       }
-    ]
+    ],
+    "preregistration": {
+      "primaryMetric": "outerMs",
+      "minimumIncrementalGainPercent": 5,
+      "requiresPublishedPackage": false,
+      "addonMode": "local-worktree-build",
+      "bootstrapResamples": 10000
+    }
   },
-  "native-static-scaled": {
-    "profiles": ["email-683m", "imports-550m"],
-    "repetitions": 5,
+  "e6-insert-batch-writer": {
+    "status": "definition-only-do-not-execute",
+    "experiment": "E6",
+    "profileFamilies": ["parameter-boundaries", "parameter-tail-boundaries"],
+    "repetitions": 12,
+    "ordering": "balanced-williams",
     "treatments": [
-      {
-        "worktree": "linear-parser",
-        "label": "cast-text",
-        "partialInsertBatches": false,
-        "directTextBuffers": true,
-        "nativeTextBuffers": false,
-        "eagerIndexes": false,
-        "eagerSecondaryIndexes": false,
-        "adaptiveSecondaryIndexes": true,
-        "instrumentCopyPhases": true,
-        "reuseFragmentedFieldBuffers": false,
-        "bufferMB": 8,
-        "mmapGiB": 0
-      },
-      {
-        "worktree": "linear-parser",
-        "label": "native-static-text",
-        "partialInsertBatches": false,
-        "directTextBuffers": true,
-        "nativeTextBuffers": true,
-        "eagerIndexes": false,
-        "eagerSecondaryIndexes": false,
-        "adaptiveSecondaryIndexes": true,
-        "instrumentCopyPhases": true,
-        "reuseFragmentedFieldBuffers": false,
-        "bufferMB": 8,
-        "mmapGiB": 0
-      }
-    ]
+      {"worktree": "origin-main", "label": "current-batching"},
+      {"worktree": "origin-main", "label": "writer-neutral-refactor"},
+      {"worktree": "origin-main", "label": "fixed-batching-and-tails"}
+    ],
+    "preregistration": {
+      "primaryMetric": "outerMs",
+      "minimumUsefulGainPercent": 5,
+      "correctnessFirst": true
+    }
   },
-  "native-binding-production-warmup": {
-    "profiles": ["email-high-6.83g"],
-    "repetitions": 1,
+  "e7-bounded-active-table-buffer": {
+    "status": "definition-only-do-not-execute",
+    "experiment": "E7",
+    "profileFamilies": ["concurrent-buffering"],
+    "repetitions": 12,
+    "ordering": "paired-ab-ba",
     "treatments": [
-      {
-        "worktree": "linear-parser",
-        "label": "native-static-warmup",
-        "partialInsertBatches": false,
-        "directTextBuffers": true,
-        "nativeTextBuffers": true,
-        "nativeTextBufferStatic": true,
-        "eagerIndexes": false,
-        "eagerSecondaryIndexes": false,
-        "adaptiveSecondaryIndexes": true,
-        "instrumentCopyPhases": false,
-        "reuseFragmentedFieldBuffers": false,
-        "bufferMB": 8,
-        "mmapGiB": 0
-      }
-    ]
+      {"worktree": "origin-main", "label": "current-buffering"},
+      {"worktree": "origin-main", "label": "bounded-buffering"}
+    ],
+    "preregistration": {
+      "primaryMetric": "cgroupPeakMemoryBytes",
+      "minimumPeakMemoryReductionPercent": 20,
+      "maximumReadinessRegressionPercent": 3
+    }
   },
-  "native-binding-production-factorial": {
-    "profiles": ["email-high-6.83g"],
-    "repetitions": 5,
+  "e8-zqlite-binding-logging-factorial": {
+    "status": "definition-only-do-not-execute",
+    "experiment": "E8",
+    "profiles": ["email-narrow-250k", "imports-narrow-250k"],
+    "repetitions": 12,
+    "ordering": "balanced-williams",
     "treatments": [
-      {
-        "worktree": "linear-parser",
-        "label": "cast-uninstrumented",
-        "partialInsertBatches": false,
-        "directTextBuffers": true,
-        "nativeTextBuffers": false,
-        "nativeTextBufferStatic": false,
-        "eagerIndexes": false,
-        "eagerSecondaryIndexes": false,
-        "adaptiveSecondaryIndexes": true,
-        "instrumentCopyPhases": false,
-        "reuseFragmentedFieldBuffers": false,
-        "bufferMB": 8,
-        "mmapGiB": 0
-      },
-      {
-        "worktree": "linear-parser",
-        "label": "cast-instrumented",
-        "partialInsertBatches": false,
-        "directTextBuffers": true,
-        "nativeTextBuffers": false,
-        "nativeTextBufferStatic": false,
-        "eagerIndexes": false,
-        "eagerSecondaryIndexes": false,
-        "adaptiveSecondaryIndexes": true,
-        "instrumentCopyPhases": true,
-        "reuseFragmentedFieldBuffers": false,
-        "bufferMB": 8,
-        "mmapGiB": 0
-      },
-      {
-        "worktree": "linear-parser",
-        "label": "native-transient-uninstrumented",
-        "partialInsertBatches": false,
-        "directTextBuffers": true,
-        "nativeTextBuffers": true,
-        "nativeTextBufferStatic": false,
-        "eagerIndexes": false,
-        "eagerSecondaryIndexes": false,
-        "adaptiveSecondaryIndexes": true,
-        "instrumentCopyPhases": false,
-        "reuseFragmentedFieldBuffers": false,
-        "bufferMB": 8,
-        "mmapGiB": 0
-      },
-      {
-        "worktree": "linear-parser",
-        "label": "native-transient-instrumented",
-        "partialInsertBatches": false,
-        "directTextBuffers": true,
-        "nativeTextBuffers": true,
-        "nativeTextBufferStatic": false,
-        "eagerIndexes": false,
-        "eagerSecondaryIndexes": false,
-        "adaptiveSecondaryIndexes": true,
-        "instrumentCopyPhases": true,
-        "reuseFragmentedFieldBuffers": false,
-        "bufferMB": 8,
-        "mmapGiB": 0
-      },
-      {
-        "worktree": "linear-parser",
-        "label": "native-static-uninstrumented",
-        "partialInsertBatches": false,
-        "directTextBuffers": true,
-        "nativeTextBuffers": true,
-        "nativeTextBufferStatic": true,
-        "eagerIndexes": false,
-        "eagerSecondaryIndexes": false,
-        "adaptiveSecondaryIndexes": true,
-        "instrumentCopyPhases": false,
-        "reuseFragmentedFieldBuffers": false,
-        "bufferMB": 8,
-        "mmapGiB": 0
-      },
-      {
-        "worktree": "linear-parser",
-        "label": "native-static-instrumented",
-        "partialInsertBatches": false,
-        "directTextBuffers": true,
-        "nativeTextBuffers": true,
-        "nativeTextBufferStatic": true,
-        "eagerIndexes": false,
-        "eagerSecondaryIndexes": false,
-        "adaptiveSecondaryIndexes": true,
-        "instrumentCopyPhases": true,
-        "reuseFragmentedFieldBuffers": false,
-        "bufferMB": 8,
-        "mmapGiB": 0
-      }
-    ]
+      {"worktree": "origin-main", "label": "rest-eager-log-context"},
+      {"worktree": "origin-main", "label": "run-values-eager-log-context"},
+      {"worktree": "origin-main", "label": "rest-lazy-log-context"},
+      {"worktree": "origin-main", "label": "run-values-lazy-log-context"}
+    ],
+    "preregistration": {
+      "primaryMetric": "outerMs",
+      "minimumCallGainPercent": 5,
+      "minimumTotalGainPercent": 3
+    }
   },
-  "native-text-imports-production": {
-    "profiles": ["imports-production-2.75g"],
-    "repetitions": 5,
+  "e9-offset-copy-decoding": {
+    "status": "definition-only-do-not-execute",
+    "experiment": "E9",
+    "profiles": ["email-narrow-250k", "imports-narrow-250k"],
+    "repetitions": 12,
+    "ordering": "balanced-williams",
     "treatments": [
+      {"worktree": "origin-main", "label": "buffer-view-parser"},
+      {"worktree": "origin-main", "label": "offset-parser"},
+      {"worktree": "origin-main", "label": "offset-parser-writer"}
+    ],
+    "preregistration": {
+      "primaryMetric": "processingMs",
+      "minimumProcessingGainPercent": 10,
+      "minimumTotalGainPercent": 5
+    }
+  },
+  "e10-schema-progress-subexperiments": {
+    "status": "definition-only-do-not-execute",
+    "experiment": "E10",
+    "profileFamilies": ["schema-heavy"],
+    "repetitions": 12,
+    "comparisonMode": "each-treatment-versus-baseline-in-separate-blocks",
+    "treatments": [
+      {"worktree": "origin-main", "label": "baseline"},
+      {"worktree": "origin-main", "label": "metadata-insert-many"},
+      {"worktree": "origin-main", "label": "lazy-metadata-statements"},
+      {"worktree": "origin-main", "label": "cached-status-state"},
+      {"worktree": "origin-main", "label": "reduced-info-logging"}
+    ],
+    "preregistration": {
+      "primaryMetric": "outerMs",
+      "minimumPhaseGainPercent": 10,
+      "minimumTotalGainPercent": 3
+    }
+  },
+  "e11-deferred-index-subexperiments": {
+    "status": "definition-only-do-not-execute",
+    "experiment": "E11",
+    "profileFamilies": ["index-topology-cache"],
+    "repetitions": 12,
+    "comparisonMode": "each-treatment-versus-baseline-before-interactions",
+    "treatments": [
+      {"worktree": "origin-main", "label": "current-index-order"},
+      {"worktree": "origin-main", "label": "grouped-unique-first"},
+      {"worktree": "origin-main", "label": "recently-copied-first"},
+      {"worktree": "origin-main", "label": "largest-first"},
+      {"worktree": "origin-main", "label": "page-cache-policy"},
+      {"worktree": "origin-main", "label": "sqlite-sorter-threads"}
+    ],
+    "preregistration": {
+      "primaryMetric": "outerMs",
+      "minimumIndexPhaseGainPercent": 10,
+      "minimumTotalGainPercent": 5
+    }
+  },
+  "e12-native-initial-sync-ingestor": {
+    "status": "definition-only-do-not-execute",
+    "experiment": "E12",
+    "profiles": [
+      "email-683m",
+      "imports-550m",
+      "email-narrow-250k",
+      "imports-narrow-250k"
+    ],
+    "profileFamilies": ["native-ingestor-protocol"],
+    "repetitions": 12,
+    "ordering": "balanced-williams",
+    "treatments": [
+      {"worktree": "origin-main", "label": "js-ingestion"},
       {
-        "worktree": "linear-parser",
-        "label": "cast-text",
-        "partialInsertBatches": false,
-        "directTextBuffers": true,
-        "nativeTextBuffers": false,
-        "nativeTextBufferStatic": false,
-        "eagerIndexes": false,
-        "eagerSecondaryIndexes": false,
-        "adaptiveSecondaryIndexes": true,
-        "instrumentCopyPhases": false,
-        "reuseFragmentedFieldBuffers": false,
-        "bufferMB": 8,
-        "mmapGiB": 0
+        "worktree": "origin-main",
+        "addonWorktree": "native-initial-sync-ingestor",
+        "label": "new-addon-native-disabled"
       },
       {
-        "worktree": "linear-parser",
-        "label": "native-transient",
-        "partialInsertBatches": false,
-        "directTextBuffers": true,
-        "nativeTextBuffers": true,
-        "nativeTextBufferStatic": false,
-        "eagerIndexes": false,
-        "eagerSecondaryIndexes": false,
-        "adaptiveSecondaryIndexes": true,
-        "instrumentCopyPhases": false,
-        "reuseFragmentedFieldBuffers": false,
-        "bufferMB": 8,
-        "mmapGiB": 0
+        "worktree": "origin-main",
+        "addonWorktree": "native-initial-sync-ingestor",
+        "label": "native-copy-ingestor"
       }
-    ]
-  },
-  "final-native-candidate-core": {
-    "profiles": ["email-high-6.83g", "imports-production-2.75g"],
-    "repetitions": 3,
-    "treatments": [
-      {
-        "worktree": "linear-parser",
-        "label": "final-native-candidate",
-        "partialInsertBatches": false,
-        "directTextBuffers": true,
-        "nativeTextBuffers": true,
-        "nativeTextBufferStatic": false,
-        "eagerIndexes": false,
-        "eagerSecondaryIndexes": false,
-        "adaptiveSecondaryIndexes": true,
-        "instrumentCopyPhases": false,
-        "reuseFragmentedFieldBuffers": false,
-        "bufferMB": 8,
-        "mmapGiB": 0
-      }
-    ]
-  },
-  "final-native-telemetry-smoke": {
-    "profiles": ["email-high-6.83g", "imports-production-2.75g"],
-    "repetitions": 3,
-    "treatments": [
-      {
-        "worktree": "linear-parser",
-        "label": "final-native-telemetry",
-        "partialInsertBatches": false,
-        "directTextBuffers": true,
-        "nativeTextBuffers": true,
-        "nativeTextBufferStatic": false,
-        "eagerIndexes": false,
-        "eagerSecondaryIndexes": false,
-        "adaptiveSecondaryIndexes": true,
-        "instrumentCopyPhases": false,
-        "reuseFragmentedFieldBuffers": false,
-        "bufferMB": 8,
-        "mmapGiB": 0
-      }
-    ]
-  },
-  "final-field-pool-core": {
-    "profiles": ["email-high-6.83g"],
-    "repetitions": 7,
-    "treatments": [
-      {
-        "worktree": "linear-parser",
-        "label": "field-pool-off",
-        "partialInsertBatches": false,
-        "directTextBuffers": true,
-        "nativeTextBuffers": true,
-        "nativeTextBufferStatic": false,
-        "eagerIndexes": false,
-        "eagerSecondaryIndexes": false,
-        "adaptiveSecondaryIndexes": true,
-        "instrumentCopyPhases": false,
-        "reuseFragmentedFieldBuffers": false,
-        "bufferMB": 8,
-        "mmapGiB": 0
-      },
-      {
-        "worktree": "linear-parser",
-        "label": "field-pool-on",
-        "partialInsertBatches": false,
-        "directTextBuffers": true,
-        "nativeTextBuffers": true,
-        "nativeTextBufferStatic": false,
-        "eagerIndexes": false,
-        "eagerSecondaryIndexes": false,
-        "adaptiveSecondaryIndexes": true,
-        "instrumentCopyPhases": false,
-        "reuseFragmentedFieldBuffers": true,
-        "bufferMB": 8,
-        "mmapGiB": 0
-      }
-    ]
+    ],
+    "preregistration": {
+      "primaryMetric": "outerMs",
+      "minimumRepresentativeGainPercent": 15,
+      "maximumRegressionPercent": 3,
+      "requiresPublishedPackage": false,
+      "addonMode": "local-worktree-build",
+      "bootstrapResamples": 10000
+    }
   }
 }

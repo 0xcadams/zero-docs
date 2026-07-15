@@ -20,6 +20,7 @@ import type {PostgresDB} from './types/pg.ts';
 
 type Fixture = 'email' | 'imports';
 type Mode = 'copy-only' | 'sync';
+type ValidationMode = 'canonical' | 'calibration' | 'exploratory';
 type PhaseRecord = {
   level: LogLevel;
   message: string;
@@ -42,7 +43,12 @@ const mode = envChoice<Mode>(
   ['copy-only', 'sync'],
   'sync',
 );
-const rows = envInteger('ZERO_COPY_PIPELINE_ROWS', 400, 1);
+const validationMode = envChoice<ValidationMode>(
+  'ZERO_COPY_PIPELINE_VALIDATION_MODE',
+  ['canonical', 'calibration', 'exploratory'],
+  'calibration',
+);
+const rows = envInteger('ZERO_COPY_PIPELINE_ROWS', 400, 0);
 const payloadBytes = envInteger('ZERO_COPY_PIPELINE_PAYLOAD_BYTES', 250_000, 1);
 const copyChunkBytes =
   process.env.ZERO_COPY_PIPELINE_COPY_CHUNK_BYTES === 'native'
@@ -92,12 +98,32 @@ const sqliteCacheMB = envOptionalInteger('ZERO_COPY_PIPELINE_SQLITE_CACHE_MB');
 const expectedCopyBytes = envOptionalInteger(
   'ZERO_COPY_PIPELINE_EXPECTED_COPY_BYTES',
 );
+const expectedRows = envOptionalInteger('ZERO_COPY_PIPELINE_EXPECTED_ROWS');
+const expectedCopyDigest = envOptionalDigest(
+  'ZERO_COPY_PIPELINE_EXPECTED_COPY_DIGEST',
+);
+const expectedContentDigest = envOptionalDigest(
+  'ZERO_COPY_PIPELINE_EXPECTED_CONTENT_DIGEST',
+);
+const configuredFixtureVersion = envOptionalString(
+  'ZERO_COPY_PIPELINE_FIXTURE_VERSION',
+);
+const fixtureVersion =
+  configuredFixtureVersion ?? `legacy-${fixture}-fixture-v1`;
+const configuredFixtureSeed = envOptionalInteger(
+  'ZERO_COPY_PIPELINE_FIXTURE_SEED',
+);
+const fixtureSeed = configuredFixtureSeed ?? 20_250_714;
+const cachePolicy = envOptionalString('ZERO_COPY_PIPELINE_CACHE_POLICY');
+const sourceStrategy = envOptionalString('ZERO_COPY_PIPELINE_SOURCE_STRATEGY');
 const instrument = process.env.ZERO_COPY_PIPELINE_INSTRUMENT !== '0';
 const TEST_TIMEOUT_MS = envInteger(
   'ZERO_COPY_PIPELINE_TIMEOUT_MS',
   3_600_000,
   1_000,
 );
+
+validateValidationConfiguration();
 
 test(
   'initial sync copy pipeline investigation',
@@ -106,32 +132,50 @@ test(
     const upstream = await testDBs.create(uniqueName('copy_pipeline_source'));
     let dbFile: DbFile | undefined;
     try {
-      progress('creating fixture', {fixture, rows, payloadBytes});
+      progress('creating fixture', {
+        fixture,
+        fixtureVersion,
+        fixtureSeed,
+        rows,
+        payloadBytes,
+        validationMode,
+      });
       await createFixture(upstream, fixture, rows, payloadBytes);
       const source = await inspectSource(upstream, fixture);
       expect(source.rows).toBe(rows);
+      validateExact('source row count', source.rows, expectedRows);
       progress('fixture ready', source);
 
       const rawCopy = await measureCopy(upstream, fixture);
-      if (expectedCopyBytes !== undefined) {
-        const relativeError =
-          Math.abs(rawCopy.bytes - expectedCopyBytes) / expectedCopyBytes;
-        if (relativeError > 0.02) {
-          throw new Error(
-            `COPY bytes ${rawCopy.bytes} differ from expected ${expectedCopyBytes} by ${(relativeError * 100).toFixed(2)}%`,
-          );
-        }
-      }
+      validateExact('measured COPY bytes', rawCopy.bytes, expectedCopyBytes);
+      const sourceCopy = await validateBinaryCopy(upstream, fixture);
+      expect(sourceCopy.bytes).toBe(rawCopy.bytes);
+      expect(sourceCopy.rows).toBe(source.rows);
+      validateExact(
+        'validated COPY bytes',
+        sourceCopy.bytes,
+        expectedCopyBytes,
+      );
+      validateExact(
+        'binary COPY stream digest',
+        sourceCopy.digest,
+        expectedCopyDigest,
+      );
       if (mode === 'copy-only') {
+        emitCalibration({source, sourceCopy});
         emitResult({
           kind: 'copy-only',
           profile,
           runLabel,
           fixture,
+          fixtureVersion,
+          fixtureSeed,
+          validationMode,
           rows,
           payloadBytes,
           source,
           rawCopy,
+          sourceCopy,
         });
         return;
       }
@@ -248,23 +292,28 @@ test(
         process.resourceUsage(),
         resourcesBefore,
       );
-      const sqlite = inspectReplica(lc, dbFile.path, fixture, rows);
+      const sqlite = inspectReplica(lc, dbFile.path, fixture);
       expect(sqlite.rows).toBe(rows);
-      const expectedPayloadHash = createHash('sha256')
-        .update(fixturePayload(payloadBytes))
-        .digest('hex');
-      for (const sample of sqlite.payloadSamples) {
-        expect(sample.bytes).toBe(payloadBytes);
-        expect(sample.sha256).toBe(expectedPayloadHash);
-      }
+      validateExact('replica row count', sqlite.rows, expectedRows);
+      validateExact(
+        'replica whole-table content digest',
+        sqlite.content.digest,
+        expectedContentDigest,
+      );
       expect(sqlite.indexes).toEqual(expectedReplicaIndexes(fixture));
       expect(sqlite.integrityCheck).toEqual([{integrity_check: 'ok'}]);
+      emitCalibration({source, sourceCopy, sqlite});
 
       emitResult({
         kind: 'initial-sync',
         profile,
         runLabel,
         fixture,
+        fixtureVersion,
+        fixtureSeed,
+        validationMode,
+        cachePolicy,
+        sourceStrategy,
         rows,
         payloadBytes,
         workers,
@@ -290,6 +339,7 @@ test(
         },
         source,
         rawCopy,
+        sourceCopy,
         timing: {
           outerMs,
           callbackMs,
@@ -315,6 +365,154 @@ test(
     }
   },
 );
+
+type BinaryCopyState =
+  | 'header'
+  | 'extension'
+  | 'tuple-header'
+  | 'field-length'
+  | 'field-data'
+  | 'done';
+
+const PGCOPY_SIGNATURE = Buffer.from([
+  0x50, 0x47, 0x43, 0x4f, 0x50, 0x59, 0x0a, 0xff, 0x0d, 0x0a, 0x00,
+]);
+const DIGEST_ROW_MARKER = Buffer.from([0x52]);
+const DIGEST_END_MARKER = Buffer.from([0x45]);
+const DIGEST_NULL = Buffer.from([0x00]);
+const DIGEST_STRING = Buffer.from([0x01]);
+const DIGEST_NUMBER = Buffer.from([0x02]);
+const DIGEST_BIGINT = Buffer.from([0x03]);
+const DIGEST_BYTES = Buffer.from([0x04]);
+
+class BinaryCopyVerifier {
+  readonly #expectedFields: number;
+  #state: BinaryCopyState = 'header';
+  #pending = Buffer.alloc(0);
+  #extensionBytesRemaining = 0;
+  #fieldsRemaining = 0;
+  #fieldBytesRemaining = 0;
+  #rows = 0;
+
+  constructor(expectedFields: number) {
+    this.#expectedFields = expectedFields;
+  }
+
+  parse(chunk: Buffer) {
+    let data =
+      this.#pending.length === 0
+        ? chunk
+        : Buffer.concat([this.#pending, chunk]);
+    this.#pending = Buffer.alloc(0);
+    let offset = 0;
+
+    while (offset < data.length) {
+      if (this.#state === 'done') {
+        throw new Error('Binary COPY stream has bytes after its trailer');
+      }
+      if (this.#state === 'extension') {
+        const consumed = Math.min(
+          this.#extensionBytesRemaining,
+          data.length - offset,
+        );
+        offset += consumed;
+        this.#extensionBytesRemaining -= consumed;
+        if (this.#extensionBytesRemaining === 0) {
+          this.#state = 'tuple-header';
+        }
+        continue;
+      }
+      if (this.#state === 'field-data') {
+        const consumed = Math.min(
+          this.#fieldBytesRemaining,
+          data.length - offset,
+        );
+        offset += consumed;
+        this.#fieldBytesRemaining -= consumed;
+        if (this.#fieldBytesRemaining === 0) {
+          this.#finishField();
+        }
+        continue;
+      }
+
+      const requiredBytes =
+        this.#state === 'header' ? 19 : this.#state === 'tuple-header' ? 2 : 4;
+      if (data.length - offset < requiredBytes) {
+        this.#pending = data.subarray(offset);
+        return;
+      }
+      if (this.#state === 'header') {
+        const header = data.subarray(offset, offset + requiredBytes);
+        offset += requiredBytes;
+        if (
+          !header.subarray(0, PGCOPY_SIGNATURE.length).equals(PGCOPY_SIGNATURE)
+        ) {
+          throw new Error('Invalid binary COPY signature');
+        }
+        const flags = header.readInt32BE(11);
+        if (flags !== 0) {
+          throw new Error(`Unsupported binary COPY flags: ${flags}`);
+        }
+        this.#extensionBytesRemaining = header.readInt32BE(15);
+        if (this.#extensionBytesRemaining < 0) {
+          throw new Error('Invalid negative binary COPY extension length');
+        }
+        this.#state =
+          this.#extensionBytesRemaining === 0 ? 'tuple-header' : 'extension';
+        continue;
+      }
+      if (this.#state === 'tuple-header') {
+        const fields = data.readInt16BE(offset);
+        offset += requiredBytes;
+        if (fields === -1) {
+          this.#state = 'done';
+          continue;
+        }
+        if (fields !== this.#expectedFields) {
+          throw new Error(
+            `Binary COPY row has ${fields} fields; expected ${this.#expectedFields}`,
+          );
+        }
+        this.#fieldsRemaining = fields;
+        this.#rows++;
+        this.#state = 'field-length';
+        continue;
+      }
+
+      const fieldLength = data.readInt32BE(offset);
+      offset += requiredBytes;
+      if (fieldLength < -1) {
+        throw new Error(`Invalid binary COPY field length ${fieldLength}`);
+      }
+      if (fieldLength <= 0) {
+        this.#finishField();
+      } else {
+        this.#fieldBytesRemaining = fieldLength;
+        this.#state = 'field-data';
+      }
+    }
+  }
+
+  finish() {
+    if (this.#state !== 'done' || this.#pending.length !== 0) {
+      throw new Error(`Truncated binary COPY stream in ${this.#state} state`);
+    }
+    return {
+      format: 'postgres-binary-copy-v1',
+      columns: this.#expectedFields,
+      rows: this.#rows,
+      protocolValid: true,
+    } as const;
+  }
+
+  #finishField() {
+    this.#fieldsRemaining--;
+    if (this.#fieldsRemaining < 0) {
+      throw new Error('Binary COPY row contains too many fields');
+    }
+    this.#state = this.#fieldsRemaining === 0 ? 'tuple-header' : 'field-length';
+  }
+}
 
 class PhaseSink implements LogSink {
   readonly #enabled: boolean;
@@ -366,6 +564,13 @@ async function createFixture(
   rowCount: number,
   valueBytes: number,
 ) {
+  const supportedVersion = `legacy-${fixtureName}-fixture-v1`;
+  if (fixtureVersion !== supportedVersion || fixtureSeed !== 20_250_714) {
+    throw new Error(
+      `Unsupported ${fixtureName} fixture identity ${fixtureVersion}/${fixtureSeed}; ` +
+        `expected ${supportedVersion}/20250714`,
+    );
+  }
   await upstream.unsafe(/* sql */ `
     CREATE TABLE bench_payload(payload text NOT NULL);
     INSERT INTO bench_payload
@@ -542,12 +747,41 @@ async function measureCopy(upstream: PostgresDB, fixtureName: Fixture) {
   };
 }
 
-function inspectReplica(
-  lc: LogContext,
-  path: string,
-  fixtureName: Fixture,
-  rowCount: number,
-) {
+async function validateBinaryCopy(upstream: PostgresDB, fixtureName: Fixture) {
+  const verifier = new BinaryCopyVerifier(expectedColumnCount(fixtureName));
+  const hash = createHash('sha256');
+  let bytes = 0;
+  let chunks = 0;
+  await pipeline(
+    await upstream
+      .unsafe(
+        `COPY ${qualifiedTable(fixtureName)} TO STDOUT WITH (FORMAT binary)`,
+      )
+      .readable(),
+    new Writable({
+      write(chunk: Buffer, _encoding, callback) {
+        try {
+          bytes += chunk.length;
+          chunks++;
+          hash.update(chunk);
+          verifier.parse(chunk);
+          callback();
+        } catch (error) {
+          callback(error as Error);
+        }
+      },
+    }),
+  );
+  const protocol = verifier.finish();
+  return {
+    bytes,
+    chunks,
+    digest: `sha256:${hash.digest('hex')}`,
+    ...protocol,
+  };
+}
+
+function inspectReplica(lc: LogContext, path: string, fixtureName: Fixture) {
   const db = new Database(lc, path, {readonly: true});
   try {
     const table = fixtureName === 'email' ? 'Email' : 'userspace.imports';
@@ -560,27 +794,8 @@ function inspectReplica(
     const pageSize = db
       .prepare('PRAGMA page_size')
       .get<{page_size: number}>().page_size;
-    const payloadColumn =
-      fixtureName === 'email' ? 'raw' : `json_extract(payload, '$.payload')`;
-    const idColumn = fixtureName === 'email' ? 'id' : 'import_id';
-    const idPrefix = fixtureName === 'email' ? 'email-' : 'import-';
-    const payloadStatement = db.prepare(
-      `SELECT ${payloadColumn} AS payload FROM "${table}" WHERE ${idColumn} = ?`,
-    );
-    const payloadSamples = [
-      ...new Set([1, Math.ceil(rowCount / 2), rowCount]),
-    ].map(row => {
-      const id = `${idPrefix}${row}`;
-      const payload = payloadStatement.get<{payload: string}>(id)?.payload;
-      if (typeof payload !== 'string') {
-        throw new Error(`Missing payload sample ${table}.${id}`);
-      }
-      return {
-        id,
-        bytes: Buffer.byteLength(payload),
-        sha256: createHash('sha256').update(payload).digest('hex'),
-      };
-    });
+    const content = digestReplicaTable(db, table, fixtureName);
+    expect(content.rows).toBe(rows);
     const indexes = db
       .prepare(
         `SELECT name, "unique" AS isUnique
@@ -604,13 +819,101 @@ function inspectReplica(
       fileBytes: statSync(path).size,
       pageCount,
       pageSize,
-      payloadSamples,
+      content,
       indexes,
       integrityCheck,
     };
   } finally {
     db.close();
   }
+}
+
+function digestReplicaTable(db: Database, table: string, fixtureName: Fixture) {
+  const columns = db
+    .prepare(`SELECT name FROM pragma_table_info(?) ORDER BY cid`)
+    .all<{name: string}>(table)
+    .map(({name}) => name);
+  if (columns.length === 0) {
+    throw new Error(`Replica table ${table} has no columns`);
+  }
+  const primaryKey = fixtureName === 'email' ? 'id' : 'import_id';
+  const hash = createHash('sha256');
+  hash.update('zero-copy-pipeline-content-v1\0');
+  hashFramed(hash, Buffer.from(table));
+  for (const column of columns) {
+    hashFramed(hash, Buffer.from(column));
+  }
+
+  let rows = 0;
+  const statement = db.prepare(
+    `SELECT * FROM ${quoteSQLiteIdentifier(table)} ` +
+      `ORDER BY ${quoteSQLiteIdentifier(primaryKey)} COLLATE BINARY`,
+  );
+  for (const row of statement.iterate<Record<string, unknown>>()) {
+    hash.update(DIGEST_ROW_MARKER);
+    for (const column of columns) {
+      hashSQLiteValue(hash, row[column]);
+    }
+    rows++;
+  }
+  hash.update(DIGEST_END_MARKER);
+  hashLength(hash, rows);
+  return {
+    algorithm: 'sha256',
+    framing: 'zero-copy-pipeline-content-v1',
+    orderBy: primaryKey,
+    columns,
+    rows,
+    digest: `sha256:${hash.digest('hex')}`,
+  };
+}
+
+function hashSQLiteValue(hash: ReturnType<typeof createHash>, value: unknown) {
+  if (value === null) {
+    hash.update(DIGEST_NULL);
+    return;
+  }
+  if (typeof value === 'string') {
+    hash.update(DIGEST_STRING);
+    hashFramed(hash, Buffer.from(value));
+    return;
+  }
+  if (typeof value === 'number') {
+    const encoded = Buffer.allocUnsafe(8);
+    encoded.writeDoubleBE(value);
+    hash.update(DIGEST_NUMBER);
+    hashFramed(hash, encoded);
+    return;
+  }
+  if (typeof value === 'bigint') {
+    hash.update(DIGEST_BIGINT);
+    hashFramed(hash, Buffer.from(value.toString()));
+    return;
+  }
+  if (value instanceof Uint8Array) {
+    hash.update(DIGEST_BYTES);
+    hashFramed(hash, value);
+    return;
+  }
+  throw new Error(`Unsupported SQLite digest value: ${typeof value}`);
+}
+
+function hashFramed(hash: ReturnType<typeof createHash>, value: Uint8Array) {
+  hashLength(hash, value.byteLength);
+  hash.update(value);
+}
+
+function hashLength(hash: ReturnType<typeof createHash>, value: number) {
+  if (!Number.isSafeInteger(value) || value < 0) {
+    throw new Error(`Invalid digest frame length ${value}`);
+  }
+  const encoded = Buffer.allocUnsafe(8);
+  encoded.writeBigUInt64BE(BigInt(value));
+  hash.update(encoded);
+}
+
+function quoteSQLiteIdentifier(identifier: string) {
+  return `"${identifier.replaceAll('"', '""')}"`;
 }
 
 function expectedReplicaIndexes(fixtureName: Fixture) {
@@ -689,11 +992,6 @@ function expectedReplicaIndexes(fixtureName: Fixture) {
           columns: [{name: 'import_id', descending: 0}],
         },
       ];
-}
-
-function fixturePayload(bytes: number) {
-  const pattern = 'production-shaped-copy-payload-0123456789abcdef';
-  return pattern.repeat(Math.ceil(bytes / pattern.length)).slice(0, bytes);
 }
 
 type LinuxDiagnostics = ReturnType<typeof readLinuxDiagnosticsData>;
@@ -777,6 +1075,10 @@ function qualifiedTable(fixtureName: Fixture) {
   return fixtureName === 'email' ? 'public."Email"' : 'userspace.imports';
 }
 
+function expectedColumnCount(fixtureName: Fixture) {
+  return fixtureName === 'email' ? 25 : 7;
+}
+
 function uniqueName(prefix: string) {
   return `${prefix}_${process.pid}_${Date.now()}_${Math.floor(Math.random() * 1_000_000)}`;
 }
@@ -809,6 +1111,19 @@ function envOptionalInteger(name: string) {
     : envInteger(name, 0, 0);
 }
 
+function envOptionalString(name: string) {
+  const value = process.env[name]?.trim();
+  return value === undefined || value === '' ? undefined : value;
+}
+
+function envOptionalDigest(name: string) {
+  const value = envOptionalString(name);
+  if (value !== undefined && !/^sha256:[0-9a-f]{64}$/.test(value)) {
+    throw new Error(`${name} must have the form sha256:<64 lowercase hex>`);
+  }
+  return value;
+}
+
 function envChoice<T extends string>(
   name: string,
   choices: readonly T[],
@@ -821,6 +1136,77 @@ function envChoice<T extends string>(
     );
   }
   return value;
+}
+
+function validateValidationConfiguration() {
+  if (expectedRows !== undefined && expectedRows !== rows) {
+    throw new Error(
+      `Configured rows ${rows} do not match exact expected rows ${expectedRows}`,
+    );
+  }
+  if (validationMode !== 'canonical') {
+    return;
+  }
+  if (mode === 'copy-only') {
+    throw new Error(
+      'Canonical validation requires sync mode so the replica content digest is checked',
+    );
+  }
+  const required: [string, unknown][] = [
+    ['ZERO_COPY_PIPELINE_FIXTURE_VERSION', configuredFixtureVersion],
+    ['ZERO_COPY_PIPELINE_FIXTURE_SEED', configuredFixtureSeed],
+    ['ZERO_COPY_PIPELINE_WORKERS', process.env.ZERO_COPY_PIPELINE_WORKERS],
+    ['ZERO_COPY_PIPELINE_CACHE_POLICY', cachePolicy],
+    ['ZERO_COPY_PIPELINE_SOURCE_STRATEGY', sourceStrategy],
+    ['ZERO_COPY_PIPELINE_EXPECTED_ROWS', expectedRows],
+    ['ZERO_COPY_PIPELINE_EXPECTED_COPY_BYTES', expectedCopyBytes],
+    ['ZERO_COPY_PIPELINE_EXPECTED_COPY_DIGEST', expectedCopyDigest],
+    ['ZERO_COPY_PIPELINE_EXPECTED_CONTENT_DIGEST', expectedContentDigest],
+  ];
+  const missing = required
+    .filter(([, value]) => value === undefined)
+    .map(([name]) => name);
+  if (missing.length > 0) {
+    throw new Error(
+      `Canonical validation fails closed; missing ${missing.join(', ')}`,
+    );
+  }
+}
+
+function validateExact(
+  label: string,
+  actual: number | string,
+  expected: number | string | undefined,
+) {
+  if (expected !== undefined && actual !== expected) {
+    throw new Error(`${label} ${actual} does not exactly equal ${expected}`);
+  }
+}
+
+function emitCalibration(values: {
+  source: {rows: number};
+  sourceCopy: {bytes: number; digest: string};
+  sqlite?: {content: {digest: string; rows: number}};
+}) {
+  if (validationMode !== 'calibration') {
+    return;
+  }
+  console.log(
+    `ZERO_COPY_PIPELINE_CALIBRATION ${BigIntJSON.stringify({
+      canonical: false,
+      autoApproved: false,
+      profile,
+      fixture,
+      fixtureVersion,
+      fixtureSeed,
+      candidateExpected: {
+        rowCount: values.source.rows,
+        copyBytes: values.sourceCopy.bytes,
+        copyDigest: values.sourceCopy.digest,
+        contentDigest: values.sqlite?.content.digest ?? null,
+      },
+    })}`,
+  );
 }
 
 function progress(message: string, data?: unknown) {

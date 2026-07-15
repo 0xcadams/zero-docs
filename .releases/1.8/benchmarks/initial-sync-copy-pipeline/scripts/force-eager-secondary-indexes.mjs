@@ -1,7 +1,7 @@
 import {readFile, writeFile} from 'node:fs/promises';
 
 const path =
-  process.env.PR7_INITIAL_SYNC_PATH ??
+  process.env.ADAPTIVE_INDEX_INITIAL_SYNC_PATH ??
   '/workspace/packages/zero-cache/src/services/change-source/pg/initial-sync.ts';
 const source = await readFile(path, 'utf8');
 const original = `function shouldCreateSecondaryIndexesBeforeCopy(
@@ -30,10 +30,10 @@ const replacement = `function shouldCreateSecondaryIndexesBeforeCopy(
 }`;
 
 if (!source.includes(original)) {
-  throw new Error('PR 7 eager-secondary benchmark patch target not found');
+  throw new Error('Eager-secondary benchmark patch target not found');
 }
 if (source.indexOf(original) !== source.lastIndexOf(original)) {
-  throw new Error('PR 7 eager-secondary benchmark patch target is ambiguous');
+  throw new Error('Eager-secondary benchmark patch target is ambiguous');
 }
 if (!process.argv.includes('--check')) {
   await writeFile(path, source.replace(original, replacement));

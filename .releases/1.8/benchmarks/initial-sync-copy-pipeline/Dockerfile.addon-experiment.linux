@@ -14,8 +14,19 @@ COPY --from=benchmark src/pg-copy-parser.product.bench.ts packages/zero-cache/sr
 COPY --from=benchmark src/initial-sync-copy-pipeline.product.bench.pg.ts packages/zero-cache/src/initial-sync-copy-pipeline.product.bench.pg.ts
 RUN pnpm install --frozen-lockfile --filter zero-cache...
 
-RUN node packages/zero-cache/node_modules/@rocicorp/zero-sqlite3/deps/gen-unicode-case.mjs \
-      > packages/zero-cache/node_modules/@rocicorp/zero-sqlite3/src/util/unicode_case_data.h \
+WORKDIR /workspace/local-zero-sqlite3
+COPY --from=addon package.json binding.gyp shell.js ./
+COPY --from=addon deps ./deps
+COPY --from=addon lib ./lib
+COPY --from=addon src ./src
+
+WORKDIR /workspace
+COPY --from=benchmark scripts/link-local-addon.mjs /tmp/link-local-addon.mjs
+RUN node /tmp/link-local-addon.mjs \
+      /workspace/local-zero-sqlite3 \
+      /workspace/packages/zero-cache/node_modules/@rocicorp/zero-sqlite3 \
+  && node packages/zero-cache/node_modules/@rocicorp/zero-sqlite3/deps/gen-unicode-case.mjs \
+       > packages/zero-cache/node_modules/@rocicorp/zero-sqlite3/src/util/unicode_case_data.h \
   && pnpm --dir packages/zero-cache/node_modules/@rocicorp/zero-sqlite3 run build-release
 
 WORKDIR /workspace/packages/zero-cache

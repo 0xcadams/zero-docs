@@ -1,0 +1,391 @@
+{
+  "schemaVersion": 1,
+  "status": "definition-only-do-not-execute",
+  "digestContract": {
+    "copy": "sha256 over every byte of one complete PostgreSQL binary COPY stream, including header and trailer",
+    "content": "sha256 using zero-copy-pipeline-content-v1 framing over every replica column of every row in primary-key COLLATE BINARY order",
+    "calibration": "candidate values are emitted as noncanonical and require review before being copied into a canonical profile"
+  },
+  "defaults": {
+    "canonical": false,
+    "validationMode": "calibration",
+    "fixtureVersion": "copy-pipeline-experiments-v1",
+    "fixtureSeed": 20250715,
+    "workerCount": 5,
+    "docker": {"cpus": 1, "memory": "3g", "nodeHeapMB": 2304},
+    "cachePolicy": {
+      "sqlite": "default",
+      "mmapGiB": 0,
+      "osPageCache": "cold-clone",
+      "betweenRuns": "new-replica-file"
+    },
+    "sourceStrategy": {
+      "clone": "template-database-per-profile",
+      "reset": "drop-clone-after-run",
+      "betweenTreatments": "fresh-clone"
+    },
+    "expected": {
+      "rowCount": null,
+      "copyBytes": null,
+      "copyDigest": null,
+      "contentDigest": null
+    }
+  },
+  "generators": {
+    "pareto-publication-v1": {
+      "tableNames": "bench_table_0001 through bench_table_N",
+      "sizes": "allocate totalRows by descending weights pow(rank + 1, -alpha), floor each share, then distribute the remainder in seeded table-name order",
+      "randomOrder": "Fisher-Yates using xorshift32 initialized from fixtureSeed; never use Math.random",
+      "schema": "id bigint primary key, tenant_id integer not null, sequence integer not null, payload text not null, marker bytea"
+    },
+    "schema-heavy-v1": {
+      "tableNames": "schema_table_0001 through schema_table_N",
+      "columns": "id bigint primary key followed by deterministic nullable text, integer, real, boolean, timestamp, jsonb, bytea, and array columns until columnCount",
+      "occupancy": "the first tinyTableCount tables contain repeating 1..10 rows; all remaining tables are empty",
+      "indexes": "allocate secondary indexes round-robin in table-name order with deterministic ascending, descending, composite, partial, and covering shapes"
+    },
+    "parameter-boundary-v1": {
+      "schema": "id bigint primary key plus generated integer columns c0001..cNNNN",
+      "columnCounts": "for each rowsPerStatement, emit floor(sqliteVariableLimit / rowsPerStatement) plus every delta, retaining values in 1..postgresColumnLimit",
+      "tails": "emit fullBatchCount complete batches followed by exactly tailRows rows"
+    },
+    "estimator-v1": {
+      "schema": "case-specific deterministic columns plus id bigint primary key",
+      "statistics": "apply each analyze/staleness/bloat action exactly as listed after loading and before cloning"
+    },
+    "index-cache-v1": {
+      "schema": "id bigint primary key, tenant_id integer, bucket integer, created_at timestamptz, payload text",
+      "indexes": "expand the named topology deterministically from tenant_id, bucket, created_at, payload prefix, and composite variants"
+    },
+    "concurrent-buffering-v1": {
+      "schema": "id bigint primary key, ordinal integer, payload text",
+      "payload": "seeded incompressible ASCII generated from repeated sha256(seed, table, row, block) hex blocks"
+    },
+    "native-ingestor-v1": {
+      "schema": "case-specific deterministic binary COPY columns plus id bigint primary key",
+      "chunks": "split the exact binary COPY corpus using the named deterministic chunk pattern",
+      "malformedCorpus": "derive truncation, field-count, length, trailer, and extension failures from the valid corpus outside timed regions"
+    }
+  },
+  "families": {
+    "many-table-publications": {
+      "generator": "pareto-publication-v1",
+      "axes": {
+        "tableCount": [32, 108, 500],
+        "publicationOrder": ["large-first", "large-last", "seeded-random"],
+        "workerCount": [1, 5, 16]
+      },
+      "fixture": {
+        "totalRows": 1000000,
+        "paretoAlpha": 1.16,
+        "minimumRowsPerTable": 1,
+        "payloadBytes": 256,
+        "indexesPerTable": 1,
+        "publication": "explicit ordered table list"
+      },
+      "expectedRowCount": 1000000
+    },
+    "schema-heavy": {
+      "generator": "schema-heavy-v1",
+      "axes": {
+        "topology": [
+          {
+            "tableCount": 108,
+            "indexCount": 345,
+            "tinyTableCount": 10,
+            "expectedRowCount": 55
+          },
+          {
+            "tableCount": 500,
+            "indexCount": 1500,
+            "tinyTableCount": 50,
+            "expectedRowCount": 275
+          }
+        ],
+        "columnCount": [24, 64],
+        "workerCount": [1, 5, 16]
+      },
+      "fixture": {
+        "emptyTableFractionMinimum": 0.9,
+        "tinyRowsCycle": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+        "publication": "all generated tables in table-name order"
+      }
+    },
+    "parameter-boundaries": {
+      "generator": "parameter-boundary-v1",
+      "axes": {
+        "rowCount": [0, 1, 49, 50, 51, 99, 100, 101],
+        "rowsPerStatement": [1, 49, 50, 51, 99, 100, 101],
+        "workerCount": [1, 5]
+      },
+      "fixture": {
+        "sqliteVariableLimit": 32766,
+        "postgresColumnLimit": 1600,
+        "columnDeltas": [-1, 0, 1],
+        "fullBatchCount": 2,
+        "includeSingleColumnControl": true,
+        "publication": "one generated table"
+      }
+    },
+    "parameter-tail-boundaries": {
+      "generator": "parameter-boundary-v1",
+      "axes": {
+        "rowsPerStatement": [49, 50, 51, 99, 100, 101],
+        "tailRows": [0, 1, 49, 50, 51, 99, 100, 101],
+        "workerCount": [1, 5]
+      },
+      "fixture": {
+        "sqliteVariableLimit": 32766,
+        "postgresColumnLimit": 1600,
+        "columnDeltas": [-1, 0, 1],
+        "fullBatchCount": 2,
+        "publication": "one generated table"
+      }
+    },
+    "estimator": {
+      "generator": "estimator-v1",
+      "axes": {
+        "case": [
+          {
+            "name": "toast-compressed",
+            "rows": 1000,
+            "payloadBytes": 1048576,
+            "payload": "repeated-compressible",
+            "storage": "extended-pglz",
+            "statistics": "analyze"
+          },
+          {
+            "name": "toast-incompressible",
+            "rows": 1000,
+            "payloadBytes": 1048576,
+            "payload": "seeded-incompressible",
+            "storage": "extended-pglz",
+            "statistics": "analyze"
+          },
+          {
+            "name": "stale-statistics-grow",
+            "rows": 100000,
+            "payloadBytes": 256,
+            "statistics": "analyze-at-1000-then-append-99000"
+          },
+          {
+            "name": "unanalyzed",
+            "rows": 100000,
+            "payloadBytes": 256,
+            "statistics": "never-analyze"
+          },
+          {
+            "name": "bloat",
+            "rows": 10000,
+            "payloadBytes": 512,
+            "statistics": "load-200000-delete-190000-no-vacuum"
+          },
+          {
+            "name": "empty",
+            "rows": 0,
+            "payloadBytes": 0,
+            "statistics": "analyze"
+          },
+          {
+            "name": "filtered-publication",
+            "rows": 10000,
+            "sourceRows": 1000000,
+            "payloadBytes": 256,
+            "publication": "where tenant_id = 0",
+            "statistics": "analyze"
+          },
+          {
+            "name": "column-subset",
+            "rows": 100000,
+            "payloadBytes": 256,
+            "unpublishedPayloadBytes": 65536,
+            "publication": "id, tenant_id, small_payload",
+            "statistics": "analyze"
+          },
+          {
+            "name": "arrays-custom-types",
+            "rows": 100000,
+            "payloadBytes": 256,
+            "types": ["int[]", "text[]", "enum", "domain", "composite"],
+            "statistics": "analyze"
+          },
+          {
+            "name": "threshold-minus-one",
+            "rows": 10000,
+            "averageRowBytes": 2047,
+            "statistics": "analyze"
+          },
+          {
+            "name": "threshold-exact",
+            "rows": 10000,
+            "averageRowBytes": 2048,
+            "statistics": "analyze"
+          },
+          {
+            "name": "threshold-plus-one",
+            "rows": 10000,
+            "averageRowBytes": 2049,
+            "statistics": "analyze"
+          }
+        ],
+        "workerCount": [1, 5]
+      },
+      "fixture": {
+        "thresholdBytes": 2048,
+        "publication": "case-specific explicit table and column list"
+      }
+    },
+    "index-topology-cache": {
+      "generator": "index-cache-v1",
+      "axes": {
+        "indexTopology": [
+          {"name": "primary-only", "secondaryIndexCount": 0},
+          {"name": "single-secondary", "secondaryIndexCount": 1},
+          {"name": "mixed-eight", "secondaryIndexCount": 8},
+          {"name": "mixed-thirty-two", "secondaryIndexCount": 32},
+          {"name": "covering-and-partial", "secondaryIndexCount": 16}
+        ],
+        "cachePolicy": [
+          {
+            "sqlite": "default",
+            "mmapGiB": 0,
+            "osPageCache": "cold-clone",
+            "betweenRuns": "new-replica-file"
+          },
+          {
+            "sqliteCacheMB": 64,
+            "mmapGiB": 0,
+            "osPageCache": "cold-clone",
+            "betweenRuns": "new-replica-file"
+          },
+          {
+            "sqliteCacheMB": 256,
+            "mmapGiB": 0,
+            "osPageCache": "cold-clone",
+            "betweenRuns": "new-replica-file"
+          },
+          {
+            "sqliteCacheMB": 256,
+            "mmapGiB": 1,
+            "osPageCache": "warm-after-one-untimed-sync",
+            "betweenRuns": "new-replica-file"
+          }
+        ],
+        "workerCount": [1, 5]
+      },
+      "fixture": {
+        "rows": 100000,
+        "payloadBytes": 512,
+        "publication": "one generated table"
+      },
+      "expectedRowCount": 100000
+    },
+    "concurrent-buffering": {
+      "generator": "concurrent-buffering-v1",
+      "axes": {
+        "case": [
+          {
+            "name": "many-active-tables",
+            "tableCount": 32,
+            "rowsPerTable": 10000,
+            "payloadBytes": 4096,
+            "expectedRowCount": 320000
+          },
+          {
+            "name": "buffer-threshold-minus-one",
+            "tableCount": 5,
+            "rowsPerTable": 100,
+            "payloadBytes": 8388607,
+            "expectedRowCount": 500
+          },
+          {
+            "name": "buffer-threshold-exact",
+            "tableCount": 5,
+            "rowsPerTable": 100,
+            "payloadBytes": 8388608,
+            "expectedRowCount": 500
+          },
+          {
+            "name": "oversized-row",
+            "tableCount": 5,
+            "rowsPerTable": 10,
+            "payloadBytes": 33554432,
+            "expectedRowCount": 50
+          }
+        ],
+        "publicationOrder": ["large-first", "large-last", "seeded-random"],
+        "workerCount": [1, 5, 16]
+      },
+      "fixture": {
+        "bufferThresholdBytes": 8388608,
+        "publication": "explicit ordered table list"
+      }
+    },
+    "native-ingestor-protocol": {
+      "generator": "native-ingestor-v1",
+      "axes": {
+        "case": [
+          {
+            "name": "mixed-native-types",
+            "rows": 100000,
+            "expectedRowCount": 100000,
+            "types": [
+              "bool",
+              "bytea",
+              "int2",
+              "int4",
+              "int8",
+              "float4",
+              "float8",
+              "numeric",
+              "date",
+              "time",
+              "timetz",
+              "timestamp",
+              "timestamptz",
+              "uuid",
+              "text",
+              "json",
+              "jsonb"
+            ],
+            "chunkPattern": "native-row-framing"
+          },
+          {
+            "name": "arrays-and-custom-types",
+            "rows": 100000,
+            "expectedRowCount": 100000,
+            "types": ["int[]", "text[]", "enum", "domain", "composite-text"],
+            "chunkPattern": "native-row-framing"
+          },
+          {
+            "name": "timestamp-numeric-edges",
+            "rows": 100000,
+            "expectedRowCount": 100000,
+            "values": "infinities, BC dates, numeric scale boundaries, int64 limits",
+            "chunkPattern": "field-boundary-sweep"
+          },
+          {
+            "name": "unsupported-text-fallbacks",
+            "rows": 100000,
+            "expectedRowCount": 100000,
+            "types": ["inet", "interval", "money", "range", "custom-domain"],
+            "chunkPattern": "field-boundary-sweep"
+          },
+          {
+            "name": "fragmented-large-fields",
+            "rows": 10000,
+            "expectedRowCount": 10000,
+            "payloadBytes": 1048576,
+            "chunkPattern": "every-header-tuple-length-and-field-boundary"
+          }
+        ],
+        "workerCount": [1, 5]
+      },
+      "fixture": {
+        "publication": "case-specific explicit table and column list",
+        "copyFormat": "binary",
+        "malformedValidation": "required-outside-timed-region"
+      }
+    }
+  }
+}

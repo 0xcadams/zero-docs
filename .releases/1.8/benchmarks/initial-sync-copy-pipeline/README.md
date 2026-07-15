@@ -1,85 +1,96 @@
 # Initial Sync Copy Pipeline
 
-This benchmark investigates PostgreSQL COPY, binary parsing, decoding, and
-SQLite insertion work under production-shaped CPU and memory constraints.
-It is intentionally separate from `../initial-sync-bottleneck`, which isolated
-the SQLite index pager-cache knee.
+This directory contains the preregistration, fixture definitions, runner, and
+analysis tools for unvetted initial-sync performance experiments. No experiment
+is considered accepted merely because it has a branch or exploratory result.
 
-All fixtures are synthetic. Production metrics are used only to calibrate row
-width, table count, index count, CPU, and memory profiles. Parser fragmentation
-profiles are synthetic stress inputs. The executable performance harness does
-not connect to a production or customer database.
+The active experiment graph and decision gates are in `pr-plan.md`. Historical
+reports retain their original PR-numbered labels as immutable provenance; active
+configuration and scripts use experiment names instead.
 
-`managed-pg-copy-fragmentation.md` separately records a read-only protocol
-framing probe through user-provided PlanetScale and Supabase endpoints. It used
-only generated `COPY (SELECT ... FROM generate_series(...))` data and did not
-enumerate or read application objects.
+## Source Worktrees
 
-## Worktrees
+Mono worktrees are pinned in `config/worktrees.json`:
 
-- `baseline`: clean Zero source at `d87c1c813`.
-- `linear-parser`: the same source plus the fragmented-field parser candidate.
-- `current-pr6-parent`: direct PR parent `c4d551967`.
-- `current-pr6-head`: direct-text-buffer head `99442b64`.
-- `current-pr7-parent`: clean deferred-index parent `ea459443f`.
-- `current-pr7-head`: adaptive-index worktree based on `ea459443f`.
-- `current-pr7-eager`: the same PR 7 worktree with a benchmark-only forced
-  eager-secondary image patch.
+- `origin-main`: frozen experiment baseline at `bc1db665f`.
+- `direct-buffer-cast`: E1 treatment at `27683b82b`.
+- `adaptive-index`: E2 treatment at `11622fdf4`.
+- `adaptive-index-eager`: E2 source plus a benchmark-only forced-eager overlay.
+- `enhanced-adaptive-index`: E3 branch, currently identical to E2.
+- `schedule-large-tables`: E4 branch, currently identical to the baseline.
 
-By default, the installer copies benchmark-only Vitest files into the two
-historical research worktrees. Runners pass explicit worktree labels when a
-stage needs the current PR parent or head, and those generated files are removed
-after host comparisons. Runtime source changes remain in the candidate worktree
-and are recorded in manifests.
+Local zero-sqlite3 worktrees are also pinned:
 
-`Dockerfile.current-pr6.linux` injects the integration harness through a named
-build context so current PR images can be built without modifying their clean
-worktrees. Current-PR Docker stages use those prebuilt images with
-`--reuse-images`.
+- `native-utf8-binding`: E5 addon branch.
+- `native-initial-sync-ingestor`: E12 addon branch.
 
-`Dockerfile.current-pr7.linux` and `scripts/build-pr7-images.mjs` similarly
-prepare isolated deferred-parent, adaptive, and forced-eager-secondary images.
-The builder defaults to a dry run; pass `--execute` only when no other benchmark
-is using Docker.
+The addon experiments build directly from these local worktrees. They do not
+publish, download, or require an npm canary.
 
-## SQLite Setting
+## Resource Policy
 
-Every full initial-sync performance case requests and verifies the `mmapGiB`
-value in its stage configuration. The final candidate uses:
+Every application profile uses the same limits:
 
-```sql
-PRAGMA mmap_size = 0;
+```text
+CPU: 1
+memory: 3 GiB
+Node heap: 2304 MiB
 ```
 
-Historical stages include mmap sweeps; their manifests are the source of truth
-for the setting used by each recorded result.
+PostgreSQL runs in a fresh isolated container for each measured operation and is
+pinned to a disjoint CPU set in canonical mode.
 
-## Parser Benchmark
+## Canonical Safety
 
-Install the benchmark-only files:
+Canonical execution fails closed unless all of these are true:
+
+- Product and addon sources match full configured commit and tree IDs.
+- Sources are clean, including untracked files.
+- Base images are digest-pinned.
+- Product and PostgreSQL CPU sets are present and disjoint.
+- The stage is complete and has a fixed analysis plan.
+- The profile is canonical and has exact rows, COPY bytes, COPY digest, and
+  replica content digest.
+- The source isolation and cache policies are explicitly declared.
+- Every expected artifact exists exactly once and matches its SHA-256.
+
+Current profiles are calibration-only because their COPY and content digests
+have not yet been pinned. Experiment stages are definition-only and cannot be
+executed until implementation, calibration, and preregistration are complete.
+
+## Files
+
+- `Dockerfile.linux`: generic mono experiment image.
+- `Dockerfile.adaptive-index.linux`: adaptive and forced-eager oracle images.
+- `Dockerfile.addon-experiment.linux`: mono image linked to a local
+  zero-sqlite3 worktree.
+- `scripts/build-adaptive-index-images.mjs`: builds the E2 three-arm image set.
+- `scripts/run-docker.mjs`: isolated immutable Docker runner.
+- `scripts/aggregate.mjs`: exact artifact reconciliation and process-level
+  aggregation.
+- `scripts/summarize-integration.mjs`: paired effect estimates, confidence
+  intervals, order effects, and decision gates.
+- `config/experiment-families.json`: deterministic generated fixture families.
+- `config/integration-stages.json`: definition-only E1-E12 experiment designs.
+
+## Validation Commands
+
+These commands validate preparation without running a performance benchmark:
 
 ```sh
-node scripts/install-harness.mjs
+node scripts/run-docker.mjs --self-test
+node --test scripts/analysis.test.mjs scripts/artifacts.test.mjs
+pnpm exec vitest run tests/initial-sync-copy-pipeline-config.test.ts
+node scripts/build-adaptive-index-images.mjs
 ```
 
-Preview or execute a balanced parser stage:
+The image builder defaults to a dry run. `run-docker.mjs` also defaults to a
+write-free dry run, but definition-only stages are intentionally rejected even
+in dry-run mode until promoted through the plan's stage gates.
 
-```sh
-node scripts/run-parser.mjs parser-core
-node scripts/run-parser.mjs parser-core --execute
-node scripts/aggregate.mjs parser-core
-```
+## Evidence
 
-The parser cases combine production-calibrated field widths with synthetic
-stream-fragment sizes, plus a contained-field control. Results report wall time,
-CPU time, throughput, peak RSS, checksums, and candidate parser assembly
-statistics.
-
-## Safety
-
-- Processes run sequentially.
-- Generated SQLite files are deleted after inspection.
-- Docker runs use explicit CPU, memory, swap, and PID limits.
-- High-volume stages begin with one smoke case.
-- A run is rejected if its exit status, result protocol, checksum, effective
-  mmap, row count, or cgroup memory state is invalid.
+Each execution writes an immutable nested run directory with a manifest and an
+exact expected-artifact list. Canonical aggregation requires an explicit run
+token when more than one run exists. Legacy flat artifacts can be read only with
+`--legacy` and are always classified as exploratory and noncanonical.
