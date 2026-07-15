@@ -1,14 +1,17 @@
 {
   "stage": "pr7-current-parent-head-narrow",
-  "generatedAt": "2026-07-15T15:03:03.009Z",
-  "execute": false,
-  "reuseImages": false,
+  "generatedAt": "2026-07-15T16:34:23.564Z",
+  "execute": true,
+  "reuseImages": true,
   "platform": "linux/arm64",
   "images": {
     "current-pr7-parent": "zero-copy-pipeline-current-pr7-parent:local",
     "current-pr7-head": "zero-copy-pipeline-current-pr7-head:local"
   },
-  "imageIDs": {},
+  "imageIDs": {
+    "current-pr7-parent": "sha256:414458486a7760b2efcd042c85ba6107cf8b5b8c197fb7734057a17e7d357bad",
+    "current-pr7-head": "sha256:b9801cb76580eb8519ffa412e4ed31003d77f2c40e8e3f9a5f314661e5ead41c"
+  },
   "runs": [
     {
       "profile": "email-narrow-250k",
@@ -34,6 +37,576 @@
       "bufferMB": 8,
       "mmapGiB": 0,
       "repetition": 1,
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304
+      }
+    },
+    {
+      "profile": "imports-narrow-250k",
+      "worktree": "current-pr7-parent",
+      "label": "pr7-deferred-parent",
+      "copyChunkBytes": "native",
+      "secondaryIndexMinAverageRowBytes": 0,
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 1,
+      "constraints": {
+        "cpus": 2,
+        "memory": "6g",
+        "nodeHeapMB": 4608
+      }
+    },
+    {
+      "profile": "imports-narrow-250k",
+      "worktree": "current-pr7-head",
+      "label": "pr7-adaptive-2k",
+      "copyChunkBytes": "native",
+      "secondaryIndexMinAverageRowBytes": 2048,
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 1,
+      "constraints": {
+        "cpus": 2,
+        "memory": "6g",
+        "nodeHeapMB": 4608
+      }
+    },
+    {
+      "profile": "imports-narrow-250k",
+      "worktree": "current-pr7-head",
+      "label": "pr7-adaptive-2k",
+      "copyChunkBytes": "native",
+      "secondaryIndexMinAverageRowBytes": 2048,
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 2,
+      "constraints": {
+        "cpus": 2,
+        "memory": "6g",
+        "nodeHeapMB": 4608
+      }
+    },
+    {
+      "profile": "imports-narrow-250k",
+      "worktree": "current-pr7-parent",
+      "label": "pr7-deferred-parent",
+      "copyChunkBytes": "native",
+      "secondaryIndexMinAverageRowBytes": 0,
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 2,
+      "constraints": {
+        "cpus": 2,
+        "memory": "6g",
+        "nodeHeapMB": 4608
+      }
+    },
+    {
+      "profile": "email-narrow-250k",
+      "worktree": "current-pr7-head",
+      "label": "pr7-adaptive-2k",
+      "copyChunkBytes": "native",
+      "secondaryIndexMinAverageRowBytes": 2048,
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 2,
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304
+      }
+    },
+    {
+      "profile": "email-narrow-250k",
+      "worktree": "current-pr7-parent",
+      "label": "pr7-deferred-parent",
+      "copyChunkBytes": "native",
+      "secondaryIndexMinAverageRowBytes": 0,
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 2,
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304
+      }
+    },
+    {
+      "profile": "email-narrow-250k",
+      "worktree": "current-pr7-parent",
+      "label": "pr7-deferred-parent",
+      "copyChunkBytes": "native",
+      "secondaryIndexMinAverageRowBytes": 0,
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 3,
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304
+      }
+    },
+    {
+      "profile": "email-narrow-250k",
+      "worktree": "current-pr7-head",
+      "label": "pr7-adaptive-2k",
+      "copyChunkBytes": "native",
+      "secondaryIndexMinAverageRowBytes": 2048,
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 3,
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304
+      }
+    },
+    {
+      "profile": "imports-narrow-250k",
+      "worktree": "current-pr7-parent",
+      "label": "pr7-deferred-parent",
+      "copyChunkBytes": "native",
+      "secondaryIndexMinAverageRowBytes": 0,
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 3,
+      "constraints": {
+        "cpus": 2,
+        "memory": "6g",
+        "nodeHeapMB": 4608
+      }
+    },
+    {
+      "profile": "imports-narrow-250k",
+      "worktree": "current-pr7-head",
+      "label": "pr7-adaptive-2k",
+      "copyChunkBytes": "native",
+      "secondaryIndexMinAverageRowBytes": 2048,
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 3,
+      "constraints": {
+        "cpus": 2,
+        "memory": "6g",
+        "nodeHeapMB": 4608
+      }
+    },
+    {
+      "profile": "imports-narrow-250k",
+      "worktree": "current-pr7-head",
+      "label": "pr7-adaptive-2k",
+      "copyChunkBytes": "native",
+      "secondaryIndexMinAverageRowBytes": 2048,
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 4,
+      "constraints": {
+        "cpus": 2,
+        "memory": "6g",
+        "nodeHeapMB": 4608
+      }
+    },
+    {
+      "profile": "imports-narrow-250k",
+      "worktree": "current-pr7-parent",
+      "label": "pr7-deferred-parent",
+      "copyChunkBytes": "native",
+      "secondaryIndexMinAverageRowBytes": 0,
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 4,
+      "constraints": {
+        "cpus": 2,
+        "memory": "6g",
+        "nodeHeapMB": 4608
+      }
+    },
+    {
+      "profile": "email-narrow-250k",
+      "worktree": "current-pr7-head",
+      "label": "pr7-adaptive-2k",
+      "copyChunkBytes": "native",
+      "secondaryIndexMinAverageRowBytes": 2048,
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 4,
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304
+      }
+    },
+    {
+      "profile": "email-narrow-250k",
+      "worktree": "current-pr7-parent",
+      "label": "pr7-deferred-parent",
+      "copyChunkBytes": "native",
+      "secondaryIndexMinAverageRowBytes": 0,
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 4,
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304
+      }
+    },
+    {
+      "profile": "email-narrow-250k",
+      "worktree": "current-pr7-parent",
+      "label": "pr7-deferred-parent",
+      "copyChunkBytes": "native",
+      "secondaryIndexMinAverageRowBytes": 0,
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 5,
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304
+      }
+    },
+    {
+      "profile": "email-narrow-250k",
+      "worktree": "current-pr7-head",
+      "label": "pr7-adaptive-2k",
+      "copyChunkBytes": "native",
+      "secondaryIndexMinAverageRowBytes": 2048,
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 5,
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304
+      }
+    },
+    {
+      "profile": "imports-narrow-250k",
+      "worktree": "current-pr7-parent",
+      "label": "pr7-deferred-parent",
+      "copyChunkBytes": "native",
+      "secondaryIndexMinAverageRowBytes": 0,
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 5,
+      "constraints": {
+        "cpus": 2,
+        "memory": "6g",
+        "nodeHeapMB": 4608
+      }
+    },
+    {
+      "profile": "imports-narrow-250k",
+      "worktree": "current-pr7-head",
+      "label": "pr7-adaptive-2k",
+      "copyChunkBytes": "native",
+      "secondaryIndexMinAverageRowBytes": 2048,
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 5,
+      "constraints": {
+        "cpus": 2,
+        "memory": "6g",
+        "nodeHeapMB": 4608
+      }
+    },
+    {
+      "profile": "imports-narrow-250k",
+      "worktree": "current-pr7-head",
+      "label": "pr7-adaptive-2k",
+      "copyChunkBytes": "native",
+      "secondaryIndexMinAverageRowBytes": 2048,
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 6,
+      "constraints": {
+        "cpus": 2,
+        "memory": "6g",
+        "nodeHeapMB": 4608
+      }
+    },
+    {
+      "profile": "imports-narrow-250k",
+      "worktree": "current-pr7-parent",
+      "label": "pr7-deferred-parent",
+      "copyChunkBytes": "native",
+      "secondaryIndexMinAverageRowBytes": 0,
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 6,
+      "constraints": {
+        "cpus": 2,
+        "memory": "6g",
+        "nodeHeapMB": 4608
+      }
+    },
+    {
+      "profile": "email-narrow-250k",
+      "worktree": "current-pr7-head",
+      "label": "pr7-adaptive-2k",
+      "copyChunkBytes": "native",
+      "secondaryIndexMinAverageRowBytes": 2048,
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 6,
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304
+      }
+    },
+    {
+      "profile": "email-narrow-250k",
+      "worktree": "current-pr7-parent",
+      "label": "pr7-deferred-parent",
+      "copyChunkBytes": "native",
+      "secondaryIndexMinAverageRowBytes": 0,
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 6,
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304
+      }
+    },
+    {
+      "profile": "email-narrow-250k",
+      "worktree": "current-pr7-parent",
+      "label": "pr7-deferred-parent",
+      "copyChunkBytes": "native",
+      "secondaryIndexMinAverageRowBytes": 0,
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 7,
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304
+      }
+    },
+    {
+      "profile": "email-narrow-250k",
+      "worktree": "current-pr7-head",
+      "label": "pr7-adaptive-2k",
+      "copyChunkBytes": "native",
+      "secondaryIndexMinAverageRowBytes": 2048,
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 7,
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304
+      }
+    },
+    {
+      "profile": "imports-narrow-250k",
+      "worktree": "current-pr7-parent",
+      "label": "pr7-deferred-parent",
+      "copyChunkBytes": "native",
+      "secondaryIndexMinAverageRowBytes": 0,
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 7,
+      "constraints": {
+        "cpus": 2,
+        "memory": "6g",
+        "nodeHeapMB": 4608
+      }
+    },
+    {
+      "profile": "imports-narrow-250k",
+      "worktree": "current-pr7-head",
+      "label": "pr7-adaptive-2k",
+      "copyChunkBytes": "native",
+      "secondaryIndexMinAverageRowBytes": 2048,
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 7,
+      "constraints": {
+        "cpus": 2,
+        "memory": "6g",
+        "nodeHeapMB": 4608
+      }
+    },
+    {
+      "profile": "imports-narrow-250k",
+      "worktree": "current-pr7-head",
+      "label": "pr7-adaptive-2k",
+      "copyChunkBytes": "native",
+      "secondaryIndexMinAverageRowBytes": 2048,
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 8,
+      "constraints": {
+        "cpus": 2,
+        "memory": "6g",
+        "nodeHeapMB": 4608
+      }
+    },
+    {
+      "profile": "imports-narrow-250k",
+      "worktree": "current-pr7-parent",
+      "label": "pr7-deferred-parent",
+      "copyChunkBytes": "native",
+      "secondaryIndexMinAverageRowBytes": 0,
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 8,
+      "constraints": {
+        "cpus": 2,
+        "memory": "6g",
+        "nodeHeapMB": 4608
+      }
+    },
+    {
+      "profile": "email-narrow-250k",
+      "worktree": "current-pr7-head",
+      "label": "pr7-adaptive-2k",
+      "copyChunkBytes": "native",
+      "secondaryIndexMinAverageRowBytes": 2048,
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 8,
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304
+      }
+    },
+    {
+      "profile": "email-narrow-250k",
+      "worktree": "current-pr7-parent",
+      "label": "pr7-deferred-parent",
+      "copyChunkBytes": "native",
+      "secondaryIndexMinAverageRowBytes": 0,
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 8,
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304
+      }
+    },
+    {
+      "profile": "email-narrow-250k",
+      "worktree": "current-pr7-parent",
+      "label": "pr7-deferred-parent",
+      "copyChunkBytes": "native",
+      "secondaryIndexMinAverageRowBytes": 0,
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 9,
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304
+      }
+    },
+    {
+      "profile": "email-narrow-250k",
+      "worktree": "current-pr7-head",
+      "label": "pr7-adaptive-2k",
+      "copyChunkBytes": "native",
+      "secondaryIndexMinAverageRowBytes": 2048,
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 9,
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304
+      }
+    },
+    {
+      "profile": "imports-narrow-250k",
+      "worktree": "current-pr7-parent",
+      "label": "pr7-deferred-parent",
+      "copyChunkBytes": "native",
+      "secondaryIndexMinAverageRowBytes": 0,
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 9,
+      "constraints": {
+        "cpus": 2,
+        "memory": "6g",
+        "nodeHeapMB": 4608
+      }
+    },
+    {
+      "profile": "imports-narrow-250k",
+      "worktree": "current-pr7-head",
+      "label": "pr7-adaptive-2k",
+      "copyChunkBytes": "native",
+      "secondaryIndexMinAverageRowBytes": 2048,
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 9,
+      "constraints": {
+        "cpus": 2,
+        "memory": "6g",
+        "nodeHeapMB": 4608
+      }
+    },
+    {
+      "profile": "imports-narrow-250k",
+      "worktree": "current-pr7-head",
+      "label": "pr7-adaptive-2k",
+      "copyChunkBytes": "native",
+      "secondaryIndexMinAverageRowBytes": 2048,
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 10,
+      "constraints": {
+        "cpus": 2,
+        "memory": "6g",
+        "nodeHeapMB": 4608
+      }
+    },
+    {
+      "profile": "imports-narrow-250k",
+      "worktree": "current-pr7-parent",
+      "label": "pr7-deferred-parent",
+      "copyChunkBytes": "native",
+      "secondaryIndexMinAverageRowBytes": 0,
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 10,
+      "constraints": {
+        "cpus": 2,
+        "memory": "6g",
+        "nodeHeapMB": 4608
+      }
+    },
+    {
+      "profile": "email-narrow-250k",
+      "worktree": "current-pr7-head",
+      "label": "pr7-adaptive-2k",
+      "copyChunkBytes": "native",
+      "secondaryIndexMinAverageRowBytes": 2048,
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 10,
+      "constraints": {
+        "cpus": 1,
+        "memory": "3g",
+        "nodeHeapMB": 2304
+      }
+    },
+    {
+      "profile": "email-narrow-250k",
+      "worktree": "current-pr7-parent",
+      "label": "pr7-deferred-parent",
+      "copyChunkBytes": "native",
+      "secondaryIndexMinAverageRowBytes": 0,
+      "bufferMB": 8,
+      "mmapGiB": 0,
+      "repetition": 10,
       "constraints": {
         "cpus": 1,
         "memory": "3g",
