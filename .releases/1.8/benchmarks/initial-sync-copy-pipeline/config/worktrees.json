@@ -9,6 +9,36 @@
     "linear-parser": {
       "path": "initial-sync-copy-pipeline",
       "label": "linear-parser"
+    },
+    "current-pr6-parent": {
+      "path": "batch-initial-sync-copy-metrics",
+      "label": "current-pr6-parent",
+      "commit": "c4d5519670d50a8bd388f5ce05d5576dc6f97df6",
+      "defaultInstall": false
+    },
+    "current-pr6-head": {
+      "path": "direct-copy-text-buffers",
+      "label": "current-pr6-head",
+      "commit": "99442b64afe8f627b8c7d06862efbb51ac3ce540",
+      "defaultInstall": false
+    },
+    "current-pr7-parent": {
+      "path": "initial-sync-statement-batching-baseline",
+      "label": "current-pr7-parent",
+      "commit": "ea459443f18e7a6f94a32e28333f8af01df1b02b",
+      "defaultInstall": false
+    },
+    "current-pr7-head": {
+      "path": "adaptive-secondary-index-scheduling",
+      "label": "current-pr7-head",
+      "commit": "ea459443f18e7a6f94a32e28333f8af01df1b02b",
+      "defaultInstall": false
+    },
+    "current-pr7-eager": {
+      "path": "adaptive-secondary-index-scheduling",
+      "label": "current-pr7-eager",
+      "commit": "ea459443f18e7a6f94a32e28333f8af01df1b02b",
+      "defaultInstall": false
     }
   }
 }

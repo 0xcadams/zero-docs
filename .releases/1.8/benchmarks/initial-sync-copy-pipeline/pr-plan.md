@@ -35,6 +35,9 @@ The frozen candidate combined:
 - Adaptive eager creation of secondary indexes for wide tables.
 - `mmap_size=0` in the benchmark configuration.
 
+The parser treatment and its results use synthetic fragmentation. Corrected
+production counters do not show that fragmentation topology.
+
 Against the pinned `origin/main` baseline at
 `d87c1c813b2e57abdf814eadda98b8d5e5885979`, the bundled candidate measured:
 
@@ -52,14 +55,18 @@ parent/head execution therefore come first.
 
 Recommended merge order:
 
-1. Durable benchmark fixtures and correctness.
-2. Representative zmail seed shape and staging canary procedure.
-3. Batched COPY metrics.
-4. Initial-sync source/processing telemetry.
-5. Linear fragmented-field parser.
-6. Direct Buffer binding through `CAST(? AS TEXT)`.
-7. Adaptive secondary-index scheduling.
-8. Native transient UTF-8 binding as a three-PR package stack.
+1. PR 1: durable benchmark fixtures and correctness.
+2. PR 2: representative zmail seed shape and staging canary procedure.
+3. PR 3: batched COPY metrics.
+4. PR 4: initial-sync source/processing telemetry.
+5. PR 6: Direct Buffer binding through `CAST(? AS TEXT)`.
+6. PR 7: adaptive secondary-index scheduling.
+7. PR 8: native transient UTF-8 binding as a three-PR package stack.
+
+PR 5 is deferred and is not in the rollout order. Its parser microbenchmark is
+valid for synthetic fragmentation, but current PL and Margins data supplies no
+production performance motivation. PR 6 is the next product optimization after
+telemetry.
 
 Producer/parser workers are not part of this sequence. Current telemetry does
 not show a material recoverable parser gap.
@@ -141,7 +148,8 @@ synchronous SQLite backpressure.
 - A 6.830 GB sample took 133.14 seconds, including 45.82 seconds in SQLite
   flush calls.
 - The container averaged 0.964 CPU against a one-core limit.
-- Observed aggregate COPY chunks were approximately 4-31 KiB.
+- Thirty-day terminal counters show one data chunk per sampled row plus 108
+  framing chunks per successful run, one for each published table.
 
 ### Margins Imports
 
@@ -154,7 +162,8 @@ synchronous SQLite backpressure.
   calls during a 41-45 second copy.
 - The workload used approximately one saturated CPU core out of its two-core
   limit.
-- Observed aggregate COPY chunks averaged approximately 5.5 KiB.
+- Thirty-day terminal counters show one data chunk per sampled row plus 91
+  framing chunks per successful run, one for each published table.
 
 The two stacks were in different AWS regions, VPCs, and NAT gateways. NAT
 packet drops and port-allocation errors were zero during measured windows.
@@ -165,6 +174,7 @@ optimization criterion.
 Production context and supporting evidence:
 
 - `production-baseline.md`
+- `production-copy-chunk-topology.md`
 - `/Users/chase/git/roci/zero-docs/.releases/1.8/benchmarks/initial-sync-bottleneck/ec2.md`
 - `/Users/chase/git/roci/cloudzero/initial-sync-dashboard.tryout.import.json`
 
@@ -175,20 +185,22 @@ shadow flush and index durations are not direct serving-initial-sync results.
 
 ## Workload Profiles
 
-The exploratory Docker profiles used:
+The exploratory Docker profiles used deliberately synthetic rechunk sizes. The
+payload widths are production-calibrated, but the rechunk sizes are not observed
+production transport topology:
 
 The labels in this historical table preserve zero-docs calibration provenance.
 They are not names to copy into canonical mono benchmark schemas or profile
 identifiers.
 
-| Profile                    |    Rows | Payload per row | Approximate COPY payload | Rechunk size | CPU | Memory |
-| -------------------------- | ------: | --------------: | -----------------------: | -----------: | --: | -----: |
-| `email-683m`               |   1,000 |         683,000 |                   683 MB |       31,744 |   1 |  3 GiB |
-| `email-high-6.83g`         |  10,000 |         683,000 |                  6.83 GB |       31,744 |   1 |  3 GiB |
-| `imports-550m`             |   2,000 |         275,000 |                   550 MB |        5,632 |   2 |  6 GiB |
-| `imports-production-2.75g` |  10,000 |         275,000 |                  2.75 GB |        5,632 |   2 |  6 GiB |
-| `email-narrow-250k`        | 250,000 |             128 |                    32 MB |       31,744 |   1 |  3 GiB |
-| `imports-narrow-250k`      | 250,000 |             128 |                    32 MB |        5,632 |   2 |  6 GiB |
+| Profile                    |    Rows | Payload per row | Approximate COPY payload | Synthetic rechunk size | CPU | Memory |
+| -------------------------- | ------: | --------------: | -----------------------: | ---------------------: | --: | -----: |
+| `email-683m`               |   1,000 |         683,000 |                   683 MB |                 31,744 |   1 |  3 GiB |
+| `email-high-6.83g`         |  10,000 |         683,000 |                  6.83 GB |                 31,744 |   1 |  3 GiB |
+| `imports-550m`             |   2,000 |         275,000 |                   550 MB |                  5,632 |   2 |  6 GiB |
+| `imports-production-2.75g` |  10,000 |         275,000 |                  2.75 GB |                  5,632 |   2 |  6 GiB |
+| `email-narrow-250k`        | 250,000 |             128 |                    32 MB |                 31,744 |   1 |  3 GiB |
+| `imports-narrow-250k`      | 250,000 |             128 |                    32 MB |                  5,632 |   2 |  6 GiB |
 
 The future canonical mono benchmark must retain the existing mixed 250,000-row
 fixture as its default durable regression lane in:
@@ -246,8 +258,20 @@ those exact values with no tolerance.
 
 The original `BinaryCopyParser` repeatedly concatenated an incomplete field
 with each subsequent chunk. For a large value split across many chunks, bytes
-already assembled were copied repeatedly. Estimated copy amplification was
-12.5x to 63.4x for the observed production shapes.
+already assembled were copied repeatedly. The historical estimate was 12.5x to
+63.4x copy amplification under synthetic fragmentation scenarios. Corrected
+production counters show one data chunk per sampled row plus one framing chunk
+per table/run, so they do not support those scenarios as PL or Margins transport
+topology.
+
+PostgreSQL 17/18 source and protocol documentation provide the underlying
+reason: binary COPY accumulates each row and sends it as one `CopyData` message.
+`postgres.js` 3.4.7 reconstructs complete protocol messages from arbitrary TCP
+and TLS input before exposing them to Zero. Read-only generated probes through
+PlanetScale PostgreSQL 18.4 and Supabase PostgreSQL 17.6 confirmed that neither
+provider rewrites the row boundary. Across 4 KiB, 270 KiB, 683 KiB distributed
+and single-field, and 1.5 MiB shapes, no row or field spanned an incoming Zero
+chunk and the current parser performed zero `Buffer.concat` calls.
 
 The candidate allocates one exact-size Buffer for a fragmented field, copies
 each fragment once, and continues using zero-copy subarrays for fields already
@@ -267,14 +291,18 @@ The cleaner five-run host integration comparison was much smaller:
 - Email: 2.721 seconds to 2.624 seconds, 3.6% faster.
 - imports: 2.392 seconds to 2.322 seconds, 2.9% faster.
 
-The parser microbenchmark strongly proves removal of pathological assembly
-work. It does not prove an equivalent end-to-end initial-sync percentage.
+The parser microbenchmark shows that linear assembly is 2.7-5.8x faster when
+fields are fragmented according to those inputs. This conditional result does
+not prove an equivalent end-to-end initial-sync percentage, and current PL and
+Margins data provides no production performance motivation for the treatment.
 
 Primary evidence:
 
 - `results/parser-core.json`
 - `results/integration-core-summary.json`
 - `results/docker-core-docker-summary.json`
+- `production-copy-chunk-topology.md`
+- `managed-pg-copy-fragmentation.md`
 
 ### Direct Text Buffers Through SQLite CAST
 
@@ -283,19 +311,42 @@ candidate keeps eligible text, varchar, bpchar, JSON, JSONB, enum, and
 PostgreSQL text-cast values as Buffers. SQLite receives them through
 `CAST(? AS TEXT)`, and JSONB drops its one-byte binary version prefix.
 
-Three-repetition constrained Docker A/B:
+The historical same-image constrained-Docker A/B was reproduced under a quiet
+host. A six-pair AB/BA Email block measured a 34.22% paired callback-time
+reduction, while imports remained approximately 3% faster. Factorials showed
+that mmap, a one-CPU quota, and synthetic 31 KiB rechunking did not create the
+Email result.
 
-| Workload       | String decoding | Buffer plus CAST | Change |
-| -------------- | --------------: | ---------------: | -----: |
-| Email 683 MB   |         1.262 s |          0.670 s | -47.0% |
-| imports 550 MB |         1.091 s |          1.058 s |  -3.0% |
+Ten fresh process pairs then compared the actual PR 6 parent and head:
 
-The effect is strongly workload- and environment-dependent. A non-Docker run
-showed only approximately 2-5% gains. The large Email result should not be
-generalized without a clean parent/head rerun.
+| Application environment and source route | Parent callback | Head callback | Paired reduction |
+| ---------------------------------------- | --------------: | ------------: | ---------------: |
+| Linux, direct Docker bridge              |      934.880 ms |    636.936 ms |           31.07% |
+| macOS host, PostgreSQL published port    |     2733.031 ms |   2675.337 ms |            1.52% |
+| Linux, published-host-port hairpin       |     6104.671 ms |   5709.557 ms |            4.32% |
+
+The large Linux callback result is present in the actual PR diff and survives
+native row-aligned COPY messages. Changing only the Linux source route reduced
+the paired effect from 31.07% to 4.32%, showing that source delivery can hide
+most destination decoder/binding savings. The hairpin route was slower and more
+variable than production-like source controls, and callback timing excludes the
+post-copy migration/`ANALYZE` wrapper.
+
+Two subsequent five-pair blocks used the actual parent and head on the
+10,000-row, 6.83 GB Email fixture. Pooled medians were 21.358 seconds for the
+parent and 16.540 seconds for the head; the paired callback reduction was
+25.00%. Whole-`initReplica` paired time improved 24.86%, raw COPY was flat to
+slightly slower, and nine of ten pairs favored the head. This demonstrates a
+full-volume constrained-Linux gain but has a variable tail and is not a general
+product percentage.
 
 Primary evidence:
 
+- `pr6-direct-copy-text-buffers-environment-follow-up.md`
+- `pr6-direct-copy-text-buffers-full-linux.md`
+- `results/rerun-docker-current-pr6-email-native-docker-summary.json`
+- `results/rerun-host-current-pr6-email-native-summary.json`
+- `results/rerun-docker-current-pr6-email-host-port-docker-summary.json`
 - `results/docker-direct-text-core-docker-summary.json`
 - `results/direct-text-core-summary.json`
 - `results/direct-text-production-smoke-docker-summary.json`
@@ -679,6 +730,8 @@ Scope:
 - Add a durable binary COPY parser benchmark under `packages/zero-cache/src/db`
   with contained 4 KiB/31 KiB and fragmented 270 KiB/5.5 KiB, 683 KiB/31 KiB,
   and 683 KiB/5.5 KiB cases.
+- Treat parser rechunk sizes as synthetic stress controls, not production
+  calibration; only the field widths are production-calibrated.
 - Use neutral executable table, column, index, and profile names in mono, such as
   `wide_text_rows`, `large_payload_rows`, `group_id`, and `scope_id`. Do not copy
   customer table names, tenant terminology, or identifiers into executable
@@ -1177,11 +1230,12 @@ arm:
    logs, OTel output, cgroup data, and storage metrics. A completed process
    without exact content validation is a failure.
 7. Collect total initial-sync wall time, dominant-table COPY time and bytes,
-   source wait, processing, SQLite flush, index phase, chunk count/size, CPU,
-   peak RSS, cgroup memory events, PSI, I/O, disk use, WAL growth, Litestream
-   backup/restore state, restarts, and OOM events. Mark fields unavailable on the
-   baseline rather than synthesizing them. zmail remains deployment validation;
-   the manual mono protocol remains the source of performance attribution.
+   source wait, processing, SQLite flush, index phase, row/chunk/run counters,
+   CPU, peak RSS, cgroup memory events, PSI, I/O, disk use, WAL growth,
+   Litestream backup/restore state, restarts, and OOM events. Mark fields
+   unavailable on the baseline rather than synthesizing them. zmail remains
+   deployment validation; the manual mono protocol remains the source of
+   performance attribution.
 8. After artifact capture, tear down each arm: stop zmail/Zero and seed jobs;
    drop/decommission replication slots, internal/custom test publications, Zero
    upstream metadata schemas, CVR/Change databases or schemas, app deployment
@@ -1301,12 +1355,12 @@ arm:
 Suggested branch: `0xcadams/representative-email-seed-shape`
 
 Once PR 2 is deployed, every later Zero PR uses zmail after its controlled mono
-comparison. PR 3 and PR 4 require smoke and scaled canaries. PR 5 through PR 7
+comparison. PR 3 and PR 4 require smoke and scaled canaries. PR 6 and PR 7
 require smoke, scaled, and one full-volume baseline/candidate validation before
-rollout. Each of the three native-stack PRs runs the lanes it can affect; PR 8c
-must run the 10,000-row seed with the actual published native prebuilds. These
-are staging deployment checks, not substitutes for the manual paired mono
-report.
+rollout. PR 5 requires no staging lane while deferred. Each of the three
+native-stack PRs runs the lanes it can affect; PR 8c must run the 10,000-row seed
+with the actual published native prebuilds. These are staging deployment checks,
+not substitutes for the manual paired mono report.
 
 ### PR 3: Batch COPY Metric Updates
 
@@ -1386,7 +1440,8 @@ Benchmark:
 - Exact parent without timing versus PR with timing.
 - Default mixed, `wide-text-scaled`, `wide-text-full`,
   `large-payload-scaled`, `large-payload-full`, and source-shaped profiles.
-- Include both 31 KiB and 5.5 KiB callback frequencies.
+- Include synthetic 31 KiB and 5.5 KiB callback frequencies as stress controls,
+  not as production-observed transport shapes.
 
 Acceptance:
 
@@ -1399,8 +1454,8 @@ Rollout:
 
 - Deploy before the behavioral optimization PRs.
 - Collect representative initial-sync events across wide and narrow tables.
-- Use the phase split to validate whether parser work and source waiting match
-  benchmark predictions.
+- Use the phase split to identify the next product bottleneck. Current production
+  topology does not predict fragmented-field parser work.
 
 Suggested branch: `0xcadams/initial-sync-copy-phase-telemetry`
 
@@ -1408,9 +1463,19 @@ Suggested branch: `0xcadams/initial-sync-copy-phase-telemetry`
 
 **Repository:** mono
 **Risk:** medium
+**Status:** deferred; do not implement without new production fragmentation
+evidence
 **Original benchmark:**
 [mono PR #6235](https://github.com/rocicorp/mono/pull/6235)
-**Depends on:** #6235 and PR 4; PR 2 before staging validation
+**Depends on if reopened:** #6235 and PR 4; PR 2 before staging validation
+
+The historical scope is retained below as conditional research. Thirty-day PL
+and Margins counters show one data chunk per row plus one framing chunk per
+table/run, so the synthetic 270 KiB/5.5 KiB and 683 KiB/{31 KiB, 5.5 KiB}
+fragmentation cases do not provide a production reason to ship this change.
+PostgreSQL source, `postgres.js` framing, and direct generated probes through
+PlanetScale and Supabase independently support the same conclusion. See
+`managed-pg-copy-fragmentation.md`.
 
 Scope:
 
@@ -1445,6 +1510,10 @@ Benchmark:
 
 Acceptance:
 
+- Reopen only after production counters exceed rows plus one framing message per
+  table/run, direct instrumentation observes split fields, a driver or
+  PostgreSQL-aware intermediary starts rewriting row messages, or telemetry
+  attributes a material parser processing gap to fragmented fields.
 - At least 1.5x parser throughput on fragmented profiles.
 - Contained and ordinary paths satisfy the common no-regression gate.
 - Claim end-to-end improvement only where paired integration results establish
@@ -1458,7 +1527,9 @@ Suggested branch: `0xcadams/linear-pg-copy-field-assembly`
 **Risk:** medium-high
 **Original benchmark:**
 [mono PR #6235](https://github.com/rocicorp/mono/pull/6235)
-**Depends on:** parser only for intended rollout order
+**Depends on:** PR 4 telemetry; PR 5 is not a dependency and remains deferred
+
+This is the next product optimization after telemetry.
 
 Scope:
 
@@ -1493,6 +1564,42 @@ Acceptance:
   satisfy the common no-regression gate.
 - Do not require a 5% large-payload gain; existing production-calibrated evidence
   suggests a much smaller benefit there.
+
+Current evidence status:
+
+- The clean three-arm local rerun is directionally positive in all seven direct
+  comparisons, but its +2.51% `wide-text-full` result does not satisfy the
+  planned 5% gate or support a generalized initial-sync speedup claim.
+- Ten fresh-process pairs with the actual parent and head measured a 1.52%
+  paired callback-time reduction on the macOS host, consistent with the clean
+  scaled result. The same commits measured 31.07% on a direct Linux Docker
+  bridge and 4.32% when routed through Docker's published host port. This
+  establishes strong environment and source-topology sensitivity, not a broad
+  product percentage.
+- Ten additional full-volume Linux pairs measured a 25.00% paired callback-time
+  reduction and 24.86% paired whole-`initReplica` reduction on the 10,000-row,
+  6.83 GB Email fixture. Nine pairs favored the head; one retained head outlier
+  regressed 31.25%. Raw COPY was flat to slightly slower for the head, while
+  COPY, flush, peak RSS, user CPU, and GC time improved materially.
+- The full Linux experiment demonstrates a meaningful constrained-environment
+  gain but does not formally satisfy the canonical gate: the mono
+  `wide-text-full` result remains +2.51%, and no interval above parity has been
+  established. Any performance statement must name the synthetic 1 CPU/3 GiB
+  Linux fixture and its variable tail rather than promise a general 25% gain.
+- The semantic claim remains removal of JavaScript UTF-8 decoding and allocation
+  for eligible known text-like fields while preserving tested SQLite behavior.
+- zmail smoke, scaled, and full validation is deferred until after merge at user
+  direction; no zmail result is part of the PR evidence.
+
+Evidence:
+
+- Summary: `pr6-direct-copy-text-buffers.md`
+- Clean rerun: `pr6-direct-copy-text-buffers-clean-rerun.md`
+- Environment follow-up:
+  `pr6-direct-copy-text-buffers-environment-follow-up.md`
+- Full Linux experiment: `pr6-direct-copy-text-buffers-full-linux.md`
+- Raw block 1: `pr6-direct-copy-text-buffers-block-1.md`
+- Raw block 2: `pr6-direct-copy-text-buffers-block-2.md`
 
 Suggested branch: `0xcadams/direct-copy-text-buffers`
 
@@ -1612,7 +1719,8 @@ Suggested branch names:
 
 ## Final Stack Validation
 
-After accepted component PRs merge:
+After accepted component PRs merge, excluding deferred PR 5 unless new
+production evidence reopens it:
 
 - Link [mono PR #6235](https://github.com/rocicorp/mono/pull/6235) as the
   original benchmark, rerun its exact benchmark commit alongside stack head, and
@@ -1678,8 +1786,9 @@ Historical rejected-treatment evidence:
    than copying zero-docs scripts wholesale.
 4. Merge [mono PR #6235](https://github.com/rocicorp/mono/pull/6235) and deploy
    the representative zmail seed PR before staging product optimization PRs.
-5. Build each product PR from the previously merged state so manual parent/head
-   measurements report marginal value in rollout order.
+5. Build each active product PR from the previously merged state so manual
+   parent/head measurements report marginal value in rollout order. Skip
+   deferred PR 5; PR 6 follows PR 4.
 6. Run smoke/correctness before expensive paired performance stages.
 7. Put the complete benchmark command, exact refs, result artifact, paired
    summary, confidence interval, and correctness status in every PR description.
@@ -1750,6 +1859,8 @@ Exploratory benchmark implementation:
 Primary reports and results:
 
 - `production-baseline.md`
+- `production-copy-chunk-topology.md`
+- `managed-pg-copy-fragmentation.md`
 - `final-candidate.md`
 - `results/origin-main-baseline-docker.json`
 - `results/origin-main-baseline-docker-summary.json`
@@ -1772,6 +1883,10 @@ Primary reports and results:
 - No product commits were created from the research worktree.
 - No production deployment was performed.
 - No worker-thread implementation was started.
+- PR 5 is deferred because PostgreSQL and `postgres.js` preserve row message
+  boundaries, direct PlanetScale and Supabase probes observed no split fields,
+  and current PL and Margins counters match that topology exactly; PR 6 follows
+  telemetry.
 - The native binding remains a local package patch and release blocker.
 - The durable mono fixture and representative zmail seed PRs are the next
   actions; paired orchestration/reporting will be performed manually for each

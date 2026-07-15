@@ -25,7 +25,13 @@ if (!stage) {
 const cases = stage.profiles.flatMap(profile =>
   stage.treatments.map(treatment => ({profile, ...treatment})),
 );
-const runs = balancedRuns(cases, stage.repetitions).slice(0, limit);
+const runs = (
+  stage.ordering === 'paired-ab-ba'
+    ? pairedRuns(stage.profiles, stage.treatments, stage.repetitions)
+    : stage.ordering === 'forward-reverse'
+      ? forwardReverseRuns(cases, stage.repetitions)
+      : balancedRuns(cases, stage.repetitions)
+).slice(0, limit);
 const manifest = {
   stage: stageName,
   generatedAt: new Date().toISOString(),
@@ -47,7 +53,10 @@ if (!execute) {
   process.exit(0);
 }
 
-run(process.execPath, [join(root, 'scripts/install-harness.mjs')]);
+run(process.execPath, [
+  join(root, 'scripts/install-harness.mjs'),
+  ...new Set(runs.map(runConfig => runConfig.worktree)),
+]);
 const postgres = `zero-copy-pipeline-postgres-${process.pid}-${Date.now()}`;
 run('docker', [
   'run',
@@ -187,6 +196,35 @@ function balancedRuns(casesToRun, repetitions) {
       .slice(offset)
       .concat(casesToRun.slice(0, offset));
     const ordered = repetition % 2 === 1 ? rotated : [...rotated].reverse();
+    for (const runConfig of ordered) {
+      output.push({...runConfig, repetition});
+    }
+  }
+  return output;
+}
+
+function pairedRuns(profilesToRun, treatments, repetitions) {
+  if (treatments.length !== 2) {
+    throw new Error('paired-ab-ba ordering requires exactly two treatments');
+  }
+  const output = [];
+  for (let repetition = 1; repetition <= repetitions; repetition++) {
+    const ordered =
+      repetition % 2 === 1 ? treatments : [...treatments].reverse();
+    for (const profile of profilesToRun) {
+      for (const treatment of ordered) {
+        output.push({profile, ...treatment, repetition});
+      }
+    }
+  }
+  return output;
+}
+
+function forwardReverseRuns(casesToRun, repetitions) {
+  const output = [];
+  for (let repetition = 1; repetition <= repetitions; repetition++) {
+    const ordered =
+      repetition % 2 === 1 ? casesToRun : [...casesToRun].reverse();
     for (const runConfig of ordered) {
       output.push({...runConfig, repetition});
     }

@@ -44,11 +44,10 @@ const mode = envChoice<Mode>(
 );
 const rows = envInteger('ZERO_COPY_PIPELINE_ROWS', 400, 1);
 const payloadBytes = envInteger('ZERO_COPY_PIPELINE_PAYLOAD_BYTES', 250_000, 1);
-const copyChunkBytes = envInteger(
-  'ZERO_COPY_PIPELINE_COPY_CHUNK_BYTES',
-  31_744,
-  1,
-);
+const copyChunkBytes =
+  process.env.ZERO_COPY_PIPELINE_COPY_CHUNK_BYTES === 'native'
+    ? undefined
+    : envInteger('ZERO_COPY_PIPELINE_COPY_CHUNK_BYTES', 31_744, 1);
 const workers = envInteger('ZERO_COPY_PIPELINE_WORKERS', 5, 1);
 const partialInsertBatches =
   process.env.ZERO_COPY_PIPELINE_PARTIAL_BATCHES === '1';
@@ -83,6 +82,11 @@ if (reuseFragmentedFieldBuffers) {
   );
 }
 const bufferMB = envInteger('ZERO_COPY_PIPELINE_BUFFER_MB', 8, 1);
+const secondaryIndexMinAverageRowBytes = envInteger(
+  'ZERO_COPY_PIPELINE_SECONDARY_INDEX_MIN_AVERAGE_ROW_BYTES',
+  0,
+  0,
+);
 const sqliteMmapGiB = envInteger('ZERO_COPY_PIPELINE_MMAP_GIB', 1, 0);
 const sqliteCacheMB = envOptionalInteger('ZERO_COPY_PIPELINE_SQLITE_CACHE_MB');
 const expectedCopyBytes = envOptionalInteger(
@@ -197,6 +201,7 @@ test(
             expect(effectiveMmapBytes).toBeLessThanOrEqual(requestedMmapBytes);
             const options = {
               tableCopyWorkers: workers,
+              secondaryIndexMinAverageRowBytes,
               experimental: {
                 partialInsertBatches,
                 directTextBuffers,
@@ -252,6 +257,8 @@ test(
         expect(sample.bytes).toBe(payloadBytes);
         expect(sample.sha256).toBe(expectedPayloadHash);
       }
+      expect(sqlite.indexes).toEqual(expectedReplicaIndexes(fixture));
+      expect(sqlite.integrityCheck).toEqual([{integrity_check: 'ok'}]);
 
       emitResult({
         kind: 'initial-sync',
@@ -273,6 +280,7 @@ test(
           nativeTextBindingLifetime: nativeTextBuffers ? 'transient' : 'cast',
           copyChunkBytes,
           bufferMB,
+          secondaryIndexMinAverageRowBytes,
         },
         sqliteTuning: {
           mmapGiB: sqliteMmapGiB,
@@ -573,16 +581,114 @@ function inspectReplica(
         sha256: createHash('sha256').update(payload).digest('hex'),
       };
     });
+    const indexes = db
+      .prepare(
+        `SELECT name, "unique" AS isUnique
+           FROM pragma_index_list(?) ORDER BY name`,
+      )
+      .all<{name: string; isUnique: number}>(table)
+      .map(index => ({
+        ...index,
+        columns: db
+          .prepare(
+            `SELECT name, "desc" AS descending
+               FROM pragma_index_xinfo(?) WHERE key = 1 ORDER BY seqno`,
+          )
+          .all<{name: string; descending: number}>(index.name),
+      }));
+    const integrityCheck = db
+      .prepare('PRAGMA integrity_check')
+      .all<{integrity_check: string}>();
     return {
       rows,
       fileBytes: statSync(path).size,
       pageCount,
       pageSize,
       payloadSamples,
+      indexes,
+      integrityCheck,
     };
   } finally {
     db.close();
   }
+}
+
+function expectedReplicaIndexes(fixtureName: Fixture) {
+  return fixtureName === 'email'
+    ? [
+        {
+          name: 'Email_pkey',
+          isUnique: 1,
+          columns: [{name: 'id', descending: 0}],
+        },
+        {
+          name: 'Email_threadId_createdAt_id_idx',
+          isUnique: 0,
+          columns: [
+            {name: 'threadId', descending: 0},
+            {name: 'createdAt', descending: 0},
+            {name: 'id', descending: 0},
+          ],
+        },
+        {
+          name: 'Email_threadId_id_idx',
+          isUnique: 0,
+          columns: [
+            {name: 'threadId', descending: 0},
+            {name: 'id', descending: 0},
+          ],
+        },
+        {
+          name: 'Email_workspaceId_id_idx',
+          isUnique: 0,
+          columns: [
+            {name: 'workspaceId', descending: 0},
+            {name: 'id', descending: 0},
+          ],
+        },
+      ]
+    : [
+        {
+          name: 'userspace.idx_imports_schema',
+          isUnique: 0,
+          columns: [{name: 'schema', descending: 0}],
+        },
+        {
+          name: 'userspace.idx_imports_user_id',
+          isUnique: 0,
+          columns: [{name: 'user_id', descending: 0}],
+        },
+        {
+          name: 'userspace.idx_imports_user_id_import_id',
+          isUnique: 0,
+          columns: [
+            {name: 'user_id', descending: 0},
+            {name: 'import_id', descending: 0},
+          ],
+        },
+        {
+          name: 'userspace.idx_imports_user_source',
+          isUnique: 0,
+          columns: [
+            {name: 'user_id', descending: 0},
+            {name: 'source', descending: 0},
+          ],
+        },
+        {
+          name: 'userspace.idx_imports_user_source_created_at',
+          isUnique: 0,
+          columns: [
+            {name: 'user_id', descending: 0},
+            {name: 'source', descending: 0},
+            {name: 'created_at', descending: 1},
+          ],
+        },
+        {
+          name: 'userspace.imports_pkey',
+          isUnique: 1,
+          columns: [{name: 'import_id', descending: 0}],
+        },
+      ];
 }
 
 function fixturePayload(bytes: number) {

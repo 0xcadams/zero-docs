@@ -6,11 +6,12 @@ import {fileURLToPath} from 'node:url';
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const stageName = process.argv[2];
 const execute = process.argv.includes('--execute');
+const reuseImages = process.argv.includes('--reuse-images');
 const limitArg = process.argv.find(arg => arg.startsWith('--limit='));
 const limit = limitArg ? Number(limitArg.slice('--limit='.length)) : Infinity;
 if (!stageName || stageName.startsWith('--')) {
   throw new Error(
-    'Usage: node scripts/run-docker.mjs <stage> [--execute] [--limit=N]',
+    'Usage: node scripts/run-docker.mjs <stage> [--execute] [--reuse-images] [--limit=N]',
   );
 }
 
@@ -26,7 +27,13 @@ if (!stage) {
 const cases = stage.profiles.flatMap(profile =>
   stage.treatments.map(treatment => ({profile, ...treatment})),
 );
-const runs = balancedRuns(cases, stage.repetitions).slice(0, limit);
+const runs = (
+  stage.ordering === 'paired-ab-ba'
+    ? pairedRuns(stage.profiles, stage.treatments, stage.repetitions)
+    : stage.ordering === 'forward-reverse'
+      ? forwardReverseRuns(cases, stage.repetitions)
+      : balancedRuns(cases, stage.repetitions)
+).slice(0, limit);
 const images = Object.fromEntries(
   [...new Set(runs.map(runConfig => runConfig.worktree))].map(worktree => [
     worktree,
@@ -37,6 +44,7 @@ const manifest = {
   stage: stageName,
   generatedAt: new Date().toISOString(),
   execute,
+  reuseImages,
   platform: 'linux/arm64',
   images,
   imageIDs: {},
@@ -62,22 +70,29 @@ if (!execute) {
   process.exit(0);
 }
 
-run(process.execPath, [join(root, 'scripts/install-harness.mjs')]);
-for (const [worktree, image] of Object.entries(images)) {
-  const context = join(
-    worktreeConfig.benchmarkRoot,
-    worktreeConfig.worktrees[worktree].path,
-  );
-  run('docker', [
-    'build',
-    '--platform',
-    'linux/arm64',
-    '--file',
-    join(root, 'Dockerfile.linux'),
-    '--tag',
-    image,
-    context,
+if (!reuseImages) {
+  run(process.execPath, [
+    join(root, 'scripts/install-harness.mjs'),
+    ...Object.keys(images),
   ]);
+}
+for (const [worktree, image] of Object.entries(images)) {
+  if (!reuseImages) {
+    const context = join(
+      worktreeConfig.benchmarkRoot,
+      worktreeConfig.worktrees[worktree].path,
+    );
+    run('docker', [
+      'build',
+      '--platform',
+      'linux/arm64',
+      '--file',
+      join(root, 'Dockerfile.linux'),
+      '--tag',
+      image,
+      context,
+    ]);
+  }
   manifest.imageIDs[worktree] = capture('docker', [
     'image',
     'inspect',
@@ -100,6 +115,8 @@ run('docker', [
   '--detach',
   '--name',
   postgres,
+  '--publish',
+  '127.0.0.1::5432',
   '--network',
   network,
   '--network-alias',
@@ -121,10 +138,16 @@ run('docker', [
 
 try {
   waitForPostgres(postgres);
+  const portOutput = capture('docker', ['port', postgres, '5432/tcp']).trim();
+  const hostPort = portOutput.slice(portOutput.lastIndexOf(':') + 1);
   for (let index = 0; index < runs.length; index++) {
     const runConfig = runs[index];
     const fixture = profiles[runConfig.profile];
     const constraints = fixture.docker;
+    const pgURI =
+      runConfig.postgresTopology === 'host-port'
+        ? `postgres://postgres:postgres@host.docker.internal:${hostPort}/postgres`
+        : 'postgres://postgres:postgres@postgres:5432/postgres';
     const id = runID(runConfig);
     const output = join(
       root,
@@ -138,7 +161,9 @@ try {
       ZERO_COPY_PIPELINE_FIXTURE: fixture.fixture,
       ZERO_COPY_PIPELINE_ROWS: String(fixture.rows),
       ZERO_COPY_PIPELINE_PAYLOAD_BYTES: String(fixture.payloadBytes),
-      ZERO_COPY_PIPELINE_COPY_CHUNK_BYTES: String(fixture.copyChunkBytes),
+      ZERO_COPY_PIPELINE_COPY_CHUNK_BYTES: String(
+        runConfig.copyChunkBytes ?? fixture.copyChunkBytes,
+      ),
       ...(fixture.expectedCopyBytes === undefined
         ? {}
         : {
@@ -171,6 +196,9 @@ try {
         ? '1'
         : '0',
       ZERO_COPY_PIPELINE_BUFFER_MB: String(runConfig.bufferMB),
+      ZERO_COPY_PIPELINE_SECONDARY_INDEX_MIN_AVERAGE_ROW_BYTES: String(
+        runConfig.secondaryIndexMinAverageRowBytes ?? 0,
+      ),
       ZERO_COPY_PIPELINE_MMAP_GIB: String(runConfig.mmapGiB ?? 1),
       ...(runConfig.cacheMB === undefined
         ? {}
@@ -194,7 +222,7 @@ try {
       '--pids-limit',
       '1024',
       '--env',
-      'TEST_PG_17=postgres://postgres:postgres@postgres:5432/postgres',
+      `TEST_PG_17=${pgURI}`,
       '--env',
       `NODE_OPTIONS=--max-old-space-size=${constraints.nodeHeapMB}`,
       ...Object.entries(env).flatMap(([name, value]) => [
@@ -277,6 +305,37 @@ function balancedRuns(casesToRun, repetitions) {
       .slice(offset)
       .concat(casesToRun.slice(0, offset));
     const ordered = repetition % 2 === 1 ? rotated : [...rotated].reverse();
+    for (const runConfig of ordered) {
+      output.push({...runConfig, repetition});
+    }
+  }
+  return output;
+}
+
+function pairedRuns(profilesToRun, treatments, repetitions) {
+  if (treatments.length !== 2) {
+    throw new Error('paired-ab-ba ordering requires exactly two treatments');
+  }
+  const output = [];
+  for (let repetition = 1; repetition <= repetitions; repetition++) {
+    const profiles =
+      repetition % 2 === 1 ? profilesToRun : [...profilesToRun].reverse();
+    const orderedTreatments =
+      repetition % 2 === 1 ? treatments : [...treatments].reverse();
+    for (const profile of profiles) {
+      for (const treatment of orderedTreatments) {
+        output.push({profile, ...treatment, repetition});
+      }
+    }
+  }
+  return output;
+}
+
+function forwardReverseRuns(casesToRun, repetitions) {
+  const output = [];
+  for (let repetition = 1; repetition <= repetitions; repetition++) {
+    const ordered =
+      repetition % 2 === 1 ? casesToRun : [...casesToRun].reverse();
     for (const runConfig of ordered) {
       output.push({...runConfig, repetition});
     }

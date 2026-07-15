@@ -43,7 +43,10 @@ console.log(
   `${execute ? 'EXECUTE' : 'DRY RUN'} ${stageName}: ${allRuns.length} processes`,
 );
 if (execute) {
-  run(process.execPath, [join(root, 'scripts/install-harness.mjs')]);
+  run(process.execPath, [
+    join(root, 'scripts/install-harness.mjs'),
+    ...new Set(allRuns.map(runConfig => runConfig.worktree)),
+  ]);
 }
 
 for (let index = 0; index < allRuns.length; index++) {

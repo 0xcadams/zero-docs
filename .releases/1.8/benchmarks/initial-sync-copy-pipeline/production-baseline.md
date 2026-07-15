@@ -47,18 +47,31 @@ The dominant value is represented by `payload`. The production index shape is
 the primary key plus indexes on `schema`, `user_id`, `(user_id, import_id)`,
 `(user_id, source)`, and `(user_id, source, created_at DESC)`.
 
-## Chunking And Parser Implication
+## COPY Chunk Topology And Parser Implication
 
-Observed aggregate COPY chunks average approximately 5.5 KiB for Margins and
-4-31 KiB for PL. The original `BinaryCopyParser` repeatedly concatenates an
-incomplete field with each following chunk. Estimated assembly amplification
-for a single fragmented field is:
+Thirty-day terminal counters show exactly one COPY data chunk per sampled row
+plus one framing chunk per published table per successful run. See
+`production-copy-chunk-topology.md` for the pod evidence and PromQL.
+`managed-pg-copy-fragmentation.md` independently confirms the expected protocol
+shape from PostgreSQL source, `postgres.js` framing, and direct generated probes
+through PlanetScale and Supabase.
 
-|   Field |   Chunk | Approximate copied bytes | Amplification |
-| ------: | ------: | -----------------------: | ------------: |
-| 270 KiB | 5.5 KiB |                 6.84 MiB |         25.9x |
-| 683 KiB |  31 KiB |                  8.3 MiB |         12.5x |
-| 683 KiB | 5.5 KiB |                 42.3 MiB |         63.4x |
+The previous 5.5 KiB Margins and 4-31 KiB PL values are publication-wide
+average row sizes, not observed transport chunk sizes. The resulting assembly
+estimates remain useful only as synthetic fragmentation scenarios:
+
+|   Field | Synthetic chunk | Approximate copied bytes | Amplification |
+| ------: | --------------: | -----------------------: | ------------: |
+| 270 KiB |         5.5 KiB |                 6.84 MiB |         25.9x |
+| 683 KiB |          31 KiB |                  8.3 MiB |         12.5x |
+| 683 KiB |         5.5 KiB |                 42.3 MiB |         63.4x |
+
+Linear field assembly is 2.7-5.8x faster in those fragmented parser
+microbenchmarks. However, PostgreSQL emits each row as one protocol message,
+`postgres.js` reassembles network fragments before Zero sees them, both tested
+managed providers preserved that boundary through 1.5 MiB fields, and the
+current PL and Margins topology matches it exactly. There is no current
+production performance motivation for the parser treatment.
 
 ## Shadow Caveat
 

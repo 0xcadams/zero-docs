@@ -218,6 +218,446 @@
       }
     ]
   },
+  "rerun-docker-direct-text-core-clean-host": {
+    "profiles": ["email-683m", "imports-550m"],
+    "repetitions": 3,
+    "treatments": [
+      {
+        "worktree": "linear-parser",
+        "label": "string-mmap-1g",
+        "partialInsertBatches": false,
+        "directTextBuffers": false,
+        "bufferMB": 8,
+        "mmapGiB": 1
+      },
+      {
+        "worktree": "linear-parser",
+        "label": "buffer-cast-mmap-1g",
+        "partialInsertBatches": false,
+        "directTextBuffers": true,
+        "bufferMB": 8,
+        "mmapGiB": 1
+      },
+      {
+        "worktree": "linear-parser",
+        "label": "buffer-cast-partial-mmap-1g",
+        "partialInsertBatches": true,
+        "directTextBuffers": true,
+        "bufferMB": 8,
+        "mmapGiB": 1
+      }
+    ]
+  },
+  "rerun-docker-direct-text-email-balanced-mmap-1g": {
+    "profiles": ["email-683m"],
+    "repetitions": 6,
+    "ordering": "paired-ab-ba",
+    "treatments": [
+      {
+        "worktree": "linear-parser",
+        "label": "string-mmap-1g",
+        "partialInsertBatches": false,
+        "directTextBuffers": false,
+        "bufferMB": 8,
+        "mmapGiB": 1
+      },
+      {
+        "worktree": "linear-parser",
+        "label": "buffer-cast-mmap-1g",
+        "partialInsertBatches": false,
+        "directTextBuffers": true,
+        "bufferMB": 8,
+        "mmapGiB": 1
+      }
+    ]
+  },
+  "rerun-docker-direct-text-email-mmap-factorial": {
+    "profiles": ["email-683m"],
+    "repetitions": 4,
+    "ordering": "forward-reverse",
+    "treatments": [
+      {
+        "worktree": "linear-parser",
+        "label": "string-mmap-off",
+        "partialInsertBatches": false,
+        "directTextBuffers": false,
+        "bufferMB": 8,
+        "mmapGiB": 0
+      },
+      {
+        "worktree": "linear-parser",
+        "label": "buffer-cast-mmap-off",
+        "partialInsertBatches": false,
+        "directTextBuffers": true,
+        "bufferMB": 8,
+        "mmapGiB": 0
+      },
+      {
+        "worktree": "linear-parser",
+        "label": "string-mmap-1g",
+        "partialInsertBatches": false,
+        "directTextBuffers": false,
+        "bufferMB": 8,
+        "mmapGiB": 1
+      },
+      {
+        "worktree": "linear-parser",
+        "label": "buffer-cast-mmap-1g",
+        "partialInsertBatches": false,
+        "directTextBuffers": true,
+        "bufferMB": 8,
+        "mmapGiB": 1
+      },
+      {
+        "worktree": "linear-parser",
+        "label": "string-mmap-2g",
+        "partialInsertBatches": false,
+        "directTextBuffers": false,
+        "bufferMB": 8,
+        "mmapGiB": 2
+      },
+      {
+        "worktree": "linear-parser",
+        "label": "buffer-cast-mmap-2g",
+        "partialInsertBatches": false,
+        "directTextBuffers": true,
+        "bufferMB": 8,
+        "mmapGiB": 2
+      }
+    ]
+  },
+  "rerun-docker-direct-text-email-cpu-sweep": {
+    "profiles": ["email-683m-2cpu", "email-683m-4cpu"],
+    "repetitions": 4,
+    "ordering": "paired-ab-ba",
+    "treatments": [
+      {
+        "worktree": "linear-parser",
+        "label": "string-mmap-1g",
+        "partialInsertBatches": false,
+        "directTextBuffers": false,
+        "bufferMB": 8,
+        "mmapGiB": 1
+      },
+      {
+        "worktree": "linear-parser",
+        "label": "buffer-cast-mmap-1g",
+        "partialInsertBatches": false,
+        "directTextBuffers": true,
+        "bufferMB": 8,
+        "mmapGiB": 1
+      }
+    ]
+  },
+  "rerun-docker-direct-text-email-chunking-factorial": {
+    "profiles": ["email-683m"],
+    "repetitions": 4,
+    "ordering": "forward-reverse",
+    "treatments": [
+      {
+        "worktree": "linear-parser",
+        "label": "string-native-chunks",
+        "partialInsertBatches": false,
+        "directTextBuffers": false,
+        "copyChunkBytes": "native",
+        "bufferMB": 8,
+        "mmapGiB": 1
+      },
+      {
+        "worktree": "linear-parser",
+        "label": "buffer-cast-native-chunks",
+        "partialInsertBatches": false,
+        "directTextBuffers": true,
+        "copyChunkBytes": "native",
+        "bufferMB": 8,
+        "mmapGiB": 1
+      },
+      {
+        "worktree": "linear-parser",
+        "label": "string-31k-chunks",
+        "partialInsertBatches": false,
+        "directTextBuffers": false,
+        "copyChunkBytes": 31744,
+        "bufferMB": 8,
+        "mmapGiB": 1
+      },
+      {
+        "worktree": "linear-parser",
+        "label": "buffer-cast-31k-chunks",
+        "partialInsertBatches": false,
+        "directTextBuffers": true,
+        "copyChunkBytes": 31744,
+        "bufferMB": 8,
+        "mmapGiB": 1
+      }
+    ]
+  },
+  "rerun-docker-current-pr6-email-native": {
+    "profiles": ["email-683m"],
+    "repetitions": 10,
+    "ordering": "paired-ab-ba",
+    "treatments": [
+      {
+        "worktree": "current-pr6-parent",
+        "label": "current-pr6-parent",
+        "copyChunkBytes": "native",
+        "bufferMB": 8,
+        "mmapGiB": 0
+      },
+      {
+        "worktree": "current-pr6-head",
+        "label": "current-pr6-head",
+        "copyChunkBytes": "native",
+        "bufferMB": 8,
+        "mmapGiB": 0
+      }
+    ]
+  },
+  "rerun-host-current-pr6-email-native": {
+    "profiles": ["email-683m"],
+    "repetitions": 10,
+    "ordering": "paired-ab-ba",
+    "treatments": [
+      {
+        "worktree": "current-pr6-parent",
+        "label": "current-pr6-parent",
+        "copyChunkBytes": "native",
+        "bufferMB": 8,
+        "mmapGiB": 0
+      },
+      {
+        "worktree": "current-pr6-head",
+        "label": "current-pr6-head",
+        "copyChunkBytes": "native",
+        "bufferMB": 8,
+        "mmapGiB": 0
+      }
+    ]
+  },
+  "rerun-docker-current-pr6-email-host-port": {
+    "profiles": ["email-683m"],
+    "repetitions": 10,
+    "ordering": "paired-ab-ba",
+    "treatments": [
+      {
+        "worktree": "current-pr6-parent",
+        "label": "current-pr6-parent-host-port",
+        "copyChunkBytes": "native",
+        "postgresTopology": "host-port",
+        "bufferMB": 8,
+        "mmapGiB": 0
+      },
+      {
+        "worktree": "current-pr6-head",
+        "label": "current-pr6-head-host-port",
+        "copyChunkBytes": "native",
+        "postgresTopology": "host-port",
+        "bufferMB": 8,
+        "mmapGiB": 0
+      }
+    ]
+  },
+  "rerun-docker-current-pr6-email-full-native": {
+    "profiles": ["email-high-6.83g"],
+    "repetitions": 5,
+    "ordering": "paired-ab-ba",
+    "treatments": [
+      {
+        "worktree": "current-pr6-parent",
+        "label": "current-pr6-parent-full-native",
+        "copyChunkBytes": "native",
+        "bufferMB": 8,
+        "mmapGiB": 0
+      },
+      {
+        "worktree": "current-pr6-head",
+        "label": "current-pr6-head-full-native",
+        "copyChunkBytes": "native",
+        "bufferMB": 8,
+        "mmapGiB": 0
+      }
+    ]
+  },
+  "rerun-docker-current-pr6-email-full-native-confirmation": {
+    "profiles": ["email-high-6.83g"],
+    "repetitions": 5,
+    "ordering": "paired-ab-ba",
+    "treatments": [
+      {
+        "worktree": "current-pr6-head",
+        "label": "current-pr6-head-full-native",
+        "copyChunkBytes": "native",
+        "bufferMB": 8,
+        "mmapGiB": 0
+      },
+      {
+        "worktree": "current-pr6-parent",
+        "label": "current-pr6-parent-full-native",
+        "copyChunkBytes": "native",
+        "bufferMB": 8,
+        "mmapGiB": 0
+      }
+    ]
+  },
+  "pr7-current-parent-head-scaled": {
+    "profiles": ["email-683m", "imports-550m"],
+    "repetitions": 10,
+    "ordering": "paired-ab-ba",
+    "treatments": [
+      {
+        "worktree": "current-pr7-parent",
+        "label": "pr7-deferred-parent",
+        "copyChunkBytes": "native",
+        "secondaryIndexMinAverageRowBytes": 0,
+        "bufferMB": 8,
+        "mmapGiB": 0
+      },
+      {
+        "worktree": "current-pr7-head",
+        "label": "pr7-adaptive-2k",
+        "copyChunkBytes": "native",
+        "secondaryIndexMinAverageRowBytes": 2048,
+        "bufferMB": 8,
+        "mmapGiB": 0
+      }
+    ]
+  },
+  "pr7-current-parent-head-full": {
+    "profiles": ["email-high-6.83g", "imports-production-2.75g"],
+    "repetitions": 10,
+    "ordering": "paired-ab-ba",
+    "treatments": [
+      {
+        "worktree": "current-pr7-parent",
+        "label": "pr7-deferred-parent",
+        "copyChunkBytes": "native",
+        "secondaryIndexMinAverageRowBytes": 0,
+        "bufferMB": 8,
+        "mmapGiB": 0
+      },
+      {
+        "worktree": "current-pr7-head",
+        "label": "pr7-adaptive-2k",
+        "copyChunkBytes": "native",
+        "secondaryIndexMinAverageRowBytes": 2048,
+        "bufferMB": 8,
+        "mmapGiB": 0
+      }
+    ]
+  },
+  "pr7-current-parent-head-narrow": {
+    "profiles": ["email-narrow-250k", "imports-narrow-250k"],
+    "repetitions": 10,
+    "ordering": "paired-ab-ba",
+    "treatments": [
+      {
+        "worktree": "current-pr7-parent",
+        "label": "pr7-deferred-parent",
+        "copyChunkBytes": "native",
+        "secondaryIndexMinAverageRowBytes": 0,
+        "bufferMB": 8,
+        "mmapGiB": 0
+      },
+      {
+        "worktree": "current-pr7-head",
+        "label": "pr7-adaptive-2k",
+        "copyChunkBytes": "native",
+        "secondaryIndexMinAverageRowBytes": 2048,
+        "bufferMB": 8,
+        "mmapGiB": 0
+      }
+    ]
+  },
+  "pr7-current-strategy-scaled": {
+    "profiles": ["email-683m", "imports-550m"],
+    "repetitions": 10,
+    "treatments": [
+      {
+        "worktree": "current-pr7-parent",
+        "label": "pr7-deferred-parent",
+        "copyChunkBytes": "native",
+        "secondaryIndexMinAverageRowBytes": 0,
+        "bufferMB": 8,
+        "mmapGiB": 0
+      },
+      {
+        "worktree": "current-pr7-head",
+        "label": "pr7-adaptive-2k",
+        "copyChunkBytes": "native",
+        "secondaryIndexMinAverageRowBytes": 2048,
+        "bufferMB": 8,
+        "mmapGiB": 0
+      },
+      {
+        "worktree": "current-pr7-eager",
+        "label": "pr7-forced-eager-secondary",
+        "copyChunkBytes": "native",
+        "secondaryIndexMinAverageRowBytes": 2048,
+        "bufferMB": 8,
+        "mmapGiB": 0
+      }
+    ]
+  },
+  "pr7-current-strategy-full": {
+    "profiles": ["email-high-6.83g", "imports-production-2.75g"],
+    "repetitions": 10,
+    "treatments": [
+      {
+        "worktree": "current-pr7-parent",
+        "label": "pr7-deferred-parent",
+        "copyChunkBytes": "native",
+        "secondaryIndexMinAverageRowBytes": 0,
+        "bufferMB": 8,
+        "mmapGiB": 0
+      },
+      {
+        "worktree": "current-pr7-head",
+        "label": "pr7-adaptive-2k",
+        "copyChunkBytes": "native",
+        "secondaryIndexMinAverageRowBytes": 2048,
+        "bufferMB": 8,
+        "mmapGiB": 0
+      },
+      {
+        "worktree": "current-pr7-eager",
+        "label": "pr7-forced-eager-secondary",
+        "copyChunkBytes": "native",
+        "secondaryIndexMinAverageRowBytes": 2048,
+        "bufferMB": 8,
+        "mmapGiB": 0
+      }
+    ]
+  },
+  "pr7-current-strategy-narrow": {
+    "profiles": ["email-narrow-250k", "imports-narrow-250k"],
+    "repetitions": 10,
+    "treatments": [
+      {
+        "worktree": "current-pr7-parent",
+        "label": "pr7-deferred-parent",
+        "copyChunkBytes": "native",
+        "secondaryIndexMinAverageRowBytes": 0,
+        "bufferMB": 8,
+        "mmapGiB": 0
+      },
+      {
+        "worktree": "current-pr7-head",
+        "label": "pr7-adaptive-2k",
+        "copyChunkBytes": "native",
+        "secondaryIndexMinAverageRowBytes": 2048,
+        "bufferMB": 8,
+        "mmapGiB": 0
+      },
+      {
+        "worktree": "current-pr7-eager",
+        "label": "pr7-forced-eager-secondary",
+        "copyChunkBytes": "native",
+        "secondaryIndexMinAverageRowBytes": 2048,
+        "bufferMB": 8,
+        "mmapGiB": 0
+      }
+    ]
+  },
   "cache-production-smoke": {
     "profiles": ["email-high-6.83g"],
     "repetitions": 1,

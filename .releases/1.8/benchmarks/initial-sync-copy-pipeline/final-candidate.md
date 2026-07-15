@@ -4,9 +4,10 @@
 
 This compares `final-native-candidate-core-docker` with the pinned
 `origin-main-baseline-docker` at `d87c1c813b2e57abdf814eadda98b8d5e5885979`.
-Both use `mmap_size=0` and production-shaped CPU, memory, heap, payload, and
-COPY fragmentation constraints. The comparison is a bundled, cross-image
-candidate comparison; same-image component experiments are noted separately.
+Both use `mmap_size=0`, production-shaped CPU, memory, heap, and payload
+constraints, and synthetic COPY fragmentation constraints. The comparison is a
+bundled, cross-image candidate comparison; same-image component experiments are
+noted separately.
 
 The candidate combines the linear fragmented-field parser, batched COPY
 metrics, direct native transient UTF-8 Buffer binding, and adaptive eager

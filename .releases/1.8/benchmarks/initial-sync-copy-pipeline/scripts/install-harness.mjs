@@ -7,15 +7,29 @@ const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const config = JSON.parse(
   await readFile(join(root, 'config/worktrees.json'), 'utf8'),
 );
+const requestedLabels = new Set(process.argv.slice(2));
+for (const label of requestedLabels) {
+  if (!config.worktrees[label]) {
+    throw new Error(`Unknown worktree ${label}`);
+  }
+}
 
 for (const [label, worktree] of Object.entries(config.worktrees)) {
+  if (
+    requestedLabels.size > 0
+      ? !requestedLabels.has(label)
+      : worktree.defaultInstall === false
+  ) {
+    continue;
+  }
   const worktreeRoot = join(config.benchmarkRoot, worktree.path);
   const commit = execFileSync('git', ['rev-parse', 'HEAD'], {
     cwd: worktreeRoot,
     encoding: 'utf8',
   }).trim();
-  if (!commit.startsWith(config.commit)) {
-    throw new Error(`${label} is at ${commit}; expected ${config.commit}`);
+  const expectedCommit = worktree.commit ?? config.commit;
+  if (!commit.startsWith(expectedCommit)) {
+    throw new Error(`${label} is at ${commit}; expected ${expectedCommit}`);
   }
   const destination = join(worktreeRoot, 'packages/zero-cache/src');
   await mkdir(destination, {recursive: true});

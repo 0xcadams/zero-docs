@@ -15,6 +15,22 @@
     "expectedCopyBytes": 683000000,
     "docker": {"cpus": 1, "memory": "3g", "nodeHeapMB": 2304}
   },
+  "email-683m-2cpu": {
+    "fixture": "email",
+    "rows": 1000,
+    "payloadBytes": 683000,
+    "copyChunkBytes": 31744,
+    "expectedCopyBytes": 683000000,
+    "docker": {"cpus": 2, "memory": "3g", "nodeHeapMB": 2304}
+  },
+  "email-683m-4cpu": {
+    "fixture": "email",
+    "rows": 1000,
+    "payloadBytes": 683000,
+    "copyChunkBytes": 31744,
+    "expectedCopyBytes": 683000000,
+    "docker": {"cpus": 4, "memory": "3g", "nodeHeapMB": 2304}
+  },
   "email-high-6.83g": {
     "fixture": "email",
     "rows": 10000,
