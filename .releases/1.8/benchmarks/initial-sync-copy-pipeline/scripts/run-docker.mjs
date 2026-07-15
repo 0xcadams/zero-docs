@@ -565,7 +565,7 @@ function operationEnvironment(runConfig, profile, pgURI, id) {
     ZERO_COPY_PIPELINE_NATIVE_TEXT_STATIC: runConfig.nativeTextBufferStatic
       ? '1'
       : '0',
-    ZERO_COPY_PIPELINE_BUFFER_MB: String(runConfig.bufferMB),
+    ZERO_COPY_PIPELINE_BUFFER_MB: String(runConfig.bufferMB ?? 8),
     ZERO_COPY_PIPELINE_SECONDARY_INDEX_MIN_AVERAGE_ROW_BYTES: String(
       runConfig.secondaryIndexMinAverageRowBytes ?? 0,
     ),
